@@ -1,4 +1,4 @@
-# Portable AQI Monitor
+# Portable AQI Recorder
 
 A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and **Sensirion SEN50** particulate matter sensor. View real-time PM1.0, PM2.5, PM4.0, and PM10.0 readings on your phone over **Bluetooth Low Energy** using the Sensirion MyAmbience app.
 
@@ -59,7 +59,7 @@ Pin 6 — NC
 1. **Clone the repository**
    ```bash
    git clone https://github.com/devalopr/Portable-AQI-recorder-.git
-   cd Portable-AQI-recorder-
+   cd Portable-AQI-recorder-V1
    ```
 
 2. **Build the firmware**
