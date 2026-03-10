@@ -1,14 +1,27 @@
 # Portable AQI Recorder
 
-A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and **Sensirion SEN50** particulate matter sensor. View real-time PM1.0, PM2.5, PM4.0, and PM10.0 readings on your phone over **Bluetooth Low Energy** using the Sensirion MyAmbience app.
+A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and a **Sensirion SEN5x** environmental sensor. The firmware **auto-detects** which sensor variant is connected — **SEN50**, **SEN54**, or **SEN55** — and adapts accordingly. View real-time readings on your phone over **Bluetooth Low Energy** using the Sensirion MyAmbience app.
 
 ## Features
 
 - **Real-time PM monitoring** — PM1.0, PM2.5, PM4.0, PM10.0 (µg/m³)
+- **Environmental data** (SEN54/SEN55) — Humidity, Temperature, VOC Index
+- **NOx monitoring** (SEN55) — NOx Index
 - **US EPA AQI calculation** — computed from PM2.5 & PM10, printed to serial
 - **BLE streaming** — connect with Sensirion MyAmbience app on iOS/Android
+- **Auto-detection** — firmware identifies SEN50/SEN54/SEN55 at boot, no code changes needed
 - **Data logging** — download measurement history from the app
 - **Tiny form factor** — ESP32-C3 Super Mini is just 22×18 mm
+
+### Sensor Comparison
+
+| Measurement | SEN50 | SEN54 | SEN55 |
+|---|:---:|:---:|:---:|
+| PM1.0 / PM2.5 / PM4.0 / PM10.0 | ✅ | ✅ | ✅ |
+| Humidity (RH%) | — | ✅ | ✅ |
+| Temperature (°C) | — | ✅ | ✅ |
+| VOC Index | — | ✅ | ✅ |
+| NOx Index | — | — | ✅ |
 
 ---
 
@@ -17,11 +30,13 @@ A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 S
 | Component | Description |
 |---|---|
 | **ESP32-C3 Super Mini** | Microcontroller with BLE & Wi-Fi |
-| **Sensirion SEN50** | PM-only environmental sensor module |
+| **Sensirion SEN50 / SEN54 / SEN55** | Environmental sensor module (auto-detected) |
 
 ### Wiring
 
-| ESP32-C3 Super Mini | SEN50 (JST connector) |
+All three SEN5x variants use the **same pinout and connector** — just swap the sensor module.
+
+| ESP32-C3 Super Mini | SEN5x (JST connector) |
 |---|---|
 | GPIO 8 (SDA) | Pin 4 — SDA |
 | GPIO 9 (SCL) | Pin 3 — SCL |
@@ -29,9 +44,9 @@ A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 S
 | 5V | Pin 1 — VDD |
 
 > [!IMPORTANT]
-> The SEN50 **requires 5V** for its internal fan. Power it from a 5V source (e.g. USB VBUS), not the ESP32's 3.3V output. The I2C lines are 3.3V tolerant — no level shifter needed.
+> The SEN5x sensors **require 5V** for the internal fan. Power from a 5V source (e.g. USB VBUS), not the ESP32's 3.3V output. The I2C lines are 3.3V tolerant — no level shifter needed.
 
-#### SEN50 JST Pinout (left to right, notch facing up)
+#### SEN5x JST Pinout (left to right, notch facing up)
 
 ```
 Pin 1 — VDD  (5V)
@@ -80,9 +95,17 @@ Pin 6 — NC
    ```bash
    pio device monitor
    ```
-   You'll see PM values and calculated AQI:
+
+   **SEN50 output:**
    ```
+   Detected: SEN50 (PM only)
    PM1.0: 5.20   PM2.5: 8.10   PM4.0: 9.30   PM10.0: 10.50   | AQI(PM2.5): 34  AQI(PM10): 10  => AQI: 34 [Good]
+   ```
+
+   **SEN55 output:**
+   ```
+   Detected: SEN55 (PM + T/RH + VOC + NOx)
+   PM1.0: 5.20   PM2.5: 8.10   PM4.0: 9.30   PM10.0: 10.50   RH: 45.2%   T: 24.3°C   VOC: 102   NOx: 5   | AQI(PM2.5): 34  AQI(PM10): 10  => AQI: 34 [Good]
    ```
 
 ---
@@ -92,8 +115,18 @@ Pin 6 — NC
 1. Open the **Sensirion MyAmbience** app on your phone.
 2. Make sure Bluetooth is enabled.
 3. The device should appear automatically — look for a device ID matching the one shown in serial output.
-4. Tap to connect and view real-time PM data.
+4. Tap to connect and view real-time data.
 5. You can also download historical data from the device's log.
+
+### What the app displays
+
+| Sensor | App shows |
+|---|---|
+| **SEN50** | PM1.0, PM2.5, PM4.0, PM10.0 |
+| **SEN54** | Temperature, Humidity, VOC Index, PM2.5 |
+| **SEN55** | Temperature, Humidity, VOC Index, NOx Index, PM2.5 |
+
+> **Note:** For SEN54/SEN55, the app displays PM2.5 alongside the environmental data (this is a limitation of the BLE protocol — there's no data type that includes all 4 PM sizes + environmental data). All PM values and AQI are always available on the serial monitor.
 
 ---
 
@@ -109,8 +142,6 @@ The firmware calculates the **US EPA Air Quality Index** from PM2.5 and PM10. Th
 | 151 – 200 | Unhealthy | 🔴 Red |
 | 201 – 300 | Very Unhealthy | 🟣 Purple |
 | 301 – 500 | Hazardous | 🟤 Maroon |
-
-> **Note:** The Sensirion MyAmbience app displays raw PM values (µg/m³). AQI is printed to the serial monitor only, as the BLE protocol does not have a custom AQI signal type.
 
 ---
 
@@ -130,7 +161,7 @@ All dependencies are managed automatically by PlatformIO:
 
 | Library | Version | Purpose |
 |---|---|---|
-| Sensirion I2C SEN5X | ^0.3.0 | I2C driver for SEN50 sensor |
+| Sensirion I2C SEN5X | ^0.3.0 | I2C driver for SEN50/SEN54/SEN55 sensors |
 | Sensirion Gadget BLE Arduino Lib | ^1.2.0 | BLE data provider for MyAmbience app |
 | Sensirion UPT Core | ^0.3.0 | BLE protocol definitions |
 | NimBLE-Arduino | ^1.4.1 | Lightweight BLE stack for ESP32 |
@@ -143,9 +174,11 @@ All dependencies are managed automatically by PlatformIO:
 |---|---|
 | `pio` not found | Use full path `~/.platformio/penv/Scripts/pio.exe` or add it to PATH |
 | Serial shows no output | Wait 2–3 seconds after reset; check baud rate is **115200** |
-| All PM values are 0.00 | SEN50 fan needs ~10 seconds warm-up after startup |
-| BLE device not visible | Re-check wiring; ensure SEN50 has 5V power |
+| All PM values are 0.00 | SEN5x fan needs ~10 seconds warm-up after startup |
+| BLE device not visible | Re-check wiring; ensure SEN5x has 5V power |
 | Upload fails | Hold BOOT button on ESP32-C3, click upload, release BOOT after "Connecting..." |
+| VOC/NOx shows "n/a" | Normal for the first ~10 seconds after boot; wait for sensor warm-up |
+| Wrong sensor detected | Check I2C wiring; try power-cycling the sensor |
 
 ---
 

@@ -1,8 +1,13 @@
 /**
  * Portable AQI Monitor
- * ESP32-C3 Super Mini + SEN50 Sensor
+ * ESP32-C3 Super Mini + Sensirion SEN5x Sensor (SEN50 / SEN54 / SEN55)
  *
- * Streams PM1.0, PM2.5, PM4.0, PM10.0 over BLE to Sensirion MyAmbience app.
+ * Auto-detects the connected sensor variant at boot:
+ *   - SEN50: PM1.0, PM2.5, PM4.0, PM10.0
+ *   - SEN54: PM + Humidity, Temperature, VOC Index
+ *   - SEN55: PM + Humidity, Temperature, VOC Index, NOx Index
+ *
+ * Streams data over BLE to the Sensirion MyAmbience app.
  * Also calculates and prints US EPA AQI to the serial monitor.
  */
 
@@ -11,10 +16,17 @@
 #include <Sensirion_Gadget_BLE.h>
 #include <Wire.h>
 
+// ---------------------------------------------------------------------------
+//  Sensor variant detection
+// ---------------------------------------------------------------------------
+
+enum SensorVariant { VARIANT_SEN50, VARIANT_SEN54, VARIANT_SEN55, VARIANT_UNKNOWN };
+
+static SensorVariant sensorVariant = VARIANT_UNKNOWN;
 
 SensirionI2CSen5x sen5x;
 
-// BLE setup — PM-only data type for SEN50
+// BLE setup — constructed with a default DataType; reconfigured in setup()
 static int64_t lastMeasurementTimeMs = 0;
 static int measurementIntervalMs = 1000;
 NimBLELibraryWrapper lib;
@@ -162,6 +174,43 @@ void printModuleVersions() {
   }
 }
 
+/**
+ * Detects the sensor variant by reading the product name via I2C.
+ * Returns the variant enum and configures the BLE DataProvider accordingly.
+ */
+SensorVariant detectSensorVariant() {
+  uint16_t error;
+  char errorMessage[256];
+  unsigned char productName[32];
+  uint8_t productNameSize = 32;
+
+  error = sen5x.getProductName(productName, productNameSize);
+  if (error) {
+    Serial.print("Error reading product name: ");
+    errorToString(error, errorMessage, 256);
+    Serial.println(errorMessage);
+    Serial.println("Falling back to SEN50 (PM-only) mode.");
+    return VARIANT_SEN50;
+  }
+
+  String name = String((char *)productName);
+  name.trim();
+
+  if (name == "SEN55") {
+    Serial.println("Detected: SEN55 (PM + T/RH + VOC + NOx)");
+    provider.setSampleConfig(DataType::T_RH_VOC_NOX_PM25);
+    return VARIANT_SEN55;
+  } else if (name == "SEN54") {
+    Serial.println("Detected: SEN54 (PM + T/RH + VOC)");
+    provider.setSampleConfig(DataType::T_RH_VOC_PM25_V2);
+    return VARIANT_SEN54;
+  } else {
+    Serial.println("Detected: SEN50 (PM only)");
+    // Already initialized with PM10_PM25_PM40_PM100 — no change needed
+    return VARIANT_SEN50;
+  }
+}
+
 // ---------------------------------------------------------------------------
 //  Main measurement + BLE reporting
 // ---------------------------------------------------------------------------
@@ -174,19 +223,26 @@ void measure_and_report() {
   float massConcentrationPm2p5;
   float massConcentrationPm4p0;
   float massConcentrationPm10p0;
+  float ambientHumidity;
+  float ambientTemperature;
+  float vocIndex;
+  float noxIndex;
 
-  error = sen5x.readMeasuredValuesSen50(
+  // Use the universal readMeasuredValues() for all variants.
+  // Unsupported values come back as NAN.
+  error = sen5x.readMeasuredValues(
       massConcentrationPm1p0, massConcentrationPm2p5, massConcentrationPm4p0,
-      massConcentrationPm10p0);
+      massConcentrationPm10p0, ambientHumidity, ambientTemperature, vocIndex,
+      noxIndex);
 
   if (error) {
-    Serial.print("Error trying to execute readMeasuredValuesSen50(): ");
+    Serial.print("Error trying to execute readMeasuredValues(): ");
     errorToString(error, errorMessage, 256);
     Serial.println(errorMessage);
     return;
   }
 
-  // Print raw PM values
+  // ---- Serial output: PM values (all variants) ----
   Serial.print("PM1.0: ");
   Serial.print(massConcentrationPm1p0);
   Serial.print("\tPM2.5: ");
@@ -196,7 +252,41 @@ void measure_and_report() {
   Serial.print("\tPM10.0: ");
   Serial.print(massConcentrationPm10p0);
 
-  // Calculate and print AQI
+  // ---- Serial output: Environmental data (SEN54/SEN55) ----
+  if (sensorVariant == VARIANT_SEN54 || sensorVariant == VARIANT_SEN55) {
+    Serial.print("\tRH: ");
+    if (isnan(ambientHumidity)) {
+      Serial.print("n/a");
+    } else {
+      Serial.print(ambientHumidity);
+      Serial.print("%");
+    }
+    Serial.print("\tT: ");
+    if (isnan(ambientTemperature)) {
+      Serial.print("n/a");
+    } else {
+      Serial.print(ambientTemperature);
+      Serial.print("°C");
+    }
+    Serial.print("\tVOC: ");
+    if (isnan(vocIndex)) {
+      Serial.print("n/a");
+    } else {
+      Serial.print(vocIndex);
+    }
+  }
+
+  // ---- Serial output: NOx (SEN55 only) ----
+  if (sensorVariant == VARIANT_SEN55) {
+    Serial.print("\tNOx: ");
+    if (isnan(noxIndex)) {
+      Serial.print("n/a");
+    } else {
+      Serial.print(noxIndex);
+    }
+  }
+
+  // ---- AQI calculation (all variants) ----
   int aqi25 = aqiFromPM25(massConcentrationPm2p5);
   int aqi10 = aqiFromPM10(massConcentrationPm10p0);
   int aqiMax = max(aqi25, aqi10);
@@ -211,21 +301,51 @@ void measure_and_report() {
   Serial.print(aqiCategory(aqiMax));
   Serial.println("]");
 
-  // Write all four PM values to the BLE sample
-  provider.writeValueToCurrentSample(
-      massConcentrationPm1p0, SignalType::PM1P0_MICRO_GRAMM_PER_CUBIC_METER);
+  // ---- BLE sample: write values according to detected variant ----
+  switch (sensorVariant) {
+  case VARIANT_SEN55:
+    provider.writeValueToCurrentSample(
+        ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
+    provider.writeValueToCurrentSample(
+        ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
+    provider.writeValueToCurrentSample(vocIndex, SignalType::VOC_INDEX);
+    // NOx may be NAN during the first ~10 seconds; send 0 in that case
+    provider.writeValueToCurrentSample(isnan(noxIndex) ? 0.0f : noxIndex,
+                                       SignalType::NOX_INDEX);
+    provider.writeValueToCurrentSample(
+        massConcentrationPm2p5,
+        SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
+    break;
 
-  provider.writeValueToCurrentSample(
-      massConcentrationPm2p5, SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
+  case VARIANT_SEN54:
+    provider.writeValueToCurrentSample(
+        ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
+    provider.writeValueToCurrentSample(
+        ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
+    provider.writeValueToCurrentSample(vocIndex, SignalType::VOC_INDEX);
+    provider.writeValueToCurrentSample(
+        massConcentrationPm2p5,
+        SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
+    break;
 
-  provider.writeValueToCurrentSample(
-      massConcentrationPm4p0, SignalType::PM4P0_MICRO_GRAMM_PER_CUBIC_METER);
-
-  provider.writeValueToCurrentSample(
-      massConcentrationPm10p0, SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER);
+  case VARIANT_SEN50:
+  default:
+    provider.writeValueToCurrentSample(
+        massConcentrationPm1p0,
+        SignalType::PM1P0_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(
+        massConcentrationPm2p5,
+        SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(
+        massConcentrationPm4p0,
+        SignalType::PM4P0_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(
+        massConcentrationPm10p0,
+        SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER);
+    break;
+  }
 
   provider.commitSample();
-
   lastMeasurementTimeMs = millis();
 }
 
@@ -239,7 +359,7 @@ void setup() {
   // Wait briefly for USB-CDC serial on ESP32-C3
   delay(2000);
   Serial.println("========================================");
-  Serial.println("   Portable AQI Monitor — SEN50 + BLE  ");
+  Serial.println("   Portable AQI Monitor — SEN5x + BLE  ");
   Serial.println("========================================");
 
   // ESP32-C3 Super Mini I2C: SDA = GPIO8, SCL = GPIO9
@@ -250,7 +370,7 @@ void setup() {
   Serial.print("BLE Gadget initialized, deviceId = ");
   Serial.println(provider.getDeviceIdString());
 
-  // Initialize SEN50
+  // Initialize SEN5x
   sen5x.begin(Wire);
 
   uint16_t error = sen5x.deviceReset();
@@ -262,6 +382,9 @@ void setup() {
   }
   delay(100);
 
+  // Auto-detect sensor variant and reconfigure BLE DataType
+  sensorVariant = detectSensorVariant();
+
   // Print sensor info
   printSerialNumber();
   printModuleVersions();
@@ -271,7 +394,7 @@ void setup() {
   if (error) {
     Serial.println("Error trying to start sensor measurement!");
   } else {
-    Serial.println("SEN50 measurement started!");
+    Serial.println("Measurement started!");
     Serial.println("----------------------------------------");
   }
 }
