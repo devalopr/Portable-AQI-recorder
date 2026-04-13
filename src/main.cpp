@@ -1,20 +1,26 @@
 /**
- * Portable AQI Monitor
- * ESP32-C3 Super Mini + Sensirion SEN5x Sensor (SEN50 / SEN54 / SEN55)
+ * Portable AQI Monitor — V2
+ * ESP32-C3 Super Mini + Sensirion SEN5x + ILI9225 TFT Display
  *
  * Auto-detects the connected sensor variant at boot:
  *   - SEN50: PM1.0, PM2.5, PM4.0, PM10.0
  *   - SEN54: PM + Humidity, Temperature, VOC Index
  *   - SEN55: PM + Humidity, Temperature, VOC Index, NOx Index
  *
+ * Displays data on a 176×220 ILI9225 TFT with 4-button navigation.
  * Streams data over BLE to the Sensirion MyAmbience app.
- * Also calculates and prints US EPA AQI to the serial monitor.
+ * Records data into RAM ring buffer for BLE transfer to a PWA.
+ * Calculates and displays US EPA AQI.
  */
 
 #include <Arduino.h>
 #include <SensirionI2CSen5x.h>
 #include <Sensirion_Gadget_BLE.h>
 #include <Wire.h>
+
+#include "data_buffer.h"
+#include "buttons.h"
+#include "display.h"
 
 // ---------------------------------------------------------------------------
 //  Sensor variant detection
@@ -32,83 +38,57 @@ static int measurementIntervalMs = 1000;
 NimBLELibraryWrapper lib;
 DataProvider provider(lib, DataType::PM10_PM25_PM40_PM100);
 
+// Display + UI state
+static ScreenMode screenMode = ScreenMode::HOME;
+static DataField cursorField = DataField::PM1_0;
+static SensorSample latestSample = {};
+static unsigned long recordingStartMs = 0;
+
+// Data buffer
+DataBuffer dataBuffer;
+
+// Display refresh timing
+static unsigned long lastDisplayUpdateMs = 0;
+static const unsigned long DISPLAY_UPDATE_INTERVAL_MS = 500;
+
 // ---------------------------------------------------------------------------
 //  US EPA AQI Calculation
 // ---------------------------------------------------------------------------
 
-/**
- * Generic linear interpolation for AQI from a concentration value
- * using the standard EPA piecewise-linear formula:
- *
- *   AQI = ((I_hi - I_lo) / (C_hi - C_lo)) * (C - C_lo) + I_lo
- */
 static int calcAQILinear(float Ih, float Il, float Ch, float Cl, float C) {
   return (int)round(((Ih - Il) / (Ch - Cl)) * (C - Cl) + Il);
 }
 
-/**
- * Calculates the AQI sub-index from PM2.5 (µg/m³) using US EPA breakpoints.
- * Returns -1 if the value is out of range.
- */
 int aqiFromPM25(float pm25) {
-  if (pm25 < 0.0f)
-    return -1;
-  if (pm25 > 500.4f)
-    return 501; // "Beyond AQI"
-  // EPA breakpoint table (2024 revised)
-  if (pm25 <= 9.0f)
-    return calcAQILinear(50, 0, 9.0f, 0.0f, pm25);
-  if (pm25 <= 35.4f)
-    return calcAQILinear(100, 51, 35.4f, 9.1f, pm25);
-  if (pm25 <= 55.4f)
-    return calcAQILinear(150, 101, 55.4f, 35.5f, pm25);
-  if (pm25 <= 125.4f)
-    return calcAQILinear(200, 151, 125.4f, 55.5f, pm25);
-  if (pm25 <= 225.4f)
-    return calcAQILinear(300, 201, 225.4f, 125.5f, pm25);
-  if (pm25 <= 325.4f)
-    return calcAQILinear(500, 301, 325.4f, 225.5f, pm25);
+  if (pm25 < 0.0f)    return -1;
+  if (pm25 > 500.4f)  return 501;
+  if (pm25 <= 9.0f)   return calcAQILinear(50, 0, 9.0f, 0.0f, pm25);
+  if (pm25 <= 35.4f)  return calcAQILinear(100, 51, 35.4f, 9.1f, pm25);
+  if (pm25 <= 55.4f)  return calcAQILinear(150, 101, 55.4f, 35.5f, pm25);
+  if (pm25 <= 125.4f) return calcAQILinear(200, 151, 125.4f, 55.5f, pm25);
+  if (pm25 <= 225.4f) return calcAQILinear(300, 201, 225.4f, 125.5f, pm25);
+  if (pm25 <= 325.4f) return calcAQILinear(500, 301, 325.4f, 225.5f, pm25);
   return 501;
 }
 
-/**
- * Calculates the AQI sub-index from PM10 (µg/m³) using US EPA breakpoints.
- * Returns -1 if the value is out of range.
- */
 int aqiFromPM10(float pm10) {
-  if (pm10 < 0.0f)
-    return -1;
-  if (pm10 > 604.0f)
-    return 501;
-  if (pm10 <= 54.0f)
-    return calcAQILinear(50, 0, 54.0f, 0.0f, pm10);
-  if (pm10 <= 154.0f)
-    return calcAQILinear(100, 51, 154.0f, 55.0f, pm10);
-  if (pm10 <= 254.0f)
-    return calcAQILinear(150, 101, 254.0f, 155.0f, pm10);
-  if (pm10 <= 354.0f)
-    return calcAQILinear(200, 151, 354.0f, 255.0f, pm10);
-  if (pm10 <= 424.0f)
-    return calcAQILinear(300, 201, 424.0f, 355.0f, pm10);
-  if (pm10 <= 604.0f)
-    return calcAQILinear(500, 301, 604.0f, 425.0f, pm10);
+  if (pm10 < 0.0f)    return -1;
+  if (pm10 > 604.0f)  return 501;
+  if (pm10 <= 54.0f)  return calcAQILinear(50, 0, 54.0f, 0.0f, pm10);
+  if (pm10 <= 154.0f) return calcAQILinear(100, 51, 154.0f, 55.0f, pm10);
+  if (pm10 <= 254.0f) return calcAQILinear(150, 101, 254.0f, 155.0f, pm10);
+  if (pm10 <= 354.0f) return calcAQILinear(200, 151, 354.0f, 255.0f, pm10);
+  if (pm10 <= 424.0f) return calcAQILinear(300, 201, 424.0f, 355.0f, pm10);
+  if (pm10 <= 604.0f) return calcAQILinear(500, 301, 604.0f, 425.0f, pm10);
   return 501;
 }
 
-/**
- * Returns an AQI category label string.
- */
 const char *aqiCategory(int aqi) {
-  if (aqi <= 50)
-    return "Good";
-  if (aqi <= 100)
-    return "Moderate";
-  if (aqi <= 150)
-    return "Unhealthy for Sensitive Groups";
-  if (aqi <= 200)
-    return "Unhealthy";
-  if (aqi <= 300)
-    return "Very Unhealthy";
+  if (aqi <= 50)  return "Good";
+  if (aqi <= 100) return "Moderate";
+  if (aqi <= 150) return "Unhealthy for Sensitive Groups";
+  if (aqi <= 200) return "Unhealthy";
+  if (aqi <= 300) return "Very Unhealthy";
   return "Hazardous";
 }
 
@@ -121,7 +101,6 @@ void printSerialNumber() {
   char errorMessage[256];
   unsigned char serialNumber[32];
   uint8_t serialNumberSize = 32;
-
   error = sen5x.getSerialNumber(serialNumber, serialNumberSize);
   if (error) {
     Serial.print("Error trying to execute getSerialNumber(): ");
@@ -139,7 +118,6 @@ void printModuleVersions() {
 
   unsigned char productName[32];
   uint8_t productNameSize = 32;
-
   error = sen5x.getProductName(productName, productNameSize);
   if (error) {
     Serial.print("Error trying to execute getProductName(): ");
@@ -154,7 +132,6 @@ void printModuleVersions() {
   bool firmwareDebug;
   uint8_t hardwareMajor, hardwareMinor;
   uint8_t protocolMajor, protocolMinor;
-
   error = sen5x.getVersion(firmwareMajor, firmwareMinor, firmwareDebug,
                            hardwareMajor, hardwareMinor, protocolMajor,
                            protocolMinor);
@@ -174,10 +151,6 @@ void printModuleVersions() {
   }
 }
 
-/**
- * Detects the sensor variant by reading the product name via I2C.
- * Returns the variant enum and configures the BLE DataProvider accordingly.
- */
 SensorVariant detectSensorVariant() {
   uint16_t error;
   char errorMessage[256];
@@ -206,13 +179,12 @@ SensorVariant detectSensorVariant() {
     return VARIANT_SEN54;
   } else {
     Serial.println("Detected: SEN50 (PM only)");
-    // Already initialized with PM10_PM25_PM40_PM100 — no change needed
     return VARIANT_SEN50;
   }
 }
 
 // ---------------------------------------------------------------------------
-//  Main measurement + BLE reporting
+//  Measurement + BLE + Buffer
 // ---------------------------------------------------------------------------
 
 void measure_and_report() {
@@ -228,8 +200,6 @@ void measure_and_report() {
   float vocIndex;
   float noxIndex;
 
-  // Use the universal readMeasuredValues() for all variants.
-  // Unsupported values come back as NAN.
   error = sen5x.readMeasuredValues(
       massConcentrationPm1p0, massConcentrationPm2p5, massConcentrationPm4p0,
       massConcentrationPm10p0, ambientHumidity, ambientTemperature, vocIndex,
@@ -242,106 +212,71 @@ void measure_and_report() {
     return;
   }
 
-  // ---- Serial output: PM values (all variants) ----
-  Serial.print("PM1.0: ");
-  Serial.print(massConcentrationPm1p0);
-  Serial.print("\tPM2.5: ");
-  Serial.print(massConcentrationPm2p5);
-  Serial.print("\tPM4.0: ");
-  Serial.print(massConcentrationPm4p0);
-  Serial.print("\tPM10.0: ");
-  Serial.print(massConcentrationPm10p0);
-
-  // ---- Serial output: Environmental data (SEN54/SEN55) ----
-  if (sensorVariant == VARIANT_SEN54 || sensorVariant == VARIANT_SEN55) {
-    Serial.print("\tRH: ");
-    if (isnan(ambientHumidity)) {
-      Serial.print("n/a");
-    } else {
-      Serial.print(ambientHumidity);
-      Serial.print("%");
-    }
-    Serial.print("\tT: ");
-    if (isnan(ambientTemperature)) {
-      Serial.print("n/a");
-    } else {
-      Serial.print(ambientTemperature);
-      Serial.print("°C");
-    }
-    Serial.print("\tVOC: ");
-    if (isnan(vocIndex)) {
-      Serial.print("n/a");
-    } else {
-      Serial.print(vocIndex);
-    }
-  }
-
-  // ---- Serial output: NOx (SEN55 only) ----
-  if (sensorVariant == VARIANT_SEN55) {
-    Serial.print("\tNOx: ");
-    if (isnan(noxIndex)) {
-      Serial.print("n/a");
-    } else {
-      Serial.print(noxIndex);
-    }
-  }
-
-  // ---- AQI calculation (all variants) ----
+  // Compute AQI
   int aqi25 = aqiFromPM25(massConcentrationPm2p5);
   int aqi10 = aqiFromPM10(massConcentrationPm10p0);
   int aqiMax = max(aqi25, aqi10);
 
-  Serial.print("\t| AQI(PM2.5): ");
-  Serial.print(aqi25);
-  Serial.print("  AQI(PM10): ");
-  Serial.print(aqi10);
-  Serial.print("  => AQI: ");
-  Serial.print(aqiMax);
-  Serial.print(" [");
-  Serial.print(aqiCategory(aqiMax));
-  Serial.println("]");
+  // ---- Build compact sample for buffer ----
+  latestSample.pm1p0       = (uint16_t)(massConcentrationPm1p0 * 10.0f);
+  latestSample.pm2p5       = (uint16_t)(massConcentrationPm2p5 * 10.0f);
+  latestSample.pm4p0       = (uint16_t)(massConcentrationPm4p0 * 10.0f);
+  latestSample.pm10p0      = (uint16_t)(massConcentrationPm10p0 * 10.0f);
+  latestSample.humidity    = isnan(ambientHumidity) ? 0 : (uint16_t)(ambientHumidity * 100.0f);
+  latestSample.temperature = isnan(ambientTemperature) ? 0 : (int16_t)(ambientTemperature * 100.0f);
+  latestSample.vocIndex    = isnan(vocIndex) ? 0 : (uint16_t)vocIndex;
+  latestSample.noxIndex    = isnan(noxIndex) ? 0 : (uint16_t)noxIndex;
+  latestSample.aqi         = (uint16_t)max(aqiMax, 0);
+  latestSample.timestamp   = millis() - recordingStartMs;
 
-  // ---- BLE sample: write values according to detected variant ----
+  // Add to ring buffer if recording
+  if (dataBuffer.isRecording()) {
+    dataBuffer.addSample(latestSample);
+  }
+
+  // ---- Serial output ----
+  Serial.print("PM1.0: ");   Serial.print(massConcentrationPm1p0);
+  Serial.print("\tPM2.5: "); Serial.print(massConcentrationPm2p5);
+  Serial.print("\tPM4.0: "); Serial.print(massConcentrationPm4p0);
+  Serial.print("\tPM10: ");  Serial.print(massConcentrationPm10p0);
+
+  if (sensorVariant == VARIANT_SEN54 || sensorVariant == VARIANT_SEN55) {
+    Serial.print("\tRH: ");
+    Serial.print(isnan(ambientHumidity) ? 0.0f : ambientHumidity); Serial.print("%");
+    Serial.print("\tT: ");
+    Serial.print(isnan(ambientTemperature) ? 0.0f : ambientTemperature); Serial.print("C");
+    Serial.print("\tVOC: ");
+    Serial.print(isnan(vocIndex) ? 0.0f : vocIndex);
+  }
+  if (sensorVariant == VARIANT_SEN55) {
+    Serial.print("\tNOx: ");
+    Serial.print(isnan(noxIndex) ? 0.0f : noxIndex);
+  }
+
+  Serial.print("\t| AQI: "); Serial.print(aqiMax);
+  Serial.print(" ["); Serial.print(aqiCategory(aqiMax)); Serial.println("]");
+
+  // ---- BLE sample ----
   switch (sensorVariant) {
   case VARIANT_SEN55:
-    provider.writeValueToCurrentSample(
-        ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
-    provider.writeValueToCurrentSample(
-        ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
+    provider.writeValueToCurrentSample(ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
+    provider.writeValueToCurrentSample(ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
     provider.writeValueToCurrentSample(vocIndex, SignalType::VOC_INDEX);
-    // NOx may be NAN during the first ~10 seconds; send 0 in that case
-    provider.writeValueToCurrentSample(isnan(noxIndex) ? 0.0f : noxIndex,
-                                       SignalType::NOX_INDEX);
-    provider.writeValueToCurrentSample(
-        massConcentrationPm2p5,
-        SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(isnan(noxIndex) ? 0.0f : noxIndex, SignalType::NOX_INDEX);
+    provider.writeValueToCurrentSample(massConcentrationPm2p5, SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
     break;
-
   case VARIANT_SEN54:
-    provider.writeValueToCurrentSample(
-        ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
-    provider.writeValueToCurrentSample(
-        ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
+    provider.writeValueToCurrentSample(ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
+    provider.writeValueToCurrentSample(ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
     provider.writeValueToCurrentSample(vocIndex, SignalType::VOC_INDEX);
-    provider.writeValueToCurrentSample(
-        massConcentrationPm2p5,
-        SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(massConcentrationPm2p5, SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
     break;
-
   case VARIANT_SEN50:
   default:
-    provider.writeValueToCurrentSample(
-        massConcentrationPm1p0,
-        SignalType::PM1P0_MICRO_GRAMM_PER_CUBIC_METER);
-    provider.writeValueToCurrentSample(
-        massConcentrationPm2p5,
-        SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
-    provider.writeValueToCurrentSample(
-        massConcentrationPm4p0,
-        SignalType::PM4P0_MICRO_GRAMM_PER_CUBIC_METER);
-    provider.writeValueToCurrentSample(
-        massConcentrationPm10p0,
-        SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(massConcentrationPm1p0, SignalType::PM1P0_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(massConcentrationPm2p5, SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(massConcentrationPm4p0, SignalType::PM4P0_MICRO_GRAMM_PER_CUBIC_METER);
+    provider.writeValueToCurrentSample(massConcentrationPm10p0, SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER);
     break;
   }
 
@@ -350,29 +285,121 @@ void measure_and_report() {
 }
 
 // ---------------------------------------------------------------------------
+//  Button handling
+// ---------------------------------------------------------------------------
+
+void handleButtons() {
+  Button btn = buttons_poll();
+  if (btn == Button::NONE) return;
+
+  switch (btn) {
+  case Button::UP:
+    if (screenMode == ScreenMode::HOME) {
+      int cur = (int)cursorField;
+      cur--;
+      if (cur < 0) cur = (int)DataField::_COUNT - 1;
+      cursorField = (DataField)cur;
+    }
+    break;
+
+  case Button::DOWN:
+    if (screenMode == ScreenMode::HOME) {
+      int cur = (int)cursorField;
+      cur++;
+      if (cur >= (int)DataField::_COUNT) cur = 0;
+      cursorField = (DataField)cur;
+    }
+    break;
+
+  case Button::SELECT:
+    if (screenMode == ScreenMode::HOME) {
+      screenMode = ScreenMode::CHART;
+    } else {
+      screenMode = ScreenMode::HOME;
+    }
+    // Force immediate redraw on mode change
+    lastDisplayUpdateMs = 0;
+    break;
+
+  case Button::RECORD:
+    if (dataBuffer.isRecording()) {
+      dataBuffer.setRecording(false);
+      Serial.println("[REC] Recording stopped.");
+    } else {
+      dataBuffer.clear();
+      recordingStartMs = millis();
+      dataBuffer.setRecording(true);
+      Serial.print("[REC] Recording started. Buffer capacity: ");
+      Serial.print(dataBuffer.getCapacity());
+      Serial.println(" samples.");
+    }
+    break;
+
+  default:
+    break;
+  }
+}
+
+// ---------------------------------------------------------------------------
+//  Display update
+// ---------------------------------------------------------------------------
+
+void updateDisplay() {
+  unsigned long now = millis();
+  if (now - lastDisplayUpdateMs < DISPLAY_UPDATE_INTERVAL_MS) return;
+  lastDisplayUpdateMs = now;
+
+  if (screenMode == ScreenMode::HOME) {
+    display_home(latestSample, cursorField,
+                 dataBuffer.isRecording(), false /* BLE connected — Phase 2 */);
+  } else {
+    display_chart(dataBuffer, cursorField);
+  }
+}
+
+// ---------------------------------------------------------------------------
 //  Arduino setup / loop
 // ---------------------------------------------------------------------------
 
 void setup() {
   Serial.begin(115200);
-
-  // Wait briefly for USB-CDC serial on ESP32-C3
   delay(2000);
+
   Serial.println("========================================");
-  Serial.println("   Portable AQI Monitor — SEN5x + BLE  ");
+  Serial.println("  Portable AQI Monitor V2 — SEN5x+TFT  ");
   Serial.println("========================================");
+
+  // Initialize display
+  display_begin();
+  Serial.println("Display initialized.");
+
+  // Initialize buttons
+  buttons_begin();
+  Serial.println("Buttons initialized.");
+
+  // Allocate ring buffer — use ~60KB for data
+  // 60000 / 22 = ~2727 samples = ~45 min at 1/sec
+  size_t bufferSamples = 2700;
+  if (dataBuffer.begin(bufferSamples)) {
+    Serial.print("Data buffer allocated: ");
+    Serial.print(bufferSamples);
+    Serial.print(" samples (");
+    Serial.print(bufferSamples * sizeof(SensorSample));
+    Serial.println(" bytes)");
+  } else {
+    Serial.println("ERROR: Failed to allocate data buffer!");
+  }
 
   // ESP32-C3 Super Mini I2C: SDA = GPIO8, SCL = GPIO9
   Wire.begin(8, 9);
 
-  // Initialize the GadgetBle Library
+  // Initialize BLE
   provider.begin();
-  Serial.print("BLE Gadget initialized, deviceId = ");
+  Serial.print("BLE initialized, deviceId = ");
   Serial.println(provider.getDeviceIdString());
 
   // Initialize SEN5x
   sen5x.begin(Wire);
-
   uint16_t error = sen5x.deviceReset();
   if (error) {
     char errorMessage[256];
@@ -382,14 +409,17 @@ void setup() {
   }
   delay(100);
 
-  // Auto-detect sensor variant and reconfigure BLE DataType
+  // Auto-detect sensor variant
   sensorVariant = detectSensorVariant();
-
-  // Print sensor info
   printSerialNumber();
   printModuleVersions();
 
-  // Start Measurement
+  // Print heap info
+  Serial.print("Free heap: ");
+  Serial.print(ESP.getFreeHeap());
+  Serial.println(" bytes");
+
+  // Start measurement
   error = sen5x.startMeasurement();
   if (error) {
     Serial.println("Error trying to start sensor measurement!");
@@ -397,13 +427,24 @@ void setup() {
     Serial.println("Measurement started!");
     Serial.println("----------------------------------------");
   }
+
+  recordingStartMs = millis();
 }
 
 void loop() {
+  // Read sensor at 1 Hz
   if (millis() - lastMeasurementTimeMs >= measurementIntervalMs) {
     measure_and_report();
   }
 
+  // Handle button input
+  handleButtons();
+
+  // Update display
+  updateDisplay();
+
+  // BLE maintenance
   provider.handleDownload();
-  delay(20);
+
+  delay(10);
 }
