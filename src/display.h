@@ -22,7 +22,7 @@ enum class DataField : uint8_t {
   _COUNT  // sentinel — number of fields
 };
 
-/// Initialize the ILI9225 display. Call once in setup().
+/// Initialize the ST7789 display. Call once in setup().
 void display_begin();
 
 /// Draw the home screen with current sensor values.

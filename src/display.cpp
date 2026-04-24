@@ -1,13 +1,6 @@
 #include "display.h"
-#include <TFT_22_ILI9225.h>
+#include <TFT_eSPI.h>
 #include <SPI.h>
-
-// --- Pin definitions ---
-#define TFT_RST  1
-#define TFT_RS   0
-#define TFT_CS   7
-#define TFT_SDI  6   // MOSI
-#define TFT_CLK  4   // SCK
 
 // --- Colors (RGB565) ---
 #define C_BLACK       0x0000
@@ -25,7 +18,7 @@
 #define C_REC_RED     0xF800
 #define C_BLE_BLUE    0x001F
 
-static TFT_22_ILI9225 tft(TFT_RST, TFT_RS, TFT_CS, TFT_SDI, TFT_CLK);
+static TFT_eSPI tft = TFT_eSPI();
 
 // ---- Field helpers ----
 
@@ -104,16 +97,17 @@ static uint16_t aqiColor(uint16_t aqi) {
 
 void display_begin() {
   tft.begin();
-  tft.setOrientation(0);  // portrait: 176 wide × 220 tall
-  tft.setBackgroundColor(C_DARK_BG);
-  tft.clear();
+  // TFT_eSPI ST7789 typically uses rotation 0 or 2 for portrait. 
+  // With connector at the top, rotation 2 is usually correct.
+  tft.setRotation(2);  
+  tft.fillScreen(C_DARK_BG);
 }
 
 // ---- Home Screen ----
-// Layout (portrait 176×220):
-//   [0-35]   Header: AQI value large + category
-//   [36-215] Data rows: 9 rows × ~20px each
-//   [216-219] Status bar: REC indicator + BLE icon
+// Layout (portrait 240x320):
+//   [0-54]   Header: AQI value large + category
+//   [55-288] Data rows: 9 rows x 26px each
+//   [289-319] Status bar: REC indicator + BLE icon
 
 void display_home(const SensorSample &current, DataField cursor,
                   bool recording, bool bleConnected) {
@@ -121,14 +115,16 @@ void display_home(const SensorSample &current, DataField cursor,
   uint16_t aqiVal = current.aqi;
   uint16_t acolor = aqiColor(aqiVal);
 
-  tft.fillRectangle(0, 0, 175, 37, C_HEADER_BG);
+  tft.fillRect(0, 0, 240, 55, C_HEADER_BG);
 
   // AQI number — large
   char buf[16];
   snprintf(buf, sizeof(buf), "%d", aqiVal);
-  tft.setFont(Terminal12x16);
-  tft.drawText(4, 2, "AQI", C_CYAN);
-  tft.drawText(50, 2, buf, acolor);
+  tft.setTextFont(4); // 26 pixel high
+  tft.setTextColor(C_CYAN);
+  tft.drawString("AQI", 10, 8);
+  tft.setTextColor(acolor);
+  tft.drawString(buf, 70, 8);
 
   // Category text — small
   const char *cat;
@@ -139,12 +135,13 @@ void display_home(const SensorSample &current, DataField cursor,
   else if (aqiVal <= 300) cat = "Very Unhealthy";
   else                    cat = "Hazardous";
 
-  tft.setFont(Terminal6x8);
-  tft.drawText(4, 24, cat, acolor);
+  tft.setTextFont(2); // 16 pixel high
+  tft.setTextColor(acolor);
+  tft.drawString(cat, 10, 36);
 
   // --- Data rows ---
-  const int ROW_START_Y = 40;
-  const int ROW_HEIGHT  = 19;
+  const int ROW_START_Y = 58;
+  const int ROW_HEIGHT  = 26;
   const int NUM_FIELDS  = (int)DataField::_COUNT;
 
   for (int i = 0; i < NUM_FIELDS; i++) {
@@ -153,11 +150,12 @@ void display_home(const SensorSample &current, DataField cursor,
 
     // Row background
     uint16_t bgColor = (f == cursor) ? C_HIGHLIGHT : C_DARK_BG;
-    tft.fillRectangle(0, y, 175, y + ROW_HEIGHT - 2, bgColor);
+    tft.fillRect(0, y, 240, ROW_HEIGHT - 2, bgColor);
 
     // Label
-    tft.setFont(Terminal6x8);
-    tft.drawText(4, y + 4, fieldLabel(f), C_CYAN);
+    tft.setTextFont(2);
+    tft.setTextColor(C_CYAN);
+    tft.drawString(fieldLabel(f), 8, y + 4);
 
     // Value
     float val = fieldValueFloat(current, f);
@@ -174,34 +172,38 @@ void display_home(const SensorSample &current, DataField cursor,
       snprintf(buf, sizeof(buf), "%d.%d", whole, frac);
     }
 
-    // Right-align the value
-    int textWidth = strlen(buf) * 6;
-    int unitWidth = strlen(fieldUnit(f)) * 6;
-    int valX = 175 - 4 - unitWidth - 4 - textWidth;
-    if (valX < 60) valX = 60;
+    int textWidth = tft.textWidth(buf);
+    int unitWidth = tft.textWidth(fieldUnit(f));
+    
+    int unitX = 240 - 8 - unitWidth;
+    int valX = unitX - 8 - textWidth;
 
     uint16_t valColor = (f == DataField::AQI) ? aqiColor(aqiVal) : C_WHITE;
-    tft.drawText(valX, y + 4, buf, valColor);
+    tft.setTextColor(valColor);
+    tft.drawString(buf, valX, y + 4);
 
     // Unit
     if (strlen(fieldUnit(f)) > 0) {
-      tft.drawText(175 - 4 - unitWidth, y + 4, fieldUnit(f), C_CYAN);
+      tft.setTextColor(C_CYAN);
+      tft.drawString(fieldUnit(f), unitX, y + 4);
     }
   }
 
   // --- Status bar ---
   int statusY = ROW_START_Y + NUM_FIELDS * ROW_HEIGHT + 2;
-  tft.fillRectangle(0, statusY, 175, 219, C_DARK_BG);
+  tft.fillRect(0, statusY, 240, 320 - statusY, C_DARK_BG);
 
   if (recording) {
-    tft.fillCircle(10, statusY + 7, 4, C_REC_RED);
-    tft.setFont(Terminal6x8);
-    tft.drawText(18, statusY + 3, "REC", C_REC_RED);
+    tft.fillCircle(16, statusY + 10, 6, C_REC_RED);
+    tft.setTextFont(2);
+    tft.setTextColor(C_REC_RED);
+    tft.drawString("REC", 28, statusY + 2);
   }
 
   if (bleConnected) {
-    tft.setFont(Terminal6x8);
-    tft.drawText(150, statusY + 3, "BLE", C_BLE_BLUE);
+    tft.setTextFont(2);
+    tft.setTextColor(C_BLE_BLUE);
+    tft.drawString("BLE", 200, statusY + 2);
   }
 }
 
@@ -209,29 +211,31 @@ void display_home(const SensorSample &current, DataField cursor,
 // Full-screen chart: title at top, axis labels, plotted line
 
 void display_chart(const DataBuffer &buf, DataField field) {
-  tft.clear();
+  tft.fillScreen(C_DARK_BG);
 
   // Title
-  tft.setFont(Terminal6x8);
+  tft.setTextFont(2);
+  tft.setTextColor(C_CYAN);
   char title[32];
   snprintf(title, sizeof(title), "%s %s", fieldLabel(field), fieldUnit(field));
-  tft.drawText(4, 2, title, C_CYAN);
+  tft.drawString(title, 8, 4);
 
   size_t count = buf.getCount();
   if (count < 2) {
-    tft.drawText(20, 100, "Waiting for data...", C_WHITE);
+    tft.setTextColor(C_WHITE);
+    tft.drawString("Waiting for data...", 40, 160);
     return;
   }
 
   // Chart area
-  const int CHART_X = 30;   // left margin (for Y axis labels)
-  const int CHART_Y = 16;   // top
-  const int CHART_W = 175 - CHART_X - 2;  // width
-  const int CHART_H = 220 - CHART_Y - 16; // height (leave room for X label)
+  const int CHART_X = 40;   // left margin (for Y axis labels)
+  const int CHART_Y = 28;   // top
+  const int CHART_W = 240 - CHART_X - 6;  // width
+  const int CHART_H = 320 - CHART_Y - 24; // height (leave room for X label)
   const int CHART_BOTTOM = CHART_Y + CHART_H;
 
   // Draw chart border
-  tft.drawRectangle(CHART_X, CHART_Y, CHART_X + CHART_W, CHART_BOTTOM, C_WHITE);
+  tft.drawRect(CHART_X, CHART_Y, CHART_W, CHART_H, C_WHITE);
 
   // Determine how many points to plot (at most CHART_W pixels)
   size_t numPoints = count;
@@ -261,22 +265,23 @@ void display_chart(const DataBuffer &buf, DataField field) {
 
   // Y-axis labels (min, mid, max)
   char lbl[12];
-  tft.setFont(Terminal6x8);
+  tft.setTextFont(2);
+  tft.setTextColor(C_WHITE);
 
   snprintf(lbl, sizeof(lbl), "%.0f", maxVal);
-  tft.drawText(0, CHART_Y, lbl, C_WHITE);
+  tft.drawString(lbl, 2, CHART_Y);
 
   float midVal = (minVal + maxVal) / 2.0f;
   snprintf(lbl, sizeof(lbl), "%.0f", midVal);
-  tft.drawText(0, CHART_Y + CHART_H / 2 - 4, lbl, C_WHITE);
+  tft.drawString(lbl, 2, CHART_Y + CHART_H / 2 - 8);
 
   snprintf(lbl, sizeof(lbl), "%.0f", minVal);
-  tft.drawText(0, CHART_BOTTOM - 8, lbl, C_WHITE);
+  tft.drawString(lbl, 2, CHART_BOTTOM - 16);
 
   // Draw horizontal grid lines
   for (int g = 0; g <= 4; g++) {
     int gy = CHART_Y + (CHART_H * g) / 4;
-    for (int gx = CHART_X + 2; gx < CHART_X + CHART_W; gx += 4) {
+    for (int gx = CHART_X + 2; gx < CHART_X + CHART_W; gx += 6) {
       tft.drawPixel(gx, gy, C_HIGHLIGHT);
     }
   }
@@ -306,8 +311,11 @@ void display_chart(const DataBuffer &buf, DataField field) {
   }
 
   // Bottom label
-  tft.setFont(Terminal6x8);
+  tft.setTextFont(2);
+  tft.setTextColor(C_WHITE);
   snprintf(lbl, sizeof(lbl), "%ds ago", (int)(numPoints));
-  tft.drawText(CHART_X, CHART_BOTTOM + 4, lbl, C_WHITE);
-  tft.drawText(CHART_X + CHART_W - 24, CHART_BOTTOM + 4, "now", C_WHITE);
+  tft.drawString(lbl, CHART_X, CHART_BOTTOM + 6);
+  
+  int nowW = tft.textWidth("now");
+  tft.drawString("now", CHART_X + CHART_W - nowW, CHART_BOTTOM + 6);
 }

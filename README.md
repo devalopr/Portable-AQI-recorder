@@ -31,8 +31,12 @@ A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 S
 |---|---|
 | **ESP32-C3 Super Mini** | Microcontroller with BLE & Wi-Fi |
 | **Sensirion SEN50 / SEN54 / SEN55** | Environmental sensor module (auto-detected) |
+| **ST7789 2.4" TFT Display** | SPI display for real-time visualization |
+| **4x Push Buttons** | Navigation controls (Up, Down, Select, Record) |
 
 ### Wiring
+
+#### SEN5x Environmental Sensor
 
 All three SEN5x variants use the **same pinout and connector** — just swap the sensor module.
 
@@ -48,7 +52,7 @@ All three SEN5x variants use the **same pinout and connector** — just swap the
 
 #### SEN5x JST Pinout (left to right, notch facing up)
 
-```
+```text
 Pin 1 — VDD  (5V)
 Pin 2 — GND
 Pin 3 — SCL
@@ -56,6 +60,32 @@ Pin 4 — SDA
 Pin 5 — SEL (leave unconnected or tie to GND for I2C)
 Pin 6 — NC
 ```
+
+#### ST7789 2.4" SPI TFT Display (10-Pin Version)
+
+| ESP32-C3 Super Mini | ST7789 Display Pin |
+|---|---|
+| GND | 1 — GND |
+| GPIO 0 | 2 — DC / RS |
+| GPIO 7 | 3 — CS |
+| GPIO 4 | 4 — SCL |
+| GPIO 6 | 5 — SDA / MOSI |
+| GPIO 1 | 6 — RST |
+| 3.3V | 7 — VCC |
+| GND | 8 — GND |
+| 3.3V | 9 — Anode (A) |
+| GND | 10 — Cathode (K) |
+
+#### Navigation Buttons
+
+Wire each push button between the specified ESP32-C3 GPIO pin and **GND**. The firmware uses internal pull-up resistors.
+
+| ESP32-C3 Super Mini | Button Function |
+|---|---|
+| GPIO 20 | Up |
+| GPIO 21 | Down |
+| GPIO 5 | Select |
+| GPIO 3 | Record |
 
 ---
 
@@ -74,7 +104,7 @@ Pin 6 — NC
 1. **Clone the repository**
    ```bash
    git clone https://github.com/devalopr/Portable-AQI-recorder-.git
-   cd Portable-AQI-recorder-V1
+   cd Portable-AQI-recorder
    ```
 
 2. **Build the firmware**
