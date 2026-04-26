@@ -14,6 +14,7 @@
  */
 
 #include <Arduino.h>
+#include <cstring>
 #include <SensirionI2CSen5x.h>
 #include <Sensirion_Gadget_BLE.h>
 #include <Wire.h>
@@ -50,6 +51,14 @@ DataBuffer dataBuffer;
 // Display refresh timing
 static unsigned long lastDisplayUpdateMs = 0;
 static const unsigned long DISPLAY_UPDATE_INTERVAL_MS = 500;
+
+// Browser-friendly BLE service for the companion web app.
+// Samples are sent as a compact little-endian binary packet:
+// timestamp u32, PM fields u16 x4, humidity u16, temperature i16,
+// VOC u16, NOx u16, AQI u16, sensor variant u8.
+static const char *WEB_AQI_SERVICE_UUID = "7b46a100-fd8a-4a28-8f4b-4b3e7c4f0001";
+static const char *WEB_AQI_LIVE_UUID    = "7b46a101-fd8a-4a28-8f4b-4b3e7c4f0001";
+static const char *WEB_AQI_STATUS_UUID  = "7b46a102-fd8a-4a28-8f4b-4b3e7c4f0001";
 
 // ---------------------------------------------------------------------------
 //  US EPA AQI Calculation
