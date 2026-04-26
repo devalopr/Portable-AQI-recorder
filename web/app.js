@@ -86,11 +86,7 @@ async function connect() {
   try {
     setStatus("Choosing device");
     const device = await navigator.bluetooth.requestDevice({
-      filters: [
-        { services: [BLE.service] },
-        { name: "AQI Recorder" },
-        { namePrefix: "AQI" },
-      ],
+      filters: [{ namePrefix: "AQI" }],
       optionalServices: [BLE.service],
     });
 
@@ -171,6 +167,12 @@ function parseSample(data) {
     offset += 2;
     return value;
   };
+  const readI16 = () => {
+    const value = data.getInt16(offset, true);
+    offset += 2;
+    return value;
+  };
+  
   const timestamp = data.getUint32(offset, true);
   offset += 4;
 
@@ -182,17 +184,13 @@ function parseSample(data) {
     pm4p0: readU16() / 10,
     pm10p0: readU16() / 10,
     humidity: readU16() / 100,
-    temperature: data.getInt16(offset, true) / 100,
-    vocIndex: 0,
-    noxIndex: 0,
-    aqi: 0,
-    sensor: "Unknown",
+    temperature: readI16() / 100,
+    vocIndex: readU16(),
+    noxIndex: readU16(),
+    aqi: readU16(),
+    sensor: sensorName(data.getUint8(offset)),
   };
-  offset += 2;
-  sample.vocIndex = readU16();
-  sample.noxIndex = readU16();
-  sample.aqi = readU16();
-  sample.sensor = sensorName(data.getUint8(offset));
+  
   return sample;
 }
 
