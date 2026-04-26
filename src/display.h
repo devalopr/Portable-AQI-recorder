@@ -18,6 +18,7 @@ enum class DataField : uint8_t {
   TEMPERATURE,
   VOC_INDEX,
   NOX_INDEX,
+  CO2,
   AQI,
   _COUNT  // sentinel — number of fields
 };
