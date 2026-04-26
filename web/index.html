@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f4ec">
+    <title>Portable AQI Recorder</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">BLE monitor</p>
+          <h1>Portable AQI Recorder</h1>
+        </div>
+        <div class="toolbar" aria-label="App controls">
+          <button id="themeToggle" class="icon-button" type="button" aria-label="Toggle theme" title="Toggle theme">
+            <span aria-hidden="true">◐</span>
+          </button>
+          <button id="connectButton" class="primary" type="button">Connect</button>
+        </div>
+      </header>
+
+      <section class="status-strip" aria-live="polite">
+        <div>
+          <span class="label">Status</span>
+          <strong id="connectionStatus">Disconnected</strong>
+        </div>
+        <div>
+          <span class="label">Sensor</span>
+          <strong id="sensorName">Waiting</strong>
+        </div>
+        <div>
+          <span class="label">Samples</span>
+          <strong id="sampleCount">0</strong>
+        </div>
+        <div>
+          <span class="label">Last update</span>
+          <strong id="lastUpdate">Never</strong>
+        </div>
+      </section>
+
+      <section class="aqi-band" id="aqiBand">
+        <div>
+          <span class="label">AQI</span>
+          <strong id="aqiValue">--</strong>
+        </div>
+        <p id="aqiCategory">Connect to the recorder to start streaming readings.</p>
+      </section>
+
+      <section class="metric-grid" id="metricGrid" aria-label="Latest readings"></section>
+
+      <section class="chart-section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">History</p>
+            <h2>Chart Over Time</h2>
+          </div>
+          <div class="actions">
+            <button id="recordButton" type="button">Start Recording</button>
+            <button id="clearButton" type="button">Clear</button>
+            <button id="exportButton" type="button">Export CSV</button>
+          </div>
+        </div>
+        <div class="chart-controls" id="chartControls" aria-label="Chart fields"></div>
+        <div class="chart-wrap">
+          <canvas id="historyChart" width="1200" height="520" aria-label="Recorded data chart"></canvas>
+        </div>
+      </section>
+
+      <section class="table-section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Recorded Data</p>
+            <h2>Recent Samples</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>AQI</th>
+                <th>PM1.0</th>
+                <th>PM2.5</th>
+                <th>PM4.0</th>
+                <th>PM10</th>
+                <th>RH</th>
+                <th>Temp</th>
+                <th>VOC</th>
+                <th>NOx</th>
+              </tr>
+            </thead>
+            <tbody id="sampleTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js?v=2"></script>
+  </body>
+</html>

@@ -8,15 +8,15 @@
  *   - SEN55: PM + Humidity, Temperature, VOC Index, NOx Index
  *
  * Displays data on a 176×220 ILI9225 TFT with 4-button navigation.
- * Streams data over BLE to the Sensirion MyAmbience app.
- * Records data into RAM ring buffer for BLE transfer to a PWA.
+ * Streams data over BLE to the companion web app.
+ * Records data into RAM ring buffer for on-device charting.
  * Calculates and displays US EPA AQI.
  */
 
 #include <Arduino.h>
 #include <cstring>
+#include <NimBLEDevice.h>
 #include <SensirionI2CSen5x.h>
-#include <Sensirion_Gadget_BLE.h>
 #include <Wire.h>
 
 #include "data_buffer.h"
@@ -33,11 +33,8 @@ static SensorVariant sensorVariant = VARIANT_UNKNOWN;
 
 SensirionI2CSen5x sen5x;
 
-// BLE setup — constructed with a default DataType; reconfigured in setup()
 static int64_t lastMeasurementTimeMs = 0;
 static int measurementIntervalMs = 1000;
-NimBLELibraryWrapper lib;
-DataProvider provider(lib, DataType::PM10_PM25_PM40_PM100);
 
 // Display + UI state
 static ScreenMode screenMode = ScreenMode::HOME;
@@ -56,9 +53,13 @@ static const unsigned long DISPLAY_UPDATE_INTERVAL_MS = 500;
 // Samples are sent as a compact little-endian binary packet:
 // timestamp u32, PM fields u16 x4, humidity u16, temperature i16,
 // VOC u16, NOx u16, AQI u16, sensor variant u8.
-static const char *WEB_AQI_SERVICE_UUID = "7b46a100-fd8a-4a28-8f4b-4b3e7c4f0001";
-static const char *WEB_AQI_LIVE_UUID    = "7b46a101-fd8a-4a28-8f4b-4b3e7c4f0001";
-static const char *WEB_AQI_STATUS_UUID  = "7b46a102-fd8a-4a28-8f4b-4b3e7c4f0001";
+static const char *WEB_AQI_SERVICE_UUID = "7b46a200-fd8a-4a28-8f4b-4b3e7c4f0001";
+static const char *WEB_AQI_LIVE_UUID    = "7b46a201-fd8a-4a28-8f4b-4b3e7c4f0001";
+static const char *WEB_AQI_STATUS_UUID  = "7b46a202-fd8a-4a28-8f4b-4b3e7c4f0001";
+static NimBLEServer *bleServer = nullptr;
+static NimBLECharacteristic *liveCharacteristic = nullptr;
+static NimBLECharacteristic *statusCharacteristic = nullptr;
+static bool bleConnected = false;
 
 // ---------------------------------------------------------------------------
 //  US EPA AQI Calculation
@@ -99,6 +100,125 @@ const char *aqiCategory(int aqi) {
   if (aqi <= 200) return "Unhealthy";
   if (aqi <= 300) return "Very Unhealthy";
   return "Hazardous";
+}
+
+static const char *sensorVariantName(SensorVariant variant) {
+  switch (variant) {
+  case VARIANT_SEN50: return "SEN50";
+  case VARIANT_SEN54: return "SEN54";
+  case VARIANT_SEN55: return "SEN55";
+  default: return "Unknown";
+  }
+}
+
+static uint8_t sensorVariantCode(SensorVariant variant) {
+  switch (variant) {
+  case VARIANT_SEN50: return 50;
+  case VARIANT_SEN54: return 54;
+  case VARIANT_SEN55: return 55;
+  default: return 0;
+  }
+}
+
+static void writeU16(uint8_t *packet, size_t &offset, uint16_t value) {
+  packet[offset++] = value & 0xff;
+  packet[offset++] = (value >> 8) & 0xff;
+}
+
+static void writeI16(uint8_t *packet, size_t &offset, int16_t value) {
+  writeU16(packet, offset, (uint16_t)value);
+}
+
+static void writeU32(uint8_t *packet, size_t &offset, uint32_t value) {
+  packet[offset++] = value & 0xff;
+  packet[offset++] = (value >> 8) & 0xff;
+  packet[offset++] = (value >> 16) & 0xff;
+  packet[offset++] = (value >> 24) & 0xff;
+}
+
+class WebBleServerCallbacks : public NimBLEServerCallbacks {
+  void onConnect(NimBLEServer *server) override {
+    bleConnected = true;
+    Serial.println("[BLE] Connected.");
+  }
+
+  void onDisconnect(NimBLEServer *server) override {
+    bleConnected = false;
+    Serial.println("[BLE] Disconnected; advertising restarted.");
+    NimBLEDevice::startAdvertising();
+  }
+};
+
+void updateWebBleStatus() {
+  if (!statusCharacteristic) return;
+
+  String status = "{";
+  status += "\"name\":\"Portable AQI Recorder\",";
+  status += "\"sensor\":\"";
+  status += sensorVariantName(sensorVariant);
+  status += "\",";
+  status += "\"recording\":";
+  status += dataBuffer.isRecording() ? "true" : "false";
+  status += ",";
+  status += "\"samples\":";
+  status += dataBuffer.getCount();
+  status += ",";
+  status += "\"capacity\":";
+  status += dataBuffer.getCapacity();
+  status += "}";
+
+  statusCharacteristic->setValue((const uint8_t *)status.c_str(), status.length());
+}
+
+void setupWebBleService() {
+  NimBLEDevice::init("AQI Recorder");
+  NimBLEDevice::setPower(ESP_PWR_LVL_P9);
+
+  bleServer = NimBLEDevice::createServer();
+  bleServer->setCallbacks(new WebBleServerCallbacks());
+  bleServer->advertiseOnDisconnect(true);
+
+  NimBLEService *service = bleServer->createService(WEB_AQI_SERVICE_UUID);
+  liveCharacteristic = service->createCharacteristic(
+      WEB_AQI_LIVE_UUID, NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::NOTIFY);
+  statusCharacteristic = service->createCharacteristic(
+      WEB_AQI_STATUS_UUID, NIMBLE_PROPERTY::READ);
+
+  updateWebBleStatus();
+  service->start();
+
+  NimBLEAdvertising *advertising = NimBLEDevice::getAdvertising();
+  advertising->addServiceUUID(WEB_AQI_SERVICE_UUID);
+  advertising->setName("AQI Recorder");
+  advertising->setScanResponse(true);
+  advertising->start();
+
+  Serial.println("Web BLE initialized as AQI Recorder.");
+}
+
+void notifyWebBleSample(const SensorSample &sample) {
+  if (!liveCharacteristic) return;
+
+  uint8_t packet[23];
+  size_t offset = 0;
+
+  writeU32(packet, offset, sample.timestamp);
+  writeU16(packet, offset, sample.pm1p0);
+  writeU16(packet, offset, sample.pm2p5);
+  writeU16(packet, offset, sample.pm4p0);
+  writeU16(packet, offset, sample.pm10p0);
+  writeU16(packet, offset, sample.humidity);
+  writeI16(packet, offset, sample.temperature);
+  writeU16(packet, offset, sample.vocIndex);
+  writeU16(packet, offset, sample.noxIndex);
+  writeU16(packet, offset, sample.aqi);
+  packet[offset++] = sensorVariantCode(sensorVariant);
+
+  liveCharacteristic->setValue(packet, offset);
+  if (bleConnected) {
+    liveCharacteristic->notify();
+  }
+  updateWebBleStatus();
 }
 
 // ---------------------------------------------------------------------------
@@ -180,11 +300,9 @@ SensorVariant detectSensorVariant() {
 
   if (name == "SEN55") {
     Serial.println("Detected: SEN55 (PM + T/RH + VOC + NOx)");
-    provider.setSampleConfig(DataType::T_RH_VOC_NOX_PM25);
     return VARIANT_SEN55;
   } else if (name == "SEN54") {
     Serial.println("Detected: SEN54 (PM + T/RH + VOC)");
-    provider.setSampleConfig(DataType::T_RH_VOC_PM25_V2);
     return VARIANT_SEN54;
   } else {
     Serial.println("Detected: SEN50 (PM only)");
@@ -242,6 +360,7 @@ void measure_and_report() {
   if (dataBuffer.isRecording()) {
     dataBuffer.addSample(latestSample);
   }
+  notifyWebBleSample(latestSample);
 
   // ---- Serial output ----
   Serial.print("PM1.0: ");   Serial.print(massConcentrationPm1p0);
@@ -264,32 +383,6 @@ void measure_and_report() {
 
   Serial.print("\t| AQI: "); Serial.print(aqiMax);
   Serial.print(" ["); Serial.print(aqiCategory(aqiMax)); Serial.println("]");
-
-  // ---- BLE sample ----
-  switch (sensorVariant) {
-  case VARIANT_SEN55:
-    provider.writeValueToCurrentSample(ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
-    provider.writeValueToCurrentSample(ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
-    provider.writeValueToCurrentSample(vocIndex, SignalType::VOC_INDEX);
-    provider.writeValueToCurrentSample(isnan(noxIndex) ? 0.0f : noxIndex, SignalType::NOX_INDEX);
-    provider.writeValueToCurrentSample(massConcentrationPm2p5, SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
-    break;
-  case VARIANT_SEN54:
-    provider.writeValueToCurrentSample(ambientTemperature, SignalType::TEMPERATURE_DEGREES_CELSIUS);
-    provider.writeValueToCurrentSample(ambientHumidity, SignalType::RELATIVE_HUMIDITY_PERCENTAGE);
-    provider.writeValueToCurrentSample(vocIndex, SignalType::VOC_INDEX);
-    provider.writeValueToCurrentSample(massConcentrationPm2p5, SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
-    break;
-  case VARIANT_SEN50:
-  default:
-    provider.writeValueToCurrentSample(massConcentrationPm1p0, SignalType::PM1P0_MICRO_GRAMM_PER_CUBIC_METER);
-    provider.writeValueToCurrentSample(massConcentrationPm2p5, SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER);
-    provider.writeValueToCurrentSample(massConcentrationPm4p0, SignalType::PM4P0_MICRO_GRAMM_PER_CUBIC_METER);
-    provider.writeValueToCurrentSample(massConcentrationPm10p0, SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER);
-    break;
-  }
-
-  provider.commitSample();
   lastMeasurementTimeMs = millis();
 }
 
@@ -360,7 +453,7 @@ void updateDisplay() {
 
   if (screenMode == ScreenMode::HOME) {
     display_home(latestSample, cursorField,
-                 dataBuffer.isRecording(), false /* BLE connected — Phase 2 */);
+                 dataBuffer.isRecording(), bleConnected);
   } else {
     display_chart(dataBuffer, cursorField);
   }
@@ -403,9 +496,7 @@ void setup() {
   Wire.begin(8, 9);
 
   // Initialize BLE
-  provider.begin();
-  Serial.print("BLE initialized, deviceId = ");
-  Serial.println(provider.getDeviceIdString());
+  setupWebBleService();
 
   // Initialize SEN5x
   sen5x.begin(Wire);
@@ -451,9 +542,6 @@ void loop() {
 
   // Update display
   updateDisplay();
-
-  // BLE maintenance
-  provider.handleDownload();
 
   delay(10);
 }

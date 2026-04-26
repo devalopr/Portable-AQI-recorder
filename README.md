@@ -1,6 +1,6 @@
 # Portable AQI Recorder
 
-A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and a **Sensirion SEN5x** environmental sensor. The firmware **auto-detects** which sensor variant is connected — **SEN50**, **SEN54**, or **SEN55** — and adapts accordingly. View real-time readings on your phone over **Bluetooth Low Energy** using the Sensirion MyAmbience app.
+A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and a **Sensirion SEN5x** environmental sensor. The firmware **auto-detects** which sensor variant is connected — **SEN50**, **SEN54**, or **SEN55** — and adapts accordingly. View and record real-time readings in the included Web Bluetooth app.
 
 ## Features
 
@@ -8,9 +8,9 @@ A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 S
 - **Environmental data** (SEN54/SEN55) — Humidity, Temperature, VOC Index
 - **NOx monitoring** (SEN55) — NOx Index
 - **US EPA AQI calculation** — computed from PM2.5 & PM10, printed to serial
-- **BLE streaming** — connect with Sensirion MyAmbience app on iOS/Android
+- **BLE streaming** — connect with the included Web Bluetooth recorder app
 - **Auto-detection** — firmware identifies SEN50/SEN54/SEN55 at boot, no code changes needed
-- **Data logging** — download measurement history from the app
+- **Data logging** — record, chart, and export CSV data from the web app
 - **Tiny form factor** — ESP32-C3 Super Mini is just 22×18 mm
 
 ### Sensor Comparison
@@ -95,9 +95,7 @@ Wire each push button between the specified ESP32-C3 GPIO pin and **GND**. The f
 
 1. **PlatformIO** — Install the [PlatformIO IDE extension](https://platformio.org/install/ide?install=vscode) in VS Code, or install the [PlatformIO CLI](https://docs.platformio.org/en/latest/core/installation.html).
 
-2. **Sensirion MyAmbience App** — Install on your phone:
-   - [iOS (App Store)](https://apps.apple.com/app/sensirion-myambience/id1529131572)
-   - [Android (Play Store)](https://play.google.com/store/apps/details?id=com.sensirion.myam)
+2. **Chrome or Edge** — Web Bluetooth is required for the browser recorder.
 
 ### Build & Upload
 
@@ -140,23 +138,37 @@ Wire each push button between the specified ESP32-C3 GPIO pin and **GND**. The f
 
 ---
 
-## Connecting to the App
+## Web BLE Recorder
 
-1. Open the **Sensirion MyAmbience** app on your phone.
-2. Make sure Bluetooth is enabled.
-3. The device should appear automatically — look for a device ID matching the one shown in serial output.
-4. Tap to connect and view real-time data.
-5. You can also download historical data from the device's log.
+This repository includes a browser app in `web/` for live viewing and recording from the AQI recorder over BLE. The ESP32 advertises as `AQI Recorder`.
 
-### What the app displays
+### Features
 
-| Sensor | App shows |
+- Live cards for AQI, PM1.0, PM2.5, PM4.0, PM10, humidity, temperature, VOC, and NOx
+- Light and dark mode
+- Local recording in the browser while connected
+- Multi-series charting for any available field over time
+- Recent sample table and CSV export
+
+### Run Locally
+
+Web Bluetooth requires a secure browser context. `localhost` is treated as secure by Chromium-based browsers.
+
+Double-click `AQI Recorder.app` in this project folder, or run:
+
+```bash
+python3 -m http.server 8080 --directory web
+```
+
+Then open [http://localhost:8080](http://localhost:8080) in Chrome or Edge, click **Connect**, and choose `AQI Recorder`.
+
+The firmware exposes this Web Bluetooth service:
+
+| Item | UUID |
 |---|---|
-| **SEN50** | PM1.0, PM2.5, PM4.0, PM10.0 |
-| **SEN54** | Temperature, Humidity, VOC Index, PM2.5 |
-| **SEN55** | Temperature, Humidity, VOC Index, NOx Index, PM2.5 |
-
-> **Note:** For SEN54/SEN55, the app displays PM2.5 alongside the environmental data (this is a limitation of the BLE protocol — there's no data type that includes all 4 PM sizes + environmental data). All PM values and AQI are always available on the serial monitor.
+| Web AQI Service | `7b46a200-fd8a-4a28-8f4b-4b3e7c4f0001` |
+| Live Sample Characteristic | `7b46a201-fd8a-4a28-8f4b-4b3e7c4f0001` |
+| Status Characteristic | `7b46a202-fd8a-4a28-8f4b-4b3e7c4f0001` |
 
 ---
 
@@ -181,6 +193,8 @@ The firmware calculates the **US EPA Air Quality Index** from PM2.5 and PM10. Th
 Portable-AQI-recorder-/
 ├── src/
 │   └── main.cpp          # Main firmware (sensor + BLE + AQI)
+├── AQI Recorder.app      # Double-click launcher for the web app
+├── web/                  # Web Bluetooth recorder app
 ├── platformio.ini         # PlatformIO configuration
 └── README.md              # This file
 ```
@@ -192,8 +206,6 @@ All dependencies are managed automatically by PlatformIO:
 | Library | Version | Purpose |
 |---|---|---|
 | Sensirion I2C SEN5X | ^0.3.0 | I2C driver for SEN50/SEN54/SEN55 sensors |
-| Sensirion Gadget BLE Arduino Lib | ^1.2.0 | BLE data provider for MyAmbience app |
-| Sensirion UPT Core | ^0.3.0 | BLE protocol definitions |
 | NimBLE-Arduino | ^1.4.1 | Lightweight BLE stack for ESP32 |
 
 ---
