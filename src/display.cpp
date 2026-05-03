@@ -201,12 +201,12 @@ static void drawStatusChip(int x, int y, const char *label, bool active,
                            uint16_t activeColor) {
   uint16_t fill = active ? activeColor : C_TEXT_LIGHT;
 
-  tft.fillRoundRect(x, y, 38, 21, 5, fill);
-  tft.drawRoundRect(x, y, 38, 21, 5, C_BORDER);
+  tft.fillRoundRect(x, y, 42, 22, 4, fill);
+  tft.drawRoundRect(x, y, 42, 22, 4, C_BORDER);
   tft.setFreeFont(&RubikBold12);
   tft.setTextColor(C_TEXT_WHITE, fill);
   tft.setTextDatum(MC_DATUM);
-  tft.drawString(label, x + 19, y + 11);
+  tft.drawString(label, x + 21, y + 12);
   tft.setTextDatum(TL_DATUM);
 }
 
@@ -214,14 +214,14 @@ static void drawBatteryChip(int x, int y, uint8_t percent) {
   char buf[8];
   snprintf(buf, sizeof(buf), "%u%%", percent);
 
-  tft.fillRoundRect(x, y, 38, 20, 5, C_CARD);
-  tft.drawRoundRect(x, y, 38, 20, 5, C_BORDER);
-  tft.fillRoundRect(x - 4, y + 7, 5, 7, 3, C_BORDER);
+  tft.fillRoundRect(x, y, 42, 22, 4, C_CARD);
+  tft.drawRoundRect(x, y, 42, 22, 4, C_BORDER);
+  tft.fillRoundRect(x - 3, y + 7, 4, 8, 2, C_BORDER);
 
   tft.setFreeFont(&RubikBold12);
   tft.setTextColor(C_TEXT_DARK, C_CARD);
   tft.setTextDatum(MC_DATUM);
-  tft.drawString(buf, x + 19, y + 10);
+  tft.drawString(buf, x + 21, y + 12);
   tft.setTextDatum(TL_DATUM);
 }
 
@@ -260,6 +260,23 @@ static void drawRubik(const char *text, int x, int y, uint8_t size,
   tft.setTextDatum(TL_DATUM);
 }
 
+static void drawFittedLabel(const char *text, int x, int y, int maxW,
+                            uint16_t color, uint16_t bg,
+                            const uint8_t *sizes, int count) {
+  uint8_t size = sizes[count - 1]; // smallest
+  for (int i = 0; i < count; i++) {
+    tft.setFreeFont(rubikBySize(sizes[i]));
+    if (tft.textWidth(text) <= maxW) {
+      size = sizes[i];
+      break;
+    }
+  }
+  tft.setFreeFont(rubikBySize(size));
+  tft.setTextColor(color, bg);
+  tft.setTextDatum(TL_DATUM);
+  tft.drawString(text, x, y);
+}
+
 static void drawFittedValue(const char *text, int x, int y, int w, int h,
                             uint16_t color, uint16_t bg,
                             const uint8_t *sizes, int count,
@@ -268,8 +285,8 @@ static void drawFittedValue(const char *text, int x, int y, int w, int h,
 
   tft.setFreeFont(rubikBySize(size));
   tft.setTextColor(color, bg);
-  tft.setTextDatum(MC_DATUM);
-  tft.drawString(text, x + w / 2, y + h / 2 + yNudge);
+  tft.setTextDatum(BC_DATUM);
+  tft.drawString(text, x + w / 2, y + h + yNudge);
   tft.setTextDatum(TL_DATUM);
 }
 
@@ -311,8 +328,11 @@ static void drawCardBorder(int x, int y, int w, int h, int radius,
                            bool selected) {
   tft.drawRoundRect(x, y, w, h, radius, C_BORDER);
   if (selected) {
-    tft.drawRoundRect(x + 2, y + 2, w - 4, h - 4, radius - 2, C_SELECT);
-    tft.drawRoundRect(x + 3, y + 3, w - 6, h - 6, radius - 3, C_SELECT);
+    tft.drawRoundRect(x - 1, y - 1, w + 2, h + 2, radius + 1, C_SELECT);
+    tft.drawRoundRect(x - 2, y - 2, w + 4, h + 4, radius + 2, C_SELECT);
+  } else {
+    tft.drawRoundRect(x - 1, y - 1, w + 2, h + 2, radius + 1, C_BG);
+    tft.drawRoundRect(x - 2, y - 2, w + 4, h + 4, radius + 2, C_BG);
   }
 }
 
@@ -354,16 +374,16 @@ static void drawHeader(const SensorSample &sample, DataField cursor,
 
   fillCard(4, 4, 232, 88, 4, bg, cursor == DataField::AQI);
 
-  drawRubik("AQI", 10, 9, 20, C_TEXT_WHITE, bg);
+  drawRubik("AQI", 12, 12, 24, C_TEXT_WHITE, bg);
 
-  drawFittedValue(buf, 58, 6, 128, 58, aqiTextColor(aqiVal), bg,
-                  aqiSizes, sizeof(aqiSizes), 0);
+  drawFittedValue(buf, 0, 4, 232, 62, aqiTextColor(aqiVal), bg,
+                  aqiSizes, 4, 0);
 
-  drawRubik(aqiCategoryShort(aqiVal), 121, 80, 15, C_TEXT_WHITE, bg, MC_DATUM);
+  drawRubik(aqiCategoryShort(aqiVal), 116, 86, 20, C_TEXT_WHITE, bg, BC_DATUM);
 
-  drawStatusChip(194, 16, "REC", recording, C_REC_RED);
-  drawStatusChip(194, 41, "BLE", bleConnected, C_BLE_BLUE);
-  drawBatteryChip(194, 66, PLACEHOLDER_BATTERY_PERCENT);
+  drawStatusChip(184, 10, "REC", recording, C_REC_RED);
+  drawStatusChip(184, 35, "BLE", bleConnected, C_BLE_BLUE);
+  drawBatteryChip(184, 60, PLACEHOLDER_BATTERY_PERCENT);
 }
 
 static void drawPmRow(int y, const char *label, uint16_t value,
@@ -372,23 +392,26 @@ static void drawPmRow(int y, const char *label, uint16_t value,
   snprintf(buf, sizeof(buf), "%u", value);
   static const uint8_t valueSizes[] = {32, 24, 20};
 
-  drawRubik(label, 11, y, 15, C_TEXT_WHITE, bg, ML_DATUM);
+  drawRubik(label, 12, y, 15, C_TEXT_WHITE, bg, ML_DATUM);
 
-  drawFittedValue(buf, 47, y - 18, 64, 36, C_TEXT_WHITE, bg,
-                  valueSizes, sizeof(valueSizes), 0);
+  drawFittedValue(buf, 44, y - 16, 66, 32, C_TEXT_WHITE, bg,
+                  valueSizes, 3, 0);
 }
 
 static void drawPmPanel(const SensorSample &sample, DataField cursor) {
   uint16_t bg = pmPanelColor(sample);
-  fillCard(4, 96, 115, 164, 4, bg, isPmField(cursor));
+  fillCard(4, 96, 114, 164, 4, bg, isPmField(cursor));
 
-  drawRubik("PM", 10, 102, 24, C_TEXT_WHITE, bg);
-  drawRubik("ug/m3", 69, 103, 8, C_TEXT_WHITE, bg);
+  drawRubik("PM", 10, 104, 20, C_TEXT_WHITE, bg);
+  
+  tft.setFreeFont(rubikBySize(12));
+  int unitW = tft.textWidth("ug/m3");
+  drawRubik("ug/m3", 118 - 8 - unitW, 108, 12, C_TEXT_WHITE, bg, TL_DATUM);
 
-  drawPmRow(130, "1.0", displayIntValue(sample, DataField::PM1_0), bg);
-  drawPmRow(174, "2.5", displayIntValue(sample, DataField::PM2_5), bg);
-  drawPmRow(218, "4.0", displayIntValue(sample, DataField::PM4_0), bg);
-  drawPmRow(248, "10.", displayIntValue(sample, DataField::PM10_0), bg);
+  drawPmRow(142, "1.0", displayIntValue(sample, DataField::PM1_0), bg);
+  drawPmRow(175, "2.5", displayIntValue(sample, DataField::PM2_5), bg);
+  drawPmRow(208, "4.0", displayIntValue(sample, DataField::PM4_0), bg);
+  drawPmRow(241, "10.", displayIntValue(sample, DataField::PM10_0), bg);
 }
 
 static void drawSmallMetricCard(int x, int y, int w, int h, DataField field,
@@ -398,17 +421,19 @@ static void drawSmallMetricCard(int x, int y, int w, int h, DataField field,
   uint16_t bg = getHealthColor(field, value);
   char buf[8];
   snprintf(buf, sizeof(buf), "%u", value);
-  static const uint8_t valueSizes[] = {32, 24, 20, 18};
+  static const uint8_t valueSizes[] = {42, 32, 24, 20};
 
   fillCard(x, y, w, h, 4, bg, cursor == field);
 
-  drawRubik(fieldLabel(field), x + 6, y + 5, 20, C_TEXT_WHITE, bg);
-  tft.setFreeFont(&RubikBold8);
+  static const uint8_t labelSizes[] = {15, 12, 10, 8};
+  drawFittedLabel(fieldLabel(field), x + 6, y + 4, w - 30, C_TEXT_WHITE, bg, labelSizes, 4);
+  
+  tft.setFreeFont(rubikBySize(10));
   int unitW = tft.textWidth(fieldUnit(field));
-  drawRubik(fieldUnit(field), x + w - 7 - unitW, y + 5, 8, C_TEXT_WHITE, bg);
+  drawRubik(fieldUnit(field), x + w - 6 - unitW, y + 6, 10, C_TEXT_WHITE, bg);
 
-  drawFittedValue(buf, x + 31, y + 19, w - 37, h - 22, C_TEXT_WHITE, bg,
-                  valueSizes, sizeof(valueSizes), 0);
+  drawFittedValue(buf, x + 4, y + 20, w - 8, h - 22, C_TEXT_WHITE, bg,
+                  valueSizes, 4, 0);
 }
 
 static void drawBottomMetricCard(int x, int y, int w, int h, DataField field,
@@ -429,13 +454,13 @@ static void drawBottomMetricCard(int x, int y, int w, int h, DataField field,
   fillCard(x, y, w, h, 4, bg, cursor == field);
 
   const char *label = fieldLabel(field);
-  uint8_t labelSize = 10;
-  uint8_t valueSizes[] = {32, 24, 20};
+  static const uint8_t valueSizes[] = {42, 32, 24};
+  static const uint8_t labelSizes[] = {15, 12, 10, 8};
 
-  drawRubik(label, x + w / 2, y + 10, labelSize, C_TEXT_WHITE, bg, MC_DATUM);
+  drawFittedLabel(label, x + 6, y + 4, w - 12, C_TEXT_WHITE, bg, labelSizes, 4);
 
-  drawFittedValue(buf, x + 5, y + 18, w - 10, h - 20, C_TEXT_WHITE, bg,
-                  valueSizes, sizeof(valueSizes), 0);
+  drawFittedValue(buf, x + 4, y + 20, w - 8, h - 22, C_TEXT_WHITE, bg,
+                  valueSizes, 3, 0);
 }
 
 static ScreenMode lastScreenMode = (ScreenMode)-1;
@@ -470,9 +495,9 @@ void display_home(const SensorSample &current, DataField cursor,
 
   drawHeader(current, cursor, recording, bleConnected);
   drawPmPanel(current, cursor);
-  drawSmallMetricCard(122, 96, 114, 54, DataField::CO2, current, cursor);
-  drawSmallMetricCard(122, 153, 114, 54, DataField::VOC_INDEX, current, cursor);
-  drawSmallMetricCard(122, 210, 114, 50, DataField::NOX_INDEX, current, cursor);
+  drawSmallMetricCard(122, 96, 114, 52, DataField::CO2, current, cursor);
+  drawSmallMetricCard(122, 152, 114, 52, DataField::VOC_INDEX, current, cursor);
+  drawSmallMetricCard(122, 208, 114, 52, DataField::NOX_INDEX, current, cursor);
   drawBottomMetricCard(4, 264, 89, 52, DataField::TEMPERATURE, current, cursor);
   drawBottomMetricCard(97, 264, 90, 52, DataField::HUMIDITY, current, cursor);
 
