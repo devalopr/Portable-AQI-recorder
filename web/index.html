@@ -3,15 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f7f4ec">
+    <meta name="description" content="A real-time dashboard and recorder for the Portable AQI Monitor. Connect via Web Bluetooth to track PM, VOC, NOx, Temp, and Humidity.">
+    <meta name="theme-color" content="#f8fafc">
     <title>Portable AQI Recorder</title>
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
   </head>
   <body>
+    <!-- Glassmorphism Animated Background -->
+    <div class="bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    
     <main class="shell">
-      <header class="topbar">
+      <header class="topbar glass-panel">
         <div>
-          <p class="eyebrow">BLE monitor</p>
+          <p class="eyebrow">BLE Monitor</p>
           <h1>Portable AQI Recorder</h1>
         </div>
         <div class="toolbar" aria-label="App controls">
@@ -22,7 +33,7 @@
         </div>
       </header>
 
-      <section class="status-strip" aria-live="polite">
+      <section class="status-strip glass-panel" aria-live="polite">
         <div>
           <span class="label">Status</span>
           <strong id="connectionStatus">Disconnected</strong>
@@ -41,7 +52,7 @@
         </div>
       </section>
 
-      <section class="aqi-band" id="aqiBand">
+      <section class="aqi-band glass-panel" id="aqiBand">
         <div>
           <span class="label">AQI</span>
           <strong id="aqiValue">--</strong>
@@ -60,11 +71,11 @@
           <div class="actions">
             <button id="recordButton" type="button">Start Recording</button>
             <button id="clearButton" type="button">Clear</button>
-            <button id="exportButton" type="button">Export CSV</button>
+            <button id="exportButton" class="primary" type="button">Export CSV</button>
           </div>
         </div>
         <div class="chart-controls" id="chartControls" aria-label="Chart fields"></div>
-        <div class="chart-wrap">
+        <div class="chart-wrap glass-panel">
           <canvas id="historyChart" width="1200" height="520" aria-label="Recorded data chart"></canvas>
         </div>
       </section>
@@ -76,7 +87,7 @@
             <h2>Recent Samples</h2>
           </div>
         </div>
-        <div class="table-wrap">
+        <div class="table-wrap glass-panel">
           <table>
             <thead>
               <tr>
@@ -98,6 +109,6 @@
       </section>
     </main>
 
-    <script src="app.js?v=2"></script>
+    <script src="app.js?v=3"></script>
   </body>
 </html>

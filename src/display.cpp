@@ -16,7 +16,7 @@
 #define C_TEXT_LIGHT  RGB565(96, 96, 96)
 #define C_TEXT_WHITE  0xFFFF
 #define C_HIGHLIGHT   0xFFFF
-#define C_SELECT      RGB565(255, 239, 64)
+#define C_SELECT      0x0000 // Black outline for maximum contrast
 #define C_REC_RED     RGB565(255, 86, 91)
 #define C_BLE_BLUE    RGB565(84, 135, 255)
 #define C_TEMP_ORANGE RGB565(248, 136, 31)
@@ -59,6 +59,7 @@ const char *fieldLabel(DataField f) {
     case DataField::NOX_INDEX:   return "NOx";
     case DataField::CO2:         return "CO2";
     case DataField::AQI:         return "AQI";
+    case DataField::SETTINGS:    return "Settings";
     default:                     return "?";
   }
 }
@@ -416,11 +417,15 @@ static void drawPmPanel(const SensorSample &sample, DataField cursor) {
 
 static void drawSmallMetricCard(int x, int y, int w, int h, DataField field,
                                 const SensorSample &sample,
-                                DataField cursor) {
+                                DataField cursor, bool enabled) {
   uint16_t value = displayIntValue(sample, field);
-  uint16_t bg = getHealthColor(field, value);
+  uint16_t bg = enabled ? getHealthColor(field, value) : C_GEAR_BG;
   char buf[8];
-  snprintf(buf, sizeof(buf), "%u", value);
+  if (enabled) {
+    snprintf(buf, sizeof(buf), "%u", value);
+  } else {
+    snprintf(buf, sizeof(buf), "--");
+  }
   static const uint8_t valueSizes[] = {42, 32, 24, 20};
 
   fillCard(x, y, w, h, 4, bg, cursor == field);
@@ -471,7 +476,7 @@ static bool lastRecording = false;
 static bool lastBleConnected = false;
 
 void display_home(const SensorSample &current, DataField cursor,
-                  bool recording, bool bleConnected) {
+                  bool recording, bool bleConnected, bool hasCo2, bool hasNox) {
   bool modeChanged = (lastScreenMode != ScreenMode::HOME);
   if (lastScreenMode != ScreenMode::HOME) {
     lastScreenMode = ScreenMode::HOME;
@@ -495,23 +500,31 @@ void display_home(const SensorSample &current, DataField cursor,
 
   drawHeader(current, cursor, recording, bleConnected);
   drawPmPanel(current, cursor);
-  drawSmallMetricCard(122, 96, 114, 52, DataField::CO2, current, cursor);
-  drawSmallMetricCard(122, 152, 114, 52, DataField::VOC_INDEX, current, cursor);
-  drawSmallMetricCard(122, 208, 114, 52, DataField::NOX_INDEX, current, cursor);
+  drawSmallMetricCard(122, 96, 114, 52, DataField::CO2, current, cursor, hasCo2);
+  drawSmallMetricCard(122, 152, 114, 52, DataField::VOC_INDEX, current, cursor, true);
+  drawSmallMetricCard(122, 208, 114, 52, DataField::NOX_INDEX, current, cursor, hasNox);
   drawBottomMetricCard(4, 264, 89, 52, DataField::TEMPERATURE, current, cursor);
   drawBottomMetricCard(97, 264, 90, 52, DataField::HUMIDITY, current, cursor);
 
-  fillCard(191, 264, 45, 52, 4, C_GEAR_BG, false);
-  tft.fillRect(211, 273, 6, 9, C_TEXT_WHITE);
-  tft.fillRect(211, 298, 6, 9, C_TEXT_WHITE);
-  tft.fillRect(197, 287, 9, 6, C_TEXT_WHITE);
-  tft.fillRect(222, 287, 9, 6, C_TEXT_WHITE);
-  tft.fillRect(202, 278, 7, 7, C_TEXT_WHITE);
-  tft.fillRect(219, 278, 7, 7, C_TEXT_WHITE);
-  tft.fillRect(202, 295, 7, 7, C_TEXT_WHITE);
-  tft.fillRect(219, 295, 7, 7, C_TEXT_WHITE);
-  tft.fillCircle(214, 290, 12, C_TEXT_WHITE);
-  tft.fillCircle(214, 290, 5, C_GEAR_BG);
+  bool settingsSelected = (cursor == DataField::SETTINGS);
+  fillCard(191, 264, 45, 52, 4, C_GEAR_BG, settingsSelected);
+  
+  int cx = 213;
+  int cy = 290;
+  // 8 smooth circular cogs for a modern gear look
+  tft.fillCircle(cx, cy - 10, 3, C_TEXT_WHITE);
+  tft.fillCircle(cx, cy + 10, 3, C_TEXT_WHITE);
+  tft.fillCircle(cx - 10, cy, 3, C_TEXT_WHITE);
+  tft.fillCircle(cx + 10, cy, 3, C_TEXT_WHITE);
+  tft.fillCircle(cx - 7, cy - 7, 3, C_TEXT_WHITE);
+  tft.fillCircle(cx + 7, cy - 7, 3, C_TEXT_WHITE);
+  tft.fillCircle(cx - 7, cy + 7, 3, C_TEXT_WHITE);
+  tft.fillCircle(cx + 7, cy + 7, 3, C_TEXT_WHITE);
+  
+  // central body
+  tft.fillCircle(cx, cy, 8, C_TEXT_WHITE);
+  // inner hole
+  tft.fillCircle(cx, cy, 3, C_GEAR_BG);
 }
 
 // ---- Chart Screen ----

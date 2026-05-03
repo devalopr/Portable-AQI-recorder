@@ -38,7 +38,20 @@ static int measurementIntervalMs = 1000;
 
 // Display + UI state
 static ScreenMode screenMode = ScreenMode::HOME;
-static DataField cursorField = DataField::PM1_0;
+static DataField cursorField = DataField::AQI;
+
+static const DataField navSequence[] = {
+  DataField::AQI,
+  DataField::PM2_5,
+  DataField::CO2,
+  DataField::VOC_INDEX,
+  DataField::NOX_INDEX,
+  DataField::TEMPERATURE,
+  DataField::HUMIDITY,
+  DataField::SETTINGS
+};
+static int navIndex = 0;
+
 static SensorSample latestSample = {};
 static unsigned long recordingStartMs = 0;
 
@@ -401,25 +414,25 @@ void handleButtons() {
   switch (btn) {
   case Button::UP:
     if (screenMode == ScreenMode::HOME) {
-      int cur = (int)cursorField;
-      cur--;
-      if (cur < 0) cur = (int)DataField::_COUNT - 1;
-      cursorField = (DataField)cur;
+      navIndex--;
+      if (navIndex < 0) navIndex = 7;
+      cursorField = navSequence[navIndex];
     }
     break;
 
   case Button::DOWN:
     if (screenMode == ScreenMode::HOME) {
-      int cur = (int)cursorField;
-      cur++;
-      if (cur >= (int)DataField::_COUNT) cur = 0;
-      cursorField = (DataField)cur;
+      navIndex++;
+      if (navIndex > 7) navIndex = 0;
+      cursorField = navSequence[navIndex];
     }
     break;
 
   case Button::SELECT:
     if (screenMode == ScreenMode::HOME) {
-      screenMode = ScreenMode::CHART;
+      if (cursorField != DataField::SETTINGS) {
+        screenMode = ScreenMode::CHART;
+      }
     } else {
       screenMode = ScreenMode::HOME;
     }
@@ -456,8 +469,10 @@ void updateDisplay() {
   lastDisplayUpdateMs = now;
 
   if (screenMode == ScreenMode::HOME) {
+    bool hasNox = (sensorVariant == VARIANT_SEN55);
+    bool hasCo2 = false; // Add logic here if SCD4x is ever added
     display_home(latestSample, cursorField,
-                 dataBuffer.isRecording(), bleConnected);
+                 dataBuffer.isRecording(), bleConnected, hasCo2, hasNox);
   } else {
     display_chart(dataBuffer, cursorField);
   }

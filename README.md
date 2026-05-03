@@ -96,6 +96,8 @@ Wire each push button between the specified ESP32-C3 GPIO pin and **GND**. The f
 1. **PlatformIO** — Install the [PlatformIO IDE extension](https://platformio.org/install/ide?install=vscode) in VS Code, or install the [PlatformIO CLI](https://docs.platformio.org/en/latest/core/installation.html).
 
 2. **Chrome or Edge** — Web Bluetooth is required for the browser recorder.
+   > [!WARNING]
+   > If you are using **Brave Browser**, Web Bluetooth is disabled by default for privacy reasons. To use the app in Brave, you must enable "Web Bluetooth" in `brave://settings/privacy`.
 
 ### Build & Upload
 
@@ -161,6 +163,7 @@ python3 -m http.server 8080 --directory web
 ```
 
 Then open [http://localhost:8080](http://localhost:8080) in Chrome or Edge, click **Connect**, and choose `AQI Recorder`.
+*(Note: If using Brave, ensure Web Bluetooth is enabled in `brave://settings/privacy`!)*
 
 The firmware exposes this Web Bluetooth service:
 
@@ -218,6 +221,7 @@ All dependencies are managed automatically by PlatformIO:
 | Serial shows no output | Wait 2–3 seconds after reset; check baud rate is **115200** |
 | All PM values are 0.00 | SEN5x fan needs ~10 seconds warm-up after startup |
 | BLE device not visible | Re-check wiring; ensure SEN5x has 5V power |
+| Web app cannot pair in Brave | Brave disables Web Bluetooth by default. Enable it via `brave://settings/privacy` |
 | Upload fails | Hold BOOT button on ESP32-C3, click upload, release BOOT after "Connecting..." |
 | VOC/NOx shows "n/a" | Normal for the first ~10 seconds after boot; wait for sensor warm-up |
 | Wrong sensor detected | Check I2C wiring; try power-cycling the sensor |
