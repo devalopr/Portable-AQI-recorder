@@ -1,5 +1,7 @@
 # Portable AQI Recorder
 
+![Device UI](assets/ui_4x_resolution.png)
+
 A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and a **Sensirion SEN5x** environmental sensor. The firmware **auto-detects** which sensor variant is connected — **SEN50**, **SEN54**, or **SEN55** — and adapts accordingly. View and record real-time readings in the included Web Bluetooth app.
 
 ## Features
@@ -194,12 +196,14 @@ The firmware calculates the **US EPA Air Quality Index** from PM2.5 and PM10. Th
 
 ```
 Portable-AQI-recorder-/
-├── src/
-│   └── main.cpp          # Main firmware (sensor + BLE + AQI)
+├── assets/               # UI mockups and images
+├── scripts/              # Python testing/utility scripts
+├── tools/                # Font generation tools
+├── src/                  # Main C++ firmware (sensor + BLE + AQI)
 ├── AQI Recorder.app      # Double-click launcher for the web app
 ├── web/                  # Web Bluetooth recorder app
-├── platformio.ini         # PlatformIO configuration
-└── README.md              # This file
+├── platformio.ini        # PlatformIO configuration
+└── README.md             # This file
 ```
 
 ## Dependencies
