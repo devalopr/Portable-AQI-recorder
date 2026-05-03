@@ -69,28 +69,32 @@ static int calcAQILinear(float Ih, float Il, float Ch, float Cl, float C) {
   return (int)round(((Ih - Il) / (Ch - Cl)) * (C - Cl) + Il);
 }
 
+static int clampAQI(int aqi) {
+  if (aqi < 0) return 0;
+  if (aqi > 999) return 999;
+  return aqi;
+}
+
 int aqiFromPM25(float pm25) {
   if (pm25 < 0.0f)    return -1;
-  if (pm25 > 500.4f)  return 501;
   if (pm25 <= 9.0f)   return calcAQILinear(50, 0, 9.0f, 0.0f, pm25);
   if (pm25 <= 35.4f)  return calcAQILinear(100, 51, 35.4f, 9.1f, pm25);
   if (pm25 <= 55.4f)  return calcAQILinear(150, 101, 55.4f, 35.5f, pm25);
   if (pm25 <= 125.4f) return calcAQILinear(200, 151, 125.4f, 55.5f, pm25);
   if (pm25 <= 225.4f) return calcAQILinear(300, 201, 225.4f, 125.5f, pm25);
   if (pm25 <= 325.4f) return calcAQILinear(500, 301, 325.4f, 225.5f, pm25);
-  return 501;
+  return clampAQI(calcAQILinear(999, 501, 1000.0f, 325.5f, pm25));
 }
 
 int aqiFromPM10(float pm10) {
   if (pm10 < 0.0f)    return -1;
-  if (pm10 > 604.0f)  return 501;
   if (pm10 <= 54.0f)  return calcAQILinear(50, 0, 54.0f, 0.0f, pm10);
   if (pm10 <= 154.0f) return calcAQILinear(100, 51, 154.0f, 55.0f, pm10);
   if (pm10 <= 254.0f) return calcAQILinear(150, 101, 254.0f, 155.0f, pm10);
   if (pm10 <= 354.0f) return calcAQILinear(200, 151, 354.0f, 255.0f, pm10);
   if (pm10 <= 424.0f) return calcAQILinear(300, 201, 424.0f, 355.0f, pm10);
   if (pm10 <= 604.0f) return calcAQILinear(500, 301, 604.0f, 425.0f, pm10);
-  return 501;
+  return clampAQI(calcAQILinear(999, 501, 1000.0f, 604.1f, pm10));
 }
 
 const char *aqiCategory(int aqi) {
