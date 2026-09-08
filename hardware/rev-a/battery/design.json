@@ -1,0 +1,1638 @@
+{
+  "name": "AQI_Battery",
+  "width": 44,
+  "height": 90,
+  "components": [
+    {
+      "ref": "J1",
+      "lib": "Connector:USB_C_Receptacle_USB2.0_16P",
+      "value": "USB-C INPUT + DATA",
+      "mpn": "USB4105-GF-A",
+      "manufacturer": "GCT",
+      "datasheet": "https://gctronic.com/PDF/USB4105-GF-A.pdf",
+      "fp": "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal",
+      "nets": {
+        "A4": "USB_VBUS_IN",
+        "B9": "USB_VBUS_IN",
+        "A1": "GND",
+        "A12": "GND",
+        "B1": "GND",
+        "B12": "GND",
+        "A6": "USB_D+",
+        "B6": "USB_D+",
+        "A7": "USB_D-",
+        "B7": "USB_D-",
+        "A5": "USB_CC1",
+        "B5": "USB_CC2",
+        "A8": null,
+        "B8": null,
+        "A9": "USB_VBUS_IN",
+        "B4": "USB_VBUS_IN",
+        "SH": "GND"
+      },
+      "sch": [
+        42,
+        40
+      ],
+      "xy": [
+        8,
+        85
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "J2",
+      "lib": "Connector_Generic:Conn_01x02",
+      "value": "65 mm 18650 / POLARITY!",
+      "mpn": "BH-18650-PC",
+      "manufacturer": "MPD",
+      "datasheet": "",
+      "fp": "Battery:BatteryHolder_MPD_BH-18650-PC",
+      "nets": {
+        "1": "CELL_POS",
+        "2": "CELL_NEG"
+      },
+      "sch": [
+        112,
+        40
+      ],
+      "xy": [
+        22,
+        43
+      ],
+      "rot": 90,
+      "side": "front",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "J3",
+      "lib": "Connector_Generic:Conn_01x10",
+      "value": "MAIN BOARD / GH 10",
+      "mpn": "SM10B-GHS-TB",
+      "manufacturer": "JST",
+      "datasheet": "https://www.jst-mfg.com/product/pdf/eng/eGH.pdf",
+      "fp": "Connector_JST:JST_GH_SM10B-GHS-TB_1x10-1MP_P1.25mm_Horizontal",
+      "nets": {
+        "1": "BOOST_5V",
+        "2": "BOOST_5V",
+        "3": "GND",
+        "4": "USB_D-",
+        "5": "USB_D+",
+        "6": "GND",
+        "7": "I2C_SDA",
+        "8": "I2C_SCL",
+        "9": "GND",
+        "10": "USB_HOST_PRESENT"
+      },
+      "sch": [
+        182,
+        40
+      ],
+      "xy": [
+        40,
+        70
+      ],
+      "rot": 270,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "J4",
+      "lib": "Connector_Generic:Conn_01x02",
+      "value": "10k CELL NTC",
+      "mpn": "SM02B-GHS-TB(LF)(SN)",
+      "manufacturer": "JST",
+      "datasheet": "",
+      "fp": "Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal",
+      "nets": {
+        "1": "CELL_NTC",
+        "2": "GND"
+      },
+      "sch": [
+        252,
+        40
+      ],
+      "xy": [
+        40,
+        20
+      ],
+      "rot": 90,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "U1",
+      "lib": "Battery_Management:BQ24074RGT",
+      "value": "1-cell charger power path",
+      "mpn": "BQ24074RGT",
+      "manufacturer": "Texas Instruments",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/bq24074.pdf",
+      "fp": "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm",
+      "nets": {
+        "1": "CELL_NTC",
+        "2": "CELL_POS",
+        "3": "CELL_POS",
+        "4": "GND",
+        "5": "U1_EN2",
+        "6": "U1_EN1",
+        "7": "USB_PRESENT_STATUS",
+        "8": "GND",
+        "9": "CHARGE_STATUS_N",
+        "10": "CHG_SYS",
+        "11": "CHG_SYS",
+        "12": "U1_ILIM",
+        "13": "USB_VBUS_IN",
+        "14": "U1_TMR",
+        "15": "U1_ITERM",
+        "16": "U1_ISET",
+        "17": "GND"
+      },
+      "sch": [
+        322,
+        40
+      ],
+      "xy": [
+        17,
+        60
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "U2",
+      "lib": "AQI:TPS61023",
+      "value": "TPS61023 / 5V",
+      "mpn": "TPS61023DRLR",
+      "manufacturer": "Texas Instruments",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/tps61023.pdf",
+      "fp": "Package_TO_SOT_SMD:SOT-563",
+      "nets": {
+        "1": "BOOST_FB",
+        "2": "BOOST_EN",
+        "3": "CHG_SYS",
+        "4": "GND",
+        "5": "BOOST_SW",
+        "6": "BOOST_5V"
+      },
+      "sch": [
+        392,
+        40
+      ],
+      "xy": [
+        29,
+        43
+      ],
+      "rot": 180,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "U3",
+      "lib": "Regulator_Switching:TPS63031DSK",
+      "value": "TPS63031 / 3.3V",
+      "mpn": "TPS63031DSKR",
+      "manufacturer": "Texas Instruments",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/tps63031.pdf",
+      "fp": "Package_SON:WSON-10-1EP_2.5x2.5mm_P0.5mm_EP1.2x2mm",
+      "nets": {
+        "1": "GEN_3V3",
+        "2": "BOOST_L2",
+        "3": "GND",
+        "4": "BOOST_L1",
+        "5": "CHG_SYS",
+        "6": "CHG_SYS",
+        "7": "GND",
+        "8": "CHG_SYS",
+        "9": "GND",
+        "10": "GEN_3V3",
+        "11": "GND"
+      },
+      "sch": [
+        462,
+        40
+      ],
+      "xy": [
+        18,
+        27
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "U4",
+      "lib": "AQI:MAX17048",
+      "value": "MAX17048 / 0x36",
+      "mpn": "MAX17048G+T10",
+      "manufacturer": "Analog Devices",
+      "datasheet": "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17048-MAX17049.pdf",
+      "fp": "Package_DFN_QFN:TDFN-8-1EP_2x2mm_P0.5mm_EP0.8x1.2mm",
+      "nets": {
+        "1": "GND",
+        "2": "CELL_POS",
+        "3": "CELL_POS",
+        "4": "GND",
+        "5": null,
+        "6": "GND",
+        "7": "I2C_SCL",
+        "8": "I2C_SDA",
+        "9": "GND"
+      },
+      "sch": [
+        532,
+        40
+      ],
+      "xy": [
+        12,
+        16
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "U5",
+      "lib": "AQI:DW01A",
+      "value": "DW01A / PROTECTOR",
+      "mpn": "DW01A",
+      "manufacturer": "Tani",
+      "datasheet": "https://www.tanisemi.com/Data/tanisemi/upload/file/20241211/DW01A.pdf",
+      "fp": "Package_TO_SOT_SMD:SOT-23-6",
+      "nets": {
+        "1": "PROT_OD",
+        "2": "PROT_CS",
+        "3": "PROT_OC",
+        "4": null,
+        "5": "PROT_VCC",
+        "6": "CELL_NEG"
+      },
+      "sch": [
+        42,
+        86
+      ],
+      "xy": [
+        13,
+        8
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "Exact Tani thresholds; never substitute without checking voltage thresholds and delay times.",
+      "short_value": true
+    },
+    {
+      "ref": "Q2",
+      "lib": "AQI:FS8205A",
+      "value": "FS8205A / TSSOP-8",
+      "mpn": "FS8205A",
+      "manufacturer": "Fortune Semiconductor",
+      "datasheet": "https://jgamblog.wordpress.com/wp-content/uploads/2017/01/fs8205a-ds-12_en.pdf",
+      "fp": "Package_SO:TSSOP-8_4.4x3mm_P0.65mm",
+      "nets": {
+        "1": "PROT_CENTER",
+        "2": "CELL_NEG",
+        "3": "CELL_NEG",
+        "4": "PROT_OD",
+        "5": "PROT_OC",
+        "6": "GND",
+        "7": "GND",
+        "8": "PROT_CENTER"
+      },
+      "sch": [
+        112,
+        86
+      ],
+      "xy": [
+        20,
+        8
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "U6",
+      "lib": "Interface_Expansion:MCP23008-xSO",
+      "value": "MCP23008 / 0x21",
+      "mpn": "MCP23008T-E/SO",
+      "manufacturer": "Microchip",
+      "datasheet": "https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/21919e.pdf",
+      "fp": "Package_SO:SOIC-18W_7.5x11.6mm_P1.27mm",
+      "nets": {
+        "1": "I2C_SCL",
+        "2": "I2C_SDA",
+        "3": "GND",
+        "4": "GND",
+        "5": "GEN_3V3",
+        "6": "GEN_3V3",
+        "7": null,
+        "8": null,
+        "9": "GND",
+        "10": "U1_EN1",
+        "11": "U1_EN2",
+        "12": "CHARGE_STATUS_N",
+        "13": "USB_PRESENT_STATUS",
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": null,
+        "18": "GEN_3V3"
+      },
+      "sch": [
+        182,
+        86
+      ],
+      "xy": [
+        30,
+        64
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "L1",
+      "lib": "Device:L",
+      "value": "1uH",
+      "mpn": "XAL5030-102MEC",
+      "manufacturer": "Coilcraft",
+      "datasheet": "https://www.coilcraft.com/en-us/products/power/shielded-inductors/molded-inductor/xal/xal50xx/xal5030-102/",
+      "fp": "Inductor_SMD:L_Coilcraft_XAL5030-XXX",
+      "nets": {
+        "1": "CHG_SYS",
+        "2": "BOOST_SW"
+      },
+      "sch": [
+        252,
+        86
+      ],
+      "xy": [
+        34,
+        43
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "L2",
+      "lib": "Device:L",
+      "value": "2.2uH",
+      "mpn": "XAL4020-222MEC",
+      "manufacturer": "Coilcraft",
+      "datasheet": "https://www.coilcraft.com/en-us/products/power/high-voltage-inductors/xal/xal40xx/xal4020-222/",
+      "fp": "Inductor_SMD:L_Coilcraft_XAL4020-XXX",
+      "nets": {
+        "1": "BOOST_L1",
+        "2": "BOOST_L2"
+      },
+      "sch": [
+        322,
+        86
+      ],
+      "xy": [
+        23,
+        27
+      ],
+      "rot": 90,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R1",
+      "lib": "Device:R_Small_US",
+      "value": "5.1kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "USB_CC1",
+        "2": "GND"
+      },
+      "sch": [
+        392,
+        86
+      ],
+      "xy": [
+        5,
+        77
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R2",
+      "lib": "Device:R_Small_US",
+      "value": "5.1kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "USB_CC2",
+        "2": "GND"
+      },
+      "sch": [
+        462,
+        86
+      ],
+      "xy": [
+        8,
+        77
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R3",
+      "lib": "Device:R_Small_US",
+      "value": "1.13kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "U1_ISET",
+        "2": "GND"
+      },
+      "sch": [
+        532,
+        86
+      ],
+      "xy": [
+        13,
+        58
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R4",
+      "lib": "Device:R_Small_US",
+      "value": "1.50kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "U1_ILIM",
+        "2": "GND"
+      },
+      "sch": [
+        42,
+        132
+      ],
+      "xy": [
+        13,
+        61
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R5",
+      "lib": "Device:R_Small_US",
+      "value": "4.12kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "U1_ITERM",
+        "2": "GND"
+      },
+      "sch": [
+        112,
+        132
+      ],
+      "xy": [
+        13,
+        64
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R6",
+      "lib": "Device:R_Small_US",
+      "value": "46.4kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "U1_TMR",
+        "2": "GND"
+      },
+      "sch": [
+        182,
+        132
+      ],
+      "xy": [
+        17,
+        66
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R7",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "USB_VBUS_IN",
+        "2": "USB_HOST_PRESENT"
+      },
+      "sch": [
+        252,
+        132
+      ],
+      "xy": [
+        16,
+        75
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R8",
+      "lib": "Device:R_Small_US",
+      "value": "150kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "USB_HOST_PRESENT",
+        "2": "GND"
+      },
+      "sch": [
+        322,
+        132
+      ],
+      "xy": [
+        19,
+        75
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C1",
+      "lib": "Device:C",
+      "value": "4.7uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "USB_VBUS_IN",
+        "2": "GND"
+      },
+      "sch": [
+        392,
+        132
+      ],
+      "xy": [
+        16,
+        55
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C2",
+      "lib": "Device:C",
+      "value": "10uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "CELL_POS",
+        "2": "GND"
+      },
+      "sch": [
+        462,
+        132
+      ],
+      "xy": [
+        22,
+        58
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C3",
+      "lib": "Device:C",
+      "value": "22uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "CHG_SYS",
+        "2": "GND"
+      },
+      "sch": [
+        532,
+        132
+      ],
+      "xy": [
+        12,
+        61
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C4",
+      "lib": "Device:C",
+      "value": "100nF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0603_1608Metric",
+      "nets": {
+        "1": "CELL_POS",
+        "2": "GND"
+      },
+      "sch": [
+        42,
+        178
+      ],
+      "xy": [
+        12,
+        20
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R9",
+      "lib": "Device:R_Small_US",
+      "value": "470R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "CELL_POS",
+        "2": "PROT_VCC"
+      },
+      "sch": [
+        112,
+        178
+      ],
+      "xy": [
+        8,
+        8
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R10",
+      "lib": "Device:R_Small_US",
+      "value": "1kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "PROT_CS",
+        "2": "GND"
+      },
+      "sch": [
+        182,
+        178
+      ],
+      "xy": [
+        17,
+        12
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C5",
+      "lib": "Device:C",
+      "value": "100nF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0603_1608Metric",
+      "nets": {
+        "1": "PROT_VCC",
+        "2": "CELL_NEG"
+      },
+      "sch": [
+        252,
+        178
+      ],
+      "xy": [
+        10,
+        11
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R11",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "BOOST_EN",
+        "2": "GND"
+      },
+      "sch": [
+        322,
+        178
+      ],
+      "xy": [
+        25,
+        39
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R13",
+      "lib": "Device:R_Small_US",
+      "value": "750kR 0.1%",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "BOOST_5V",
+        "2": "BOOST_FB"
+      },
+      "sch": [
+        392,
+        178
+      ],
+      "xy": [
+        25,
+        46
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R14",
+      "lib": "Device:R_Small_US",
+      "value": "82.5kR 0.1%",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "BOOST_FB",
+        "2": "GND"
+      },
+      "sch": [
+        462,
+        178
+      ],
+      "xy": [
+        25,
+        49
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C7",
+      "lib": "Device:C",
+      "value": "10uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "CHG_SYS",
+        "2": "GND"
+      },
+      "sch": [
+        532,
+        178
+      ],
+      "xy": [
+        26,
+        42
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C8",
+      "lib": "Device:C",
+      "value": "22uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BOOST_5V",
+        "2": "GND"
+      },
+      "sch": [
+        42,
+        224
+      ],
+      "xy": [
+        30,
+        46
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C9",
+      "lib": "Device:C",
+      "value": "22uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BOOST_5V",
+        "2": "GND"
+      },
+      "sch": [
+        112,
+        224
+      ],
+      "xy": [
+        34,
+        48
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C10",
+      "lib": "Device:C",
+      "value": "22uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "BOOST_5V",
+        "2": "GND"
+      },
+      "sch": [
+        182,
+        224
+      ],
+      "xy": [
+        38,
+        48
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C11",
+      "lib": "Device:C",
+      "value": "10uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "CHG_SYS",
+        "2": "GND"
+      },
+      "sch": [
+        252,
+        224
+      ],
+      "xy": [
+        13,
+        27
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C12",
+      "lib": "Device:C",
+      "value": "100nF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0603_1608Metric",
+      "nets": {
+        "1": "CHG_SYS",
+        "2": "GND"
+      },
+      "sch": [
+        322,
+        224
+      ],
+      "xy": [
+        13,
+        30
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C13",
+      "lib": "Device:C",
+      "value": "22uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "GEN_3V3",
+        "2": "GND"
+      },
+      "sch": [
+        392,
+        224
+      ],
+      "xy": [
+        21,
+        22
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "C14",
+      "lib": "Device:C",
+      "value": "22uF 16V X7R",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "GEN_3V3",
+        "2": "GND"
+      },
+      "sch": [
+        462,
+        224
+      ],
+      "xy": [
+        25,
+        22
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R16",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "U1_EN2",
+        "2": "GND"
+      },
+      "sch": [
+        532,
+        224
+      ],
+      "xy": [
+        18,
+        70
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R17",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "U1_EN1",
+        "2": "GND"
+      },
+      "sch": [
+        42,
+        270
+      ],
+      "xy": [
+        21,
+        70
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "",
+      "short_value": true
+    },
+    {
+      "ref": "R18",
+      "lib": "Device:R_Small_US",
+      "value": "4.7kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "I2C_SDA",
+        "2": "GEN_3V3"
+      },
+      "sch": [
+        112,
+        270
+      ],
+      "xy": [
+        32,
+        73
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "Populate only for independent I2C operation. Main PCB supplies the pullups.",
+      "short_value": true,
+      "dnp": true
+    },
+    {
+      "ref": "R19",
+      "lib": "Device:R_Small_US",
+      "value": "4.7kR",
+      "mpn": "TBD",
+      "manufacturer": "TBD",
+      "datasheet": "",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "I2C_SCL",
+        "2": "GEN_3V3"
+      },
+      "sch": [
+        182,
+        270
+      ],
+      "xy": [
+        35,
+        73
+      ],
+      "rot": 0,
+      "side": "back",
+      "note": "Populate only for independent I2C operation. Main PCB supplies the pullups.",
+      "short_value": true,
+      "dnp": true
+    },
+    {
+      "ref": "SW1",
+      "lib": "Switch:SW_SPDT",
+      "value": "5V OUTPUT ENABLE",
+      "nets": {
+        "1": "CHG_SYS",
+        "2": "BOOST_EN",
+        "3": "GND"
+      },
+      "fp": "Button_Switch_SMD:SW_SPDT_CK_JS102011SAQN",
+      "xy": [
+        3,
+        70
+      ],
+      "sch": [
+        252,
+        270
+      ],
+      "side": "back",
+      "rot": 270,
+      "dnp": false,
+      "rot_unused": 0,
+      "mpn": "JS102011SAQN",
+      "manufacturer": "C&K"
+    },
+    {
+      "ref": "R20",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "GEN_3V3",
+        "2": "CHARGE_STATUS_N"
+      },
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "xy": [
+        27,
+        63
+      ],
+      "sch": [
+        322,
+        270
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false
+    },
+    {
+      "ref": "R21",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "GEN_3V3",
+        "2": "USB_PRESENT_STATUS"
+      },
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "xy": [
+        27,
+        66
+      ],
+      "sch": [
+        392,
+        270
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false
+    },
+    {
+      "ref": "C15",
+      "lib": "Device:C",
+      "value": "100nF 16V X7R",
+      "nets": {
+        "1": "GEN_3V3",
+        "2": "GND"
+      },
+      "fp": "Capacitor_SMD:C_0603_1608Metric",
+      "xy": [
+        26,
+        59
+      ],
+      "sch": [
+        462,
+        270
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false
+    },
+    {
+      "ref": "D2",
+      "lib": "Power_Protection:USBLC6-2SC6",
+      "value": "USBLC6-2SC6",
+      "nets": {
+        "1": "USB_D+",
+        "6": "USB_D+",
+        "3": "USB_D-",
+        "4": "USB_D-",
+        "2": "GND",
+        "5": "USB_VBUS_IN"
+      },
+      "fp": "Package_TO_SOT_SMD:SOT-23-6",
+      "xy": [
+        12,
+        77
+      ],
+      "sch": [
+        532,
+        270
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false,
+      "mpn": "USBLC6-2SC6",
+      "manufacturer": "STMicroelectronics"
+    },
+    {
+      "ref": "J5",
+      "lib": "Connector_Generic:Conn_01x02",
+      "value": "5V / 0.5A",
+      "nets": {
+        "1": "BOOST_5V",
+        "2": "GND"
+      },
+      "fp": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+      "xy": [
+        4,
+        12
+      ],
+      "sch": [
+        42,
+        316
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false,
+      "mpn": "Pin header 1x2 P2.54",
+      "manufacturer": "Generic"
+    },
+    {
+      "ref": "J6",
+      "lib": "Connector_Generic:Conn_01x02",
+      "value": "3V3 / 0.3A",
+      "nets": {
+        "1": "GEN_3V3",
+        "2": "GND"
+      },
+      "fp": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+      "xy": [
+        4,
+        28
+      ],
+      "sch": [
+        112,
+        316
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false,
+      "mpn": "Pin header 1x2 P2.54",
+      "manufacturer": "Generic"
+    },
+    {
+      "ref": "#FLG1",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "CELL_NEG"
+      },
+      "fp": "",
+      "xy": null,
+      "sch": [
+        182,
+        316
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false
+    },
+    {
+      "ref": "#FLG2",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "USB_VBUS_IN"
+      },
+      "fp": "",
+      "xy": null,
+      "sch": [
+        252,
+        316
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false
+    },
+    {
+      "ref": "#FLG3",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "GND"
+      },
+      "fp": "",
+      "xy": null,
+      "sch": [
+        322,
+        316
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false
+    },
+    {
+      "ref": "#FLG4",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "PROT_VCC"
+      },
+      "fp": "",
+      "xy": null,
+      "sch": [
+        392,
+        316
+      ],
+      "side": "back",
+      "rot": 0,
+      "dnp": false
+    }
+  ],
+  "custom_symbols": [
+    {
+      "name": "MAX17048",
+      "pins": [
+        {
+          "number": "1",
+          "name": "CTG",
+          "type": "passive",
+          "side": "left"
+        },
+        {
+          "number": "2",
+          "name": "CELL",
+          "type": "power_in",
+          "side": "left"
+        },
+        {
+          "number": "3",
+          "name": "VDD",
+          "type": "power_in",
+          "side": "left"
+        },
+        {
+          "number": "4",
+          "name": "GND",
+          "type": "power_in",
+          "side": "left"
+        },
+        {
+          "number": "5",
+          "name": "ALRT",
+          "type": "open_collector",
+          "side": "right"
+        },
+        {
+          "number": "6",
+          "name": "QSTRT",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": "7",
+          "name": "SCL",
+          "type": "input",
+          "side": "right"
+        },
+        {
+          "number": "8",
+          "name": "SDA",
+          "type": "bidirectional",
+          "side": "right"
+        },
+        {
+          "number": "9",
+          "name": "EP",
+          "type": "power_in",
+          "side": "bottom"
+        }
+      ]
+    },
+    {
+      "name": "DW01A",
+      "pins": [
+        {
+          "number": "1",
+          "name": "OD",
+          "type": "output",
+          "side": "right"
+        },
+        {
+          "number": "2",
+          "name": "CS",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": "3",
+          "name": "OC",
+          "type": "output",
+          "side": "right"
+        },
+        {
+          "number": "4",
+          "name": "NC",
+          "type": "no_connect",
+          "side": "left"
+        },
+        {
+          "number": "5",
+          "name": "VCC",
+          "type": "power_in",
+          "side": "left"
+        },
+        {
+          "number": "6",
+          "name": "GND",
+          "type": "power_in",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "name": "FS8205A",
+      "pins": [
+        {
+          "number": "1",
+          "name": "D12",
+          "type": "passive",
+          "side": "left"
+        },
+        {
+          "number": "2",
+          "name": "S1",
+          "type": "passive",
+          "side": "left"
+        },
+        {
+          "number": "3",
+          "name": "S1",
+          "type": "passive",
+          "side": "left"
+        },
+        {
+          "number": "4",
+          "name": "G1",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": "5",
+          "name": "G2",
+          "type": "input",
+          "side": "right"
+        },
+        {
+          "number": "6",
+          "name": "S2",
+          "type": "passive",
+          "side": "right"
+        },
+        {
+          "number": "7",
+          "name": "S2",
+          "type": "passive",
+          "side": "right"
+        },
+        {
+          "number": "8",
+          "name": "D12",
+          "type": "passive",
+          "side": "right"
+        }
+      ]
+    },
+    {
+      "name": "TPS61023",
+      "pins": [
+        {
+          "number": "1",
+          "name": "FB",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": "2",
+          "name": "EN",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": "3",
+          "name": "VIN",
+          "type": "power_in",
+          "side": "left"
+        },
+        {
+          "number": "4",
+          "name": "GND",
+          "type": "power_in",
+          "side": "bottom"
+        },
+        {
+          "number": "5",
+          "name": "SW",
+          "type": "passive",
+          "side": "right"
+        },
+        {
+          "number": "6",
+          "name": "VOUT",
+          "type": "power_out",
+          "side": "right"
+        }
+      ]
+    }
+  ],
+  "blocks": [],
+  "notes": [
+    {
+      "text": "AQI BATTERY REV A / ENGINEERING - NOT RELEASED",
+      "x": 12,
+      "y": 12,
+      "size": 2.4
+    },
+    {
+      "text": "Standard 65mm cell. Check polarity. Cell NTC required. USB100 default; firmware selects higher input limit only after source qualification.",
+      "x": 12,
+      "y": 20
+    }
+  ],
+  "board_texts": [
+    {
+      "text": "AQI POWER A",
+      "xy": [
+        22,
+        84
+      ],
+      "layer": "B_SilkS"
+    },
+    {
+      "text": "65mm 18650 / CHECK + -",
+      "xy": [
+        22,
+        42
+      ]
+    },
+    {
+      "text": "CELL -",
+      "xy": [
+        22,
+        3
+      ]
+    },
+    {
+      "text": "CELL +",
+      "xy": [
+        22,
+        82
+      ]
+    }
+  ]
+}

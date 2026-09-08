@@ -1,0 +1,36 @@
+2026-09-08 10:21:13.302 INFO   Freerouting v2.4.1 (build-date: 2026-09-03)
+2026-09-08 10:21:13.345 WARN   Couldn't get screen resolution. If you are running in a headless environment, disable the GUI by setting gui.enabled to false.
+2026-09-08 10:21:14.650 INFO   [529A6C\C0EB85] Loading board file 'AQI_Battery.dsn'...
+2026-09-08 10:21:14.681 WARN   Power-plane validation failed:
+- Dedicated power layer 'In1.Cu' has no conduction areas defined.
+
+Proper Definition and Best Practices for Power Planes:
+1. What Belongs on a Power Plane:
+   - Solid Copper Pours: A single, uninterrupted sheet of copper assigned to one voltage (e.g., +3.3V).
+   - Split Planes: Multiple distinct voltage zones divided by thin isolation gaps (puzzle pieces).
+   - Vias and Anti-Pads: Plated holes passing through the board, surrounded by circular voids (anti-pads) to prevent shorting.
+   - Thermal Reliefs: Spoked connections for vias or pins that connect to the plane, facilitating soldering.
+2. Why Signal Wires/Traces are Banned:
+   - Destroyed Return Paths: High-speed signals on adjacent layers couple to the solid plane below/above as return paths. Crossing a trace gap detours return currents, causing severe EMI and signal integrity issues.
+   - Compromised Power Delivery: Power planes should provide the lowest impedance path. Routing traces chops up the copper, creating bottleneck restrictions and voltage drops.
+
+2026-09-08 10:21:14.686 INFO   [529A6C\C0EB85] Job '529A6C\C0EB85' started at 2026-09-08T04:51:14.685927Z.
+2026-09-08 10:21:14.731 INFO   [529A6C\C0EB85] Fanout stage started on board '7c4cf99084cf299b47bb3db9087e58f4' with 166 of 186 SMD pins needing fanout (16 already connected, 4 netless).
+2026-09-08 10:21:15.676 INFO   [529A6C\C0EB85] Fanout pass #1 on board '439a4ac5e52881c7408891d9927e967c' completed in 0.92 seconds with 117 SMD pins fanouted, 42 not routed, 0 insert errors, +30 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-09-08 10:21:15.977 INFO   [529A6C\C0EB85] Fanout pass #2 on board '8aed2b1c0d6b4f6add57774a6c0e3a21' completed in 0.29 seconds with 11 SMD pins fanouted, 52 not routed, 0 insert errors, +8 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-09-08 10:21:16.150 INFO   [529A6C\C0EB85] Fanout pass #3 on board '5730f62b1cd2a2e25600ad03714e7656' completed in 0.17 seconds with 3 SMD pins fanouted, 48 not routed, 0 insert errors, +2 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-09-08 10:21:16.322 INFO   [529A6C\C0EB85] Fanout pass #4 on board '5730f62b1cd2a2e25600ad03714e7656' completed in 0.16 seconds with 0 SMD pins fanouted, 48 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-09-08 10:21:16.329 INFO   [529A6C\C0EB85] Fanout stage completed: started with 182 total SMD pins, completed in 1.59 seconds, escaped pins: 145/182 (79.7%), using 1.55 total CPU seconds, 14.48 GB total allocated, and 559.8 MB peak heap usage.
+2026-09-08 10:21:16.333 INFO   [529A6C\C0EB85] Auto-routing stage started on board '5730f62b1cd2a2e25600ad03714e7656' for 58 unrouted items.
+2026-09-08 10:21:19.675 INFO   [529A6C\C0EB85] Auto-routing pass #1 on board '5730f62b1cd2a2e25600ad03714e7656' was completed in 3.31 seconds with score 907.37 (13 unrouted and 4 violations), using 3.89 CPU seconds and the job allocated 42.18 GB of memory so far.
+2026-09-08 10:21:20.423 INFO   [529A6C\C0EB85] Auto-routing pass #2 on board '26f52f45f2a09dfb5f2665e2997285d3' was completed in 0.71 seconds with score 940.93 (8 unrouted and 4 violations), using 4.85 CPU seconds and the job allocated 60.57 GB of memory so far.
+2026-09-08 10:21:21.075 INFO   [529A6C\C0EB85] Auto-routing pass #3 on board 'c9580671893985b6ce813f1458ab4115' was completed in 0.60 seconds with score 974.49 (3 unrouted and 4 violations), using 5.84 CPU seconds and the job allocated 81.57 GB of memory so far.
+2026-09-08 10:21:21.377 INFO   [529A6C\C0EB85] Auto-routing pass #4 on board 'ce2d734ed7270421f09a3c76aa5ce816' was completed in 0.24 seconds with score 994.62 (0 unrouted and 4 violations), using 5.84 CPU seconds and the job allocated 81.57 GB of memory so far.
+2026-09-08 10:21:21.462 INFO   [529A6C\C0EB85] Auto-routing pass #5 on board 'bc9483ee59e8c4be6a472ce2812b9cca' was completed in 0.03 seconds with score 994.62 (0 unrouted and 4 violations), using 5.84 CPU seconds and the job allocated 81.57 GB of memory so far.
+2026-09-08 10:21:21.522 INFO   [529A6C\C0EB85] Auto-routing stage completed: started with 142 unrouted nets, completed in 6.78 seconds, final score: 994.62 (0 unrouted and 4 violations), using 5.84 total CPU seconds, 81.57 GB total allocated, and 471.3 MB peak heap usage.
+2026-09-08 10:21:21.550 INFO   [529A6C\C0EB85] Optimization stage started on board 'bc9483ee59e8c4be6a472ce2812b9cca' with score 994.62 (0 unrouted and 4 violations).
+2026-09-08 10:21:21.577 INFO   [529A6C\C0EB85] Stopping optimizer because the current board score (994.62) is already close to the maximum score (1000). Remaining potential improvement is less than the threshold (1.00%).
+2026-09-08 10:21:21.605 INFO   [529A6C\C0EB85] Optimization stage completed: started with score 994.62 (0 unrouted and 4 violations), completed in 0.03 seconds, final score: 994.62 (0 unrouted and 4 violations), using 0.03 total CPU seconds, 0.81 GB total allocated, and 550.9 MB peak heap usage.
+2026-09-08 10:21:21.609 INFO   [529A6C\C0EB85] Job '529A6C\C0EB85' finished with state: COMPLETED (elapsed: 6.92 seconds, finished at UTC: 2026-09-08T04:51:21.609395Z).
+2026-09-08 10:21:21.967 INFO   Saving output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-a/battery/review/AQI_Battery.ses' (SES)...
+2026-09-08 10:21:21.968 INFO   Successfully saved output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-a/battery/review/AQI_Battery.ses' (47612 bytes).

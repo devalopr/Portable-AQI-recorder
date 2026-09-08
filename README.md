@@ -44,24 +44,28 @@ All three SEN5x variants use the **same pinout and connector** — just swap the
 
 | ESP32-C3 Super Mini | SEN5x (JST connector) |
 |---|---|
-| GPIO 8 (SDA) | Pin 4 — SDA |
-| GPIO 9 (SCL) | Pin 3 — SCL |
+| GPIO 8 (SDA) | Pin 3 — SDA |
+| GPIO 9 (SCL) | Pin 4 — SCL |
 | GND | Pin 2 — GND |
 | 5V | Pin 1 — VDD |
 
 > [!IMPORTANT]
 > The SEN5x sensors **require 5V** for the internal fan. Power from a 5V source (e.g. USB VBUS), not the ESP32's 3.3V output. The I2C lines are 3.3V tolerant — no level shifter needed.
 
-#### SEN5x JST Pinout (left to right, notch facing up)
+#### SEN5x Connector Pinout
+
+Pin numbers below follow Sensirion's connector drawing; do not infer numbering from a cable's viewing direction or wire colors. See the [SEN5x datasheet, Table 11](https://sensirion.com/resource/datasheet/sen5x).
 
 ```text
 Pin 1 — VDD  (5V)
 Pin 2 — GND
-Pin 3 — SCL
-Pin 4 — SDA
-Pin 5 — SEL (leave unconnected or tie to GND for I2C)
+Pin 3 — SDA
+Pin 4 — SCL
+Pin 5 — SEL (tie to GND before or at power-up for I2C)
 Pin 6 — NC
 ```
+
+These are SEN5x connections. SEN6x requires a 3.3V supply and has different functions on pins 5 and 6; it must not be plugged into this 5V connection. The custom PCB architecture is tracked in [hardware/rev-a/design-brief.md](hardware/rev-a/design-brief.md).
 
 #### ST7789 2.4" SPI TFT Display (10-Pin Version)
 

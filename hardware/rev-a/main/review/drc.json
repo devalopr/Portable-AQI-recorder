@@ -1,0 +1,176 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-08T10:30:09",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.0",
+    "schematic_parity": [],
+    "source": "AQI_Main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [+5V_SYS] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 17.45,
+                        "y": 55.4145
+                    },
+                    "uuid": "2bd1a440-31bd-49b5-b75b-2a435712b4a6"
+                },
+                {
+                    "description": "Track [+5V_SYS] on B.Cu, length 1.4800 mm",
+                    "pos": {
+                        "x": 15.74,
+                        "y": 56.8375
+                    },
+                    "uuid": "0e79972d-09a9-4556-bb7e-b233008afacd"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 6 [+3V2] of U5 on B.Cu",
+                    "pos": {
+                        "x": 27.1125,
+                        "y": 50.6475
+                    },
+                    "uuid": "e431576a-79f9-4a78-a7cb-2bec9931649b"
+                },
+                {
+                    "description": "Track [+3V2] on B.Cu, length 0.9164 mm",
+                    "pos": {
+                        "x": 26.4781,
+                        "y": 49.3469
+                    },
+                    "uuid": "fa793204-471c-4d83-844f-7b23e5f1a994"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1482 mm)",
+            "items": [
+                {
+                    "description": "Track [/BL_PWM] on F.Cu, length 25.2054 mm",
+                    "pos": {
+                        "x": 27.6518,
+                        "y": 38.3046
+                    },
+                    "uuid": "0093c0ce-9d6b-4156-804b-255b7484d4a7"
+                },
+                {
+                    "description": "Via [+3V2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 28.2,
+                        "y": 50.6475
+                    },
+                    "uuid": "3e70c353-31c4-4b29-9282-ea783452649e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0113 mm)",
+            "items": [
+                {
+                    "description": "Track [/CORE_SW] on B.Cu, length 1.6643 mm",
+                    "pos": {
+                        "x": 27.7625,
+                        "y": 51.297501
+                    },
+                    "uuid": "29b365b5-26a6-4da3-91ff-15a1ad94135d"
+                },
+                {
+                    "description": "Via [+3V2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 28.2,
+                        "y": 50.6475
+                    },
+                    "uuid": "3e70c353-31c4-4b29-9282-ea783452649e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Items shorting two nets (nets +3V2 and /BUTTON_RIGHT)",
+            "items": [
+                {
+                    "description": "Via [+3V2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 28.2,
+                        "y": 50.6475
+                    },
+                    "uuid": "3e70c353-31c4-4b29-9282-ea783452649e"
+                },
+                {
+                    "description": "Track [/BUTTON_RIGHT] on In2.Cu, length 10.7617 mm",
+                    "pos": {
+                        "x": 28.2245,
+                        "y": 49.7082
+                    },
+                    "uuid": "dfe61b1f-9d9a-49f0-b592-552a624cef18"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        },
+        {
+            "description": "Items shorting two nets (nets +3V2 and /DISP_CS)",
+            "items": [
+                {
+                    "description": "Via [+3V2] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 33.5,
+                        "y": 55.0
+                    },
+                    "uuid": "21de1ed4-c991-4a4a-9ab1-a4a072561f3b"
+                },
+                {
+                    "description": "Track [/DISP_CS] on F.Cu, length 9.9442 mm",
+                    "pos": {
+                        "x": 33.4,
+                        "y": 60.8179
+                    },
+                    "uuid": "e07ea7b4-c1c2-445e-be43-85ea6d3ab8eb"
+                }
+            ],
+            "severity": "error",
+            "type": "shorting_items"
+        }
+    ]
+}

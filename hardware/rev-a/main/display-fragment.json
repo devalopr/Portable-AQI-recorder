@@ -1,0 +1,568 @@
+{
+  "name": "AQI_Display_Fragment",
+  "board": {
+    "width": 44,
+    "height": 78
+  },
+  "components": [
+    {
+      "ref": "J5",
+      "lib": "Connector_Generic:Conn_01x10",
+      "value": "ST7789 TFT 10P 1.0mm",
+      "fp": "Connector_FFC-FPC:TE_1-84952-0_1x10-1MP_P1.0mm_Horizontal",
+      "nets": {
+        "1": "GND",
+        "2": "DISP_DC",
+        "3": "DISP_CS",
+        "4": "DISP_SCK",
+        "5": "DISP_MOSI",
+        "6": "DISP_RST",
+        "7": "+3V2",
+        "8": "GND",
+        "9": "BL_A",
+        "10": "BL_K"
+      },
+      "sch": [
+        505,
+        65
+      ],
+      "xy": [
+        22,
+        6
+      ],
+      "rot": 180,
+      "side": "back",
+      "dnp": false
+    },
+    {
+      "ref": "J6",
+      "lib": "Connector_Generic:Conn_01x24",
+      "value": "GDEY037T03 UC8253 24P 0.5mm",
+      "fp": "Connector_FFC-FPC:Hirose_FH12-24S-0.5SH_1x24-1MP_P0.50mm_Horizontal",
+      "nets": {
+        "1": null,
+        "2": "EPD_GDR",
+        "3": "EPD_RESE",
+        "4": "EPD_VGL",
+        "5": "EPD_VGH",
+        "6": null,
+        "7": null,
+        "8": "EPD_BS",
+        "9": "EPD_BUSY",
+        "10": "EPD_RST",
+        "11": "EPD_DC",
+        "12": "EPD_CS",
+        "13": "DISP_SCK",
+        "14": "DISP_MOSI",
+        "15": "+3V2",
+        "16": "+3V2",
+        "17": "GND",
+        "18": "EPD_VDD",
+        "19": null,
+        "20": "EPD_VSH1",
+        "21": "EPD_PREVGH",
+        "22": "EPD_VSL",
+        "23": "EPD_PREVGL",
+        "24": "EPD_VCOM"
+      },
+      "sch": [
+        430,
+        310
+      ],
+      "xy": [
+        13,
+        35
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "R32",
+      "lib": "Device:R",
+      "value": "0R EPD BS default-low strap",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "EPD_BS",
+        "2": "GND"
+      },
+      "sch": [
+        550,
+        310
+      ],
+      "xy": [
+        15,
+        35
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false
+    },
+    {
+      "ref": "J7",
+      "lib": "Connector_Generic:Conn_01x02",
+      "value": "EPD BS high override",
+      "fp": "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm",
+      "nets": {
+        "1": "EPD_BS",
+        "2": "+3V2"
+      },
+      "sch": [
+        550,
+        330
+      ],
+      "xy": [
+        18,
+        35
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "note": "Remove R32 before bridging J7. Default BS low matches vendor circuit."
+    },
+    {
+      "ref": "L3",
+      "lib": "Device:L",
+      "value": "10uH 1A EPD boost inductor",
+      "fp": "Inductor_SMD:L_Sunlord_SWPA4020S",
+      "nets": {
+        "1": "+3V2",
+        "2": "EPD_BOOST_SW"
+      },
+      "sch": [
+        340,
+        275
+      ],
+      "xy": [
+        8,
+        29
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "mpn": "SWPA4020S100MT"
+    },
+    {
+      "ref": "Q3",
+      "lib": "Transistor_FET:Q_NMOS_GSD",
+      "value": "Si1308EDL UC8253 boost MOSFET",
+      "fp": "Package_TO_SOT_SMD:SOT-323_SC-70",
+      "nets": {
+        "1": "EPD_GDR",
+        "2": "EPD_RESE",
+        "3": "EPD_BOOST_SW"
+      },
+      "sch": [
+        390,
+        305
+      ],
+      "xy": [
+        12,
+        31
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "D10",
+      "lib": "Device:D",
+      "value": "MBR0530 EPD PREVGL rectifier",
+      "fp": "Diode_SMD:D_SOD-123",
+      "nets": {
+        "1": "EPD_NEG_PUMP",
+        "2": "EPD_PREVGL"
+      },
+      "sch": [
+        365,
+        320
+      ],
+      "xy": [
+        9,
+        34
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "D11",
+      "lib": "Device:D",
+      "value": "MBR0530 EPD negative-pump rectifier",
+      "fp": "Diode_SMD:D_SOD-123",
+      "nets": {
+        "1": "GND",
+        "2": "EPD_NEG_PUMP"
+      },
+      "sch": [
+        365,
+        345
+      ],
+      "xy": [
+        9,
+        37
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "D12",
+      "lib": "Device:D",
+      "value": "MBR0530 EPD PREVGH rectifier",
+      "fp": "Diode_SMD:D_SOD-123",
+      "nets": {
+        "1": "EPD_PREVGH",
+        "2": "EPD_BOOST_SW"
+      },
+      "sch": [
+        365,
+        370
+      ],
+      "xy": [
+        9,
+        40
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C30",
+      "lib": "Device:C",
+      "value": "4.7uF 50V EPD input",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        320,
+        260
+      ],
+      "xy": [
+        5,
+        27
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C31",
+      "lib": "Device:C",
+      "value": "4.7uF 50V EPD flying capacitor",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_BOOST_SW",
+        "2": "EPD_NEG_PUMP"
+      },
+      "sch": [
+        350,
+        260
+      ],
+      "xy": [
+        7,
+        27
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C32",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD VGL",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VGL",
+        "2": "GND"
+      },
+      "sch": [
+        475,
+        255
+      ],
+      "xy": [
+        17,
+        27
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C33",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD VGH",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VGH",
+        "2": "GND"
+      },
+      "sch": [
+        500,
+        255
+      ],
+      "xy": [
+        20,
+        27
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C34",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD PREVGH reservoir",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_PREVGH",
+        "2": "GND"
+      },
+      "sch": [
+        475,
+        335
+      ],
+      "xy": [
+        12,
+        43
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C35",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD VCI",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        505,
+        275
+      ],
+      "xy": [
+        22,
+        29
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C36",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD VDD",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VDD",
+        "2": "GND"
+      },
+      "sch": [
+        530,
+        275
+      ],
+      "xy": [
+        22,
+        31
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C37",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD VPP DNP placeholder",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": null,
+        "2": null
+      },
+      "sch": [
+        505,
+        355
+      ],
+      "xy": [
+        17,
+        43
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C38",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD VSH1",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VSH1",
+        "2": "GND"
+      },
+      "sch": [
+        475,
+        360
+      ],
+      "xy": [
+        20,
+        43
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C39",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD PREVGH panel decoupling",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_PREVGL",
+        "2": "GND"
+      },
+      "sch": [
+        505,
+        360
+      ],
+      "xy": [
+        17,
+        45
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C40",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD PREVGL panel decoupling",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VSL",
+        "2": "GND"
+      },
+      "sch": [
+        535,
+        360
+      ],
+      "xy": [
+        20,
+        45
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C41",
+      "lib": "Device:C",
+      "value": "1uF 50V EPD VCOM",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VCOM",
+        "2": "GND"
+      },
+      "sch": [
+        565,
+        360
+      ],
+      "xy": [
+        23,
+        45
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "R30",
+      "lib": "Device:R",
+      "value": "1M EPD GDR bias",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "EPD_GDR",
+        "2": "GND"
+      },
+      "sch": [
+        350,
+        390
+      ],
+      "xy": [
+        11,
+        35
+      ],
+      "rot": 90,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "R31",
+      "lib": "Device:R",
+      "value": "0.47R EPD RESE sense",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "EPD_RESE",
+        "2": "GND"
+      },
+      "sch": [
+        390,
+        390
+      ],
+      "xy": [
+        13,
+        35
+      ],
+      "rot": 90,
+      "side": "back",
+      "dnp": true
+    }
+  ],
+  "blocks": [
+    {
+      "title": "GDEY037T03 / UC8253 e-paper (optional stationary population)",
+      "x": 300,
+      "y": 225,
+      "w": 280,
+      "h": 170
+    },
+    {
+      "title": "ST7789 TFT (handheld population)",
+      "x": 430,
+      "y": 20,
+      "w": 150,
+      "h": 95
+    }
+  ],
+  "notes": [
+    {
+      "text": "EPD pinout and boost values transcribed from Good Display GDEY037T03-T02 specification, pages 6-7 and 35. EPD components are DNP by default because only one display is populated per assembly.",
+      "x": 300,
+      "y": 405
+    },
+    {
+      "text": "UC8253 BS is default-low through R32 per the page-35 reference capture; J7 provides a DNP +3V2 override because the page-7 interface table and panel revision must agree before release. Pin 3 RESE is boost current-sense control and is distinct from pin 10 RES# digital reset.",
+      "x": 300,
+      "y": 415
+    },
+    {
+      "text": "J6 uses stock Hirose_FH12-24S-0.5SH footprint. Confirm selected panel revision and exposed-contact face/pin-1 orientation before release; do not mirror footprint by assumption.",
+      "x": 300,
+      "y": 425
+    },
+    {
+      "text": "J5 uses TE 1-84952-0 bottom-contact ZIF footprint. Contact-face orientation for the actual TFT tail remains unresolved. BL_A/BL_K are exported only; no backlight driver is included in this fragment.",
+      "x": 430,
+      "y": 120
+    },
+    {
+      "text": "D10-D12 use KiCad numeric diode pins 1=K and 2=A. D10 K=EPD_NEG_PUMP/A=EPD_PREVGL; D11 K=GND/A=EPD_NEG_PUMP; D12 K=EPD_PREVGH/A=EPD_BOOST_SW. Verify against the final rendered source image before release.",
+      "x": 300,
+      "y": 435
+    }
+  ]
+}

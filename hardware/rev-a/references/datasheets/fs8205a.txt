@@ -1,0 +1,298 @@
+ 
+REV. 1.8   F S8205A-DS-18_EN MAY 2025 
+ 
+Datasheet 
+FS8205A 
+ 
+Dual N-Channel Enhancement Mode Power MOSFET 
+ 
+FORTUNE’  
+Properties 
+For Reference Only 
+ 
+FS8205A 
+ 
+Rev. 1.8   2/6 
+Fortune Semiconductor Corporation 
+富晶電子股份有限公司  
+23F, No. 29-5, Sec. 2, Zhongzheng E. Rd.,  
+Danshui Dist, New Taipei City 251, Taiwan  
+Tel.：886-2-28094742 
+Fax：886-2-28094874 
+www.ic-fortune.com  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+This manual contains new product information. Fortune Semiconductor Corporation reserves the 
+rights to modify the product specification without further notice. No liabi lity is assumed by Fortune 
+Semiconductor Corporation as a result of the use of this product. No rights under any patent 
+accompany the sale of the product
+FORTUNE’  
+Properties 
+For Reference Only 
+ 
+FS8205A 
+ 
+Rev. 1.8   3/6 
+1. Features 
+1.1 Low on-resistance 
+1.1.1 RDS(ON) = 28 mΩ MAX. (VGS = 4.5V, ID = 4A)  
+1.1.2 RDS(ON) = 37 mΩ MAX. (VGS = 2.5V, ID = 3A) 
+ 
+2. Applications 
+ Li-ion battery management applications 
+ 
+3. Ordering Information 
+Product Number Description Package Type Quantity/Reel 
+FS8205A TSSOP8 package version TSSOP-8 4,000 
+ 
+4. Pin Assignment 
+ 
+FS8205A
+ABCCC
+   
+ 
+A：A~Z or A ~ Z 
+B：A~Z or A ~ Z  
+C：A~Z or A ~ Z or 0~9 
+ABCCC : Lot no information 
+ 
+ 
+ 
+5. Absolute Maximum Ratings 
+Symbol Parameter Rating Units 
+VDS Drain-Source Voltage 20 V 
+VGS Gate-Source Voltage ±12 V 
+ID @TA = 25℃ Continuous Drain Current3 6 A 
+ID @TA = 70℃ Continuous Drain Current3 5 A 
+IDM Pulsed Drain Current1 25 A 
+PD @TA = 25℃ Total Power Dissipation 1 W 
+ Linear Derating Factor 0.008 W/℃ 
+TSTG Storage Temperature Range -55 to 150 ℃ 
+TJ Operating Junction Temperature Range -55 to 150 ℃ 
+FORTUNE’  
+Properties 
+For Reference Only 
+ 
+FS8205A 
+ 
+Rev. 1.8   4/6 
+6. Thermal Data 
+Symbol Parameter Value Unit 
+Rthj-a Thermal Resistance Junction-ambient3 Max.  125  ℃/W 
+ 
+7. Electrical Characteristics 
+Electrical Characteristics @Tj = 25℃ ( unless otherwise specified ) 
+Symbol Parameter Test Conditions Min. Typ. Max. Units 
+Static Characteristics 
+BVDSS Drain-Source Breakdown Voltage VGS = 0V, ID = 250uA 20 - - V 
+ΔBVDSS/ΔTj Breakdown Voltage Temperature Coefficient Reference to 25℃, ID=1mA - 0.1 - V/℃ 
+RDS(ON) Static Drain-Source On-Resistance2 VGS = 4.5V, ID = 4A - 23 28 mΩ 
+  VGS = 2.5V, ID = 3A - 30 37 mΩ 
+VGS(th) Gate Threshold Voltage VDS = VGS, ID = 250uA 0.45 - 1.2 V 
+IDSS 
+Drain-Source Leakage Current (Tj = 25℃) VDS =16V, VGS = 0V - - 1 uA 
+Drain-Source Leakage Current (Tj = 70℃) VDS =16V, VGS = 0V - - 25 uA 
+IGSS Gate-Source Leakage VGS = ±10V - - ±0.1 uA 
+ 
+8. Source-Drain Diode 
+Symbol Parameter Test Conditions Min. Typ. Max. Units 
+IS Continuous Source Current (Body Diode) VD = VG = 0V, VS = 1.2V - - 0.83 A 
+VSD Forward On Voltage2 Tj = 25℃, IS = 1.25A, VGS = 0V - - 1.2 V 
+ 
+ 
+Notes： 
+1. Pulse width limited by Max. junction temperature. 
+2. Pulse width ≦ 300us, duty cycle ≦ 2%. 
+3. Surface mounted on 1 in 2 copper pad of FR4 board ；208℃/W when mounted on Min. copper 
+pad. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+FORTUNE’  
+Properties 
+For Reference Only 
+ 
+FS8205A 
+ 
+Rev. 1.8   5/6 
+9. Typical Characteristics 
+On-Region characteristics @ T a=25Deg
+-5
+0
+5
+10
+15
+20
+25
+0 0.5 1 1 .5 2
+Vds, Drain to Source Voltage ( V )
+Id, Drain Current ( A )
+2.0V
+2.5V
+3.0V
+3.5V
+4.0V
+4.5V
+ 
+On-Region characteristics @ T a=125Deg
+-5
+0
+5
+10
+15
+20
+25
+0 0.5 1 1 .5 2
+Vds, Drain to Source Voltage ( V )
+Id, Drain Current ( A )
+2.0V
+2.5V
+3.0V
+3.5V
+4.0V
+4.5V
+ 
+Fig 1. Typical Output Characteristics Fig 2. Typical Output Characteristics 
+ 
+On-Resistance Variation with T emperature
+Vgs=4.5V, Ids=4A
+0
+0.2
+0
+.4
+0.6
+0.8
+1
+1.2
+1.4
+-50 0 50 100 150
+T emperature ( Deg )
+Rds(on) - Normalized
+Drain - Source On-Resistance
+ 
+Gate T hreshold Voltage T emperature Coefficient
+Vgs=Vdg, Ids=250uA
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+1.4
+-50 0 50 100 150
+T emperature ( Deg )
+Vth - Normalized
+Threshold Voltage
+ 
+Fig 3. Normalized On-Resistance Fig 4. Gate Threshold Variation with 
+Temperature 
+ 
+Forward Characteristic of Rev erse Diode
+0
+0.5
+1
+1.5
+2
+2.5
+-0.3 0.2 0.7 1.2
+Vsd, Soucre to Drain Voltage ( V )
+Is (A)
+T a=25Deg
+T a=125Deg
+ 
+ 
+Fig 5. Forward Characteristic of Reverse Diode  
+ 
+ 
+FORTUNE’  
+Properties 
+For Reference Only 
+ 
+FS8205A 
+ 
+Rev. 1.8   6/6 
+10. Package Information 
+ 
+ 
+11. Revision History 
+Version Date Page Description 
+1.0 2009/02/10 - Version 1.0 released 
+1.1 2009/04/28 3~4 Rds25  TYP 25mohm MAX 32mohm 
+Rds45  TYP 20mohm MAX 25mohm 
+ID @TA = 25℃   6A 
+ID @TA = 70℃   5A 
+ID pulse 300μS 25A 
+1.2 2009/08/04 3~4 Rds25  TYP 27mohm MAX 35mohm 
+Rds45  TYP 21mohm MAX 25mohm 
+Rds25  ID：3A 
+Rds45  ID：4A 
+1.3 2010/06/02 3~4 Rds45  TYP 22mohm MAX 27mohm 
+1.4 2010/06/10 4 IDSS  Test Conditions：VDS=16V  VGS=0V  
+1.5 2011/04/27 4 Rds25  TYP：30mohm MAX：37mohm 
+Rds45  TYP：23mohm MAX：28mohm 
+VGS(th)  MIN ：0.45V  MAX ：1.2V 
+IGSS  MAX ：±0.1uA 
+1.6 2014/05/22 2 Revised company address 
+1.7 2016/08/22 3 Revise Package Marking Information 
+1.8 2025/05/09 3 Modified Quantity/Reel from 3000 to 4000 
+ 
+FORTUNE’  
+Properties 
+For Reference Only 
+ 

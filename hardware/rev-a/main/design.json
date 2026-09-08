@@ -1,0 +1,2564 @@
+{
+  "name": "AQI_Main",
+  "width": 44,
+  "height": 80,
+  "components": [
+    {
+      "ref": "U1",
+      "lib": "AQI:ESP32-C3-MINI-1-H4",
+      "value": "ESP32-C3-MINI-1-H4",
+      "nets": {
+        "1": "GND",
+        "2": "GND",
+        "3": "+3V2",
+        "4": null,
+        "5": "BOOT_GPIO2",
+        "6": "BL_PWM",
+        "7": null,
+        "8": "MCU_EN",
+        "9": null,
+        "10": null,
+        "11": "GND",
+        "12": "I2C_SDA",
+        "13": "I2C_SCL",
+        "14": "GND",
+        "15": null,
+        "16": "DISP_CS",
+        "17": null,
+        "18": "DISP_SCK",
+        "19": "DISP_DC",
+        "20": "DISP_MOSI",
+        "21": "DISP_RST",
+        "22": "BOOT_GPIO8",
+        "23": "BOOT_GPIO9",
+        "24": null,
+        "25": null,
+        "26": "USB_MCU_D-",
+        "27": "USB_MCU_D+",
+        "28": null,
+        "29": null,
+        "30": "EPD_BUSY",
+        "31": "UART_TX",
+        "32": null,
+        "33": null,
+        "34": null,
+        "35": null,
+        "36": "GND",
+        "37": "GND",
+        "38": "GND",
+        "39": "GND",
+        "40": "GND",
+        "41": "GND",
+        "42": "GND",
+        "43": "GND",
+        "44": "GND",
+        "45": "GND",
+        "46": "GND",
+        "47": "GND",
+        "48": "GND",
+        "49": "GND",
+        "50": "GND",
+        "51": "GND",
+        "52": "GND",
+        "53": "GND"
+      },
+      "sch": [
+        74,
+        80
+      ],
+      "xy": [
+        35.0,
+        70.0175
+      ],
+      "rot": 180,
+      "side": "back",
+      "dnp": false,
+      "mpn": "ESP32-C3-MINI-1-H4",
+      "manufacturer": "Espressif",
+      "datasheet": "https://documentation.espressif.com/esp32-c3-mini-1_datasheet_en.html",
+      "fp": "AQI:ESP32-C3-MINI-1"
+    },
+    {
+      "ref": "R1",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "MCU_EN"
+      },
+      "sch": [
+        137,
+        45
+      ],
+      "xy": [
+        22.5,
+        66.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C1",
+      "lib": "Device:C",
+      "value": "1uF 16V",
+      "nets": {
+        "1": "MCU_EN",
+        "2": "GND"
+      },
+      "sch": [
+        163,
+        45
+      ],
+      "xy": [
+        26.0,
+        70.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "C2",
+      "lib": "Device:C",
+      "value": "10uF 25V",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        137,
+        75
+      ],
+      "xy": [
+        25.5,
+        73.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0805_2012Metric"
+    },
+    {
+      "ref": "C3",
+      "lib": "Device:C",
+      "value": "100nF 25V",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        163,
+        75
+      ],
+      "xy": [
+        25.5,
+        77.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "R2",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "BOOT_GPIO9"
+      },
+      "sch": [
+        137,
+        105
+      ],
+      "xy": [
+        26.0,
+        65.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R3",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "BOOT_GPIO8"
+      },
+      "sch": [
+        163,
+        105
+      ],
+      "xy": [
+        26.0,
+        63.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R4",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "BOOT_GPIO2"
+      },
+      "sch": [
+        137,
+        133
+      ],
+      "xy": [
+        26.0,
+        67.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "TP1",
+      "lib": "Connector:TestPoint",
+      "value": "GND",
+      "nets": {
+        "1": "GND"
+      },
+      "sch": [
+        23,
+        152
+      ],
+      "xy": [
+        11.0,
+        53.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "TestPoint:TestPoint_Pad_D1.0mm"
+    },
+    {
+      "ref": "TP2",
+      "lib": "Connector:TestPoint",
+      "value": "MCU_EN",
+      "nets": {
+        "1": "MCU_EN"
+      },
+      "sch": [
+        51,
+        152
+      ],
+      "xy": [
+        2.5,
+        64.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "TestPoint:TestPoint_Pad_D1.0mm"
+    },
+    {
+      "ref": "TP3",
+      "lib": "Connector:TestPoint",
+      "value": "BOOT_GPIO9",
+      "nets": {
+        "1": "BOOT_GPIO9"
+      },
+      "sch": [
+        79,
+        152
+      ],
+      "xy": [
+        5.0,
+        64.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "TestPoint:TestPoint_Pad_D1.0mm"
+    },
+    {
+      "ref": "TP4",
+      "lib": "Connector:TestPoint",
+      "value": "UART_TX",
+      "nets": {
+        "1": "UART_TX"
+      },
+      "sch": [
+        107,
+        152
+      ],
+      "xy": [
+        13.0,
+        63.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "TestPoint:TestPoint_Pad_D1.0mm"
+    },
+    {
+      "ref": "TP5",
+      "lib": "Connector:TestPoint",
+      "value": "EPD_BUSY",
+      "nets": {
+        "1": "EPD_BUSY"
+      },
+      "sch": [
+        135,
+        152
+      ],
+      "xy": [
+        26.0,
+        60.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "TestPoint:TestPoint_Pad_D1.0mm"
+    },
+    {
+      "ref": "TP6",
+      "lib": "Connector:TestPoint",
+      "value": "+3V2",
+      "nets": {
+        "1": "+3V2"
+      },
+      "sch": [
+        163,
+        152
+      ],
+      "xy": [
+        24.5,
+        57.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "TestPoint:TestPoint_Pad_D1.0mm"
+    },
+    {
+      "ref": "J1",
+      "lib": "Connector:USB_C_Receptacle_USB2.0_16P",
+      "value": "USB-C / standalone",
+      "nets": {
+        "A1": "GND",
+        "A12": "GND",
+        "B1": "GND",
+        "B12": "GND",
+        "SH": "GND",
+        "A4": "+5V_USB",
+        "A9": "+5V_USB",
+        "B4": "+5V_USB",
+        "B9": "+5V_USB",
+        "A5": "USB_CC1",
+        "B5": "USB_CC2",
+        "A6": "USB_LOCAL_D+",
+        "B6": "USB_LOCAL_D+",
+        "A7": "USB_LOCAL_D-",
+        "B7": "USB_LOCAL_D-",
+        "A8": null,
+        "B8": null
+      },
+      "sch": [
+        236,
+        69
+      ],
+      "xy": [
+        7.5,
+        75.29
+      ],
+      "rot": 0,
+      "side": "front",
+      "dnp": false,
+      "mpn": "USB4105-GF-A",
+      "manufacturer": "GCT",
+      "fp": "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal"
+    },
+    {
+      "ref": "J2",
+      "lib": "Connector_Generic:Conn_01x10",
+      "value": "BATTERY / JST GH",
+      "nets": {
+        "1": "+5V_INT",
+        "2": "+5V_INT",
+        "3": "GND",
+        "4": "USB_INT_D-",
+        "5": "USB_INT_D+",
+        "6": "GND",
+        "7": "I2C_SDA",
+        "8": "I2C_SCL",
+        "9": "GND",
+        "10": "INT_HOST_PRESENT"
+      },
+      "sch": [
+        393,
+        53
+      ],
+      "xy": [
+        39.0,
+        51.0
+      ],
+      "rot": 90,
+      "side": "back",
+      "dnp": false,
+      "mpn": "SM10B-GHS-TB(LF)(SN)",
+      "manufacturer": "JST",
+      "fp": "Connector_JST:JST_GH_SM10B-GHS-TB_1x10-1MP_P1.25mm_Horizontal"
+    },
+    {
+      "ref": "R5",
+      "lib": "Device:R_Small_US",
+      "value": "5.1kR",
+      "nets": {
+        "1": "USB_CC1",
+        "2": "GND"
+      },
+      "sch": [
+        210,
+        132
+      ],
+      "xy": [
+        3.0,
+        67.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R6",
+      "lib": "Device:R_Small_US",
+      "value": "5.1kR",
+      "nets": {
+        "1": "USB_CC2",
+        "2": "GND"
+      },
+      "sch": [
+        236,
+        132
+      ],
+      "xy": [
+        4.0,
+        69.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C4",
+      "lib": "Device:C",
+      "value": "1uF 16V",
+      "nets": {
+        "1": "+5V_USB",
+        "2": "GND"
+      },
+      "sch": [
+        262,
+        132
+      ],
+      "xy": [
+        18.5,
+        78.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "D1",
+      "lib": "Power_Protection:USBLC6-2SC6",
+      "value": "USBLC6-2SC6",
+      "nets": {
+        "1": "USB_LOCAL_D+",
+        "6": "USB_LOCAL_D+",
+        "3": "USB_LOCAL_D-",
+        "4": "USB_LOCAL_D-",
+        "2": "GND",
+        "5": "+5V_USB"
+      },
+      "sch": [
+        292,
+        52
+      ],
+      "xy": [
+        15.5,
+        74.0875
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "USBLC6-2SC6",
+      "manufacturer": "STMicroelectronics",
+      "fp": "Package_TO_SOT_SMD:SOT-23-6"
+    },
+    {
+      "ref": "U2",
+      "lib": "Interface_USB:TS3USB30EDGSR",
+      "value": "TS3USB30EDGSR",
+      "nets": {
+        "1": "USB_SEL_INT",
+        "2": "USB_LOCAL_D+",
+        "3": "USB_INT_D+",
+        "4": "USB_SWITCH_D+",
+        "5": "GND",
+        "6": "USB_SWITCH_D-",
+        "7": "USB_INT_D-",
+        "8": "USB_LOCAL_D-",
+        "9": "USB_OE_N",
+        "10": "+3V2"
+      },
+      "sch": [
+        323,
+        100
+      ],
+      "xy": [
+        20.0,
+        69.0125
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "TS3USB30EDGSR",
+      "manufacturer": "Texas Instruments"
+    },
+    {
+      "ref": "R7",
+      "lib": "Device:R_Small_US",
+      "value": "22R",
+      "nets": {
+        "1": "USB_SWITCH_D+",
+        "2": "USB_MCU_D+"
+      },
+      "sch": [
+        291,
+        150
+      ],
+      "xy": [
+        20.5,
+        76.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R8",
+      "lib": "Device:R_Small_US",
+      "value": "22R",
+      "nets": {
+        "1": "USB_SWITCH_D-",
+        "2": "USB_MCU_D-"
+      },
+      "sch": [
+        320,
+        150
+      ],
+      "xy": [
+        24.0,
+        75.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C5",
+      "lib": "Device:C",
+      "value": "100nF 25V",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        351,
+        150
+      ],
+      "xy": [
+        19.5,
+        74.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "Q1",
+      "lib": "Transistor_FET:2N7002",
+      "value": "AO3400A",
+      "nets": {
+        "1": "+5V_USB",
+        "2": "GND",
+        "3": "USB_SEL_INT"
+      },
+      "sch": [
+        455,
+        142
+      ],
+      "xy": [
+        8.0,
+        68.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "AO3400A",
+      "manufacturer": "Alpha & Omega Semiconductor",
+      "datasheet": "https://www.aosmd.com/sites/default/files/res/data_sheets/AO3400A.pdf",
+      "fp": "Package_TO_SOT_SMD:SOT-23"
+    },
+    {
+      "ref": "Q2",
+      "lib": "Transistor_FET:2N7002",
+      "value": "AO3400A",
+      "nets": {
+        "1": "+5V_USB",
+        "2": "GND",
+        "3": "USB_OE_N"
+      },
+      "sch": [
+        491,
+        142
+      ],
+      "xy": [
+        12.5,
+        67.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "AO3400A",
+      "manufacturer": "Alpha & Omega Semiconductor",
+      "datasheet": "https://www.aosmd.com/sites/default/files/res/data_sheets/AO3400A.pdf",
+      "fp": "Package_TO_SOT_SMD:SOT-23"
+    },
+    {
+      "ref": "Q4",
+      "lib": "Transistor_FET:2N7002",
+      "value": "AO3400A",
+      "nets": {
+        "1": "INT_HOST_PRESENT",
+        "2": "GND",
+        "3": "USB_OE_N"
+      },
+      "sch": [
+        527,
+        142
+      ],
+      "xy": [
+        17.0,
+        65.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "AO3400A",
+      "manufacturer": "Alpha & Omega Semiconductor",
+      "datasheet": "https://www.aosmd.com/sites/default/files/res/data_sheets/AO3400A.pdf",
+      "fp": "Package_TO_SOT_SMD:SOT-23"
+    },
+    {
+      "ref": "R9",
+      "lib": "Device:R_Small_US",
+      "value": "47kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "USB_SEL_INT"
+      },
+      "sch": [
+        450,
+        180
+      ],
+      "xy": [
+        15.0,
+        71.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R10",
+      "lib": "Device:R_Small_US",
+      "value": "47kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "USB_OE_N"
+      },
+      "sch": [
+        481,
+        180
+      ],
+      "xy": [
+        19.5,
+        72.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R11",
+      "lib": "Device:R_Small_US",
+      "value": "1MR",
+      "nets": {
+        "1": "INT_HOST_PRESENT",
+        "2": "GND"
+      },
+      "sch": [
+        519,
+        180
+      ],
+      "xy": [
+        21.0,
+        64.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R12",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "nets": {
+        "1": "+5V_USB",
+        "2": "GND"
+      },
+      "sch": [
+        554,
+        180
+      ],
+      "xy": [
+        15.0,
+        77.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "U3",
+      "lib": "Power_Management:TPS2116DRL",
+      "value": "TPS2116DRLR",
+      "nets": {
+        "1": "GND",
+        "2": "+5V_SYS",
+        "7": "+5V_SYS",
+        "3": "+5V_USB",
+        "4": "PWR_PR1",
+        "5": "+5V_USB",
+        "6": "+5V_INT",
+        "8": null
+      },
+      "sch": [
+        50,
+        205
+      ],
+      "xy": [
+        15.0,
+        57.0875
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "TPS2116DRLR",
+      "manufacturer": "Texas Instruments"
+    },
+    {
+      "ref": "R13",
+      "lib": "Device:R_Small_US",
+      "value": "301kR",
+      "nets": {
+        "1": "+5V_USB",
+        "2": "PWR_PR1"
+      },
+      "sch": [
+        22,
+        251
+      ],
+      "xy": [
+        11.5,
+        56.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R14",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "nets": {
+        "1": "PWR_PR1",
+        "2": "GND"
+      },
+      "sch": [
+        48,
+        251
+      ],
+      "xy": [
+        13.0,
+        60.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C6",
+      "lib": "Device:C",
+      "value": "1uF 16V",
+      "nets": {
+        "1": "+5V_INT",
+        "2": "GND"
+      },
+      "sch": [
+        75,
+        251
+      ],
+      "xy": [
+        17.0,
+        59.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "C7",
+      "lib": "Device:C",
+      "value": "10uF 25V",
+      "nets": {
+        "1": "+5V_SYS",
+        "2": "GND"
+      },
+      "sch": [
+        100,
+        251
+      ],
+      "xy": [
+        16.5,
+        54.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0805_2012Metric"
+    },
+    {
+      "ref": "SW4",
+      "lib": "Switch:SW_SPDT",
+      "value": "POWER / JS102011SAQN",
+      "nets": {
+        "1": "+5V_SYS",
+        "2": "MAIN_ON",
+        "3": "GND"
+      },
+      "sch": [
+        90,
+        201
+      ],
+      "xy": [
+        5.125,
+        56.0
+      ],
+      "rot": 270,
+      "side": "back",
+      "dnp": false,
+      "mpn": "JS102011SAQN",
+      "manufacturer": "C&K",
+      "fp": "Button_Switch_SMD:SW_SPDT_CK_JS102011SAQN"
+    },
+    {
+      "ref": "U4",
+      "lib": "Power_Management:TPS22917DBV",
+      "value": "TPS22917DBVR",
+      "nets": {
+        "1": "+5V_SYS",
+        "2": "GND",
+        "3": "MAIN_ON",
+        "4": "MAIN_CT",
+        "5": "MAIN_QOD",
+        "6": "+5V_SW"
+      },
+      "sch": [
+        128,
+        204
+      ],
+      "xy": [
+        21.0,
+        57.0875
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "TPS22917DBVR",
+      "manufacturer": "Texas Instruments"
+    },
+    {
+      "ref": "R15",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "nets": {
+        "1": "MAIN_ON",
+        "2": "GND"
+      },
+      "sch": [
+        130,
+        251
+      ],
+      "xy": [
+        18.5,
+        62.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R16",
+      "lib": "Device:R_Small_US",
+      "value": "100R",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "MAIN_QOD"
+      },
+      "sch": [
+        158,
+        251
+      ],
+      "xy": [
+        23.0,
+        60.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C8",
+      "lib": "Device:C",
+      "value": "1nF 25V",
+      "nets": {
+        "1": "MAIN_CT",
+        "2": "GND"
+      },
+      "sch": [
+        185,
+        251
+      ],
+      "xy": [
+        20.5,
+        54.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "U5",
+      "lib": "Regulator_Switching:TPS62160DGK",
+      "value": "TPS62160DGKR",
+      "nets": {
+        "1": "GND",
+        "2": "+5V_SW",
+        "3": "+5V_SW",
+        "4": "GND",
+        "5": "CORE_FB",
+        "6": "+3V2",
+        "7": "CORE_SW",
+        "8": null
+      },
+      "sch": [
+        52,
+        292
+      ],
+      "xy": [
+        28.0,
+        53.0275
+      ],
+      "rot": 180,
+      "side": "back",
+      "dnp": false,
+      "mpn": "TPS62160DGKR",
+      "manufacturer": "Texas Instruments"
+    },
+    {
+      "ref": "L1",
+      "lib": "Device:L",
+      "value": "2.2uH SWPA4020S",
+      "nets": {
+        "1": "CORE_SW",
+        "2": "+3V2"
+      },
+      "sch": [
+        91,
+        286
+      ],
+      "xy": [
+        33.0,
+        48.5
+      ],
+      "rot": 180,
+      "side": "back",
+      "dnp": false,
+      "mpn": "SWPA4020S2R2MT",
+      "manufacturer": "Sunlord",
+      "fp": "Inductor_SMD:L_Sunlord_SWPA4020S"
+    },
+    {
+      "ref": "R17",
+      "lib": "Device:R_Small_US",
+      "value": "300kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "CORE_FB"
+      },
+      "sch": [
+        63,
+        320
+      ],
+      "xy": [
+        33.5,
+        53.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R18",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "nets": {
+        "1": "CORE_FB",
+        "2": "GND"
+      },
+      "sch": [
+        94,
+        320
+      ],
+      "xy": [
+        29.5,
+        56.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C9",
+      "lib": "Device:C",
+      "value": "10uF 25V",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "GND"
+      },
+      "sch": [
+        25,
+        298
+      ],
+      "xy": [
+        27.0,
+        49.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0805_2012Metric"
+    },
+    {
+      "ref": "C10",
+      "lib": "Device:C",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        125,
+        286
+      ],
+      "xy": [
+        33.5,
+        56.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0805_2012Metric"
+    },
+    {
+      "ref": "C11",
+      "lib": "Device:C",
+      "value": "100nF 25V",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        125,
+        317
+      ],
+      "xy": [
+        33.5,
+        58.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "U6",
+      "lib": "Regulator_Switching:TPS62160DGK",
+      "value": "TPS62160DGKR",
+      "nets": {
+        "1": "GND",
+        "2": "+5V_SW",
+        "3": "+5V_SW",
+        "4": "GND",
+        "5": "PM_FB",
+        "6": "+3V3_PM",
+        "7": "PM_SW",
+        "8": null
+      },
+      "sch": [
+        183,
+        292
+      ],
+      "xy": [
+        32.0,
+        23.0275
+      ],
+      "rot": 180,
+      "side": "back",
+      "dnp": false,
+      "mpn": "TPS62160DGKR",
+      "manufacturer": "Texas Instruments"
+    },
+    {
+      "ref": "L2",
+      "lib": "Device:L",
+      "value": "2.2uH SWPA4020S",
+      "nets": {
+        "1": "PM_SW",
+        "2": "+3V3_PM"
+      },
+      "sch": [
+        222,
+        286
+      ],
+      "xy": [
+        38.0,
+        23.0
+      ],
+      "rot": 180,
+      "side": "back",
+      "dnp": false,
+      "mpn": "SWPA4020S2R2MT",
+      "manufacturer": "Sunlord",
+      "fp": "Inductor_SMD:L_Sunlord_SWPA4020S"
+    },
+    {
+      "ref": "R19",
+      "lib": "Device:R_Small_US",
+      "value": "316kR",
+      "nets": {
+        "1": "+3V3_PM",
+        "2": "PM_FB"
+      },
+      "sch": [
+        194,
+        320
+      ],
+      "xy": [
+        31.5,
+        26.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R20",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "nets": {
+        "1": "PM_FB",
+        "2": "GND"
+      },
+      "sch": [
+        225,
+        320
+      ],
+      "xy": [
+        31.5,
+        28.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C12",
+      "lib": "Device:C",
+      "value": "10uF 25V",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "GND"
+      },
+      "sch": [
+        156,
+        298
+      ],
+      "xy": [
+        26.5,
+        22.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0805_2012Metric"
+    },
+    {
+      "ref": "C13",
+      "lib": "Device:C",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "+3V3_PM",
+        "2": "GND"
+      },
+      "sch": [
+        256,
+        286
+      ],
+      "xy": [
+        39.0,
+        27.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0805_2012Metric"
+    },
+    {
+      "ref": "C14",
+      "lib": "Device:C",
+      "value": "100nF 25V",
+      "nets": {
+        "1": "+3V3_PM",
+        "2": "GND"
+      },
+      "sch": [
+        256,
+        317
+      ],
+      "xy": [
+        35.0,
+        27.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "J3",
+      "lib": "Connector_Generic:Conn_01x06",
+      "value": "SEN5x / 5V",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "GND",
+        "3": "I2C_SDA",
+        "4": "I2C_SCL",
+        "5": "GND",
+        "6": null
+      },
+      "sch": [
+        35,
+        368
+      ],
+      "xy": [
+        4.5,
+        24.0
+      ],
+      "rot": 270,
+      "side": "back",
+      "dnp": false,
+      "mpn": "SM06B-GHS-TB(LF)(SN)",
+      "manufacturer": "JST",
+      "fp": "Connector_JST:JST_GH_SM06B-GHS-TB_1x06-1MP_P1.25mm_Horizontal"
+    },
+    {
+      "ref": "J4",
+      "lib": "Connector_Generic:Conn_01x04",
+      "value": "SEN6x / 3.3V",
+      "nets": {
+        "1": "+3V3_PM",
+        "2": "GND",
+        "3": "I2C_SDA",
+        "4": "I2C_SCL"
+      },
+      "sch": [
+        77,
+        369
+      ],
+      "xy": [
+        4.5,
+        45.0
+      ],
+      "rot": 270,
+      "side": "back",
+      "dnp": false,
+      "mpn": "SM04B-GHS-TB(LF)(SN)",
+      "manufacturer": "JST",
+      "note": "Custom 4-to-6 cable. Sensor pins5/6 open; pin1 3.3V,2GND,3SDA,4SCL.",
+      "fp": "Connector_JST:JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal"
+    },
+    {
+      "ref": "U7",
+      "lib": "AQI:TPS7A2033DBV",
+      "value": "TPS7A2033PDBVR",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "GND",
+        "3": "+5V_SW",
+        "4": null,
+        "5": "+3V3_CO2"
+      },
+      "sch": [
+        138,
+        369
+      ],
+      "xy": [
+        22.0,
+        15.0875
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "mpn": "TPS7A2033PDBVR",
+      "manufacturer": "Texas Instruments",
+      "fp": "Package_TO_SOT_SMD:SOT-23-5"
+    },
+    {
+      "ref": "C15",
+      "lib": "Device:C",
+      "value": "1uF 16V",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "GND"
+      },
+      "sch": [
+        110,
+        390
+      ],
+      "xy": [
+        8.0,
+        9.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "C16",
+      "lib": "Device:C",
+      "value": "10uF 25V",
+      "nets": {
+        "1": "+3V3_CO2",
+        "2": "GND"
+      },
+      "sch": [
+        169,
+        390
+      ],
+      "xy": [
+        6.0,
+        15.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "fp": "Capacitor_SMD:C_0805_2012Metric"
+    },
+    {
+      "ref": "U8",
+      "lib": "Sensor_Gas:SCD40-D-R2",
+      "value": "SCD41-D-R2",
+      "nets": {
+        "6": "GND",
+        "7": "+3V3_CO2",
+        "9": "I2C_SCL",
+        "10": "I2C_SDA",
+        "19": "+3V3_CO2",
+        "20": "GND",
+        "21": "GND"
+      },
+      "sch": [
+        220,
+        373
+      ],
+      "xy": [
+        13.8125,
+        17.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "mpn": "SCD41-D-R2",
+      "manufacturer": "Sensirion",
+      "note": "Optional; vented sensor body 10.1x10.1mm, clearance and thermal review required"
+    },
+    {
+      "ref": "U9",
+      "lib": "Interface_Expansion:MCP23008-xSO",
+      "value": "MCP23008-E/SO",
+      "nets": {
+        "1": "I2C_SCL",
+        "2": "I2C_SDA",
+        "3": "GND",
+        "4": "GND",
+        "5": "GND",
+        "6": "MCU_EN",
+        "7": null,
+        "8": null,
+        "9": "GND",
+        "10": "BUTTON_LEFT",
+        "11": "BUTTON_OK",
+        "12": "BUTTON_RIGHT",
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": null,
+        "18": "+3V2"
+      },
+      "sch": [
+        344,
+        193
+      ],
+      "xy": [
+        30.5,
+        36.0575
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "MCP23008-E/SO",
+      "manufacturer": "Microchip"
+    },
+    {
+      "ref": "C17",
+      "lib": "Device:C",
+      "value": "100nF 25V",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        385,
+        194
+      ],
+      "xy": [
+        27.0,
+        47.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "R21",
+      "lib": "Device:R_Small_US",
+      "value": "4.7kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "I2C_SDA"
+      },
+      "sch": [
+        386,
+        136
+      ],
+      "xy": [
+        22.0,
+        49.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R22",
+      "lib": "Device:R_Small_US",
+      "value": "4.7kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "I2C_SCL"
+      },
+      "sch": [
+        416,
+        136
+      ],
+      "xy": [
+        22.5,
+        51.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "SW1",
+      "lib": "Switch:SW_Push",
+      "value": "LEFT",
+      "nets": {
+        "1": "BUTTON_LEFT",
+        "2": "GND"
+      },
+      "sch": [
+        439,
+        210
+      ],
+      "xy": [
+        8.0,
+        66.0
+      ],
+      "rot": 0,
+      "side": "front",
+      "dnp": false,
+      "mpn": "KMR221GLFS",
+      "manufacturer": "C&K",
+      "fp": "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
+    },
+    {
+      "ref": "R23",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "BUTTON_LEFT"
+      },
+      "sch": [
+        439,
+        235
+      ],
+      "xy": [
+        8.0,
+        62.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "SW2",
+      "lib": "Switch:SW_Push",
+      "value": "OK",
+      "nets": {
+        "1": "BUTTON_OK",
+        "2": "GND"
+      },
+      "sch": [
+        487,
+        210
+      ],
+      "xy": [
+        22.0,
+        66.0
+      ],
+      "rot": 0,
+      "side": "front",
+      "dnp": false,
+      "mpn": "KMR221GLFS",
+      "manufacturer": "C&K",
+      "fp": "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
+    },
+    {
+      "ref": "R24",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "BUTTON_OK"
+      },
+      "sch": [
+        487,
+        235
+      ],
+      "xy": [
+        22.0,
+        62.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "SW3",
+      "lib": "Switch:SW_Push",
+      "value": "RIGHT",
+      "nets": {
+        "1": "BUTTON_RIGHT",
+        "2": "GND"
+      },
+      "sch": [
+        535,
+        210
+      ],
+      "xy": [
+        36.0,
+        66.0
+      ],
+      "rot": 0,
+      "side": "front",
+      "dnp": false,
+      "mpn": "KMR221GLFS",
+      "manufacturer": "C&K",
+      "fp": "Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2"
+    },
+    {
+      "ref": "R25",
+      "lib": "Device:R_Small_US",
+      "value": "10kR",
+      "nets": {
+        "1": "+3V2",
+        "2": "BUTTON_RIGHT"
+      },
+      "sch": [
+        535,
+        235
+      ],
+      "xy": [
+        30.0,
+        60.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "U10",
+      "lib": "AQI:STCS05A",
+      "value": "STCS05ADR",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "BL_PWM",
+        "3": "+3V2",
+        "4": "BL_K",
+        "5": "BL_FB",
+        "6": "GND",
+        "7": null,
+        "8": null
+      },
+      "sch": [
+        472,
+        82
+      ],
+      "xy": [
+        30.0,
+        14.5675
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "mpn": "STCS05ADR",
+      "manufacturer": "STMicroelectronics",
+      "fp": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
+    },
+    {
+      "ref": "R26",
+      "lib": "Device:R_Small_US",
+      "value": "1.5R",
+      "nets": {
+        "1": "BL_FB",
+        "2": "GND"
+      },
+      "sch": [
+        449,
+        111
+      ],
+      "xy": [
+        31.0,
+        18.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "R27",
+      "lib": "Device:R_Small_US",
+      "value": "100kR",
+      "nets": {
+        "1": "BL_PWM",
+        "2": "GND"
+      },
+      "sch": [
+        480,
+        111
+      ],
+      "xy": [
+        26.0,
+        18.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "C18",
+      "lib": "Device:C",
+      "value": "100nF 25V",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "GND"
+      },
+      "sch": [
+        509,
+        111
+      ],
+      "xy": [
+        22.5,
+        18.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "C19",
+      "lib": "Device:C",
+      "value": "470nF 16V",
+      "nets": {
+        "1": "BL_K",
+        "2": "GND"
+      },
+      "sch": [
+        545,
+        111
+      ],
+      "xy": [
+        36.0,
+        16.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Capacitor_SMD:C_0603_1608Metric"
+    },
+    {
+      "ref": "R28",
+      "lib": "Device:R_Small_US",
+      "value": "0R",
+      "nets": {
+        "1": "+5V_SW",
+        "2": "BL_A"
+      },
+      "sch": [
+        552,
+        80
+      ],
+      "xy": [
+        36.0,
+        12.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false,
+      "fp": "Resistor_SMD:R_0603_1608Metric"
+    },
+    {
+      "ref": "J5",
+      "lib": "Connector_Generic:Conn_01x10",
+      "value": "TFT TOP CONTACT",
+      "fp": "Connector_FFC-FPC:TE_1-84953-0_1x10-1MP_P1.0mm_Horizontal",
+      "nets": {
+        "1": "GND",
+        "2": "DISP_DC",
+        "3": "DISP_CS",
+        "4": "DISP_SCK",
+        "5": "DISP_MOSI",
+        "6": "DISP_RST",
+        "7": "+3V2",
+        "8": "GND",
+        "9": "BL_A",
+        "10": "BL_K"
+      },
+      "sch": [
+        565,
+        48
+      ],
+      "xy": [
+        22.0,
+        7.85
+      ],
+      "rot": 180,
+      "side": "back",
+      "dnp": false,
+      "mpn": "1-84953-0",
+      "manufacturer": "TE Connectivity"
+    },
+    {
+      "ref": "J6",
+      "lib": "Connector_Generic:Conn_01x24",
+      "value": "GDEY037T03",
+      "fp": "Connector_FFC-FPC:Hirose_FH12-24S-0.5SH_1x24-1MP_P0.50mm_Horizontal",
+      "nets": {
+        "1": null,
+        "2": "EPD_GDR",
+        "3": "EPD_RESE",
+        "4": "EPD_VGL",
+        "5": "EPD_VGH",
+        "6": null,
+        "7": null,
+        "8": "EPD_BS",
+        "9": "EPD_BUSY",
+        "10": "DISP_RST",
+        "11": "DISP_DC",
+        "12": "DISP_CS",
+        "13": "DISP_SCK",
+        "14": "DISP_MOSI",
+        "15": "+3V2",
+        "16": "+3V2",
+        "17": "GND",
+        "18": "EPD_VDD",
+        "19": null,
+        "20": "EPD_VSH1",
+        "21": "EPD_PREVGH",
+        "22": "EPD_VSL",
+        "23": "EPD_PREVGL",
+        "24": "EPD_VCOM"
+      },
+      "sch": [
+        430,
+        310
+      ],
+      "xy": [
+        15.0,
+        34.05
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "R32",
+      "lib": "Device:R",
+      "value": "0R",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "EPD_BS",
+        "2": "GND"
+      },
+      "sch": [
+        550,
+        310
+      ],
+      "xy": [
+        21.5,
+        40.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": false
+    },
+    {
+      "ref": "J7",
+      "lib": "Connector_Generic:Conn_01x02",
+      "value": "EPD BS high override",
+      "fp": "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm",
+      "nets": {
+        "1": "EPD_BS",
+        "2": "+3V2"
+      },
+      "sch": [
+        550,
+        330
+      ],
+      "xy": [
+        18.0,
+        41.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "note": "Remove R32 before bridging J7. Default BS low matches vendor circuit."
+    },
+    {
+      "ref": "L3",
+      "lib": "Device:L",
+      "value": "10uH 1A",
+      "fp": "Inductor_SMD:L_Sunlord_SWPA4020S",
+      "nets": {
+        "1": "+3V2",
+        "2": "EPD_BOOST_SW"
+      },
+      "sch": [
+        340,
+        275
+      ],
+      "xy": [
+        12.0,
+        27.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true,
+      "mpn": "SWPA4020S100MT"
+    },
+    {
+      "ref": "Q3",
+      "lib": "Transistor_FET:Q_NMOS_GSD",
+      "value": "Si1308EDL",
+      "fp": "Package_TO_SOT_SMD:SOT-323_SC-70",
+      "nets": {
+        "1": "EPD_GDR",
+        "2": "EPD_RESE",
+        "3": "EPD_BOOST_SW"
+      },
+      "sch": [
+        390,
+        305
+      ],
+      "xy": [
+        16.5,
+        28.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "D10",
+      "lib": "Device:D",
+      "value": "MBR0530",
+      "fp": "Diode_SMD:D_SOD-123",
+      "nets": {
+        "1": "EPD_NEG_PUMP",
+        "2": "EPD_PREVGL"
+      },
+      "sch": [
+        365,
+        320
+      ],
+      "xy": [
+        2.9775,
+        34.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "D11",
+      "lib": "Device:D",
+      "value": "MBR0530",
+      "fp": "Diode_SMD:D_SOD-123",
+      "nets": {
+        "1": "GND",
+        "2": "EPD_NEG_PUMP"
+      },
+      "sch": [
+        365,
+        345
+      ],
+      "xy": [
+        10.4775,
+        40.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "D12",
+      "lib": "Device:D",
+      "value": "MBR0530",
+      "fp": "Diode_SMD:D_SOD-123",
+      "nets": {
+        "1": "EPD_PREVGH",
+        "2": "EPD_BOOST_SW"
+      },
+      "sch": [
+        365,
+        370
+      ],
+      "xy": [
+        10.4775,
+        43.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C30",
+      "lib": "Device:C",
+      "value": "4.7uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        320,
+        260
+      ],
+      "xy": [
+        3.5,
+        36.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C31",
+      "lib": "Device:C",
+      "value": "4.7uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_BOOST_SW",
+        "2": "EPD_NEG_PUMP"
+      },
+      "sch": [
+        350,
+        260
+      ],
+      "xy": [
+        3.5,
+        31.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C32",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VGL",
+        "2": "GND"
+      },
+      "sch": [
+        475,
+        255
+      ],
+      "xy": [
+        17.0,
+        25.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C33",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VGH",
+        "2": "GND"
+      },
+      "sch": [
+        500,
+        255
+      ],
+      "xy": [
+        21.0,
+        26.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C34",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_PREVGH",
+        "2": "GND"
+      },
+      "sch": [
+        475,
+        335
+      ],
+      "xy": [
+        11.0,
+        46.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C35",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "+3V2",
+        "2": "GND"
+      },
+      "sch": [
+        505,
+        275
+      ],
+      "xy": [
+        22.0,
+        29.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C36",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VDD",
+        "2": "GND"
+      },
+      "sch": [
+        530,
+        275
+      ],
+      "xy": [
+        26.0,
+        28.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C38",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VSH1",
+        "2": "GND"
+      },
+      "sch": [
+        475,
+        360
+      ],
+      "xy": [
+        19.0,
+        44.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C39",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_PREVGL",
+        "2": "GND"
+      },
+      "sch": [
+        505,
+        360
+      ],
+      "xy": [
+        15.0,
+        45.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C40",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VSL",
+        "2": "GND"
+      },
+      "sch": [
+        535,
+        360
+      ],
+      "xy": [
+        19.0,
+        46.5
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "C41",
+      "lib": "Device:C",
+      "value": "1uF 50V",
+      "fp": "Capacitor_SMD:C_0805_2012Metric",
+      "nets": {
+        "1": "EPD_VCOM",
+        "2": "GND"
+      },
+      "sch": [
+        565,
+        360
+      ],
+      "xy": [
+        23.0,
+        45.0
+      ],
+      "rot": 0,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "R30",
+      "lib": "Device:R",
+      "value": "1M",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "EPD_GDR",
+        "2": "GND"
+      },
+      "sch": [
+        350,
+        390
+      ],
+      "xy": [
+        14.0,
+        48.0
+      ],
+      "rot": 90,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "R31",
+      "lib": "Device:R",
+      "value": "0.47R",
+      "fp": "Resistor_SMD:R_0603_1608Metric",
+      "nets": {
+        "1": "EPD_RESE",
+        "2": "GND"
+      },
+      "sch": [
+        390,
+        390
+      ],
+      "xy": [
+        14.0,
+        41.0
+      ],
+      "rot": 90,
+      "side": "back",
+      "dnp": true
+    },
+    {
+      "ref": "#FLG1",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "+5V_USB"
+      },
+      "sch": [
+        212,
+        24
+      ],
+      "xy": null,
+      "rot": 0,
+      "side": "front",
+      "dnp": false
+    },
+    {
+      "ref": "#FLG2",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "+5V_INT"
+      },
+      "sch": [
+        368,
+        24
+      ],
+      "xy": null,
+      "rot": 0,
+      "side": "front",
+      "dnp": false
+    },
+    {
+      "ref": "#FLG3",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "GND"
+      },
+      "sch": [
+        278,
+        24
+      ],
+      "xy": null,
+      "rot": 0,
+      "side": "front",
+      "dnp": false
+    },
+    {
+      "ref": "#FLG4",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "+3V2"
+      },
+      "sch": [
+        157,
+        170
+      ],
+      "xy": null,
+      "rot": 0,
+      "side": "front",
+      "dnp": false
+    },
+    {
+      "ref": "#FLG5",
+      "lib": "power:PWR_FLAG",
+      "value": "PWR_FLAG",
+      "nets": {
+        "1": "+3V3_PM"
+      },
+      "sch": [
+        188,
+        170
+      ],
+      "xy": null,
+      "rot": 0,
+      "side": "front",
+      "dnp": false
+    }
+  ],
+  "custom_symbols": [
+    {
+      "name": "TPS7A2033DBV",
+      "pins": [
+        {
+          "number": 1,
+          "name": "IN",
+          "type": "power_in",
+          "side": "left"
+        },
+        {
+          "number": 2,
+          "name": "GND",
+          "type": "power_in",
+          "side": "bottom"
+        },
+        {
+          "number": 3,
+          "name": "EN",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": 4,
+          "name": "NC",
+          "type": "no_connect",
+          "side": "right"
+        },
+        {
+          "number": 5,
+          "name": "OUT",
+          "type": "power_out",
+          "side": "right"
+        }
+      ]
+    },
+    {
+      "name": "STCS05A",
+      "pins": [
+        {
+          "number": 1,
+          "name": "VCC",
+          "type": "power_in",
+          "side": "top"
+        },
+        {
+          "number": 2,
+          "name": "PWM",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": 3,
+          "name": "EN",
+          "type": "input",
+          "side": "left"
+        },
+        {
+          "number": 4,
+          "name": "DRAIN",
+          "type": "passive",
+          "side": "right"
+        },
+        {
+          "number": 5,
+          "name": "FB",
+          "type": "passive",
+          "side": "right"
+        },
+        {
+          "number": 6,
+          "name": "GND",
+          "type": "power_in",
+          "side": "bottom"
+        },
+        {
+          "number": 7,
+          "name": "SLOPE",
+          "type": "passive",
+          "side": "left"
+        },
+        {
+          "number": 8,
+          "name": "DISC",
+          "type": "open_collector",
+          "side": "right"
+        }
+      ]
+    }
+  ],
+  "import_symbols": [
+    {
+      "path": "lib/Espressif-H4.kicad_sym",
+      "name": "ESP32-C3-MINI-1-H4",
+      "libid": "AQI:ESP32-C3-MINI-1-H4"
+    }
+  ],
+  "blocks": [],
+  "notes": [
+    {
+      "text": "AQI MAIN / REV A - ENGINEERING PROTOTYPE",
+      "x": 12,
+      "y": 10,
+      "size": 2.4
+    },
+    {
+      "text": "TFT top contact confirmed by user. EPD population alternative. One PM module. USB source-current qualification required.",
+      "x": 12,
+      "y": 17
+    }
+  ],
+  "board_texts": [
+    {
+      "text": "AQI MAIN A",
+      "xy": [
+        22,
+        60
+      ],
+      "layer": "F_SilkS"
+    },
+    {
+      "text": "L",
+      "xy": [
+        8,
+        70
+      ]
+    },
+    {
+      "text": "OK",
+      "xy": [
+        22,
+        70
+      ]
+    },
+    {
+      "text": "R",
+      "xy": [
+        36,
+        70
+      ]
+    }
+  ],
+  "envelopes": [
+    {
+      "start": [
+        0.64,
+        1.5
+      ],
+      "end": [
+        43.36,
+        62.46
+      ]
+    }
+  ],
+  "keepouts": [
+    [
+      [
+        27.5,
+        73
+      ],
+      [
+        44,
+        73
+      ],
+      [
+        44,
+        80
+      ],
+      [
+        27.5,
+        80
+      ]
+    ]
+  ]
+}

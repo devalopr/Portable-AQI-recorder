@@ -1,0 +1,52 @@
+version: 1
+status: schematic-input-only
+sources:
+  tps2116: https://www.ti.com/lit/gpn/TPS2116
+  ts3usb30e: https://www.ti.com/lit/ds/symlink/ts3usb30e.pdf
+  tps62160: https://www.ti.com/lit/ds/symlink/tps62160.pdf
+  tps7a20: https://www.ti.com/lit/ds/symlink/tps7a20.pdf
+  stcs05a: https://www.st.com/resource/en/datasheet/stcs05a.pdf
+  mcp23008: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/MCP23008-and-MCP23S08-Data-Sheet-DS20001919.pdf
+  esp32_c3_mini_1: https://documentation.espressif.com/esp32-c3-mini-1_datasheet_en.html
+components:
+  U_PWR1:
+    mpn: TPS2116DRLR
+    symbol: Power_Management:TPS2116DRL
+    footprint: Package_TO_SOT_SMD:SOT-583-8
+    pins: {1: GND, 2: SYS_5V, 3: USB5V_LOCAL, 4: USB5V_LOCAL, 5: USB5V_LOCAL, 6: USB5V_INTERNAL, 7: SYS_5V, 8: PWR_MUX_ST}
+  U_USB1:
+    mpn: TS3USB30EDGSR
+    symbol: Interface_USB:TS3USB30EDGSR
+    footprint: Package_SO:TSSOP-10_3x3mm_P0.5mm
+    pins: {1: USB_SEL_INTERNAL, 2: USB_DP_LOCAL, 3: USB_DP_INTERNAL, 4: USB_DP_MCU, 5: GND, 6: USB_DM_MCU, 7: USB_DM_INTERNAL, 8: USB_DM_LOCAL, 9: USB_MUX_OE_N, 10: 3V3}
+  U_CORE1:
+    mpn: TPS62160DGKR
+    symbol: Regulator_Switching:TPS62160DGK
+    footprint: Package_SO:VSSOP-8_3.0x3.0mm_P0.65mm
+    pins: {1: GND, 2: SYS_5V, 3: MAIN_RAIL_EN, 4: GND, 5: CORE_FB, 6: 3V3, 7: CORE_SW, 8: CORE_PGOOD}
+  U_SCDLDO1:
+    mpn: TPS7A2033PDBVR
+    symbol: project_local:TPS7A2033PDBVR
+    footprint: Package_TO_SOT_SMD:SOT-23-5
+    pins: {1: 3V3, 2: GND, 3: SCD_RAIL_EN, 4: NC, 5: SCD_3V3}
+  U_BL1:
+    mpn: STCS05ADR
+    symbol: project_local:STCS05ADR
+    footprint: Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
+    nets: {VCC: SYS_5V, DRAIN: LCD_BL_K, PWM: LCD_BL_PWM, EN: MAIN_RAIL_EN, FB: BL_FB, GND: GND}
+  U_IO1:
+    mpn: MCP23008-xSO
+    symbol: Interface_Expansion:MCP23008-xSO
+    footprint: Package_SO:SOIC-18_3.9x9.9mm_P1.27mm
+    pins: {1: I2C_SCL, 2: I2C_SDA, 3: GND, 4: GND, 5: GND, 6: MCU_EN, 7: NC, 8: NC, 9: GND, 10: BTN_UP_N, 11: BTN_DOWN_N, 12: BTN_SELECT_N, 13: IO_SPARE3, 14: IO_SPARE4, 15: IO_SPARE5, 16: IO_SPARE6, 17: IO_SPARE7, 18: 3V3}
+  U_MCU1:
+    mpn: ESP32-C3-MINI-1-H4X
+    symbol: project_local:ESP32-C3-MINI-1-H4X
+    footprint: project_local:ESP32-C3-MINI-1
+    pads: {3: 3V3, 8: MCU_EN, 12: I2C_SDA, 13: I2C_SCL, 16: LCD_CS, 18: LCD_SCLK, 19: LCD_DC, 20: LCD_MOSI, 21: LCD_RESET, 26: USB_DM_MCU, 27: USB_DP_MCU, 30: EPAPER_BUSY, 31: SERVICE_TX}
+logic:
+  usb_sel_internal: "INT_HOST_PRESENT AND NOT LOCAL_VBUS_PRESENT"
+  usb_mux_truth:
+    '0': USB_LOCAL
+    '1': USB_INTERNAL
+  tps2116_mode: priority
