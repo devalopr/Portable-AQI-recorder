@@ -1,8 +1,0 @@
-{
-  "status": "validated_and_promoted",
-  "authoritative_project": "../../main/AQI_Main.kicad_pro",
-  "drc_violations": 0,
-  "unconnected_items": 0,
-  "schematic_parity_issues": 0,
-  "connected_pins_checked": 339
-}

@@ -1,6 +1,6 @@
 # AQI main board — Rev B
 
-Open `AQI_Main.kicad_pro` in KiCad 10. This board mates with the IP5310 battery board, which now lives in its own private repo, [18650-USB-C-UPS](https://github.com/devalopr/18650-USB-C-UPS). It starts from the routed Rev A board; `../../rev-a/main` is unchanged, and `../main-pwm` (schematic only, still with the GH connector) is superseded.
+Open `AQI_Main.kicad_pro` in KiCad 10. This board mates with the IP5310 battery board, which now lives in its own private repo, [18650-USB-C-UPS](https://github.com/devalopr/18650-USB-C-UPS). It started from the routed Rev A main board, whose design is kept in `review/rev-a-baseline/` as the input to `main_revb_design.py`; the rest of Rev A is in git history.
 
 **47 × 76 mm, two layers, 1.6 mm.** This is 4 mm shorter and 3 mm wider than Rev A, and two layers instead of four. The previous 4-layer, 80 mm version is kept in `review/rev-b-4layer-80mm/` (board, `design.json` and its cost).
 
@@ -119,6 +119,10 @@ The TFT connector (TE 1-84953-0, $0.44) stays: no cheap top-contact 1.0 mm 10-pi
 | 2 | RIGHT button, active low, R4 pull-up |
 | 21 | BAT_PWM input through R34. Use native USB for logs; do not enable UART TX on GPIO21. |
 | 3 | Backlight PWM, now driving a MOSFET gate (R27 pull-down) |
+| 0 | I²C SDA (SEN5x, SEN6x, SCD41) |
+| 1 | I²C SCL |
+| 20 | E-paper BUSY (J6 pin 1), input; also the ROM UART RX |
+| 18, 19 | Native USB D−, D+ (to J1 through R7/R8 and D1) |
 
 GPIO2, 8 and 9 are boot-strap pins. Don't hold LEFT or RIGHT while resetting; OK held at reset is the intended download mode. The buttons need a pull-up at reset, which R2–R4 provide; there's no I2C expander any more.
 
@@ -130,7 +134,7 @@ The 2-layer layout changed the display pins so they leave the module in the TFT 
 | CS | GPIO10 | GPIO4 |
 | SCK | GPIO4 | GPIO5 |
 
-MOSI (GPIO6) and RST (GPIO7) are unchanged. The display SPI goes through the GPIO matrix either way. All other GPIOs are as in Rev A.
+MOSI (GPIO6) and RST (GPIO7) are unchanged. The display SPI goes through the GPIO matrix either way. The table above is the complete pin map.
 
 ## Layout
 
@@ -173,7 +177,7 @@ Two layers. Nearly every part is on the back, so the back carries most signals, 
 - **Results:** ERC 0. DRC with schematic parity: 0 errors, 0 warnings, 0 unconnected, 0 parity issues.
 - **Exports:** `AQI_Main.pdf`, `netlist.xml`, `engineering-bom.csv`, `jlc-bom.csv`, `jlc-cpl.csv`, `COST.md`, `price-snapshot-2026-09-27.json`, `drc.json`, `erc.json`, layer SVGs and renders.
 - **3D renders:** `main-top.png`, `main-bottom.png` and the two angled views. They include the display panel and its flex.
-- `rev-a-baseline/` holds the untouched Rev A board; `rev-b-4layer-80mm/` holds the 4-layer, 80 mm Rev B that the 2-layer layout starts from.
+- `rev-a-baseline/` holds the untouched Rev A board and its `design.json` (the input to `main_revb_design.py`); `rev-b-4layer-80mm/` holds the 4-layer, 80 mm Rev B that the 2-layer layout starts from.
 - `routing/` holds the Freerouting input and output (`AQI_Main.dsn`, `.ses`, logs) and the list of fixed routes.
 
 ## Regenerating
@@ -221,4 +225,9 @@ Hand edits made in KiCad are not captured by the scripts. Once you edit the `.ki
    - for the e-paper build, BUSY on GPIO20 and a driver for the chosen panel.
 6. **USB-C supply and fit.** LCSC had only 2,553 of C49287211 in stock (2026-09-27). The battery board uses two per set, so 1000 sets need 3000. Reserve stock or approve the HRO TYPE-C-31-M-12 as the alternate, which needs a footprint and breakout change. SHOU HAN's drawing is for 0.8 mm boards, so check shell-leg soldering and retention on this 1.6 mm board. The battery board has the same open check. In JLC's placement preview, confirm J1's rotation: its footprint comes from the EasyEDA catalogue.
 7. **Pricing.** Get a real JLCPCB quote. The cost uses catalogue tiers and published assembly rates, not a quotation.
-8. Rev A items 1 and 3–6 in `../../rev-a/README.md` still apply: enclosure, USB current, sensor/CO₂ and display validation.
+8. **Carried over from Rev A:**
+   - Finish the enclosure CAD: TFT flex bend radius, connector latch access, button caps and travel, PCB retention on the lips, sensor airflow. Support the CO₂ island without a conductive metal bridge.
+   - Standalone sensing needs a suitable 5 V supply (start with a 1 A or larger adapter); the board does not detect Type-C advertised current.
+   - Check MLCC effective capacitance under DC bias for the fitted parts.
+   - Validate the CO₂ temperature offset with Wi-Fi, the display and the PM sensor running; couple the CO₂ opening to ambient air and shield it from PM fan turbulence.
+   - Validate USB signal quality, regulator transients and backlight PWM on the built board.

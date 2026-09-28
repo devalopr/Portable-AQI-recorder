@@ -13,3 +13,6 @@ __pycache__/
 *.pyc
 *.step.glb
 hardware/**/*.zip
+
+# macOS
+.DS_Store

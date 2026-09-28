@@ -1,255 +1,34 @@
-# Portable AQI Recorder
+# Portable AQI Recorder — V3 (custom PCB)
 
-![Device UI](assets/ui_4x_resolution.png)
+A handheld air-quality recorder on a custom main board: an ESP32-C3-MINI-1 module reads a Sensirion SEN5x or SEN6x particulate sensor and an optional SCD41 CO₂ sensor, shows readings on a 2.4" ST7789 TFT with three buttons, and has Wi-Fi and BLE on the module.
 
-A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and a **Sensirion SEN5x** environmental sensor. The firmware **auto-detects** which sensor variant is connected — **SEN50**, **SEN54**, or **SEN55** — and adapts accordingly. View and record real-time readings in the included Web Bluetooth app.
+This branch holds the **V3 main PCB only**. Everything else lives elsewhere:
 
-## V3: custom PCB
-
-This branch (V3) replaces the Super Mini breadboard build with a custom main board: an ESP32-C3-MINI-1 module, SEN5x and SEN6x connectors, an optional SCD41 CO₂ sensor, a 2.4" ST7789 TFT and three buttons on a 47 × 76 mm two-layer PCB. An e-paper display can be fitted instead of the TFT through an external adapter.
-
-- **Main board:** [hardware/rev-b/main](hardware/rev-b/main/README.md) (KiCad 10). The pin map differs from the Super Mini wiring below; see that README.
-- **Battery board:** the 18650 USB-C power board is now a separate product in its own repo, [18650-USB-C-UPS](https://github.com/devalopr/18650-USB-C-UPS). The main board takes power and USB data from it through USB-C and reads the battery charge as PWM on J2.
-- **Earlier designs:** [hardware/rev-a](hardware/rev-a/README.md), and the older battery boards and the 4-layer main board in [hardware/rev-b](hardware/rev-b/README.md), are kept for history.
-
-The Super Mini build without a PCB is on the [V2 branch](https://github.com/devalopr/Portable-AQI-recorder/tree/V2); the rest of this README describes that firmware and wiring.
-
-## Features
-
-- **Real-time PM monitoring** — PM1.0, PM2.5, PM4.0, PM10.0 (µg/m³)
-- **Environmental data** (SEN54/SEN55) — Humidity, Temperature, VOC Index
-- **NOx monitoring** (SEN55) — NOx Index
-- **US EPA AQI calculation** — computed from PM2.5 & PM10, printed to serial
-- **BLE streaming** — connect with the included Web Bluetooth recorder app
-- **Auto-detection** — firmware identifies SEN50/SEN54/SEN55 at boot, no code changes needed
-- **Data logging** — record, chart, and export CSV data from the web app
-- **Tiny form factor** — ESP32-C3 Super Mini is just 22×18 mm
-
-### Sensor Comparison
-
-| Measurement | SEN50 | SEN54 | SEN55 |
-|---|:---:|:---:|:---:|
-| PM1.0 / PM2.5 / PM4.0 / PM10.0 | ✅ | ✅ | ✅ |
-| Humidity (RH%) | — | ✅ | ✅ |
-| Temperature (°C) | — | ✅ | ✅ |
-| VOC Index | — | ✅ | ✅ |
-| NOx Index | — | — | ✅ |
-
----
-
-## Hardware
-
-| Component | Description |
+| What | Where |
 |---|---|
-| **ESP32-C3 Super Mini** | Microcontroller with BLE & Wi-Fi |
-| **Sensirion SEN50 / SEN54 / SEN55** | Environmental sensor module (auto-detected) |
-| **ST7789 2.4" TFT Display** | SPI display for real-time visualization |
-| **4x Push Buttons** | Navigation controls (Up, Down, Select, Record) |
+| ESP32-C3 Super Mini build without a PCB: firmware, Web Bluetooth app, wiring | [V2 branch](https://github.com/devalopr/Portable-AQI-recorder/tree/V2) |
+| 18650 battery board (IP5310, USB-C in/out, battery % over PWM) | Separate product: [18650-USB-C-UPS](https://github.com/devalopr/18650-USB-C-UPS) (private) |
+| Rev A boards and earlier design history | Git history of this branch (commit `34dd5cf`) |
 
-### Wiring
+## Main board (Rev B)
 
-#### SEN5x Environmental Sensor
+**[hardware/rev-b/main](hardware/rev-b/main/README.md)** — KiCad 10 project, 47 × 76 mm, two layers, fully routed. Start with its README: layout, pin map, connectors, cost, checks and open items before fabrication.
 
-All three SEN5x variants use the **same pinout and connector** — just swap the sensor module.
+- **Display:** 2.4" 240 × 320 ST7789 TFT on the front, with the three buttons below it. An e-paper display can be fitted instead through an external adapter on J6.
+- **Sensors:** SEN5x and SEN6x connectors (fit one PM module) and a CO₂ island for an optional SCD41, soldered by hand later.
+- **Power and data:** USB-C J1 is the only input. It takes 5 V and USB data from the battery board's USB-C output, or straight from a charger or computer. Battery % arrives as PWM on J2.
+- **Cost:** about $4.63 per board at 1000 (parts, 2-layer fabrication and JLC assembly); see [review/COST.md](hardware/rev-b/main/review/COST.md).
 
-| ESP32-C3 Super Mini | SEN5x (JST connector) |
+## Repository layout
+
+| Path | Contents |
 |---|---|
-| GPIO 8 (SDA) | Pin 3 — SDA |
-| GPIO 9 (SCL) | Pin 4 — SCL |
-| GND | Pin 2 — GND |
-| 5V | Pin 1 — VDD |
+| [hardware/rev-b/main](hardware/rev-b/main/README.md) | Schematic, PCB, libraries and 3D models; `review/` has the BOM, placement file, PDF, renders, DRC/ERC reports and routing files. |
+| [hardware/rev-b/scripts](hardware/rev-b/scripts) | Python/shell pipeline that generates the schematic and places, routes and checks the board (see "Regenerating" in the main README). |
+| [hardware/rev-b/firmware/telemetry](hardware/rev-b/firmware/telemetry/README.md) | ESP32 receiver for the battery board's battery-% PWM signal. |
+| [hardware/rev-b/references](hardware/rev-b/references) | Datasheets for parts on this board. |
+| [hardware/design-brief.md](hardware/design-brief.md) | The original product brief the boards were designed from. |
 
-> [!IMPORTANT]
-> The SEN5x sensors **require 5V** for the internal fan. Power from a 5V source (e.g. USB VBUS), not the ESP32's 3.3V output. The I2C lines are 3.3V tolerant — no level shifter needed.
+## Firmware
 
-#### SEN5x Connector Pinout
-
-Pin numbers below follow Sensirion's connector drawing; do not infer numbering from a cable's viewing direction or wire colors. See the [SEN5x datasheet, Table 11](https://sensirion.com/resource/datasheet/sen5x).
-
-```text
-Pin 1 — VDD  (5V)
-Pin 2 — GND
-Pin 3 — SDA
-Pin 4 — SCL
-Pin 5 — SEL (tie to GND before or at power-up for I2C)
-Pin 6 — NC
-```
-
-These are SEN5x connections. SEN6x requires a 3.3V supply and has different functions on pins 5 and 6; it must not be plugged into this 5V connection.
-
-#### ST7789 2.4" SPI TFT Display (10-Pin Version)
-
-| ESP32-C3 Super Mini | ST7789 Display Pin |
-|---|---|
-| GND | 1 — GND |
-| GPIO 0 | 2 — DC / RS |
-| GPIO 7 | 3 — CS |
-| GPIO 4 | 4 — SCL |
-| GPIO 6 | 5 — SDA / MOSI |
-| GPIO 1 | 6 — RST |
-| 3.3V | 7 — VCC |
-| GND | 8 — GND |
-| 3.3V | 9 — Anode (A) |
-| GND | 10 — Cathode (K) |
-
-#### Navigation Buttons
-
-Wire each push button between the specified ESP32-C3 GPIO pin and **GND**. The firmware uses internal pull-up resistors.
-
-| ESP32-C3 Super Mini | Button Function |
-|---|---|
-| GPIO 20 | Up |
-| GPIO 21 | Down |
-| GPIO 5 | Select |
-| GPIO 3 | Record |
-
----
-
-## Software Setup
-
-### Prerequisites
-
-1. **PlatformIO** — Install the [PlatformIO IDE extension](https://platformio.org/install/ide?install=vscode) in VS Code, or install the [PlatformIO CLI](https://docs.platformio.org/en/latest/core/installation.html).
-
-2. **Chrome or Edge** — Web Bluetooth is required for the browser recorder.
-   > [!WARNING]
-   > If you are using **Brave Browser**, Web Bluetooth is disabled by default for privacy reasons. To use the app in Brave, you must enable "Web Bluetooth" in `brave://settings/privacy`.
-
-### Build & Upload
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/devalopr/Portable-AQI-recorder-.git
-   cd Portable-AQI-recorder
-   ```
-
-2. **Build the firmware**
-   ```bash
-   pio run
-   ```
-   > If `pio` isn't in your PATH, use the full path:
-   > `C:\Users\<YOU>\.platformio\penv\Scripts\pio.exe run`
-
-3. **Upload to ESP32-C3**
-   
-   Connect the ESP32-C3 Super Mini via USB-C, then:
-   ```bash
-   pio run -t upload
-   ```
-
-4. **Monitor serial output** (optional)
-   ```bash
-   pio device monitor
-   ```
-
-   **SEN50 output:**
-   ```
-   Detected: SEN50 (PM only)
-   PM1.0: 5.20   PM2.5: 8.10   PM4.0: 9.30   PM10.0: 10.50   | AQI(PM2.5): 34  AQI(PM10): 10  => AQI: 34 [Good]
-   ```
-
-   **SEN55 output:**
-   ```
-   Detected: SEN55 (PM + T/RH + VOC + NOx)
-   PM1.0: 5.20   PM2.5: 8.10   PM4.0: 9.30   PM10.0: 10.50   RH: 45.2%   T: 24.3°C   VOC: 102   NOx: 5   | AQI(PM2.5): 34  AQI(PM10): 10  => AQI: 34 [Good]
-   ```
-
----
-
-## Web BLE Recorder
-
-This repository includes a browser app in `web/` for live viewing and recording from the AQI recorder over BLE. The ESP32 advertises as `AQI Recorder`.
-
-### Features
-
-- Live cards for AQI, PM1.0, PM2.5, PM4.0, PM10, humidity, temperature, VOC, and NOx
-- Light and dark mode
-- Local recording in the browser while connected
-- Multi-series charting for any available field over time
-- Recent sample table and CSV export
-
-### Run Locally
-
-Web Bluetooth requires a secure browser context. `localhost` is treated as secure by Chromium-based browsers.
-
-Double-click `AQI Recorder.app` in this project folder, or run:
-
-```bash
-python3 -m http.server 8080 --directory web
-```
-
-Then open [http://localhost:8080](http://localhost:8080) in Chrome or Edge, click **Connect**, and choose `AQI Recorder`.
-*(Note: If using Brave, ensure Web Bluetooth is enabled in `brave://settings/privacy`!)*
-
-The firmware exposes this Web Bluetooth service:
-
-| Item | UUID |
-|---|---|
-| Web AQI Service | `7b46a200-fd8a-4a28-8f4b-4b3e7c4f0001` |
-| Live Sample Characteristic | `7b46a201-fd8a-4a28-8f4b-4b3e7c4f0001` |
-| Status Characteristic | `7b46a202-fd8a-4a28-8f4b-4b3e7c4f0001` |
-
----
-
-## AQI Reference
-
-The firmware calculates the **US EPA Air Quality Index** from PM2.5 and PM10. The overall AQI is the higher of the two sub-indices.
-
-PM2.5 is truncated to one decimal place and PM10 to whole µg/m³ before conversion. Above AQI 500, both pollutants continue the slope of their 301–500 band, following [EPA guidance](https://document.airnow.gov/technical-assistance-document-for-the-reporting-of-daily-air-quailty.pdf). For example, PM2.5 575.9 µg/m³ produces AQI 999, and 1000 µg/m³ produces AQI 1844. The display shows values above 999 in thousands (`1.0K`, `1.1K`, `1.5K`); BLE and recordings retain the full integer (up to 65535). This is an instantaneous concentration-derived index, not a daily average or NowCast.
-
-Run `python3 scripts/test_aqi.py` for host regression checks and `pio run` to build the firmware.
-
-| AQI Range | Category | Color |
-|---|---|---|
-| 0 – 50 | Good | 🟢 Green |
-| 51 – 100 | Moderate | 🟡 Yellow |
-| 101 – 150 | Unhealthy for Sensitive Groups | 🟠 Orange |
-| 151 – 200 | Unhealthy | 🔴 Red |
-| 201 – 300 | Very Unhealthy | 🟣 Purple |
-| 301 – 500 | Hazardous | 🟤 Maroon |
-
----
-
-## Project Structure
-
-```
-Portable-AQI-recorder-/
-├── assets/               # UI mockups and images
-├── scripts/              # Python testing/utility scripts
-├── tools/                # Font generation tools
-├── src/                  # Main C++ firmware (sensor + BLE + AQI)
-├── AQI Recorder.app      # Double-click launcher for the web app
-├── web/                  # Web Bluetooth recorder app
-├── platformio.ini        # PlatformIO configuration
-└── README.md             # This file
-```
-
-## Dependencies
-
-All dependencies are managed automatically by PlatformIO:
-
-| Library | Version | Purpose |
-|---|---|---|
-| Sensirion I2C SEN5X | ^0.3.0 | I2C driver for SEN50/SEN54/SEN55 sensors |
-| NimBLE-Arduino | ^1.4.1 | Lightweight BLE stack for ESP32 |
-
----
-
-## Troubleshooting
-
-| Problem | Solution |
-|---|---|
-| `pio` not found | Use full path `~/.platformio/penv/Scripts/pio.exe` or add it to PATH |
-| Serial shows no output | Wait 2–3 seconds after reset; check baud rate is **115200** |
-| All PM values are 0.00 | SEN5x fan needs ~10 seconds warm-up after startup |
-| BLE device not visible | Re-check wiring; ensure SEN5x has 5V power |
-| Web app cannot pair in Brave | Brave disables Web Bluetooth by default. Enable it via `brave://settings/privacy` |
-| Upload fails | Hold BOOT button on ESP32-C3, click upload, release BOOT after "Connecting..." |
-| VOC/NOx shows "n/a" | Normal for the first ~10 seconds after boot; wait for sensor warm-up |
-| Wrong sensor detected | Check I2C wiring; try power-cycling the sensor |
-
----
-
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
+There is no firmware for the V3 board yet. The Super Mini firmware on the V2 branch is the starting point; its pin map differs from this board's (see the main README's firmware pin map), and it needs the SEN6x/SCD41 drivers, three-button handling and battery-% input added.

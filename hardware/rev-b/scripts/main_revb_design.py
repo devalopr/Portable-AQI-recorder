@@ -1,6 +1,6 @@
 """Rev B main board: USB-C is the only power/data input; battery % arrives as PWM on a Dupont header.
 
-Starts from the routed Rev A design (copied into ../main) and edits design.json, then regenerates
+Starts from the routed Rev A design (kept in ../main/review/rev-a-baseline) and edits design.json, then regenerates
 the schematic. The PCB is revised separately by main_revb_board.py so Rev A routing is preserved.
 """
 from pathlib import Path
@@ -8,7 +8,7 @@ import json, copy
 from kicad_common import Project
 
 root = Path(__file__).resolve().parents[1]
-src = root.parent / 'rev-a/main/design.json'
+src = root / 'main/review/rev-a-baseline/design.json'     # the routed Rev A design this revision starts from
 out = root / 'main'
 d = json.loads(src.read_text())
 C = {c['ref']: c for c in d['components']}

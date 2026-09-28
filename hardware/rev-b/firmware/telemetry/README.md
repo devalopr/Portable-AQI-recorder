@@ -21,16 +21,7 @@ Decode `percent = (high_time / period - 0.1) / 0.8 * 100`. No transitions means 
 ## Firmware
 
 - `battery_pwm.h`: shared encoding/decoding, no framework dependency.
-- `battery_pwm_ch32.c`: PC1 output using TIM2 update/compare interrupts, 1MHz timer count. Call `battery_pwm_init(actual_TIM2_clock_hz)` once, then `battery_pwm_submit(percent, valid)` at least once per second from the battery estimator. It releases the output after two seconds without an update. Use `valid=false` for unavailable/invalid measurements. Calls must originate in the main loop, not a higher-priority interrupt.
-- WCH project interrupt wrapper:
-
-```c
-void TIM2_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
-void TIM2_IRQHandler(void) { battery_pwm_tim2_irq(); }
-```
-
-Use WCH's CH32V003 SDK, correct startup/linker script and RV32EC toolchain. TIM2 is reserved for telemetry. Do not block interrupts for long periods. Driver API/type syntax was checked against the official WCH SDK; it has **not** been linked into a CH32 image or flashed. The battery ADC estimator/RGB application integration remains pending; this module does not implement charging or the estimator itself.
-
+- The CH32V003 transmitter (`battery_pwm_ch32.c`) is battery-board firmware and lives in the [18650-USB-C-UPS](https://github.com/devalopr/18650-USB-C-UPS) repo (`firmware/telemetry`), which has the full copy of this interface.
 - `BatteryPwmReader.h/.cpp`: ESP32 Arduino receiver using a GPIO edge interrupt, no busy-wait pulse reads.
 - `receiver_example.cpp` and `platformio.ini`: standalone GPIO21/USB diagnostic example, successfully built for ESP32-C3 using Arduino-ESP32 2.0.14. This example is not the AQI application and should not replace it wholesale.
 
