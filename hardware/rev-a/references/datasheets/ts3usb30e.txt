@@ -1,0 +1,1137 @@
+TS3USB30E ESD-Protected, High-Speed USB 2.0 (480Mbps)
+1:2 Multiplexer/Demultiplexer Switch With Single Enable
+1 Features
+• VCC operation at 2.7V to 4.3V
+• D+/D– pins tolerate up to 5.25V
+• 1.8V compatible control-pin inputs
+• IOFF supports partial power-down-mode operation
+• RON = 10Ω maximum
+• ΔRON = 0.35Ω typical
+• Cio(ON) = 7.5pF typical
+• Low power consumption (70nA maximum)
+• –3dB bandwidth = 1400MHz typical
+• Latch-up performance exceeds
+100mA per JESD 78, Class II 1
+• ESD performance tested per JESD 22
+– 8000V human-body model
+(A114-B, Class II)
+– 1000V charged-device model (C101)
+• ESD performance I/O port to GND 2
+– 15000V human-body model
+• Packaged in 10-pin UQFN (1.8mm × 1.4mm)
+2 Applications
+• Routes Signals for USB 1.0, 1.1, and 2.0
+• Multi-Purpose Signal Switching
+• Portable Electronics
+• Industrial
+• Consumer Products
+3 Description
+The TS3USB30E is a high-bandwidth 1:2 switch 
+specially designed for the switching of high-speed 
+USB 2.0 signals in handset and consumer 
+applications, such as cell phones, digital cameras, 
+and notebooks with hubs or controllers with limited 
+USB I/Os. The wide bandwidth ( 1400MHz) of this 
+switch allows signals to pass with minimum edge and 
+phase distortion. The device multiplexes differential 
+outputs from a USB host device to one of two 
+corresponding outputs, or from two different hosts to 
+one corresponding output. The switch is bidirectional 
+and offers little or no attenuation of the high-speed 
+signals at the outputs. The TS3USB30E is designed 
+for low bit-to-bit skew and high channel-to-channel 
+noise isolation, and is compatible with various 
+standards, such as high-speed USB 2.0 (480Mbps).
+The TS3USB30E integrates ESD protection cells on 
+all pins, is available in a tiny UQFN package (1.8mm 
+× 1.4mm) or a VSSOP package, and is characterized 
+over the free-air temperature range of –40°C to 85°C.
+Package Information
+PART NUMBER PACKAGE(1) PACKAGE SIZE(2)
+TS3USB30E
+DGS (VSSOP, 10) 3mm × 4.9mm
+RSW (UQFN, 10) 1.8mm × 1.4mm
+(1) For all available packages, see Section 11.
+(2) The package size (length × width) is a nominal value and 
+includes pins, where applicable.
+D1+
+D1–
+D2+
+D2–
+Control
+D+
+D–
+S
+OE
+Functional Block Diagram
+1 Except OE and S inputs
+2 High-voltage HBM is performed in addition to the standard HBM testing (A114-B, Class II) and applies to I/O ports tested with respect 
+to GND only.
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications, 
+intellectual property matters and other important disclaimers. PRODUCTION DATA.
+Table of Contents
+1 Features............................................................................1
+2 Applications.....................................................................1
+3 Description.......................................................................1
+4 Pin Configuration and Functions...................................3
+5 Specifications.................................................................. 4
+5.1 Absolute Maximum Ratings........................................ 4
+5.2 ESD Ratings............................................................... 4
+5.3 Recommended Operating Conditions.........................4
+5.4 Thermal Information....................................................4
+5.5 Electrical Characteristics.............................................5
+5.6 Dynamic Electrical Characteristics..............................5
+5.7 Switching Characteristics............................................5
+5.8 Typical Characteristics................................................7
+6 Parameter Measurement Information............................8
+7 Detailed Description......................................................12
+7.1 Overview...................................................................12
+7.2 Functional Block Diagram.........................................12
+7.3 Feature Description...................................................12
+7.4 Device Functional Modes..........................................12
+8 Application and Implementation..................................13
+8.1 Application Information............................................. 13
+8.2 Typical Application.................................................... 13
+8.3 Power Supply Recommendations.............................14
+8.4 Layout....................................................................... 14
+9 Device and Documentation Support............................16
+9.1 Documentation Support............................................ 16
+9.2 Receiving Notification of Documentation Updates....16
+9.3 Support Resources................................................... 16
+9.4 Trademarks...............................................................16
+9.5 Electrostatic Discharge Caution................................16
+9.6 Glossary....................................................................16
+10 Revision History.......................................................... 16
+11 Mechanical, Packaging, and Orderable 
+Information.................................................................... 17
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+2 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+4 Pin Configuration and Functions
+1D1+
+2D2+
+3D+
+4GND
+5D-
+6 D2 ±
+7 D1 ±
+8 OE
+9 VCC
+10 S
+Not to scale
+Figure 4-1. RSW Package 10-Pin UQFN Top View 
+1S 10  VCC
+2D1+ 9  OE
+3D2+ 8  D1 ±
+4D+ 7  D2 ±
+5GND 6  D-
+Not to scale
+Figure 4-2. DGS Package 10-Pin VSSOP Top View 
+Table 4-1. Pin Functions
+PIN
+I/O DESCRIPTION
+NAME UQFN VSSOP
+D+ 3 4 I/O
+Common USB signal path
+D– 5 6 I/O
+D1+ 1 2 I/O
+USB signal path port 1
+D1– 7 8 I/O
+D2+ 2 3 I/O
+USB signal path port 2
+D2– 6 7 I/O
+GND 4 5 — Ground
+OE 8 9 I Bus-switch enable
+S 10 1 I Select input
+VCC 9 10 — Voltage supply
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 3
+Product Folder Links: TS3USB30E
+5 Specifications
+5.1 Absolute Maximum Ratings
+over operating free-air temperature range (unless otherwise noted) (see (1) (2))
+MIN MAX UNIT
+VCC Supply voltage  –0.5 7 V
+VIN Control input voltage –0.5 7 V
+VI/O Signal path I/O voltage (3) D+, D– when VCC > 0V –0.5 VCC + 0.3
+V
+D+, D– when VCC = 0V –0.5 5.25
+IIK Control input clamp current VIN < 0V –50 mA
+II/OK I/O port clamp current VI/O < 0V –50 mA
+II/O ON-state switch current(4) ±64 mA
+Continuous current through VCC or GND ±100 mA
+Tstg Storage temperature –65 150 °C
+(1) Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress 
+ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under 
+Recommended Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device 
+reliability.
+(2) All voltages are with respect to ground, unless otherwise specified.
+(3) VI and VO are used to denote specific conditions for VI/O.
+(4) II and IO are used to denote specific conditions for II/O.
+5.2 ESD Ratings
+VALUE UNIT
+V(ESD) Electrostatic discharge
+Human body model (HBM),
+per ANSI/ESDA/JEDEC JS-001(1)
+All pins 8000 V
+I/O port to GND 15000 V
+Charged-device model (CDM), per ANSI/ESDA/JEDEC JS-002 (2) 1000 V
+(1) JEDEC document JEP155 states that 500V HBM allows safe manufacturing with a standard ESD control process.
+(2) JEDEC document JEP157 states that 250V CDM allows safe manufacturing with a standard ESD control process.
+5.3 Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)  (1).
+MIN MAX UNIT
+VCC Supply voltage 3 4.3 V
+VIH High-level control input voltage
+VCC = 3V to 3.6V 1.3 VCC
+V
+VCC = 4.3V 1.7 VCC
+VIL Low-level control input voltage
+VCC = 3V to 3.6V 0 0.5
+V
+VCC = 4.3V 0 0.7
+VI/O Data input/output voltage 0 VCC V
+TA Operating free-air temperature –40 85 °C
+(1) All unused control inputs of the device must be held at VCC or GND to ensure proper device operation. Refer to Implications of Slow or 
+Floating CMOS Inputs.
+5.4 Thermal Information
+THERMAL METRIC(1)
+Device
+UNITDGS (VSSOP) RSW (UQFN)
+10 PINS 10 PINS
+RθJA Junction-to-ambient thermal resistance 203.1 114.5 °C/W
+RθJC(top) Junction-to-case (top) thermal resistance 88.7 64.7 °C/W
+RθJB Junction-to-board thermal resistance 123.0 21.0 °C/W
+ψJT Junction-to-top characterization parameter 21.2 1.9 °C/W
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+4 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+THERMAL METRIC(1)
+Device
+UNITDGS (VSSOP) RSW (UQFN)
+10 PINS 10 PINS
+ψJB Junction-to-board characterization parameter 121.6 21.0 °C/W
+(1) For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application 
+report.
+5.5 Electrical Characteristics
+over operating free-air temperature range (unless otherwise noted)(1)
+PARAMETER TEST CONDITIONS MIN TYP(2) MAX UNIT
+VIK Control inputs clamp voltage VCC = 3V, II = –18mA –1.2 V
+IIN Control inputs VCC = 4.3V, 0V, VIN = 0V to 4.3V ±1 μA
+IOZ D+ and D– OFF-state leakage current(3) VCC = 4.3V, VO = 0V to 3.6V, VI = 0V,
+Switch OFF ±1 μA
+IOFF Powered off leakage current VCC = 0V, VO = 0V to 4.3V, VI = 0V,
+VIN = VCC or GND ±2 μA
+ICC Supply current VCC = 4.3V, II/O = 0mA,
+Switch ON or OFF 1 μA
+ΔICC (4) Control inputs VCC = 4.3V, VIN = 2.6V 10 μA
+Cin Control inputs digital input capacitance VCC = 0V,
+VIN = VCC or GND 1 pF
+Cio(OFF) OFF-state input capacitance VCC = 3.3V, VI/O = 3.3V or 0V,
+Switch OFF 2 pF
+Cio(ON) ON-state input capacitance VCC = 3.3V, VI/O = 3.3V or 0V,
+Switch ON 7.5 pF
+RON ON-state resistance(5) VCC = 3V, VI = 0.4V, IO = –8mA 6 10 Ω
+ΔRON ON-state resistance match between channels VCC = 3V, VI = 0.4V, IO = –8mA 0.35 Ω
+ron(flat) ON-state resistance flatness VCC = 3V, VI = 0V or 1V, IO = –8mA 2 Ω
+(1) VIN and IIN refer to control inputs. VI, VO, II, and IO refer to data pins.
+(2) All typical values are at VCC = 3.3V (unless otherwise noted), TA = 25°C.
+(3) For I/O ports, the parameter IOZ includes the input leakage current.
+(4) This is the increase in supply current for each input that is at the specified TTL voltage level, rather than VCC or GND.
+(5) Measured by the voltage drop between the A and B terminals at the indicated current through the switch. ON-state resistance is 
+determined by the lower of the voltages of the two (A or B) terminals.
+5.6 Dynamic Electrical Characteristics
+over operating range, TA = –40°C to 85°C, VCC = 3.3V ±10%, GND = 0V
+PARAMETER TEST CONDITIONS TYP(1) UNIT
+XTALK Crosstalk   RL = 50Ω, f = 240MHz, See Figure 6-3 –32 dB
+OISO OFF isolation RL = 50Ω, f = 240MHz, See Figure 6-2 –32 dB
+BW Bandwidth (–3 dB) RL = 50Ω, See Figure 6-4 1400 MHz
+(1) For minimum or maximum conditions, use the appropriate value specified under Electrical Characterisics for the applicable device 
+type.
+5.7 Switching Characteristics
+over operating range, TA = –40°C to 85°C, VCC = 3.3V ±10%, GND = 0V
+PARAMETER TEST CONDITIONS MIN TYP(1) MAX UNIT
+tpd Propagation delay(2) (3) RL = 50Ω, CL = 5pF, At 480Mbps, 
+See Figure 6-5 0.25 ns
+tON Line enable time, SEL to D, nD RL = 50Ω, CL = 5pF,
+See Figure 6-1 30 ns
+tOFF Line disable time, SEL to D, nD RL = 50Ω, CL = 5pF,
+See Figure 6-1 25 ns
+tON Line enable time, OE to D, nD RL = 50Ω, CL = 5pF,
+See Figure 6-1 30 ns
+tOFF Line disable time, OE to D, nD RL = 50Ω, CL = 5pF,
+See Figure 6-1 25 ns
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 5
+Product Folder Links: TS3USB30E
+over operating range, TA = –40°C to 85°C, VCC = 3.3V ±10%, GND = 0V
+PARAMETER TEST CONDITIONS MIN TYP(1) MAX UNIT
+tSK(O) Output skew between center port to any other port(2) RL = 50Ω, CL = 5pF,
+See Figure 6-6 50 ps
+tSK(P)
+Skew between opposite transitions of the same output
+(tPHL – tPLH)(2)
+RL = 50Ω, CL = 5pF,
+See Figure 6-6 20 ps
+tJ Total jitter(2)
+RL = 50Ω, CL = 5pF,
+tR = tF = 500ps at 480Mbps (PRBS 
+= 215 – 1)
+20 ps
+(1) For minimum or maximum conditions, use the appropriate value specified under Electrical Characteristics for the applicable device 
+type.
+(2) Specified by design
+(3) The bus switch contributes no propagational delay other than the RC delay of the on resistance of the switch and the load capacitance. 
+The time constant for the switch alone is of the order of 0.25ns for 10pF load. Since this time constant is much smaller than the rise/fall 
+times of typical driving signals, bus switch adds very little propagational delay to the system. Propagational delay of the bus switch, 
+when used in a system, is determined by the driving circuit on the driving side of the switch and its interactions with the load on the 
+driven side.
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+6 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+5.8 Typical Characteristics
+F r e q u e n c y  ( H z )
+Gain (dB)
+5 E + 7 1 E + 8 1 E + 9 1 E + 1 0
+- 2 5
+- 2 0
+- 1 5
+- 1 0
+- 5
+0
+Figure 5-1. Gain vs Frequency
+F r e q u e n c y  ( H z )
+Gain (dB)
+5 E + 7 1 E + 8 1 E + 9 1 E + 1 0
+- 5 0
+- 4 5
+- 4 0
+- 3 5
+- 3 0
+- 2 5
+- 2 0
+- 1 5
+- 1 0
+- 5
+0 Figure 5-2. OFF Isolation
+F r e q u e n c y  ( H z )
+Gain (dB)
+5 E + 7 1 E + 8 1 E + 9 1 E + 1 0
+- 5 0
+- 4 5
+- 4 0
+- 3 5
+- 3 0
+- 2 5
+- 2 0
+- 1 5
+- 1 0
+- 5
+0
+Figure 5-3. Crosstalk
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 7
+Product Folder Links: TS3USB30E
+6 Parameter Measurement Information
+CL(2) RL
+VIN
+VCC
+GND
+1D or 2D VOUT1
+1D or 2D
+D
+VCC
+VIN
+50 Ω
+RL CL
+5 pFtON
+TEST
+VCC50 Ω 5 pFtOFF
+50%
+tON tOFF
+50%
+90% 90%
+Logic
+Input
+(VSEL or VOE)
+1.8 V
+Switch
+Output
+(VOUT1 or VOUT2)
+0
+CL(2) RL
+VOH
+VOL
+OE
+VOUT2
+VOE(1)
+VSEL(1)
+S
+A. All input pulses are supplied by generators having the following characteristics: PRR ≤ 10MHz, ZO = 50Ω, tr < 5ns, tf < 5ns.
+B. CL includes probe and jig capacitance.
+Figure 6-1. Turn-On (tON) and Turn-Off Time (tOFF)
+1D2DDVOUT1 VINChannel OFF: 1D to DNetworkAnalyzer SetupSource Power = 0dBm(632mV P-Pat 50load)DC Bias = 350mV
+VCC
+GND
+NetworkAnalyzerSourceSignalVSEL+ VSEL= VCCS50Ω
+50Ω Ω
+Figure 6-2. OFF Isolation (OISO)
+1D2DVOUT1 VINChannel ON: 1D to DNetworkAnalyzer SetupSource Power = 0dBm(632mV P-Pat 50load)DC Bias = 350mV
+VCC
+GNDVOUT2SourceSignal Channel OFF: 2D to DNetworkAnalyzer
+VSEL+ VSEL= VCCS50Ω50Ω 50Ω ΩD
+Figure 6-3. Crosstalk (XTALK)
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+8 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+VCC
+GND
+1D
+VSEL
+2D
+D
+50 VOUT1
+VIN
+Channel ON: 1D to D
+Network Analyzer Setup
+Source Power = 0 dBm
+(632-mV P-P at 50-Ω load)
+DC Bias = 350 mV
+Network Analyzer
+Source
+Signal
+VCTRL = GND
+S
+GND
+Ω
+50Ω
+Figure 6-4. Bandwidth (BW)
+400 mV
+Figure 6-5. Propagation Delay
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 9
+Product Folder Links: TS3USB30E
+Pulse Skew tSK(P)
+Output Skew tSK(P)
+VOL
+VOH
+VOH
+VOL
+VOH
+VOL
+Figure 6-6. Skew Test
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+10 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+VCC
+IIN
+ron
+VIN VOUT2 or VOUT1
+IIN
+GND
+Channel ON
+1D
+VSEL
+2D
+D VIN
+VSEL = VIH or VIL
+VOUT2
+VOUT1
++
++
+S
+Figure 6-7. ON-State Resistance (RON)
+Channel OFF
+OFF-State Leakage Current
+VSEL = VIH or VIL
+VCC
+GND
+1D
+VSEL
+2D
+D VIN
+VOUT2
+VOUT1
++
++
++
+S
+Figure 6-8. OFF-State Leakage Current
+VCC
+GND
+VBIAS
+VSEL
+VSEL = VCC or GND
+VBIAS = VCC or GND
+Capacitance is measured at 1D,
+2D, D, and S inputs during ON
+and OFF conditions.
+Capacitance
+Meter
+VIN
+VOUT2
+VOUT1
+D
+2D
+1D
+S
+Figure 6-9. Capacitance
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 11
+Product Folder Links: TS3USB30E
+7 Detailed Description
+7.1 Overview
+The TS3USB30E is a high-bandwidth switch specially designed for the switching and isolating of high-speed 
+USB 2.0 signals in systems with limited USB I/Os. The wide bandwidth ( 1400MHz) of this switch allows signals 
+to pass with minimum edge and phase distortion. The device multiplexes differential outputs from a USB host 
+device to one of two corresponding outputs or from two different hosts to one corresponding output. The switch 
+is bidirectional and offers little or no attenuation of the high-speed signals at the outputs. The switch is designed 
+for low bit-to-bit skew and high channel-to-channel noise isolation, and is compatible with various standards such 
+as high-speed USB 2.0 (480Mbps).
+7.2 Functional Block Diagram
+D1+
+D1–
+D2+
+D2–
+Control
+D+
+D–
+S
+OE
+7.3 Feature Description
+The TS3USB30E has a bus-switch enable pin OE that can place the signal paths in high impedance. This allows 
+the user to isolate the bus when the bus is not in use to consume less current.
+7.4 Device Functional Modes
+The device functional modes are shown in Table 7-1.
+Table 7-1. Truth Table
+S OE FUNCTION
+X H Disconnect
+L L D = D1
+H L D = D2
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+12 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+8 Application and Implementation
+Note
+Information in the following applications sections is not part of the TI component specification, 
+and TI does not warrant its accuracy or completeness. TI’s customers are responsible for 
+determining suitability of components for their purposes, as well as validating and testing their design 
+implementation to confirm system functionality.
+8.1 Application Information
+There are many USB applications in which the USB hubs or controllers have a limited number of USB I/Os. The 
+TS3USB30E solution can effectively expand the limited USB I/Os by switching between multiple USB buses to a 
+single USB hub or controller. The TS3USB30E can also be used to connect a single USB controller to two USB 
+connectors or controllers.
+8.2 Typical Application
+USB
+Connector
+Set□Top□Box
+(STB)□CPU
+or□DSP
+Processor
+USB2.0
+Controller
+DVR□or
+Mass□Storage
+Controller
+TS3USB30E
+Control
+1D+
+1D–
+VCC
+2D+
+2D–
+D+
+D–
+S OE
+Figure 8-1. Application Diagram
+8.2.1 Design Requirements
+Design requirements of the USB 1.0, 1.1, and 2.0 standards should be followed. TI recommends that the digital 
+control pins S and OE be pulled up to V CC or down to GND to avoid undesired switch positions that could result 
+from the floating pin.
+8.2.2 Detailed Design Procedure
+The TS3USB30E can be properly operated without any external components. However, TI recommends to 
+connect any unused pins to ground through a 50Ω resistor to prevent signal reflections back into the device.
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 13
+Product Folder Links: TS3USB30E
+8.2.3 Application Curves
+Differential Signal (V)
+Time ( 10  ) (s)x
+–9
+0.5
+–0.5
+0.4
+0.4 1.0 1.6
+–0.4
+0.3
+–0.3
+0.2
+0.2 0.8 1.4 2.0
+–0.2
+0.1
+–0.1
+0.0
+0.0 0.6 1.2 1.8
+Figure 8-2. Eye Pattern: 480Mbps USB Signal With 
+No Switch (Through Path)
+Differential Signal (V)
+Time ( 10  ) (s)x
+–9
+0.5
+–0.5
+0.4
+0.4 1.0 1.6
+–0.4
+0.3
+–0.3
+0.2
+0.2 0.8 1.4 2.0
+–0.2
+0.1
+–0.1
+0.0
+0.0 0.6 1.2 1.8
+Figure 8-3. Eye Pattern: 480Mbps USB Signal With 
+Switch NC Path
+Differential Signal (V)
+Time ( 10  ) (s)x
+–9
+0.5
+–0.5
+0.4
+0.4 1.0 1.6
+–0.4
+0.3
+–0.3
+0.2
+0.2 0.8 1.4 2.0
+–0.2
+0.1
+–0.1
+0.0
+0.0 0.6 1.2 1.8
+Figure 8-4. Eye Pattern: 480Mbps USB Signal With Switch NO Path
+8.3 Power Supply Recommendations
+Power to the device is supplied through the V CC pin and must follow the USB 1.0, 1.1, and 2.0 standards. TI 
+recommends placing a bypass capacitor as close as possible to the supply pin V CC to help smooth out lower 
+frequency noise to provide better load regulation across the frequency spectrum.
+8.4 Layout
+8.4.1 Layout Guidelines
+Place supply bypass capacitors as close to V CC pin as possible and avoid placing the bypass caps near the D+ 
+and D– traces.
+The high-speed D+ and D– traces must always be of equal length and must be no more than 4 inches; 
+otherwise, the eye diagram performance may be degraded. A high-speed USB connection is made through a 
+shielded, twisted pair cable with a differential characteristic impedance. In the layout, make sure the impedance 
+of D+ and D– traces match the cable characteristic differential impedance for optimal performance.
+Route the high-speed USB signals using a minimum of vias and corners to reduce signal reflections and 
+impedance changes. When a via must be used, increase the clearance size around the via to minimize the 
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+14 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+capacitance. Each via introduces discontinuities in the transmission line of the signal and increases the chance 
+of picking up interference from the other layers of the board. Be careful when designing test points on twisted 
+pair lines; through-hole pins are not recommended.
+When it becomes necessary to turn 90°, use two 45° turns or an arc instead of making a single 90° turn. This 
+reduces reflections on the signal traces by minimizing impedance discontinuities.
+Do not route USB traces under or near crystals, oscillators, clock signal generators, switching regulators, 
+mounting holes, magnetic devices, or ICs that use or duplicate clock signals.
+Avoid stubs on the high-speed USB signals because the stubs can cause signal reflections. If a stub is 
+unavoidable, then make sure the stub is less than 200mm.
+Route all high-speed USB signal traces over continuous planes (VCC or GND), with no interruptions.
+Avoid crossing over anti-etch, commonly found with plane splits.
+Due to high frequencies associated with the USB, a printed circuit board with at least four layers is 
+recommended: two signal layers separated by a ground layer and a power layer. The majority of signal traces 
+should run on a single layer, preferably Signal 1. Immediately next to this layer should be the GND plane, which 
+is solid with no cuts. Avoid running signal traces across a split in the ground or power plane. When running 
+across split planes is unavoidable, sufficient decoupling must be used. Minimizing the number of signal vias 
+reduces EMI by reducing inductance at high frequencies. For more information on layout guidelines, see High 
+Speed Layout Guidelines and USB 2.0 Board Design and Layout Guidelines.
+8.4.2 Layout Example
+D1-
+0603 Cap
+V
+CC
+= VIA to GND Plane
+To Device 1To Device 2
+GND
+D2-
+D1+ D2+
+D+
+D-
+VCC
+S
+OE
+To Device 1To Device 2
+To System
+To System
+To System
+To System
+Figure 8-5. Layout Recommendation
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 15
+Product Folder Links: TS3USB30E
+9 Device and Documentation Support
+9.1 Documentation Support
+9.1.1 Related Documentation
+For related documentation, see the following:
+• Texas Instruments, Implications of Slow or Floating CMOS Inputs application note
+• Texas Instruments, High Speed Layout Guidelines
+• Texas Instruments, USB 2.0 Board Design and Layout Guidelines
+9.2 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. Click on 
+Notifications to register and receive a weekly digest of any product information that has changed. For change 
+details, review the revision history included in any revised document.
+9.3 Support Resources
+TI E2E ™ support forums  are an engineer's go-to source for fast, verified answers and design help — straight 
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do 
+not necessarily reflect TI's views; see TI's Terms of Use.
+9.4 Trademarks
+TI E2E™ is a trademark of Texas Instruments.
+All trademarks are the property of their respective owners.
+9.5 Electrostatic Discharge Caution
+This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled 
+with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may 
+be more susceptible to damage because very small parametric changes could cause the device not to meet its published 
+specifications.
+9.6 Glossary
+TI Glossary This glossary lists and explains terms, acronyms, and definitions.
+10 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+Changes from Revision F (August 2015) to Revision G (October 2024) Page
+• Changed the Pin Configuration images and removed the RSW bottom view pinout......................................... 3
+• Removed footnote in Absolute Maximum Ratings which stated "The input and output voltage ratings may be 
+exceeded if the input and output clamp-current ratings are observed."............................................................. 4
+• Changed XTALK from -54dB to -32dB............................................................................................................... 5
+• Changed OISO from -40dB to -32dB..................................................................................................................5
+• Changed BW from 900MHz to 1400GHz and removed CL = 5pF from Test Conditions....................................5
+• Changed the Gain vs Frequency graph..............................................................................................................7
+• Changed the Crosstalk (XTALK) graph................................................................................................................ 7
+• Changed the Off Isolation (OISO) graph..............................................................................................................7
+• Removed the 50Ω pulldown resistor on VOUT1 from the Off Isolation (OISO) image........................................ 8
+• Added the text D next to VIN the Crosstalk (XTALK) image..................................................................................8
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+ www.ti.com
+16 Submit Document Feedback Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TS3USB30E
+Changes from Revision E (August 2012) to Revision F (August 2015) Page
+• Added Pin Configuration and Functions section, ESD Ratings table, Feature Description section, Device 
+Functional Modes, Application and Implementation section, Power Supply Recommendations section, Layout 
+section, Device and Documentation Support section, and Mechanical, Packaging, and Orderable Information
+section ............................................................................................................................................................... 1
+• Changed package type in the Description From: DGS To: VSSOP .................................................................. 1
+11 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most 
+current data available for the designated devices. This data is subject to change without notice and revision of 
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+www.ti.com
+TS3USB30E
+SCDS255G – DECEMBER 2008 – REVISED OCTOBER 2024
+Copyright © 2024 Texas Instruments Incorporated Submit Document Feedback 17
+Product Folder Links: TS3USB30E
+PACKAGE OPTION ADDENDUM
+www.ti.com 8-Nov-2025
+PACKAGING INFORMATION
+Orderable part number Status
+(1)
+Material type
+(2)
+Package | Pins Package qty | Carrier RoHS
+(3)
+Lead finish/
+Ball material
+(4)
+MSL rating/
+Peak reflow
+(5)
+Op temp (°C) Part marking
+(6)
+TS3USB30EDGSR Active Production VSSOP (DGS) | 10 2500 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 (L6Q, L6R)
+TS3USB30EDGSR.B Active Production VSSOP (DGS) | 10 2500 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 (L6Q, L6R)
+TS3USB30EDGSRG4 Active Production VSSOP (DGS) | 10 2500 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 L6R
+TS3USB30EDGSRG4.B Active Production VSSOP (DGS) | 10 2500 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 L6R
+TS3USB30ERSWR Active Production UQFN (RSW) | 10 3000 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 (LY7, LYO, LYV)
+TS3USB30ERSWR.A Active Production UQFN (RSW) | 10 3000 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 (LY7, LYO, LYV)
+TS3USB30ERSWR.B Active Production UQFN (RSW) | 10 3000 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 (LY7, LYO, LYV)
+TS3USB30ERSWRG4.A Active Production UQFN (RSW) | 10 3000 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 LYV
+TS3USB30ERSWRG4.B Active Production UQFN (RSW) | 10 3000 | LARGE T&R Yes NIPDAU Level-1-260C-UNLIM -40 to 85 LYV
+ 
+(1) Status:  For more details on status, see our product life cycle.
+ 
+(2) Material type:  When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+ 
+(3) RoHS values:  Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+ 
+(4) Lead finish/Ball material:  Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+ 
+(5) MSL rating/Peak reflow:  The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+ 
+(6) Part marking:  There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+ 
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+ 
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+Addendum-Page 1
+PACKAGE OPTION ADDENDUM
+www.ti.com 8-Nov-2025
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+ 
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+ 
+Addendum-Page 2
+PACKAGE MATERIALS INFORMATION
+  
+www.ti.com 22-Jul-2026
+TAPE AND REEL INFORMATION
+Reel Width (W1)
+REEL DIMENSIONS
+A0B0K0WDimension designed to accommodate the component lengthDimension designed to accommodate the component thicknessOverall width of the carrier tapePitch between successive cavity centersDimension designed to accommodate the component width
+TAPE DIMENSIONSK0 P1B0WA0Cavity
+QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+Pocket QuadrantsSprocket HolesQ1Q1Q2Q2Q3Q3Q4Q4User Direction of Feed
+P1ReelDiameter
+ 
+*All dimensions are nominal
+Device Package
+Type
+Package
+Drawing
+Pins SPQ Reel
+Diameter
+(mm)
+Reel
+Width
+W1 (mm)
+A0
+(mm)
+B0
+(mm)
+K0
+(mm)
+P1
+(mm)
+W
+(mm)
+Pin1
+Quadrant
+TS3USB30EDGSR VSSOP DGS 10 2500 330.0 12.4 5.3 3.4 1.4 8.0 12.0 Q1
+TS3USB30EDGSRG4 VSSOP DGS 10 2500 330.0 12.4 5.3 3.4 1.4 8.0 12.0 Q1
+TS3USB30ERSWR UQFN RSW 10 3000 180.0 8.4 1.6 2.0 0.7 4.0 8.0 Q1
+TS3USB30ERSWR UQFN RSW 10 3000 180.0 9.5 1.6 2.0 0.8 4.0 8.0 Q1
+Pack Materials-Page 1
+PACKAGE MATERIALS INFORMATION
+  
+www.ti.com 22-Jul-2026
+TAPE AND REEL BOX DIMENSIONS
+Width (mm)
+W LH
+ 
+*All dimensions are nominal
+Device Package Type Package Drawing Pins SPQ Length (mm) Width (mm) Height (mm)
+TS3USB30EDGSR VSSOP DGS 10 2500 358.0 335.0 35.0
+TS3USB30EDGSRG4 VSSOP DGS 10 2500 358.0 335.0 35.0
+TS3USB30ERSWR UQFN RSW 10 3000 210.0 185.0 35.0
+TS3USB30ERSWR UQFN RSW 10 3000 189.0 185.0 36.0
+Pack Materials-Page 2
+www.ti.com
+PACKAGE OUTLINE
+C
+1.45
+1.35
+1.85
+1.75
+0.55
+0.45
+NOTE 3
+0.05
+0.00
+6X 0.4
+2X 0.8
+9X 0.45
+0.35
+10X 0.25
+0.15
+0.55
+0.45
+(0.13) TYP
+UQFN - 0.55 mm max heightRSW0010A
+PLASTIC QUAD FLATPACK - NO LEAD
+4224897/A   03/2019
+0.05 C
+0.07 C A B
+0.05
+NOTES:
+ 
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+    per ASME Y14.5M. 
+2. This drawing is subject to change without notice. 
+3. This package complies to JEDEC MO-288 variation UDEE, except minimum package height.
+PIN 1 INDEX AREA
+SEATING PLANE
+PIN 1 ID
+SYMM
+SYMM
+1
+2
+3 5
+6
+7
+810
+SCALE  7.000
+AB
+www.ti.com
+EXAMPLE BOARD LAYOUT
+(R0.05) TYP
+0.05 MAX
+ALL AROUND
+0.05 MIN
+ALL AROUND
+9X (0.6)
+(0.7)10X (0.2)
+(1.2)
+(1.6)
+6X (0.4)
+UQFN - 0.55 mm max heightRSW0010A
+PLASTIC QUAD FLATPACK - NO LEAD
+4224897/A   03/2019
+NOTES: (continued)
+ 
+4. This package is designed to be soldered to a thermal pad on the board. For more information, see Texas Instruments literature
+    number SLUA271 (www.ti.com/lit/slua271).
+5. Vias are optional depending on application, refer to device data sheet. If any vias are implemented, refer to their locations shown
+    on this view. It is recommended that vias under paste be filled, plugged or tented.
+SYMM
+SYMM
+LAND PATTERN EXAMPLE
+EXPOSED METAL SHOWN
+SCALE: 30X
+SEE SOLDER MASK
+DETAIL
+1
+2
+3 5
+6
+7
+810
+METAL EDGE
+SOLDER MASK
+OPENING
+EXPOSED METAL
+METAL UNDER
+SOLDER MASK
+SOLDER MASK
+OPENING
+EXPOSED
+METAL
+NON SOLDER MASK
+DEFINED
+(PREFERRED)
+SOLDER MASK DEFINED
+SOLDER MASK DETAILS
+www.ti.com
+EXAMPLE STENCIL DESIGN
+9X (0.6)
+10X (0.2)
+6X (0.4)
+(1.2)
+(1.6)
+(R0.05) TYP
+(0.7)
+UQFN - 0.55 mm max heightRSW0010A
+PLASTIC QUAD FLATPACK - NO LEAD
+4224897/A   03/2019
+NOTES: (continued)
+ 
+6. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations. 
+ 
+SYMM
+SOLDER PASTE EXAMPLE
+BASED ON 0.125 MM THICK STENCIL
+SCALE: 30X
+SYMM
+1
+2
+3 5
+6
+7
+810
+www.ti.com
+PACKAGE OUTLINE
+C
+ TYP5.05
+4.75
+1.1 MAX
+8X 0.5
+10X 0.27
+0.17
+2X
+2
+0.15
+0.05
+ TYP0.23
+0.13
+0 - 8
+0.25
+GAGE PLANE
+0.7
+0.4
+A
+NOTE 3
+3.1
+2.9
+B
+NOTE 4
+3.1
+2.9
+4221984/A   05/2015
+VSSOP - 1.1 mm max heightDGS0010A
+SMALL OUTLINE PACKAGE
+NOTES: 
+ 
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+    per ASME Y14.5M. 
+2. This drawing is subject to change without notice. 
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+    exceed 0.15 mm per side. 
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm per side.
+5. Reference JEDEC registration MO-187, variation BA.
+ 
+1
+10
+0.1 C A B
+6
+5
+PIN 1 ID
+AREA
+SEATING PLANE
+0.1 C
+ SEE DETAIL A
+DETAIL A
+TYPICAL
+SCALE  3.200
+www.ti.com
+EXAMPLE BOARD LAYOUT
+(4.4)
+0.05 MAX
+ALL AROUND
+0.05 MIN
+ALL AROUND
+10X (1.45)
+10X (0.3)
+8X (0.5)
+(R )
+TYP
+0.05
+4221984/A   05/2015
+VSSOP - 1.1 mm max heightDGS0010A
+SMALL OUTLINE PACKAGE
+SYMM
+SYMM
+LAND PATTERN EXAMPLE
+SCALE:10X
+1
+5 6
+10
+NOTES: (continued)
+ 
+6. Publication IPC-7351 may have alternate designs. 
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+ 
+METALSOLDER MASK
+OPENING
+NON SOLDER MASK
+DEFINED
+SOLDER MASK DETAILS
+NOT TO SCALE
+SOLDER MASK
+OPENING
+METAL UNDER
+SOLDER MASK
+SOLDER MASK
+DEFINED
+www.ti.com
+EXAMPLE STENCIL DESIGN
+(4.4)
+8X (0.5)
+10X (0.3)
+10X (1.45)
+(R ) TYP0.05
+4221984/A   05/2015
+VSSOP - 1.1 mm max heightDGS0010A
+SMALL OUTLINE PACKAGE
+NOTES: (continued)
+ 
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+    design recommendations.   
+9. Board assembly site may have different recommendations for stencil design.
+ 
+SYMM
+SYMM
+1
+5 6
+10
+SOLDER PASTE EXAMPLE
+BASED ON 0.125 mm THICK STENCIL
+SCALE:10X
+IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE 
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS” 
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY 
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD 
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate 
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable 
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an 
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license 
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully 
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on 
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable 
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products 
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+Copyright © 2026, Texas Instruments Incorporated
+Last updated 10/2025

@@ -1,0 +1,1161 @@
+{
+ "date": "2026-09-27",
+ "source": "PCBParts JLC/LCSC catalogue (pcbparts.dev jlc_get_part); USD",
+ "parts": {
+  "C14663": {
+   "lcsc": "C14663",
+   "model": "CC0603KRX7R9BB104",
+   "manufacturer": "YAGEO",
+   "package": "0603",
+   "stock": 51328558,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0122
+    },
+    {
+     "qty": "500+",
+     "price": 0.0088
+    },
+    {
+     "qty": "1500+",
+     "price": 0.0073
+    },
+    {
+     "qty": "4000+",
+     "price": 0.0058
+    },
+    {
+     "qty": "24000+",
+     "price": 0.0054
+    },
+    {
+     "qty": "48000+",
+     "price": 0.0051
+    }
+   ]
+  },
+  "C15849": {
+   "lcsc": "C15849",
+   "model": "CL10A105KB8NNNC",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 6782399,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0752
+    },
+    {
+     "qty": "500+",
+     "price": 0.0614
+    },
+    {
+     "qty": "1500+",
+     "price": 0.0543
+    },
+    {
+     "qty": "4000+",
+     "price": 0.0484
+    },
+    {
+     "qty": "24000+",
+     "price": 0.0465
+    },
+    {
+     "qty": "48000+",
+     "price": 0.045
+    }
+   ]
+  },
+  "C15850": {
+   "lcsc": "C15850",
+   "model": "CL21A106KAYNNNE",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "package": "0805",
+   "stock": 5523011,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0788
+    },
+    {
+     "qty": "200+",
+     "price": 0.0609
+    },
+    {
+     "qty": "600+",
+     "price": 0.0519
+    },
+    {
+     "qty": "2000+",
+     "price": 0.0442
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0416
+    },
+    {
+     "qty": "20000+",
+     "price": 0.0398
+    }
+   ]
+  },
+  "C1588": {
+   "lcsc": "C1588",
+   "model": "CL10B102KB8NNNC",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 8211195,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0089
+    },
+    {
+     "qty": "500+",
+     "price": 0.0068
+    },
+    {
+     "qty": "1500+",
+     "price": 0.0058
+    },
+    {
+     "qty": "4000+",
+     "price": 0.0046
+    },
+    {
+     "qty": "24000+",
+     "price": 0.0043
+    },
+    {
+     "qty": "48000+",
+     "price": 0.0041
+    }
+   ]
+  },
+  "C165948": {
+   "lcsc": "C165948",
+   "model": "TYPE-C-31-M-12",
+   "manufacturer": "Korean Hroparts Elec",
+   "package": "SMD",
+   "stock": 449589,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.1855
+    },
+    {
+     "qty": "50+",
+     "price": 0.1465
+    },
+    {
+     "qty": "150+",
+     "price": 0.1274
+    },
+    {
+     "qty": "1000+",
+     "price": 0.1033
+    },
+    {
+     "qty": "2000+",
+     "price": 0.0986
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0959
+    }
+   ]
+  },
+  "C20917": {
+   "lcsc": "C20917",
+   "model": "AO3400A",
+   "manufacturer": "Alpha & Omega Semicon",
+   "package": "SOT-23",
+   "stock": 1062401,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0845
+    },
+    {
+     "qty": "50+",
+     "price": 0.0678
+    },
+    {
+     "qty": "150+",
+     "price": 0.0592
+    },
+    {
+     "qty": "500+",
+     "price": 0.052
+    },
+    {
+     "qty": "3000+",
+     "price": 0.0494
+    },
+    {
+     "qty": "6000+",
+     "price": 0.0478
+    }
+   ]
+  },
+  "C21190": {
+   "lcsc": "C21190",
+   "model": "0603WAF1001T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 23617494,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0026
+    },
+    {
+     "qty": "1000+",
+     "price": 0.002
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0018
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0014
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0013
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0013
+    }
+   ]
+  },
+  "C22775": {
+   "lcsc": "C22775",
+   "model": "0603WAF1000T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 12303224,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0031
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0025
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0022
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0018
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0016
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0016
+    }
+   ]
+  },
+  "C23162": {
+   "lcsc": "C23162",
+   "model": "0603WAF4701T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 23279460,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0028
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0022
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0019
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0016
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0015
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0015
+    }
+   ]
+  },
+  "C23186": {
+   "lcsc": "C23186",
+   "model": "0603WAF5101T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 26095300,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0015
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0012
+    },
+    {
+     "qty": "5000+",
+     "price": 0.001
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0008
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0007
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0007
+    }
+   ]
+  },
+  "C23345": {
+   "lcsc": "C23345",
+   "model": "0603WAF220JT5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 9437102,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0017
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0013
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0012
+    },
+    {
+     "qty": "10000+",
+     "price": 0.001
+    },
+    {
+     "qty": "50000+",
+     "price": 0.001
+    },
+    {
+     "qty": "50200+",
+     "price": 0.001
+    }
+   ]
+  },
+  "C25375": {
+   "lcsc": "C25375",
+   "model": "1206W4J0330T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "1206",
+   "stock": 112255,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0035
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0027
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0023
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0021
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0018
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0018
+    }
+   ]
+  },
+  "C25803": {
+   "lcsc": "C25803",
+   "model": "0603WAF1003T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 22793308,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0031
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0024
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0021
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0017
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0016
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0016
+    }
+   ]
+  },
+  "C25804": {
+   "lcsc": "C25804",
+   "model": "0603WAF1002T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 22812640,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0018
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0015
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0013
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0013
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0012
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0012
+    }
+   ]
+  },
+  "C2681320": {
+   "lcsc": "C2681320",
+   "model": "TPS22917DBVR",
+   "manufacturer": "Texas Instruments",
+   "package": "SOT-23-6",
+   "stock": 15703,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.3537
+    },
+    {
+     "qty": "50+",
+     "price": 0.2737
+    },
+    {
+     "qty": "150+",
+     "price": 0.2394
+    },
+    {
+     "qty": "500+",
+     "price": 0.1967
+    },
+    {
+     "qty": "3000+",
+     "price": 0.1776
+    },
+    {
+     "qty": "6000+",
+     "price": 0.1662
+    }
+   ]
+  },
+  "C2827654": {
+   "lcsc": "C2827654",
+   "model": "USBLC6-2SC6",
+   "manufacturer": "TECH PUBLIC",
+   "package": "SOT-23-6",
+   "stock": 101193,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0445
+    },
+    {
+     "qty": "100+",
+     "price": 0.0355
+    },
+    {
+     "qty": "300+",
+     "price": 0.0309
+    },
+    {
+     "qty": "3000+",
+     "price": 0.027
+    },
+    {
+     "qty": "6000+",
+     "price": 0.0257
+    },
+    {
+     "qty": "9000+",
+     "price": 0.0247
+    }
+   ]
+  },
+  "C3168738": {
+   "lcsc": "C3168738",
+   "model": "1-84953-0",
+   "manufacturer": "TE Connectivity",
+   "package": "SMD,P=1mm,Surface Mount\uff0cRight Angle",
+   "stock": 4736,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.6042
+    },
+    {
+     "qty": "10+",
+     "price": 0.5327
+    },
+    {
+     "qty": "30+",
+     "price": 0.4986
+    },
+    {
+     "qty": "100+",
+     "price": 0.4629
+    },
+    {
+     "qty": "500+",
+     "price": 0.4418
+    },
+    {
+     "qty": "1500+",
+     "price": 0.4304
+    }
+   ]
+  },
+  "C31850": {
+   "lcsc": "C31850",
+   "model": "0603WAF2202T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0603",
+   "stock": 3770750,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0041
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0031
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0026
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0023
+    },
+    {
+     "qty": "50000+",
+     "price": 0.002
+    },
+    {
+     "qty": "50200+",
+     "price": 0.002
+    }
+   ]
+  },
+  "C318884": {
+   "lcsc": "C318884",
+   "model": "TS-1187A-B-A-B",
+   "manufacturer": "XKB Connection",
+   "package": "SMD-4P,5.1x5.1mm",
+   "stock": 573032,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0205
+    },
+    {
+     "qty": "200+",
+     "price": 0.0158
+    },
+    {
+     "qty": "600+",
+     "price": 0.0138
+    },
+    {
+     "qty": "4000+",
+     "price": 0.012
+    },
+    {
+     "qty": "8000+",
+     "price": 0.0114
+    },
+    {
+     "qty": "20000+",
+     "price": 0.011
+    }
+   ]
+  },
+  "C32713261": {
+   "lcsc": "C32713261",
+   "model": "HX PZ2.54-1x2P WZ",
+   "manufacturer": "hanxia",
+   "package": "Push-Pull,P=2.54mm",
+   "stock": 47805,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0182
+    },
+    {
+     "qty": "500+",
+     "price": 0.0143
+    },
+    {
+     "qty": "1500+",
+     "price": 0.012
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0107
+    },
+    {
+     "qty": "25000+",
+     "price": 0.0095
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0089
+    }
+   ]
+  },
+  "C41349510": {
+   "lcsc": "C41349510",
+   "model": "ESP32-C3-MINI-1-H4X",
+   "manufacturer": "Espressif Systems",
+   "package": "SMD,16.6x13.2mm",
+   "stock": 1779,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 2.9101
+    },
+    {
+     "qty": "10+",
+     "price": 2.5837
+    },
+    {
+     "qty": "30+",
+     "price": 2.3905
+    },
+    {
+     "qty": "100+",
+     "price": 2.2297
+    },
+    {
+     "qty": "650+",
+     "price": 2.1209
+    },
+    {
+     "qty": "1300+",
+     "price": 2.0722
+    }
+   ]
+  },
+  "C431540": {
+   "lcsc": "C431540",
+   "model": "MSK12C02",
+   "manufacturer": "SHOU HAN",
+   "package": "SMD,8x2.8mm",
+   "stock": 166206,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0566
+    },
+    {
+     "qty": "100+",
+     "price": 0.0462
+    },
+    {
+     "qty": "300+",
+     "price": 0.041
+    },
+    {
+     "qty": "3000+",
+     "price": 0.0351
+    },
+    {
+     "qty": "6000+",
+     "price": 0.0335
+    },
+    {
+     "qty": "9000+",
+     "price": 0.0325
+    }
+   ]
+  },
+  "C45783": {
+   "lcsc": "C45783",
+   "model": "CL21A226MAQNNNE",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "package": "0805",
+   "stock": 4244289,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.2199
+    },
+    {
+     "qty": "200+",
+     "price": 0.1636
+    },
+    {
+     "qty": "600+",
+     "price": 0.1361
+    },
+    {
+     "qty": "2000+",
+     "price": 0.1116
+    },
+    {
+     "qty": "10000+",
+     "price": 0.1048
+    },
+    {
+     "qty": "20000+",
+     "price": 0.1007
+    }
+   ]
+  },
+  "C479074": {
+   "lcsc": "C479074",
+   "model": "SY8089A1AAC",
+   "manufacturer": "Silergy Corp",
+   "package": "SOT-23-5",
+   "stock": 106071,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0858
+    },
+    {
+     "qty": "50+",
+     "price": 0.0684
+    },
+    {
+     "qty": "150+",
+     "price": 0.0595
+    },
+    {
+     "qty": "500+",
+     "price": 0.052
+    },
+    {
+     "qty": "3000+",
+     "price": 0.0494
+    },
+    {
+     "qty": "6000+",
+     "price": 0.0478
+    }
+   ]
+  },
+  "C49656146": {
+   "lcsc": "C49656146",
+   "model": "GR0603F23K2T5G00",
+   "manufacturer": "GiantOhm",
+   "package": "0603",
+   "stock": 3735,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0014
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0011
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0009
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0008
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0007
+    },
+    {
+     "qty": "50200+",
+     "price": 0.0007
+    }
+   ]
+  },
+  "C51940118": {
+   "lcsc": "C51940118",
+   "model": "XY-SM04B-GHS-TB",
+   "manufacturer": "XYECONN",
+   "package": "SMD,P=1.25mm,Surface Mount\uff0cRight Angle",
+   "stock": 79032,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0583
+    },
+    {
+     "qty": "100+",
+     "price": 0.0465
+    },
+    {
+     "qty": "300+",
+     "price": 0.0405
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0359
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0324
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0306
+    }
+   ]
+  },
+  "C51940119": {
+   "lcsc": "C51940119",
+   "model": "XY-SM06B-GHS-TB",
+   "manufacturer": "XYECONN",
+   "package": "SMD,P=1.25mm,Surface Mount\uff0cRight Angle",
+   "stock": 18611,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0704
+    },
+    {
+     "qty": "100+",
+     "price": 0.0561
+    },
+    {
+     "qty": "300+",
+     "price": 0.0488
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0434
+    },
+    {
+     "qty": "5000+",
+     "price": 0.039
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0369
+    }
+   ]
+  },
+  "C83423": {
+   "lcsc": "C83423",
+   "model": "SWPA4020S2R2MT",
+   "manufacturer": "Sunlord",
+   "package": "SMD,4x4mm",
+   "stock": 33589,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0609
+    },
+    {
+     "qty": "100+",
+     "price": 0.0497
+    },
+    {
+     "qty": "300+",
+     "price": 0.0442
+    },
+    {
+     "qty": "3000+",
+     "price": 0.04
+    },
+    {
+     "qty": "6000+",
+     "price": 0.0366
+    },
+    {
+     "qty": "9000+",
+     "price": 0.035
+    }
+   ]
+  },
+  "C8598": {
+   "lcsc": "C8598",
+   "model": "B5819W SL",
+   "manufacturer": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+   "package": "SOD-123",
+   "stock": 492793,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.028
+    },
+    {
+     "qty": "200+",
+     "price": 0.0218
+    },
+    {
+     "qty": "600+",
+     "price": 0.0192
+    },
+    {
+     "qty": "3000+",
+     "price": 0.0171
+    },
+    {
+     "qty": "9000+",
+     "price": 0.0163
+    },
+    {
+     "qty": "21000+",
+     "price": 0.0158
+    }
+   ]
+  },
+  "C49287211": {
+   "lcsc": "C49287211",
+   "model": "TYPE-C 16P L6.5",
+   "manufacturer": "SHOU HAN",
+   "package": "SMD",
+   "stock": 2553,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0762
+    },
+    {
+     "qty": "100+",
+     "price": 0.0606
+    },
+    {
+     "qty": "300+",
+     "price": 0.0528
+    },
+    {
+     "qty": "1000+",
+     "price": 0.047
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0424
+    },
+    {
+     "qty": "10000+",
+     "price": 0.04
+    }
+   ]
+  },
+  "C32713268": {
+   "lcsc": "C32713268",
+   "model": "HX PZ2.54-1x2P ZZ",
+   "manufacturer": "hanxia",
+   "package": "Plugin,P=2.54mm",
+   "stock": 186905,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0153
+    },
+    {
+     "qty": "50+",
+     "price": 0.0119
+    },
+    {
+     "qty": "150+",
+     "price": 0.01
+    },
+    {
+     "qty": "500+",
+     "price": 0.0088
+    },
+    {
+     "qty": "2500+",
+     "price": 0.0077
+    },
+    {
+     "qty": "5000+",
+     "price": 0.0072
+    }
+   ]
+  },
+  "C2862740": {
+   "lcsc": "C2862740",
+   "model": "TPS7A2033PDBVR",
+   "manufacturer": "Texas Instruments",
+   "package": "SOT-23-5",
+   "stock": 221199,
+   "library_type": "extended",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.2154
+    },
+    {
+     "qty": "50+",
+     "price": 0.1661
+    },
+    {
+     "qty": "150+",
+     "price": 0.1421
+    },
+    {
+     "qty": "500+",
+     "price": 0.1207
+    },
+    {
+     "qty": "3000+",
+     "price": 0.1149
+    },
+    {
+     "qty": "6000+",
+     "price": 0.1113
+    }
+   ]
+  },
+  "C1525": {
+   "lcsc": "C1525",
+   "model": "CL05B104KO5NNNC",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 23777578,
+   "library_type": "basic",
+   "preferred": false,
+   "prices": [
+    {
+     "qty": "1+",
+     "price": 0.0045
+    },
+    {
+     "qty": "1000+",
+     "price": 0.0034
+    },
+    {
+     "qty": "3000+",
+     "price": 0.0029
+    },
+    {
+     "qty": "10000+",
+     "price": 0.0025
+    },
+    {
+     "qty": "50000+",
+     "price": 0.0024
+    },
+    {
+     "qty": "100000+",
+     "price": 0.0023
+    }
+   ]
+  }
+ }
+}

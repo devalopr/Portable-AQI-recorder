@@ -1,0 +1,119 @@
+{
+  "generated_utc": "2026-09-09T15:24:21.072520+00:00",
+  "status": "engineering_review_only",
+  "fabrication_released": false,
+  "kicad_version": "10.0.0",
+  "scope": "ERC/DRC under project rules, schematic parity and design pin comparison; no hardware or enclosure qualification.",
+  "boards": {
+    "main": {
+      "erc_violations": 0,
+      "drc_violations": 0,
+      "unconnected_items": 0,
+      "schematic_parity_issues": 0,
+      "connected_pins_checked": 339,
+      "connectivity_issues": [],
+      "erc_ignored_checks": [
+        {
+          "description": "Global label only appears once in the schematic",
+          "key": "single_global_label"
+        },
+        {
+          "description": "Four connection points are joined together",
+          "key": "four_way_junction"
+        },
+        {
+          "description": "SPICE model issue",
+          "key": "simulation_model_issue"
+        },
+        {
+          "description": "Assigned footprint doesn't match footprint filters",
+          "key": "footprint_filter"
+        }
+      ],
+      "drc_ignored_checks": [
+        {
+          "description": "Footprint has no courtyard defined",
+          "key": "missing_courtyard"
+        },
+        {
+          "description": "Track endpoint not centered on via",
+          "key": "track_not_centered_on_via"
+        },
+        {
+          "description": "Tuning profile track geometries",
+          "key": "tuning_profile_track_geometries"
+        },
+        {
+          "description": "Footprint doesn't match symbol's footprint filters",
+          "key": "footprint_filters_mismatch"
+        },
+        {
+          "description": "Footprint component type doesn't match footprint pads",
+          "key": "footprint_type_mismatch"
+        }
+      ],
+      "drc_exclusions": [],
+      "sha256": {
+        "AQI_Main.kicad_sch": "87c33b28a15143f90a88da6f1fd90e9fd7b1f96ae8678bd8f995d230a41734a0",
+        "AQI_Main.kicad_pcb": "79e605112374c8f1472a9eecba49ce5b0da623a959cbd27698baa40545bd0890",
+        "AQI_Main.kicad_pro": "2aff5cf89607b71f47c779b888d36970719b45b6fb9969c4affb431345d388cf",
+        "design.json": "1d7a0161cfd691f28649a26a9881c7a181f3e637ea81adaa39003385316191a6"
+      }
+    },
+    "battery": {
+      "erc_violations": 0,
+      "drc_violations": 0,
+      "unconnected_items": 0,
+      "schematic_parity_issues": 0,
+      "connected_pins_checked": 179,
+      "connectivity_issues": [],
+      "erc_ignored_checks": [
+        {
+          "description": "Global label only appears once in the schematic",
+          "key": "single_global_label"
+        },
+        {
+          "description": "Four connection points are joined together",
+          "key": "four_way_junction"
+        },
+        {
+          "description": "SPICE model issue",
+          "key": "simulation_model_issue"
+        },
+        {
+          "description": "Assigned footprint doesn't match footprint filters",
+          "key": "footprint_filter"
+        }
+      ],
+      "drc_ignored_checks": [
+        {
+          "description": "Footprint has no courtyard defined",
+          "key": "missing_courtyard"
+        },
+        {
+          "description": "Track endpoint not centered on via",
+          "key": "track_not_centered_on_via"
+        },
+        {
+          "description": "Tuning profile track geometries",
+          "key": "tuning_profile_track_geometries"
+        },
+        {
+          "description": "Footprint doesn't match symbol's footprint filters",
+          "key": "footprint_filters_mismatch"
+        },
+        {
+          "description": "Footprint component type doesn't match footprint pads",
+          "key": "footprint_type_mismatch"
+        }
+      ],
+      "drc_exclusions": [],
+      "sha256": {
+        "AQI_Battery.kicad_sch": "9cad31fd2f45f4d2e1c815fbc909e29226b504bac93ac22fb39c8c9d4880b0e8",
+        "AQI_Battery.kicad_pcb": "bf9010ba824d092cf7fa95a0ca4cd0f5ae79a94ccf49345b6738034aaa581221",
+        "AQI_Battery.kicad_pro": "5a11ac9938f962d270138ec744fd722b1d78b55eaa4e9bc8d49e072531dfa901",
+        "design.json": "e738be510adf0aae4a18eb6f5b5105ab1dfff8c9582133bdcbda544c01fe012c"
+      }
+    }
+  }
+}

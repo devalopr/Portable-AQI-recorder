@@ -1,0 +1,16 @@
+# IP5310_I2C supplier/manufacturer questions — draft, not sent
+
+We are evaluating IP5310_I2C for a two-layer 5 V portable supply with 1S1P and 1S2P variants, using one common power stage. Please confirm the exact orderable suffix, applicable datasheet/register revisions, 1,000-piece pricing, lead time and sample availability. LCSC C20616661 currently lists zero stock.
+
+1. Please supply the current original-language electrical datasheet and complete register manual, including reset defaults and any OTP/factory configuration options. We have IP5310 register manual V1.28 and family datasheet V1.37.
+2. Can this exact variant continuously supply 5 V / 3 A over a 3.0–4.2 V battery range? Please provide minimum output voltage, current-limit tolerances, recommended inductor saturation/current/DCR, effective output capacitance and thermal reference layout for this load.
+3. We need separate input-only and output-only USB-C receptacles. Can the built-in CC block be factory configured sink-only on input, without advertising source during reset? What reverse-current isolation and external switches are required? Please provide a reference circuit for charging through VBUS versus VIN while supplying a 5 V load.
+4. Please confirm how registers 0x23, 0x24, 0x25 and 0x26 set BAT versus input current on the selected path. We need approximately 0.5/1.0/1.5 A cell/pack charge settings with a three-position switch read by the MCU. What are the achievable values/tolerances, termination behaviour at the lowest setting and default charge current before firmware initializes?
+5. Can charging default disabled or safely limited until configuration is verified, while still recovering an over-discharged protected pack? What minimum input and battery voltages allow register access?
+6. Does 0x02[7:5]=111 keep both boost and I2C available indefinitely at light/no load? How does it interact with 0x00 bit2, KEY and undervoltage shutdown? Which configuration is retained across sleep, input unplug and battery reconnection?
+7. Please confirm the guaranteed 4.2 V cell charging voltage including the 0x22 compensation settings. We want a conservative 4.2 V maximum operating target; clarify tolerances and recommended configuration.
+8. Is output uninterrupted when inserting/removing input power? Please provide worst-case handover time/droop and load-priority behaviour. Can the battery supplement input power without a reset at 3 A system load?
+
+This inquiry is for component qualification. No purchase or production order is authorized by this draft.
+
+9. Priority: V1.37 p9 explicitly states input BC1.2 detection/PC charging compatibility, yet pins29/30 (DMB/DPB) are marked FLOAT and the reference circuit prohibits connection to input/output USB. Which pins, register/OTP settings, silicon suffix and reference circuit implement input SDP/CDP/DCP detection? How are detection results read and what current is drawn before detection/USB enumeration? Can USB D+/D- simultaneously pass through to an external ESP32 USB device, or is a data isolation switch needed? Please distinguish input charger detection from output DCP emulation on DPA/DMA/DPC/DMC. We will not connect FLOAT pins based solely on the feature-list claim.

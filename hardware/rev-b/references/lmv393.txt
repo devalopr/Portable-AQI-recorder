@@ -1,0 +1,2255 @@
+                                                                           LMV331, LMV393, LMV339
+                                                                              SLCS136V – AUGUST 1999 – REVISED MAY 2025
+    LMV331 Single, LMV393 Dual, LMV339 Quad General-Purpose Low-Voltage
+                              Comparators
+
+1 Features                              3 Description
+
+•  2.7V and 5V performance                       The LMV393 and LMV339 devices are low-voltage
+•  Low supply current                                  (2.7V  to  5.5V)  versions  of  the  dual  and  quad
+   – LMV331 26μA typical                            comparators, LM393 and LM339, which operate from
+   – LMV393 50μA typical                      5V  to 30V. The LMV331  is the single-comparator
+   – LMV339 100μA typical                              version.
+•  Input common-mode voltage range includes                                             The LMV331, LMV339, and LMV393 are the most
+   ground                                                              cost-effective  devices  for  applications where  low-
+•  Low output saturation voltage 150mV typical                                                        voltage  operation,  low  power, and space  saving
+•  Open-collector output for maximum flexibility                                                      are the primary specifications  in  circuit design  for
+2 Applications                                       portable consumer  products. These  devices  offer
+                                                            specifications that meet or exceed the familiar LM339
+•  Vacuum robot                                 and LM393 devices at a fraction of the supply current.
+•  Server PSU
+                                                              Device Information•  Cordless power tool
+•  Appliances                                     PART NUMBER  PACKAGE (PIN)(1)   BODY SIZE (NOM)(2)
+•  Building automation                                              SOIC (14)         3.91mm × 8.65mm
+•  Factory automation & control                        LMV339      TSSOP (14)        4.40mm × 5.00mm
+                                                               (Quad)
+                                                             X2QFN (14)        2.00mm x 2.00mm
+                                                    LMV393       SOIC (8)          3.91mm × 4.90mm
+                                                                        (Dual)        TSSOP (8)         3.00mm × 4.40mm
+                                                    LMV331        SC-70 (5)         1.25mm x 2.00mm
+                                                                            (Single)        SOT-23 (5)        1.60mm x 2.90mm
+
+                                                                               (1)   For all available packages, see the orderable addendum at
+                                                                           the end of the data sheet.
+                                                                               (2)  The package size (length × width) is a nominal value and
+                                                                            includes pins, where applicable
+
+
+                                                   –
+                                           IN–
+
+                                                      OUT
+                                                 +
+                                          IN+
+
+                                          Simplified Schematic
+
+
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+       intellectual property matters and other important disclaimers. PRODUCTION DATA.
+LMV331, LMV393, LMV339
+SLCS136V – AUGUST 1999 – REVISED MAY 2025                                                                    www.ti.com
+
+                                 Table of Contents
+
+ 1 Features............................................................................1      6.3 Feature Description.....................................................9
+ 2 Applications.....................................................................1      6.4 Device Functional Modes............................................9
+ 3 Description.......................................................................1    7 Application and Implementation..................................10
+ 4 Pin Configuration and Functions...................................3      7.1 Application Information............................................. 10
+ 5 Specifications.................................................................. 4      7.2 Typical Application.................................................... 10
+   5.1 Absolute Maximum Ratings........................................ 4    8 Power Supply Recommendations................................12
+   5.2 ESD Ratings............................................................... 4    9 Layout.............................................................................12
+   5.3 Recommended Operating Conditions.........................4      9.1 Layout Guidelines..................................................... 12
+   5.4 Thermal Information....................................................4      9.2 Layout Example........................................................ 12
+   5.5 Electrical Characteristics, VCC+ = 2.7V....................... 5    10 Device and Documentation Support..........................13
+   5.6 Switching Characteristics, VCC+ = 2.7V...................... 5      10.1 Related Links.......................................................... 13
+   5.7 Electrical Characteristics, VCC+ = 5V.......................... 6    11 Trademarks...................................................................13
+   5.8 Switching Characteristics, VCC+ = 5V......................... 6    12 Electrostatic Discharge Caution................................ 13
+   5.9 Typical Characteristics................................................7    13 Glossary....................................................................... 13
+ 6 Detailed Description........................................................9    14 Revision History.......................................................... 14
+   6.1 Overview.....................................................................9    15 Mechanical, Packaging, and Orderable
+   6.2 Functional Block Diagram...........................................9          Information.................................................................... 15
+
+
+
+
+
+2     Submit Document Feedback                                                                   Copyright © 2025 Texas Instruments Incorporated
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                                           LMV331, LMV393, LMV339
+www.ti.com                                                                     SLCS136V – AUGUST 1999 – REVISED MAY 2025
+
+4 Pin Configuration and Functions
+
+                       LMV339 . . . D OR PW PACKAGE          LMV339 . . . RUC PACKAGE
+                                 (TOP VIEW)                          (TOP VIEW)
+
+                    2OUT   1     14  3OUT                                                                                                                                               2OUT      3OUT
+                    1OUT   2     13  4OUT
+                        VCC+   3     12 GND       1OUT   1   14   13   12  4OUT
+                           1IN–   4      11  4IN+         VCC+   2                11  GND
+                          1IN+   5     10  4IN–
+                                                         1IN–   3              10  4IN+
+                           2IN–   6      9  3IN+
+                          2IN+   7      8  3IN–          1IN+   4              9   4IN–
+                                                         2IN–  5    6    7    8   3IN+
+                                                                                                                                               2IN+      3IN–
+
+
+
+
+                  LMV393 . . . D, DDU, DGK OR PW PACKAGE   LMV331 . . . DBV OR DCK PACKAGE
+                                 (TOP VIEW)                           (TOP VIEW)
+
+                                                             1IN+   1      5  VCC+                    1OUT  1      8  VCC+
+                          1IN–  2      7  2OUT          GND   2
+                          1IN+  3      6   2IN–               1IN–   3      4  OUT
+                   GND  4      5   2IN+
+
+                                      Table 4-1. Pin Functions
+                         PIN
+
+         LMV331   LMV393          LMV339
+                                               TYPE                   DESCRIPTION
+ NAME     DBV,     D, DGK ,
+                                    D, PW      RUC
+         DCK     PW
+
+ 1IN– ,
+ 2IN–,
+             3           2, 6        4, 6, 8, 10      3, 5, 7, 9              I     Comparator negative input pin
+ 3IN–,
+ 4IN–
+
+ 1IN+ ,
+ 2IN+,
+             1           3, 5        5, 7, 9, 11     4, 6, 8, 10             I     Comparator positive input pin
+ 3IN+,
+ 4IN+
+
+ GND        2         4          12           11                   I    Ground
+
+ 1OUT,
+ 2OUT,
+             4           1, 7       2, 1, 14, 13   1, 14, 13, 12    O    Comparator output pin
+ 3OUT,
+ 4OUT
+ VCC+        5         8          3           2                    I     Supply Pin
+
+
+
+
+
+Copyright © 2025 Texas Instruments Incorporated                                                      Submit Document Feedback     3
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+LMV331, LMV393, LMV339
+SLCS136V – AUGUST 1999 – REVISED MAY 2025                                                                    www.ti.com
+
+5 Specifications
+ 5.1 Absolute Maximum Ratings
+
+ over operating free-air temperature range (unless otherwise noted)(1)
+
+                                                                                    MIN   MAX  UNIT
+ VCC      Supply voltage(2)                                                                                              5.5   V
+ VID        Differential input voltage(3)                                                                                ±5.5   V
+ VI         Input voltage range (either input)                                                           0     VCC+   V
+                                                                       At or below TA = 25°C,           Duration of output short circuit (one amplifier) to ground(4)                                                 Unlimited
+                                                         VCC ≤ 5.5V
+ TJ        Operating virtual junction temperature                                                             150    °C
+  Tstg      Storage temperature range                                                             –65     150    °C
+
+ (1)   Stresses beyond those listed under Absolute Maximum Ratings can cause permanent damage to the device. These are stress ratings
+       only, and functional operation of the device at these or any other conditions beyond those indicated under Section 5.3 is not implied.
+      Exposure to absolute-maximum-rated conditions for extended periods can affect device reliability.
+ (2)    All voltage values (except differential voltages and VCC specified for the measurement of IOS) are with respect to the network GND.
+ (3)    Differential voltages are at IN+ with respect to IN–.
+ (4)   Short circuits from outputs to VCC can cause excessive heating and eventual destruction.
+
+ 5.2 ESD Ratings
+
+                                                                              VALUE      UNIT
+                             Human body model (HBM), per ANSI/ESDA/JEDEC JS-001, all pins(1)     ±2000
+ V(ESD)     Electrostatic discharge      Charged device model (CDM), per JEDEC specification JESD22-C101,              V
+                                                                                              ±1000                                                       all pins(2)
+
+ (1)  JEDEC document JEP155 states that 500V HBM allows safe manufacturing with a standard ESD control process.
+ (2)  JEDEC document JEP157 states that 250V CDM allows safe manufacturing with a standard ESD control process.
+
+ 5.3 Recommended Operating Conditions
+
+                                                                                   MIN    MAX  UNIT
+ VCC      Supply voltage (single-supply operation)                                                            2.7         5.5   V
+ VOUT     Output voltage                                                                           VCC+ + 0.3   V
+ TA       Operating free-air temperature                                                         –40       125    °C
+
+ 5.4 Thermal Information
+
+                                    LMV339                          LMV393                      LMV331
+     THERMAL METRIC(1)       D      PW     RUC      D      DDU     DGK     PW      DBV     DCK    UNIT
+
+                                         14 PINS                              8 PINS                          5 PINS
+
+ RθJA     Junction-to-ambient                                136       155       216       168       210       216       222       224       238
+          thermal resistance
+
+  RθJC(top) Junction-to-case (top)                  —     —         51.3    —     —     —     —     —     —
+          thermal resistance
+
+ RθJB     Junction-to-board                  —     —         59.0    —     —     —     —     —     —
+          thermal resistance
+                                                                                                                     °C/W
+ ψJT      Junction-to-top
+           characterization      —     —          1.2     —     —     —     —     —     —
+          parameter
+
+ ψJB      Junction-to-board
+           characterization      —     —         59.0    —     —     —     —     —     —
+          parameter
+
+ (1)   For more information about traditional and new thermal metrics, see the IC Package Thermal Metrics application report, SPRA953.
+
+
+
+
+
+4     Submit Document Feedback                                                                   Copyright © 2025 Texas Instruments Incorporated
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                                           LMV331, LMV393, LMV339
+www.ti.com                                                                     SLCS136V – AUGUST 1999 – REVISED MAY 2025
+
+ 5.5 Electrical Characteristics, VCC+ = 2.7V
+ VCC+ = 2.7V, GND = 0V, at specified free-air temperature (unless otherwise noted)
+        PARAMETER               TEST CONDITIONS           TA           MIN       TYP   MAX  UNIT
+ VIO       Input offset voltage                                         25°C                         +0.5       7  mV
+          Average temperature
+                                                                –40°C to
+ αVIO       coefficient of input offset                                                                  5           μV/°C                                                                 125°C
+           voltage
+
+                                                                  25°C                       0.005     250
+  IIB        Input bias current                                         –40°C to                                 nA
+                                                                                                     400
+                                                                 125°C
+
+                                                                  25°C                       0.001      50
+  IIO        Input offset current                                        –40°C to                                 nA
+                                                                                                     150
+                                                                 125°C
+ IO        Output current (sinking)   VO ≤ 1.5V                          25°C             5         23         mA
+                                                                  25°C                       0.003
+           Output Leakage Current                                   –40°C to                                µA
+                                                                                                       1
+                                                                 125°C
+
+        Common-mode input
+ VICR                                                             25°C                     –0.1 to 2          V           voltage range
+ VSAT      Saturation voltage          IO ≤ 1.5mA                         25°C                       150         mV
+                             LMV331                           25°C                        26     100
+ ICC      Supply current          LMV393 (both comparators)           25°C                        50     140   μA
+                             LMV339 (all four comparators)          25°C                       100     200
+
+ 5.6 Switching Characteristics, VCC+ = 2.7V
+ TA = 25°C, VCC+ = 2.7V, RL = 5.1kΩ, GND = 0V (unless otherwise noted)
+
+               PARAMETER                             TEST CONDITIONS                 TYP   UNIT
+            Propagation delay high to low level output    Input overdrive = 10mV                                1000
+ tPHL                                                                                                            ns
+             switching                                    Input overdrive = 100mV                                350
+            Propagation delay low to high level output    Input overdrive = 10mV                                 500
+ tPLH                                                                                                            ns
+             switching                                    Input overdrive = 100mV                                400
+
+
+
+
+
+Copyright © 2025 Texas Instruments Incorporated                                                      Submit Document Feedback     5
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+LMV331, LMV393, LMV339
+SLCS136V – AUGUST 1999 – REVISED MAY 2025                                                                    www.ti.com
+
+ 5.7 Electrical Characteristics, VCC+ = 5V
+ VCC+ = 5V, GND = 0V, at specified free-air temperature (unless otherwise noted)
+        PARAMETER               TEST CONDITIONS           TA           MIN       TYP   MAX  UNIT
+                                                                  25°C                         +0.5       7
+ VIO       Input offset voltage                                        –40°C to                           mV
+                                                                                                       9
+                                                                 125°C
+
+          Average temperature
+ αVIO       coefficient of input offset                                     25°C                         5           μV/°C
+           voltage
+
+                                                                  25°C                       0.005     250
+  IIB        Input bias current                                         –40°C to                                 nA
+                                                                                                     400
+                                                                 125°C
+
+                                                                  25°C                       0.001      50
+  IIO        Input offset current                                        –40°C to                                 nA
+                                                                                                     150
+                                                                 125°C
+ IO        Output current (sinking)   VO ≤ 1.5V                          25°C            10         84         mA
+                                                                  25°C                       0.003
+           Output Leakage Current                                   –40°C to                                µA
+                                                                                                       1
+                                                                 125°C
+
+        Common-mode input
+ VICR                                                             25°C                    –0.1 to 4.2          V           voltage range
+
+           Large-signal differential
+ AVD                                                             25°C            20         50          V/mV           voltage gain
+
+                                                                  25°C                       150     400
+ VSAT      Saturation voltage          IO ≤4 mA                         –40°C to                           mV
+                                                                                                     700
+                                                                 125°C
+
+                                                                  25°C                        26     120
+                             LMV331                          –40°C to
+                                                                                                     150
+                                                                 125°C
+
+                                                                  25°C                        50     200
+ ICC      Supply current          LMV393 (both comparators)          –40°C to                                μA
+                                                                                                     250
+                                                                 125°C
+
+                                                                  25°C                       100     300
+                             LMV339 (all four comparators)        –40°C to
+                                                                                                     350
+                                                                 125°C
+
+ 5.8 Switching Characteristics, VCC+ = 5V
+ TA = 25°C, VCC+ = 5V, RL = 5.1kΩ, GND = 0V (unless otherwise noted)
+
+               PARAMETER                             TEST CONDITIONS                 TYP   UNIT
+            Propagation delay high to low level output    Input overdrive = 10mV                                 600
+ tPHL                                                                                                            ns
+             switching                                    Input overdrive = 100mV                                200
+            Propagation delay low to high level output    Input overdrive = 10mV                                 450
+ tPLH                                                                                                            ns
+             switching                                    Input overdrive = 100mV                                300
+
+
+
+
+
+6     Submit Document Feedback                                                                   Copyright © 2025 Texas Instruments Incorporated
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                                           LMV331, LMV393, LMV339
+www.ti.com                                                                     SLCS136V – AUGUST 1999 – REVISED MAY 2025
+
+ 5.9 Typical Characteristics
+
+ Unless otherwise specified, VS = +5V, single supply, TA = 25°C
+
+
+        70                                                              95
+        65             -40C                                             90            -40C
+                    25C                                                       25C        60                                                              85
+                    85C                                                       85C
+        55                                                              80
+           (PA) 50                                                                                                                               (PA) 75
+        45                                                              70
+        40                                                              65                     Current 35                                                                                                                                                                                                                                     Current 60
+        30                                                              55
+        25                                                              50                     Suppply 20                                                                                                                                                                                                                                     Suppply 45
+        15                                                              40
+        10                                                              35
+         5                                                              30
+         0                                                              25
+           1     1.5    2     2.5    3     3.5    4     4.5    5              1     1.5    2     2.5    3     3.5    4     4.5    5
+                                        Volts (V)                                                                       Volts (V)
+    Figure 5-1. Supply Current vs Supply Voltage Output High        Figure 5-2. Supply Current vs Supply Voltage Output Low
+
+       700                                                              55
+                       -40C                                                              -40C       650                                                                     52.5
+                    25C                                                       25C
+       600           85C                                               50           85C
+       550                                                                                                                                (nA) 47.5          (mV) 500                                                              45
+       450                                                                     42.5       400                                                                                                                                                                                                                                Current   40                 Voltage
+       350                                                                     37.5                                                                                                                                                       Bias
+       300                                                              35               Output       250                                                                                                                                                                Input 32.5
+
+       200                                                              30
+
+       150                                                                     27.5
+
+       100                                                              25
+           0    5   10   15   20   25   30   35   40   45   50               2.4  2.7   3   3.3  3.6  3.9  4.2  4.5  4.8  5.1  5.4  5.7
+                               Output Current (mA)                                                     Supply Voltage (V)
+          Figure 5-3. Output Voltage vs Output Current                  Figure 5-4. Input Bias Current vs Supply Voltage
+
+       310                                                                    176.1
+
+                                                                                175.8
+       305
+                                                                                175.5
+       300                                                                                175.2
+
+       295                                                                    174.9
+         (ns) 290                                                                                                                                  (ns) 174.6
+                                                                                174.3
+       285                                                                                                                                  Time   174         Time
+       280                                                                    173.7
+                                                                                173.4
+       275
+                                                                                173.1
+       270                                                                    172.8
+       265                                                                    172.5
+           0   10   20   30   40   50   60   70   80   90  100              0   10   20   30   40   50   60   70   80   90  100
+                                  Overdrive (mV)                                                             Overdrive (mV)
+     Figure 5-5. Response Time vs Input Overdrives Negative         Figure 5-6. Response Time vs Input Overdrives Positive
+                        Transition (VCC=5V)                                             Transition (VCC = 5V)
+
+
+
+
+
+Copyright © 2025 Texas Instruments Incorporated                                                      Submit Document Feedback     7
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+LMV331, LMV393, LMV339
+SLCS136V – AUGUST 1999 – REVISED MAY 2025                                                                    www.ti.com
+
+ 5.9 Typical Characteristics (continued)
+
+ Unless otherwise specified, VS = +5V, single supply, TA = 25°C
+
+
+       648                                                               189
+
+       645                                                                    188.7
+
+       642                                                                    188.4
+
+       639                                                                    188.1
+       636                                                                    187.8
+         (ns) 633                                                                                                                                  (ns) 187.5
+         Time 630627                                                                                                                                  Time 187.2186.9
+       624                                                                    186.6
+       621                                                                    186.3
+       618                                                               186
+       615                                                                    185.7
+       612                                                                    185.4
+           0   10   20   30   40   50   60   70   80   90  100              0   10   20   30   40   50   60   70   80   90  100
+                                  Overdrive (mV)                                                             Overdrive (mV)
+     Figure 5-7. Response Time vs Input Overdrives Negative         Figure 5-8. Response Time vs Input Overdrives Positive
+                      Transition (VCC = 2.7V)                                           Transition (VCC = 2.7V)
+
+
+
+
+
+8     Submit Document Feedback                                                                   Copyright © 2025 Texas Instruments Incorporated
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                                           LMV331, LMV393, LMV339
+www.ti.com                                                                     SLCS136V – AUGUST 1999 – REVISED MAY 2025
+
+6 Detailed Description
+ 6.1 Overview
+
+The LMV331, LMV393 and LMV339 family of comparators have the ability to operate up to 5V on the supply pin.
+ This standard device has proven ubiquity and versatility across a wide range of applications. This is due to it's
+ low Iq and fast response.
+
+The open-drain output allows the user to configure the output's logic low voltage (VOL) and can be utilized to
+ enable the comparator to be used in AND functionality.
+
+ 6.2 Functional Block Diagram
+
+   VCC+
+
+                                               Q6           Q7
+
+
+                                                                       Q8
+
+                                                                               OUT
+
+
+
+             Q1  Q2               Q3              Q4        Q5    IN+                                                                                 Q9
+
+
+    IN−
+
+
+
+
+
+                                      R1              R2        R3
+
+
+
+
+                                                  GND
+
+ 6.3 Feature Description
+
+The LMV331, LMV393 and LMV339 consists of a PNP input, whose Vbe creates a limit on the input common
+mode voltage capability, allowing LMV33x to accurately function from ground to VCC–Vbe( about 700mV)
+ differential input. This enables much head room for modern day supplies of 3.3V and 5.0V.
+
+The output consists of an open drain NPN (pull-down or low side) transistor. The output NPN sinks current when
+ the negative input voltage is higher than the positive input voltage and the offset voltage. The VOL is resistive
+and scales with the output current. Please see Figure 5-3 for VOL values with respect to the output current.
+ 6.4 Device Functional Modes
+ 6.4.1 Voltage Comparison
+
+The LMV33x operates solely as a voltage comparator, comparing the differential voltage between the positive
+and negative pins and outputs a logic low or high impedance (logic high with pull-up) based on the input
+ differential polarity.
+
+
+
+
+
+Copyright © 2025 Texas Instruments Incorporated                                                      Submit Document Feedback     9
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+LMV331, LMV393, LMV339
+SLCS136V – AUGUST 1999 – REVISED MAY 2025                                                                    www.ti.com
+
+7 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 7.1 Application Information
+
+LMV331, LMV393, and LMV339 typically is used to compare a single signal to a reference or two signals against
+each other. Many users take advantage of the open drain output to drive the comparison logic output to a logic
+ voltage level to an MCU or logic device. The wide supply range and high voltage capability makes LMV331,
+LMV393, and LMV33 is an ecxellent choice for level shifting to a higher or lower voltage.
+
+ 7.2 Typical Application
+                                        VLOGIC                                              VLOGIC
+
+                     VSUP                                           VSUP                                                   Rpullup                                                      Rpullup
+         Vin    +                                Vin+   +
+                  LMV33x                                    LMV33x
+         Vref                                           Vin-
+                                   CL                                         CL
+
+
+
+                              Figure 7-1. Typical Application Schematic
+
+ 7.2.1 Design Requirements
+
+ For this design example, use the parameters listed in Table 7-1 as the input parameters.
+
+                                    Table 7-1. Design Parameters
+                  DESIGN PARAMETER                                EXAMPLE VALUE
+
+                           Input Voltage Range                                        0V to 4.2V
+
+                          Supply Voltage                                                  2.7V to 5V
+                Logic Supply Voltage (RPULLUP Voltage)                                 1V to 5V
+                  Output Current (VLOGIC/RPULLUP)                                   1µA to 20mA
+                         Input Overdrive Voltage                                      100mV
+
+                        Reference Voltage                                                   2.5V
+                    Load Capacitance (CL)                                            15pF
+
+ 7.2.2 Detailed Design Procedure
+
+When using LMV331, LMV393, and LMV33 in a general comparator application, determine the following:
+
+ •  Input Voltage Range
+ •  Minimum Overdrive Voltage
+ •  Output and Drive Current
+ •  Response Time
+
+
+
+
+
+10    Submit Document Feedback                                                                   Copyright © 2025 Texas Instruments Incorporated
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                                           LMV331, LMV393, LMV339
+www.ti.com                                                                     SLCS136V – AUGUST 1999 – REVISED MAY 2025
+
+ 7.2.2.1 Input Voltage Range
+
+When choosing the input voltage range, the input common mode voltage range (VICR) must be taken in to
+ account. If operating temperature is above or below 25°C the VICR can range from 0V to VCC– 0.7V. This limits
+ the input voltage range to as high as VCC– 0.7V and as low as 0V. Operation outside of this range can yield
+ incorrect comparisons.
+
+Below is a possible list of input voltage situation and the outcomes:
+
+ 1. When both IN- and IN+ are both within the common mode range:
+     a.   If IN- is higher than IN+ and the offset voltage, the output is low and the output transistor is sinking
+         current
+     b.   If IN- is lower than IN+ and the offset voltage, the output is high impedance and the output transistor is
+        not conducting
+
+ 2. When IN- is higher than common mode and IN+ is within common mode, the output is low and the output
+     transistor is sinking current
+ 3. When IN+ is higher than common mode and IN- is within common mode, the output is high impedance and
+    the output transistor is not conducting
+ 4. When IN- and IN+ are both higher than common mode, the output is low and the output transistor is sinking
+     current
+
+ 7.2.2.2 Minimum Overdrive Voltage
+
+ Overdrive Voltage  is the  differential voltage produced between the  positive and negative inputs  of the
+ comparator over the offset voltage (VIO). To make an accurate comparison; the Overdrive Voltage (VOD) must
+be higher than the input offset voltage (VIO). Overdrive voltage can also determine the response time of the
+ comparator, with the response time decreasing with increasing overdrive. Figure 7-2 show positive and negative
+ response times with respect to overdrive voltage.
+
+ 7.2.2.3 Output and Drive Current
+
+ Output current is determined by the pull-up resistance (Rpullup) and Vlogic voltage, refer to Figure 7-1. The
+ output current produces a output low voltage (VOL) from the comparator. In which VOL is proportional to the
+ output current. Use Figure 5-3 to determine VOL based on the output current.
+The output current can also effect the transient response. This is explained in the next section.
+
+ 7.2.2.4 Response Time
+
+The transient response can be determined by the load capacitance (CL), load/pull-up resistance (RPULLUP) and
+ equivalent collector-emitter resistance (RCE).
+ •  The positive response time (τp) is approximately τP = RPULLUP × CL
+ •  The negative response time (τN) is approximately τN = RCE × CL
+   – RCE can be determine by taking the slope of Figure 5-3 in it's linear region at the desired temperature, or
+      by dividing the VOL by Iout
+
+
+
+
+
+Copyright © 2025 Texas Instruments Incorporated                                                      Submit Document Feedback    11
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+LMV331, LMV393, LMV339
+SLCS136V – AUGUST 1999 – REVISED MAY 2025                                                                    www.ti.com
+
+ 7.2.3 Application Curves
+
+The following curves were generated with 5V on VCC and VLogic, RPULLUP = 5.1kΩ, and 50pF scope probe.
+
+
+                                         6
+                                                5.5
+                                         5                                5mV OD
+                                                4.5                                  20mV OD
+                                                                        100mV OD
+                                         4
+                                                3.5
+                                                            (V)   3
+                                                2.5
+                                         2                                                                                                                                             Voltage
+                                                1.5
+                                         1
+                                                0.5
+                                         0
+                                                   -0.5
+                                                   -1
+                                                  0.2  0.22  0.24  0.26  0.28  0.3  0.32  0.34  0.36  0.38  0.4
+                                                                Time (uS)
+                Figure 7-2. Response Time for Various Overdrives (Negative Transition)
+
+8 Power Supply Recommendations
+
+ For fast response and comparison applications with noisy or AC inputs, a bypass capacitor is recommended on
+ the supply pin to reject any variation on the supply voltage. This variation cause temporary fluctuations in the
+ comparator's input common mode range and create an inaccurate comparison.
+
+9 Layout
+ 9.1 Layout Guidelines
+
+ For accurate comparator applications without hysteresis, a stable power supply is necessary with minimized
+ noise and glitches, which can affect the high level input common mode voltage range. To achieve this, add a
+ bypass capacitor between the supply voltage and ground. This can be implemented on the positive power supply
+and negative supply (if available). If a negative supply is not being used, do not put a capacitor between the IC's
+GND pin and system ground.
+
+ 9.2 Layout Example
+
+
+                                                                                                            Ground
+
+                                                                                                  Bypass
+                                                                                                               Capacitor
+                                                                                                                                0.1 μ F
+                                                            IN–   1      5  VCC                 Positive Supply
+                                                  Negative Supply or Ground   GND   2
+                           Only needed                               IN+   3      4  OUT
+                                   for dual power
+                                                  0.1 μ F
+                                supplies
+                                           Ground
+
+                                 Figure 9-1. LMV331 Layout Example
+
+
+
+
+
+12    Submit Document Feedback                                                                   Copyright © 2025 Texas Instruments Incorporated
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                                           LMV331, LMV393, LMV339
+www.ti.com                                                                     SLCS136V – AUGUST 1999 – REVISED MAY 2025
+
+10 Device and Documentation Support
+ 10.1 Related Links
+
+The table below  lists quick access links. Categories include technical documents, support and community
+ resources, tools and software, and quick access to sample or buy.
+
+                                      Table 10-1. Related Links
+                                                     TECHNICAL        TOOLS &        SUPPORT &
+      PARTS      PRODUCT FOLDER   SAMPLE & BUY
+                                               DOCUMENTS      SOFTWARE       COMMUNITY
+
+      LMV331               Click here              Click here              Click here              Click here              Click here
+
+      LMV393               Click here              Click here              Click here              Click here              Click here
+
+      LMV339               Click here              Click here              Click here              Click here              Click here
+
+11 Trademarks
+ All trademarks are the property of their respective owners.
+12 Electrostatic Discharge Caution
+                  This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled
+                   with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+
+            ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may
+               be more susceptible to damage because very small parametric changes could cause the device not to meet its published
+                    specifications.
+
+13 Glossary
+
+ TI Glossary      This glossary lists and explains terms, acronyms, and definitions.
+
+
+
+
+
+Copyright © 2025 Texas Instruments Incorporated                                                      Submit Document Feedback    13
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+LMV331, LMV393, LMV339
+SLCS136V – AUGUST 1999 – REVISED MAY 2025                                                                    www.ti.com
+
+
+14 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+
+Changes from Revision U (October 2020) to Revision V (May 2025)                           Page
+ •  Updated Device Information table...................................................................................................................... 1
+ •  Corrected incorrect Feature Description text about input voltage conditions for output sinking.........................9
+
+
+
+Changes from Revision T (January 2015) to Revision U (October 2020)                        Page
+ •  Updated the numbering format for tables, figures and cross-references throughout the document.................. 1
+
+
+
+Changes from Revision S (January 2015) to Revision T (January 2015)                        Page
+ •  Added Applications, Device Information table, Pin Functions table, ESD Ratings table, Thermal Information
+    table, Typical Characteristics, Feature Description section, Device Functional Modes, Application and
+   Implementation section, Power Supply Recommendations section, Layout section, Device and
+   Documentation Support section, and Mechanical, Packaging, and Orderable Information section...................1
+ •  Deleted Ordering Information table. See the orderable addendum at the end of the data sheet.......................1
+
+
+
+Changes from Revision R (May 2012) to Revision S (January 2015)                           Page
+ •  Updated operating temperature range............................................................................................................... 4
+
+
+
+Changes from Revision Q (April 2012) to Revision R (May 2012)                             Page
+ •  Added RUC to marking list (table later removed in T)........................................................................................3
+
+
+
+Changes from Revision P (March 2012) to Revision Q (April 2012)                            Page
+ •  Corrected the Top Side Marking for RUC package, RT_ (table removed in T).................................................. 3
+
+
+
+Changes from Revision O (February 2012) to Revision P (March 2012)                        Page
+ •  Corrected typo in Ordering Information Table for Top Side Marking, R9_ (table removed in T).........................3
+
+
+
+Changes from Revision N (April 2011) to Revision O (February 2012)                         Page
+ •  Changed VI in the Absolute Maximum Ratings from 5.5V to VCC+ ....................................................................4
+
+
+
+Changes from Revision M (November 2005) to Revision N (April 2011)                        Page
+ •  Changed document format from Quicksilver to DocZone...................................................................................1
+ •  Added RUC package pin out drawing................................................................................................................ 3
+
+
+
+
+
+14    Submit Document Feedback                                                                   Copyright © 2025 Texas Instruments Incorporated
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                                           LMV331, LMV393, LMV339
+www.ti.com                                                                     SLCS136V – AUGUST 1999 – REVISED MAY 2025
+
+15 Mechanical, Packaging, and Orderable Information
+
+The following pages include mechanical, packaging, and orderable information. This information is the most
+ current data available for the designated devices. This data is subject to change without notice and revision of
+ this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+
+Copyright © 2025 Texas Instruments Incorporated                                                      Submit Document Feedback    15
+
+                                          Product Folder Links: LMV331 LMV393 LMV339
+                                                         PACKAGE OPTION ADDENDUM
+
+
+    www.ti.com                                                                                                                                                                      9-Mar-2026
+
+
+PACKAGING INFORMATION
+
+   Orderable part number     Status   Material type    Package | Pins    Package qty | Carrier    RoHS        Lead finish/       MSL rating/       Op temp (°C)           Part marking
+                                                      (1)                 (2)                                                                                          (3)            Ball material        Peak reflow                                                              (6)
+                                                                                                                                                                                                    (4)                                (5)
+      LMV331IDBVR           Active     Production    SOT-23 (DBV) | 5    3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125              (R1IF, R1IK)
+     LMV331IDBVR.A          Active     Production    SOT-23 (DBV) | 5    3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125              (R1IF, R1IK)
+     LMV331IDBVR.B          Active     Production    SOT-23 (DBV) | 5    3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125              (R1IF, R1IK)
+     LMV331IDBVRE4          Active     Production    SOT-23 (DBV) | 5    3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125              (R1IF, R1IK)
+     LMV331IDBVRG4          Active     Production    SOT-23 (DBV) | 5    3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125              (R1IF, R1IK)
+      LMV331IDBVT         Obsolete    Production    SOT-23 (DBV) | 5                    -                          -                 Call TI                  Call TI              -40 to 125              (R1IF, R1IK)
+      LMV331IDCKR           Active     Production     SC70 (DCK) | 5     3000 | LARGE T&R      Yes     NIPDAU | NIPDAUAG  Level-1-260C-UNLIM        -40 to 125           (R2F, R2K, R2R)
+     LMV331IDCKR.A          Active     Production     SC70 (DCK) | 5     3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125           (R2F, R2K, R2R)
+     LMV331IDCKR.B          Active     Production     SC70 (DCK) | 5     3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125           (R2F, R2K, R2R)
+     LMV331IDCKRE4          Active     Production     SC70 (DCK) | 5     3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125           (R2F, R2K, R2R)
+     LMV331IDCKRG4         Active     Production     SC70 (DCK) | 5     3000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125           (R2F, R2K, R2R)
+      LMV331IDCKT         Obsolete    Production     SC70 (DCK) | 5                     -                          -                 Call TI                  Call TI              -40 to 125             (R2F, R2R)
+        LMV339ID           Obsolete    Production      SOIC (D) | 14                      -                          -                 Call TI                  Call TI              -40 to 125             LMV339I
+       LMV339IDR            Active     Production      SOIC (D) | 14      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             LMV339I
+       LMV339IDR.A           Active     Production      SOIC (D) | 14      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             LMV339I
+      LMV339IDRG4           Active     Production      SOIC (D) | 14      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             LMV339I
+     LMV339IDRG4.A          Active     Production      SOIC (D) | 14      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             LMV339I
+       LMV339IPW          Obsolete    Production    TSSOP (PW) | 14                    -                          -                 Call TI                  Call TI              -40 to 125             MV339I
+      LMV339IPWR           Active     Production    TSSOP (PW) | 14    2000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV339I
+      LMV339IPWR.A          Active     Production    TSSOP (PW) | 14    2000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV339I
+      LMV339IPWR.B          Active     Production    TSSOP (PW) | 14    2000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV339I
+     LMV339IPWRG4          Active     Production    TSSOP (PW) | 14    2000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV339I
+        LMV393ID           Obsolete    Production      SOIC (D) | 8                       -                          -                 Call TI                  Call TI              -40 to 125             MV393I
+      LMV393IDDUR         Obsolete    Production    VSSOP (DDU) | 8                    -                          -                 Call TI                  Call TI              -40 to 125           RABR
+      LMV393IDGKR           Active     Production    VSSOP (DGK) | 8    2500 | LARGE T&R      Yes        NIPDAU | SN      Level-1-260C-UNLIM        -40 to 125           (R9B, R9Q, R9R)
+     LMV393IDGKR.A          Active     Production    VSSOP (DGK) | 8    2500 | LARGE T&R      Yes           SN          Level-1-260C-UNLIM        -40 to 125           (R9B, R9Q, R9R)
+     LMV393IDGKR.B          Active     Production    VSSOP (DGK) | 8    2500 | LARGE T&R      Yes           SN          Level-1-260C-UNLIM        -40 to 125           (R9B, R9Q, R9R)
+       LMV393IDR            Active     Production      SOIC (D) | 8      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+       LMV393IDR.A           Active     Production      SOIC (D) | 8      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+
+
+                                                                               Addendum-Page 1
+                                                         PACKAGE OPTION ADDENDUM
+
+
+    www.ti.com                                                                                                                                                                      9-Mar-2026
+
+
+
+
+   Orderable part number     Status   Material type    Package | Pins    Package qty | Carrier    RoHS        Lead finish/       MSL rating/       Op temp (°C)           Part marking
+                                                      (1)                 (2)                                                                                          (3)            Ball material        Peak reflow                                                              (6)
+                                                                                                                                                                                                    (4)                                (5)
+       LMV393IDR.B           Active     Production      SOIC (D) | 8      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+      LMV393IDRG4           Active     Production      SOIC (D) | 8      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+     LMV393IDRG4.A          Active     Production      SOIC (D) | 8      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+     LMV393IDRG4.B          Active     Production      SOIC (D) | 8      2500 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+       LMV393IPW          Obsolete    Production    TSSOP (PW) | 8                    -                          -                 Call TI                  Call TI              -40 to 125             MV393I
+      LMV393IPWR           Active     Production    TSSOP (PW) | 8     2000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+      LMV393IPWR.A          Active     Production    TSSOP (PW) | 8     2000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+     LMV393IPWRG4          Active     Production    TSSOP (PW) | 8     2000 | LARGE T&R      Yes          NIPDAU        Level-1-260C-UNLIM        -40 to 125             MV393I
+
+(1) Status: For more details on status, see our product life cycle.
+
+(2) Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3) RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4) Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5) MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6) Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+
+                                                                               Addendum-Page 2
+                                                         PACKAGE OPTION ADDENDUM
+
+
+    www.ti.com                                                                                                                                                                      9-Mar-2026
+
+
+
+
+
+OTHER QUALIFIED VERSIONS OF LMV331, LMV393 :
+• Automotive : LMV331-Q1, LMV393-Q1
+
+
+NOTE: Qualified Version Definitions:
+       • Automotive - Q100 devices qualified for high-reliability automotive applications targeting zero defects
+
+
+
+
+
+                                                                               Addendum-Page 3
+                         PACKAGE MATERIALS INFORMATION
+
+
+www.ti.com                                                                                                                    17-May-2026
+
+TAPE AND REEL INFORMATION
+
+     REEL DIMENSIONS                                  TAPE DIMENSIONS
+                                                       K0    P1
+
+
+                                                   W                                                                               B0
+                                      Reel
+                                    Diameter
+                                                                         Cavity       A0
+                                         A0  Dimension designed to accommodate the component width
+                                           B0  Dimension designed to accommodate the component length
+                                         K0  Dimension designed to accommodate the component thickness
+                           W   Overall width of the carrier tape
+                                               P1   Pitch between successive cavity centers
+
+                                      Reel Width (W1)
+                  QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+                                                                                         Sprocket Holes
+
+
+                                  Q1  Q2     Q1  Q2
+
+                                  Q3  Q4     Q3  Q4             User Direction of Feed
+
+
+                                                      Pocket Quadrants
+
+
+*All dimensions are nominal
+        Device        Package Package Pins  SPQ     Reel     Reel    A0    B0    K0    P1   W     Pin1
+                       Type   Drawing               Diameter  Width  (mm)  (mm)  (mm)  (mm)  (mm) Quadrant
+                                                 (mm)  W1 (mm)
+    LMV331IDBVR     SOT-23   DBV    5    3000    180.0      8.4      3.2     3.2     1.4     4.0     8.0    Q3
+    LMV331IDBVR     SOT-23   DBV    5    3000    178.0      9.0     3.23   3.17   1.37    4.0     8.0    Q3
+    LMV331IDBVR     SOT-23   DBV    5    3000    180.0      8.4     3.17   3.23   1.37    4.0     8.0    Q3
+    LMV331IDCKR      SC70   DCK    5    3000    178.0      9.0      2.4     2.5     1.2     4.0     8.0    Q3
+    LMV331IDCKR      SC70   DCK    5    3000    178.0      9.0      2.4     2.5     1.2     4.0     8.0    Q3
+      LMV339IDR       SOIC    D     14    2500    330.0     16.4     6.5     9.0     2.1     8.0    16.0    Q1
+    LMV339IDRG4      SOIC    D     14    2500    330.0     16.4     6.5     9.0     2.1     8.0    16.0    Q1
+     LMV339IPWR     TSSOP   PW    14    2000    330.0     12.4     6.9     5.6     1.6     8.0    12.0    Q1
+    LMV393IDGKR     VSSOP  DGK    8    2500    330.0     12.4     5.3     3.3     1.3     8.0    12.0    Q1
+    LMV393IDGKR     VSSOP  DGK    8    2500    330.0     12.4    5.25   3.35   1.25    8.0    12.0    Q1
+      LMV393IDR       SOIC    D      8    2500    330.0     12.4     6.4     5.2     2.1     8.0    12.0    Q1
+      LMV393IDR       SOIC    D      8    2500    330.0     12.4     6.4     5.2     2.1     8.0    12.0    Q1
+    LMV393IDRG4      SOIC    D      8    2500    330.0     12.4     6.4     5.2     2.1     8.0    12.0    Q1
+    LMV393IDRG4      SOIC    D      8    2500    330.0     12.4     6.4     5.2     2.1     8.0    12.0    Q1
+     LMV393IPWR     TSSOP   PW     8    2000    330.0     12.4     7.0     3.6     1.6     8.0    12.0    Q1
+
+
+
+
+
+                                                  Pack Materials-Page 1
+                         PACKAGE MATERIALS INFORMATION
+
+
+www.ti.com                                                                                                                    17-May-2026
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+
+                                                                                                   Width (mm)     H
+
+
+
+
+
+     W             L
+
+
+
+
+
+*All dimensions are nominal
+         Device          Package Type  Package Drawing  Pins   SPQ    Length (mm)  Width (mm)   Height (mm)
+     LMV331IDBVR         SOT-23         DBV         5     3000        210.0         185.0          35.0
+     LMV331IDBVR         SOT-23         DBV         5     3000        180.0         180.0          18.0
+     LMV331IDBVR         SOT-23         DBV         5     3000        205.0         200.0          33.0
+     LMV331IDCKR          SC70         DCK         5     3000        180.0         180.0          18.0
+     LMV331IDCKR          SC70         DCK         5     3000        180.0         180.0          18.0
+      LMV339IDR           SOIC          D          14     2500        353.0         353.0          32.0
+     LMV339IDRG4          SOIC          D          14     2500        353.0         353.0          32.0
+     LMV339IPWR         TSSOP        PW         14     2000        353.0         353.0          32.0
+    LMV393IDGKR        VSSOP        DGK         8     2500        370.0         355.0          55.0
+    LMV393IDGKR        VSSOP        DGK         8     2500        366.0         364.0          50.0
+      LMV393IDR           SOIC          D          8     2500        353.0         353.0          32.0
+      LMV393IDR           SOIC          D          8     2500        353.0         353.0          32.0
+     LMV393IDRG4          SOIC          D          8     2500        353.0         353.0          32.0
+     LMV393IDRG4          SOIC          D          8     2500        340.5         338.1          20.6
+     LMV393IPWR         TSSOP        PW         8     2000        353.0         353.0          32.0
+
+
+
+
+
+                                                  Pack Materials-Page 2
+                                 PACKAGE OUTLINE
+DCK0005A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         SCALE 5.600               SOT - 1.1 max height
+                                                                        SMALL OUTLINE TRANSISTOR
+
+
+
+
+
+                                                                         C
+                                                2.4
+                                                1.8                                                               0.1 C
+                                                1.4                                            B              A                       1.1 MAX                   PIN 1                    1.1
+           INDEX AREA
+
+                          1                            5
+
+                                             NOTE 4                2X 0.65
+                                                                               2.15                 1.3                                             (0.15)         1.3                          2                                                1.85
+                                                                          (0.1)
+
+                                                        4
+                            3                     0.33              5X                     0.15
+            0.10.1   CC AA BB                                                                  4X 0 -12               (0.9)            0.1 TYP            NOTENOTE 55                                                                                                     0.0
+
+
+
+
+
+                                                 4X 4 -15
+
+
+
+                  0.15
+                                                                        0.22      GAGE PLANE                                        TYP                                                                        0.08
+
+
+                                         0.46          8                                  TYP           TYP                                         0.26          0                                             SEATING PLANE
+
+
+
+
+
+                                                                                                  4214834/G  11/2024
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+  per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. Refernce JEDEC MO-203.
+4. Support pin may differ or may not be present.
+5. Lead width does not comply with JEDEC.
+6. Body dimensions do not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not exceed
+  0.25mm per side
+
+
+
+                                                     www.ti.com
+                             EXAMPLE BOARD LAYOUT
+DCK0005A                                  SOT - 1.1 max height
+                                                                        SMALL OUTLINE TRANSISTOR
+
+
+
+
+
+                                             PKG                                      5X (0.95)
+                                      1
+                                                                             5
+                           5X (0.4)
+
+                                                          SYMM
+                                                                                                                    (1.3)                                      2
+                       2X (0.65)
+
+                                      3                                      4
+
+                             (R0.05) TYP                             (2.2)
+
+                             LAND PATTERN EXAMPLE
+                                       EXPOSED METAL SHOWN
+                                                   SCALE:18X
+
+
+
+
+
+                                                                         SOLDER MASK             SOLDER MASK                           METAL UNDER                                   METAL                                   OPENING             OPENING                              SOLDER MASK
+
+
+        EXPOSED METAL                        EXPOSED METAL
+
+                                       0.07 MAX                                          0.07 MIN
+                          ARROUND                           ARROUND
+
+                     NON SOLDER MASK                        SOLDER MASK
+                             DEFINED                                DEFINED
+                           (PREFERRED)
+                              SOLDER MASK DETAILS
+
+
+
+
+
+                                                                                                  4214834/G  11/2024
+NOTES: (continued)
+
+7. Publication IPC-7351 may have alternate designs.
+8. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+
+                                                     www.ti.com
+                            EXAMPLE STENCIL DESIGN
+DCK0005A                                  SOT - 1.1 max height
+                                                                        SMALL OUTLINE TRANSISTOR
+
+
+
+
+
+                                           PKG
+                                     5X (0.95)
+                                     1
+                                                                            5
+                          5X (0.4)
+
+                                                         SYMM
+                                                                                                                  (1.3)
+                                     2
+                             2X(0.65)
+
+                                     3                                      4
+
+                           (R0.05) TYP                                                                          (2.2)
+
+                           SOLDER PASTE EXAMPLE
+                                   BASED ON 0.125 THICK STENCIL
+                                                 SCALE:18X
+
+
+
+
+
+                                                                                                  4214834/G  11/2024
+NOTES: (continued)
+
+9. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+10. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+
+                                                     www.ti.com
+                                 PACKAGE OUTLINE
+D0008A                                                                                                                                                                                                                                                                                 SCALE 2.800            SOIC - 1.75 mm max height
+                                                                 SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+                                                                           C
+
+                                                                         SEATING PLANE
+                                  .228-.244 TYP
+                                     [5.80-6.19]                                                                                                    .004 [0.1] C
+       A                                    PIN 1 ID AREA
+                                                        6X .050
+                                                                                       [1.27]
+                                                       8
+              1
+
+
+
+                                                         2X     .189-.197
+      [4.81-5.00]                                                       .150
+    NOTE 3                                                                  [3.81]
+
+
+                                                                      4X (0 -15 )
+
+              4
+                                                       5
+                                                        8X .012-.020
+              B               .150-.157                                [0.31-0.51]                                                                                                           .069 MAX
+                                        [3.81-3.98]                        .010 [0.25]   C A B                     [1.75]
+                          NOTE 4
+
+
+
+
+
+                                                                          .005-.010 TYP
+                                                                               [0.13-0.25]
+
+
+                            4X (0 -15 )
+
+             SEE DETAIL A
+                                                                   .010
+                                                                              [0.25]
+
+
+
+                                                                                                                   .004-.010                                                        0 - 8                                                                                                                            [0.11-0.25]
+                                                                        .016-.050
+                                                                             [0.41-1.27]              DETAIL A
+                                                                                                (.041)        TYPICAL
+                                                                                                    [1.04]
+
+                                                                                                   4214825/C  02/2019
+NOTES:
+
+1. Linear dimensions are in inches [millimeters]. Dimensions in parenthesis are for reference only. Controlling dimensions are in inches.
+  Dimensioning and tolerancing per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+  exceed .006 [0.15] per side.
+4. This dimension does not include interlead flash.
+5. Reference JEDEC registration MS-012, variation AA.
+
+
+
+
+                                                    www.ti.com
+                             EXAMPLE BOARD LAYOUT
+D0008A                                    SOIC - 1.75 mm max height
+                                                                 SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+
+
+
+                         8X (.061  )
+                                        [1.55]
+                                        SYMM               SEE
+                                                                       DETAILS
+                                    1
+                                                                          8
+
+                       8X (.024)
+                                        [0.6]                                  SYMM
+
+
+
+                                                                                        (R.002  ) TYP
+                                                                                                            [0.05]                                                                          5
+                                     4
+                   6X (.050  )
+                                 [1.27]
+                                                                    (.213)
+                                                                             [5.4]
+
+                            LAND PATTERN EXAMPLE
+                                    EXPOSED METAL SHOWN
+                                                SCALE:8X
+
+
+
+
+
+                                SOLDER MASK      SOLDER MASK
+               METAL             OPENING              OPENING               METAL UNDER                                                                         SOLDER MASK
+
+
+        EXPOSED
+           METAL                                EXPOSED
+                                                   METAL
+                                 .0028 MAX                                              .0028 MIN
+                                       [0.07]                                                             [0.07]
+                            ALL AROUND                                    ALL AROUND
+
+                  NON SOLDER MASK                            SOLDER MASK
+                         DEFINED                                      DEFINED
+
+                              SOLDER MASK DETAILS
+
+
+
+
+                                                                                                   4214825/C  02/2019
+
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+
+                                                    www.ti.com
+                            EXAMPLE STENCIL DESIGN
+D0008A                                    SOIC - 1.75 mm max height
+                                                                 SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+
+
+
+                           8X (.061  )
+                                            [1.55]              SYMM
+
+                                        1
+                                                                             8
+
+                         8X (.024)
+                                            [0.6]                                                            SYMM
+
+
+
+                                                                                            (R.002  ) TYP
+                                                                                                                [0.05]                                                                             5
+                                        4
+                      6X (.050  )
+                                     [1.27]
+                                                                         (.213)
+                                                                                  [5.4]
+
+                              SOLDER PASTE EXAMPLE
+                                BASED ON .005 INCH [0.125 MM] THICK STENCIL
+                                                   SCALE:8X
+
+
+
+
+
+                                                                                                   4214825/C  02/2019
+
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+  design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+
+                                                     www.ti.com
+                                 PACKAGE OUTLINE
+PW0014A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           SCALE 2.500            TSSOP - 1.2 mm max height
+                                                                           SMALL OUTLINE PACKAGE
+
+
+
+
+                                                                                           SEATING
+                                                                                       PLANE
+                                                                      C                                       6.6                              TYP                                       6.2       A
+                                                                                                                              0.1 C
+                                   PIN 1 INDEX AREA
+                                                             12X 0.65
+                                                         14
+             1
+
+
+
+                                                            2X
+          5.1                                                                  3.9
+          4.9
+     NOTE 3
+
+                                                                        4X (0 -12 )
+             7
+                                                         8                                                                               0.30                                                             14X                                                                               0.17
+                                         4.5                                                                                                           1.2 MAX            B                                         4.3                                     0.1   C A B
+                          NOTE 4
+
+
+
+
+
+                                                             (0.15) TYP
+                          SEE DETAIL A
+
+                                                                          0.25
+                                           GAGE PLANE
+                                                                                                                       0.15
+                                                                                                                       0.05
+
+
+                                                                                         0.75
+                                                                                         0.50                                                                                                                                                                      A 20                                                                  0 -8                                                                   DETAIL A
+                                                                                   TYPICAL
+
+                                                                                                    4220202/B  12/2023
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+  per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+  exceed 0.15 mm per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm per side.
+5. Reference JEDEC registration MO-153.
+
+
+
+
+                                                     www.ti.com
+                             EXAMPLE BOARD LAYOUT
+PW0014A                              TSSOP - 1.2 mm max height
+                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                 14X (1.5)         SYMM
+                                                                                                    (R0.05) TYP                                1
+                                                                                  14                      14X (0.45)
+
+
+
+                                                               SYMM
+
+
+                     12X (0.65)
+
+
+                                7                                                 8
+
+
+                                                                           (5.8)
+
+                             LAND PATTERN EXAMPLE
+                                     EXPOSED METAL SHOWN
+                                                 SCALE: 10X
+
+
+
+
+         SOLDER MASK                                 METAL UNDER           SOLDER MASK
+                       METAL                         SOLDER MASK           OPENING              OPENING
+
+
+    EXPOSED METAL                                                             EXPOSED METAL
+
+                                0.05 MAX                                                    0.05 MIN
+                          ALL AROUND                                        ALL AROUND
+
+                   NON-SOLDER MASK                               SOLDER MASK
+                        DEFINED                                                                                                                                                                                                                                                                                                                                                                                     15.000                         DEFINED
+                       (PREFERRED)      SOLDER MASK DETAILS
+
+
+                                                                                                    4220202/B  12/2023
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+
+                                                     www.ti.com
+                            EXAMPLE STENCIL DESIGN
+PW0014A                              TSSOP - 1.2 mm max height
+                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                 14X (1.5)         SYMM
+                                                                                                    (R0.05) TYP                                1
+                      14X (0.45)                                                  14
+
+
+
+                                                              SYMM
+
+
+                     12X (0.65)
+
+
+                                7                                                 8
+
+
+                                                                           (5.8)
+
+
+                            SOLDER PASTE EXAMPLE
+                                  BASED ON 0.125 mm THICK STENCIL
+                                                 SCALE: 10X
+
+
+
+
+
+                                                                                                    4220202/B  12/2023
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+  design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+
+                                                     www.ti.com
+                                 PACKAGE OUTLINE
+PW0008A                                                                                                                                                                                                                                                                                                                                                                                                                             SCALE 2.800           TSSOP - 1.2 mm max height
+                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                                                          C
+                                         6.6                                TYP                                  SEATING PLANE                                         6.2
+                                      PIN 1 ID        A                                                                                                0.1 C                               AREA
+                                                            6X 0.65
+                                                           8
+               1
+
+           3.1                                                 2X
+           2.9
+      NOTE 3                                                           1.95
+
+               4
+                                                           5
+                                                                            0.30                                                          8X                                                                            0.19
+                                           4.5                                                                   1.2 MAX               B                                                          0.1   C A   B                                           4.3
+                           NOTE 4
+
+
+
+
+
+                                                                                  (0.15) TYP
+                         SEE DETAIL A
+
+
+
+                                                                           0.25
+                                            GAGE PLANE
+
+
+
+                                                                                                                         0.15                                                                                                     0.75                                                             0 - 8                                              0.05                                                                                                     0.50
+
+                                                                  DETAIL A
+                                                                                  TYPICAL
+
+
+                                                                                                    4221848/A  02/2015
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+  per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+  exceed 0.15 mm per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm per side.
+5. Reference JEDEC registration MO-153, variation AA.
+
+
+
+
+                                                     www.ti.com
+                             EXAMPLE BOARD LAYOUT
+PW0008A                              TSSOP - 1.2 mm max height
+                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                 8X (1.5)
+                   8X (0.45)                    SYMM                                                                                           (R 0.05 )
+                                 1                                             TYP
+                                                                                   8
+
+                                                                SYMM
+
+
+                      6X (0.65)
+                                                                                   5
+                                 4
+
+                                                                             (5.8)
+
+                              LAND PATTERN EXAMPLE
+                                                   SCALE:10X
+
+
+
+
+
+                                                                         SOLDER                                                                            MASK            SOLDER                  MASK                                                    UNDER                                  METAL           METAL                                                                           OPENING            OPENING                                                 SOLDER                                                      MASK
+
+
+
+                                    0.05 MAX                                              0.05 MIN
+                              ALL AROUND                                  ALL AROUND
+
+                   NON SOLDER MASK                           SOLDER MASK
+                           DEFINED                                    DEFINED
+
+                              SOLDER MASK DETAILS
+                                         NOT TO SCALE
+
+
+
+
+
+                                                                                                    4221848/A  02/2015
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+
+                                                     www.ti.com
+                            EXAMPLE STENCIL DESIGN
+PW0008A                              TSSOP - 1.2 mm max height
+                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                 8X (1.5)
+                                         SYMM                          (R 0.05 ) TYP                   8X (0.45)
+                                 1
+                                                                                  8
+
+                                                                SYMM
+
+
+                     6X (0.65)
+                                                                                  5
+                                 4
+
+                                                                            (5.8)
+
+
+                             SOLDER PASTE EXAMPLE
+                                   BASED ON 0.125 mm THICK STENCIL
+                                                  SCALE:10X
+
+
+
+
+
+                                                                                                    4221848/A  02/2015
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+  design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+
+                                                     www.ti.com
+                               GENERIC PACKAGE VIEW
+RUC 14                                 X2QFN - 0.4 mm max height
+2 x 2, 0.4 mm pitch                                                      PLASTIC QUAD FLATPACK - NO LEAD
+
+
+                This image is a representation of the package family, actual package may vary.
+                            Refer to the product data sheet for package details.
+
+
+
+
+
+                                                                                                                          4229871/A
+
+
+
+                                                    www.ti.com
+                                 PACKAGE OUTLINE
+DBV0005A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           SCALE 4.000           SOT-23 - 1.45 mm max height
+                                                                        SMALL OUTLINE TRANSISTOR
+
+
+                                           3.0                                         C
+                                           2.6
+                                                                                                       0.1 C                                        1.75                                         B             A                                        1.45
+            PIN 1
+     INDEX AREA
+
+                   1                                  5
+
+          2X 0.95                                                 (0.1)
+                                                                          3.05
+                                                                          2.75
+        1.9                                                            1.9
+                   2
+                                                                    (0.15)
+
+
+
+                                                      4
+                     3              0.5        5X              0.3
+                                                                                                                   0.15
+               0.2   C A B                          NOTE 5     4X 0 -15               (1.1)           0.00 TYP
+                                                                                                     1.45
+                                                                                                     0.90
+                                              4X 4 -15
+
+
+          0.25
+ GAGE PLANE                                                       0.22                                                        TYP                                                                     0.08
+
+
+   8    TYP                        0.6   0                           TYP        SEATING PLANE                                  0.3
+
+
+
+
+
+                                                                                                    4214839/K  08/2024
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+  per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. Refernce JEDEC MO-178.
+4. Body dimensions do not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+  exceed 0.25 mm per side.
+5. Support pin may differ or may not be present.
+
+
+
+
+                                                     www.ti.com
+                             EXAMPLE BOARD LAYOUT
+DBV0005A                                 SOT-23 - 1.45 mm max height
+                                                                        SMALL OUTLINE TRANSISTOR
+
+
+
+
+
+                                             PKG
+                                       5X (1.1)
+                                      1
+                                                                             5
+                           5X (0.6)
+
+
+                                                          SYMM
+                                                                                                                    (1.9)
+                                       2
+                        2X (0.95)
+
+                                       3                                     4
+
+                             (R0.05) TYP                             (2.6)
+
+                             LAND PATTERN EXAMPLE
+                                      EXPOSED METAL SHOWN
+                                                  SCALE:15X
+
+
+
+
+
+                                                                         SOLDER MASK             SOLDER MASK                           METAL UNDER                                   METAL                                   OPENING             OPENING                              SOLDER MASK
+
+
+      EXPOSED METAL                         EXPOSED METAL
+
+                                       0.07 MAX                                          0.07 MIN
+                          ARROUND                           ARROUND
+
+                     NON SOLDER MASK                        SOLDER MASK
+                             DEFINED                                DEFINED
+                           (PREFERRED)
+
+                              SOLDER MASK DETAILS
+
+
+
+
+                                                                                                    4214839/K  08/2024
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+
+                                                     www.ti.com
+                            EXAMPLE STENCIL DESIGN
+DBV0005A                                 SOT-23 - 1.45 mm max height
+                                                                        SMALL OUTLINE TRANSISTOR
+
+
+
+
+
+                                           PKG
+                                     5X (1.1)
+                                     1
+                                                                           5
+                          5X (0.6)
+
+
+                                                         SYMM
+                                     2                                                              (1.9)
+                             2X(0.95)
+
+                                     3                                     4
+
+                            (R0.05) TYP                                                                          (2.6)
+
+                           SOLDER PASTE EXAMPLE
+                                  BASED ON 0.125 mm THICK STENCIL
+                                                 SCALE:15X
+
+
+
+
+
+                                                                                                     4214839/K  08/2024
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+
+                                                     www.ti.com
+                                 PACKAGE OUTLINE
+DGK0008A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            SCALE 4.000             VSSOP - 1.1 mm max height
+                                                                           SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                                                       C
+                                         5.05                                  TYP        A                             4.75                                                                                                         0.1 C
+                                        PIN 1 INDEX AREA                                                                                            SEATING
+                                                                                        PLANE
+                                                                6X 0.65                                                                8
+              1
+
+
+                                                                  2X
+          3.1                                                                                   1.95          2.9
+     NOTE 3
+
+
+              4
+                                                               5                                                                                     0.38                                                                 8X                                                                                     0.25
+                                              3.1                                        0.13   C A B               B                                              2.9
+                             NOTE 4
+
+
+
+
+
+                                                                                0.23
+                                                                                0.13
+
+
+
+                             SEE DETAIL A
+                                                                                         0.25
+                                                            GAGE PLANE
+
+                                                                                                                              1.1 MAX
+
+
+
+                                                                                                                          0.15                                                                                                   0.7                                                                  0 -8                                           0.05                                                                                                   0.4                                                                                                                                                                              A 20
+                                                                      DETAIL A
+                                                                                       TYPICAL
+
+                                                                                                    4214862/A  04/2023
+                                                                    PowerPAD is a trademark of Texas Instruments.NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+  per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+  exceed 0.15 mm per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm per side.
+5. Reference JEDEC registration MO-187.
+
+
+
+
+                                                     www.ti.com
+                             EXAMPLE BOARD LAYOUT
+                                                                                             TM VSSOP - 1.1 mm max heightDGK0008A
+                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                        SYMM
+                             8X (1.4)                                                              (R0.05) TYP
+
+
+               8X (0.45)  1                                                          8
+
+
+                                                                 SYMM
+
+
+                 6X (0.65)
+                                                                                     5
+                          4
+
+
+                                                                        SEE DETAILS
+
+                                                                         (4.4)
+                             LAND PATTERN EXAMPLE
+                                     EXPOSED METAL SHOWN
+                                                 SCALE: 15X
+
+
+
+
+            SOLDER MASK            METAL            METAL UNDER          SOLDER MASK                 OPENING                             SOLDER MASK           OPENING
+
+
+       EXPOSED METAL                                                          EXPOSED METAL
+
+                                    0.05 MAX                                               0.05 MIN
+                              ALL AROUND                                   ALL AROUND
+                     NON-SOLDER MASK                            SOLDER MASK
+                           DEFINED                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    15.000                        DEFINED
+                         (PREFERRED)    SOLDER MASK DETAILS
+
+
+
+                                                                                                    4214862/A  04/2023
+NOTES: (continued)
+
+ 6. Publication IPC-7351 may have alternate designs.
+ 7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+ 8. Vias are optional depending on application, refer to device data sheet. If any vias are implemented, refer to their locations shown
+   on this view. It is recommended that vias under paste be filled, plugged or tented.
+ 9. Size of metal pad may vary due to creepage requirement.
+
+
+
+
+
+                                                     www.ti.com
+                            EXAMPLE STENCIL DESIGN
+                                                                                             TM VSSOP - 1.1 mm max heightDGK0008A
+                                                                          SMALL OUTLINE PACKAGE
+
+
+
+
+
+                                         SYMM
+
+                              8X (1.4)                                                              (R0.05) TYP
+
+                8X (0.45)  1                                                         8
+
+
+                                                                  SYMM
+
+
+                  6X (0.65)
+                                                                                      5
+                            4
+
+
+
+                                                                           (4.4)
+
+
+                            SOLDER PASTE EXAMPLE
+                                                  SCALE: 15X
+
+
+
+
+
+                                                                                                    4214862/A  04/2023
+NOTES: (continued)
+
+11. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+12. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+
+                                                     www.ti.com
+
+                                 PACKAGE OUTLINE
+D0014A                                                                                                                                                                                                                                                                                                                                                                                                                                                                SCALE 1.800             SOIC - 1.75 mm max height
+                                                                 SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+                                                                          C
+                                      6.2                              TYP                                     SEATING PLANE                                      5.8
+                                       PIN 1 ID                                                       0.1 C           A                               AREA
+                                                       12X 1.27
+                                                   14
+                  1
+
+
+
+
+
+             8.75                                        2X
+             8.55                                                 7.62
+        NOTE 3
+
+
+
+
+
+                  7
+                                                 8                                                                     0.51                                                     14X
+                                         4.0                            0.31                 B                                         3.8                            0.25   C A B                      1.75 MAX
+                         NOTE 4
+
+
+
+
+
+                                                                0.25                                                    TYP                                                                0.13                           SEE DETAIL A
+                                                                                  0.25
+                                                 GAGE PLANE
+
+
+                                                                                                                           0.25                                                                                                           1.27                                                                     0 - 8                                        0.10                                                                                                           0.40
+
+                                                                      DETAIL A
+                                                                                        TYPICAL
+
+
+                                                                                                    4220718/A  09/2016
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+  per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+  exceed 0.15 mm, per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.43 mm, per side.
+5. Reference JEDEC registration MS-012, variation AB.
+
+
+
+
+                                                     www.ti.com
+                             EXAMPLE BOARD LAYOUT
+D0014A                                    SOIC - 1.75 mm max height
+                                                                 SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+
+                           14X (1.55)              SYMM
+                                       1
+                                                                             14
+
+                          14X (0.6)
+
+
+
+
+                           12X (1.27)
+                                                           SYMM
+
+
+
+
+
+                                       7                                     8
+
+                                 (R0.05)
+                         TYP
+                                                                             (5.4)
+
+                              LAND PATTERN EXAMPLE
+                                                   SCALE:8X
+
+
+
+
+                                                                         SOLDER                                                                             MASK            SOLDER                 MASK                                                    UNDER                                  METAL           METAL                                                                            OPENING            OPENING                                                 SOLDER                                                     MASK
+
+
+
+
+                                    0.07 MAX                                              0.07 MIN
+                             ALL AROUND                                  ALL AROUND
+
+                   NON SOLDER MASK                           SOLDER MASK
+                           DEFINED                                    DEFINED
+
+                              SOLDER MASK DETAILS
+
+
+                                                                                                    4220718/A  09/2016
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+
+                                                     www.ti.com
+                            EXAMPLE STENCIL DESIGN
+D0014A                                    SOIC - 1.75 mm max height
+                                                                 SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+
+
+
+                           14X (1.55)                                         SYMM
+
+                                       1
+                                                                             14
+
+                          14X (0.6)
+
+
+
+
+                            12X (1.27)                                                           SYMM
+
+
+
+
+
+                                       7                                     8
+
+                                                                             (5.4)
+
+                             SOLDER PASTE EXAMPLE
+                                    BASED ON 0.125 mm THICK STENCIL
+                                                   SCALE:8X
+
+
+
+
+
+                                                                                                    4220718/A  09/2016
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+  design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+
+                                                     www.ti.com
+                 IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+
+TI objects to and rejects any additional or different terms you may propose.
+
+IMPORTANT NOTICE
+
+                                         Copyright © 2026, Texas Instruments Incorporated
+
+                                                       Last updated 10/2025

@@ -4,6 +4,16 @@
 
 A compact, battery-friendly Air Quality Index monitor built with an **ESP32-C3 Super Mini** and a **Sensirion SEN5x** environmental sensor. The firmware **auto-detects** which sensor variant is connected — **SEN50**, **SEN54**, or **SEN55** — and adapts accordingly. View and record real-time readings in the included Web Bluetooth app.
 
+## V3: custom PCB
+
+This branch (V3) replaces the Super Mini breadboard build with a custom main board: an ESP32-C3-MINI-1 module, SEN5x and SEN6x connectors, an optional SCD41 CO₂ sensor, a 2.4" ST7789 TFT and three buttons on a 47 × 76 mm two-layer PCB. An e-paper display can be fitted instead of the TFT through an external adapter.
+
+- **Main board:** [hardware/rev-b/main](hardware/rev-b/main/README.md) (KiCad 10). The pin map differs from the Super Mini wiring below; see that README.
+- **Battery board:** the 18650 USB-C power board is now a separate product in its own repo, [18650-USB-C-UPS](https://github.com/devalopr/18650-USB-C-UPS). The main board takes power and USB data from it through USB-C and reads the battery charge as PWM on J2.
+- **Earlier designs:** [hardware/rev-a](hardware/rev-a/README.md), and the older battery boards and the 4-layer main board in [hardware/rev-b](hardware/rev-b/README.md), are kept for history.
+
+The Super Mini build without a PCB is on the [V2 branch](https://github.com/devalopr/Portable-AQI-recorder/tree/V2); the rest of this README describes that firmware and wiring.
+
 ## Features
 
 - **Real-time PM monitoring** — PM1.0, PM2.5, PM4.0, PM10.0 (µg/m³)

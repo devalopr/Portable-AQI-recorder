@@ -1,0 +1,19 @@
+{
+  "file": "AQI_Main-fit-check.step",
+  "valid": true,
+  "solid_count": 245,
+  "bounds_mm": {
+    "min": [
+      -2.8357888266404645e-16,
+      -80.0,
+      -6.394000000000001
+    ],
+    "max": [
+      45.5,
+      2.8357888266404645e-16,
+      5.840000000000001
+    ]
+  },
+  "includes_optional_components": true,
+  "scope": "PCB and footprint models; external display, sensor module, cables and enclosure are not included."
+}

@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-12",
+  "status": "UNQUALIFIED COST-REDUCTION SCENARIOS",
+  "input_cc_removed_inr": 18.8928,
+  "additional_adc_frontend_allowance_inr": [
+    2,
+    5
+  ],
+  "adc_allowance_status": "Unquoted incremental hardware allowance, not verified circuit cost; firmware development excluded",
+  "gh_candidate": {
+    "mpn": "LQ-GH1.25-10PWT",
+    "lcsc": "C54618749",
+    "usd": 0.0529,
+    "tier": "300+",
+    "stock_observed": 5225,
+    "status": "Manufacturer drawing and locking/mating qualification still required"
+  },
+  "gh_saving_inr": 13.6608,
+  "variants": [
+    {
+      "cells_parallel": 1,
+      "input_adc_only_inr": [
+        182.78,
+        243.78
+      ],
+      "input_adc_and_candidate_gh_inr": [
+        169.12,
+        230.12
+      ]
+    },
+    {
+      "cells_parallel": 2,
+      "input_adc_only_inr": [
+        216.78,
+        283.78
+      ],
+      "input_adc_and_candidate_gh_inr": [
+        203.12,
+        270.12
+      ]
+    }
+  ]
+}

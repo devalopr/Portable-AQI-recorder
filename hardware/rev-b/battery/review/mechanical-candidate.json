@@ -1,0 +1,20 @@
+{
+  "status": "mechanical_candidate_only_unrouted",
+  "board_mm": [
+    25.7,
+    88
+  ],
+  "copper_layers": 2,
+  "holder_candidate": "Keystone 1042",
+  "holder_model_body_width_mm": 20.65,
+  "extra_board_width_mm": 5.050000000000001,
+  "holder_terminal_pad_span_mm": 86.88,
+  "input_connector_candidate": "GCT USB4110, USB2 data, reverse side, bottom",
+  "output_connector_candidate": "GCT USB4135, power-only, reverse side, top",
+  "not_validated": [
+    "Exact-cell compatibility against current holder drawing",
+    "Connector/courtyard and locating-peg fit",
+    "Electrical circuit and routing",
+    "Charge current, thermal performance and charge time"
+  ]
+}

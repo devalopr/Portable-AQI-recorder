@@ -1,0 +1,56 @@
+2026-09-28 17:53:07.257 INFO   Freerouting v2.4.1 (build-date: 2026-09-03)
+WARNING: Final field userProfileSettings in class app.freerouting.settings.GlobalSettings has been mutated reflectively by class com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$2 in unnamed module @481a15ff (file:/Users/devalopr/Applications/freerouting/freerouting-2.4.1.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-09-28 17:53:08.647 INFO   [39836E\0FE70C] Loading board file 'AQI_Main.dsn'...
+2026-09-28 17:53:08.708 INFO   [39836E\0FE70C] Job '39836E\0FE70C' started at 2026-09-28T12:23:08.708623Z.
+2026-09-28 17:53:08.929 INFO   [39836E\0FE70C] Fanout stage started on board 'f71980bbddfdc3d0f037dd5f2de0d6a5' with 140 of 257 SMD pins needing fanout (93 already connected, 24 netless).
+2026-09-28 17:53:10.133 INFO   [39836E\0FE70C] Fanout pass #1 on board 'fccd0d4423343d7aa91899659030568c' completed in 1.00 seconds with 109 SMD pins fanouted, 2 not routed, 0 insert errors, +49 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-09-28 17:53:10.649 INFO   [39836E\0FE70C] Fanout pass #2 on board 'f0d0e071e8f90603baf65432e056ab32' completed in 0.51 seconds with 19 SMD pins fanouted, 2 not routed, 0 insert errors, +4 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-09-28 17:53:11.110 INFO   [39836E\0FE70C] Fanout pass #3 on board '4f1f2cf0db738bd32c1441480644ba59' completed in 0.45 seconds with 14 SMD pins fanouted, 2 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-09-28 17:53:11.556 INFO   [39836E\0FE70C] Fanout pass #4 on board '85185723c406ff4bb54dcb269f12bf97' completed in 0.44 seconds with 12 SMD pins fanouted, 2 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-09-28 17:53:12.015 INFO   [39836E\0FE70C] Fanout pass #5 on board 'bc5fdefe9a20b4aca78c22c9f5e38b57' completed in 0.45 seconds with 12 SMD pins fanouted, 2 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=500).
+2026-09-28 17:53:12.450 INFO   [39836E\0FE70C] Fanout pass #6 on board '15973476d0e4b144a82fbd49fb05d227' completed in 0.43 seconds with 12 SMD pins fanouted, 2 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=600).
+2026-09-28 17:53:12.876 INFO   [39836E\0FE70C] Fanout pass #7 on board '31fc17a00078bfa131725ca431f63b8e' completed in 0.42 seconds with 12 SMD pins fanouted, 2 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=700).
+2026-09-28 17:53:12.876 INFO   Fanout stopped after 7 passes: no progress for 3 consecutive passes.
+2026-09-28 17:53:12.981 INFO   [39836E\0FE70C] Fanout stage completed: started with 233 total SMD pins, completed in 3.86 seconds, escaped pins: 206/233 (88.4%), using 4.15 total CPU seconds, 60.55 GB total allocated, and 1262.8 MB peak heap usage.
+2026-09-28 17:53:12.986 INFO   [39836E\0FE70C] Auto-routing stage started on board '31fc17a00078bfa131725ca431f63b8e' for 52 unrouted items.
+2026-09-28 17:53:16.590 INFO   [39836E\0FE70C] Auto-routing pass #1 on board '31fc17a00078bfa131725ca431f63b8e' was completed in 3.36 seconds with score 823.40 (19 unrouted and 71 violations), using 6.91 CPU seconds and the job allocated 97.59 GB of memory so far.
+2026-09-28 17:53:18.551 INFO   [39836E\0FE70C] Auto-routing pass #2 on board '0a17e1535849dfc194c336c2ad3b35d7' was completed in 1.71 seconds with score 865.95 (11 unrouted and 71 violations), using 8.90 CPU seconds and the job allocated 128.20 GB of memory so far.
+2026-09-28 17:53:20.034 INFO   [39836E\0FE70C] Auto-routing pass #3 on board '88ceb851f650d9059b648fe926df893b' was completed in 1.23 seconds with score 871.27 (10 unrouted and 71 violations), using 10.88 CPU seconds and the job allocated 157.04 GB of memory so far.
+2026-09-28 17:53:21.425 INFO   [39836E\0FE70C] Auto-routing pass #4 on board '10134554bfd8a87c3dd706f3b85964eb' was completed in 1.14 seconds with score 871.27 (10 unrouted and 71 violations), using 11.87 CPU seconds and the job allocated 172.73 GB of memory so far.
+2026-09-28 17:53:22.830 INFO   [39836E\0FE70C] Auto-routing pass #5 on board '50552ff9afe69ed1415936d21df62293' was completed in 1.15 seconds with score 871.27 (10 unrouted and 71 violations), using 13.84 CPU seconds and the job allocated 201.96 GB of memory so far.
+2026-09-28 17:53:24.265 INFO   [39836E\0FE70C] Auto-routing pass #6 on board '295d65068d2d2ab62d531308e1649ab4' was completed in 1.18 seconds with score 871.27 (10 unrouted and 71 violations), using 14.83 CPU seconds and the job allocated 216.78 GB of memory so far.
+2026-09-28 17:53:25.752 INFO   [39836E\0FE70C] Auto-routing pass #7 on board 'd3451ed8df38db49d0f897f7ebe0812e' was completed in 1.23 seconds with score 876.59 (9 unrouted and 71 violations), using 15.82 CPU seconds and the job allocated 232.37 GB of memory so far.
+2026-09-28 17:53:27.275 INFO   [39836E\0FE70C] Auto-routing pass #8 on board '8d0a7dbd550e72eb2b5765c7a4ab73ed' was completed in 1.27 seconds with score 876.59 (9 unrouted and 71 violations), using 17.79 CPU seconds and the job allocated 260.07 GB of memory so far.
+2026-09-28 17:53:28.616 INFO   [39836E\0FE70C] Auto-routing pass #9 on board '8d0a7dbd550e72eb2b5765c7a4ab73ed' was completed in 1.21 seconds with score 881.90 (8 unrouted and 71 violations), using 18.77 CPU seconds and the job allocated 275.28 GB of memory so far.
+2026-09-28 17:53:29.877 INFO   [39836E\0FE70C] Auto-routing pass #10 on board '96ed0065373c3e13d264e7284b4180d5' was completed in 0.97 seconds with score 876.59 (9 unrouted and 71 violations), using 20.74 CPU seconds and the job allocated 304.26 GB of memory so far.
+2026-09-28 17:53:31.256 INFO   [39836E\0FE70C] Auto-routing pass #11 on board 'd33be2d30f97e790a3023c5b308cb18b' was completed in 1.12 seconds with score 876.59 (9 unrouted and 71 violations), using 21.72 CPU seconds and the job allocated 319.21 GB of memory so far.
+2026-09-28 17:53:32.775 INFO   [39836E\0FE70C] Auto-routing pass #12 on board '96ed0065373c3e13d264e7284b4180d5' was completed in 0.00 seconds with score 881.90 (8 unrouted and 71 violations), using 22.71 CPU seconds and the job allocated 334.79 GB of memory so far.
+2026-09-28 17:53:33.936 INFO   [39836E\0FE70C] Auto-routing pass #13 on board '96ed0065373c3e13d264e7284b4180d5' was completed in 1.03 seconds with score 876.59 (9 unrouted and 71 violations), using 24.67 CPU seconds and the job allocated 363.67 GB of memory so far.
+2026-09-28 17:53:35.180 INFO   [39836E\0FE70C] Auto-routing pass #14 on board 'd33be2d30f97e790a3023c5b308cb18b' was completed in 1.11 seconds with score 876.59 (9 unrouted and 71 violations), using 25.65 CPU seconds and the job allocated 378.00 GB of memory so far.
+2026-09-28 17:53:36.708 INFO   [39836E\0FE70C] Auto-routing pass #15 on board 'd11c8d8709b71d0fcca7d2ade71b61e9' was completed in 1.13 seconds with score 881.91 (8 unrouted and 71 violations), using 26.64 CPU seconds and the job allocated 394.63 GB of memory so far.
+2026-09-28 17:53:37.870 INFO   [39836E\0FE70C] Auto-routing pass #16 on board '6da8bded3e4b2d5bde6da7384393940a' was completed in 0.91 seconds with score 881.91 (8 unrouted and 71 violations), using 28.61 CPU seconds and the job allocated 424.09 GB of memory so far.
+2026-09-28 17:53:38.906 INFO   [39836E\0FE70C] Auto-routing pass #17 on board '6da8bded3e4b2d5bde6da7384393940a' was completed in 0.91 seconds with score 881.91 (8 unrouted and 71 violations), using 29.59 CPU seconds and the job allocated 439.58 GB of memory so far.
+2026-09-28 17:53:39.943 INFO   [39836E\0FE70C] Auto-routing pass #18 on board '6da8bded3e4b2d5bde6da7384393940a' was completed in 0.90 seconds with score 881.91 (8 unrouted and 71 violations), using 30.58 CPU seconds and the job allocated 455.11 GB of memory so far.
+2026-09-28 17:53:40.981 INFO   [39836E\0FE70C] Auto-routing pass #19 on board '6da8bded3e4b2d5bde6da7384393940a' was completed in 0.91 seconds with score 881.91 (8 unrouted and 71 violations), using 31.56 CPU seconds and the job allocated 470.74 GB of memory so far.
+2026-09-28 17:53:40.993 INFO   [39836E\0FE70C] The router's best score (881.90) has not improved by more than 0.5 points since pass #9. Stopping the auto-router after 19 passes (8 items still unconnected).
+The following connections could not be routed -- please review your design (e.g. check pad clearances, trace width rules, and available routing space):
+  Net '+3V3_CO2' (1 unrouted connection):
+    - via  ->  U8-7
+  Net '/I2C_SDA' (2 unrouted connections):
+    - U8-10  ->  J3-3
+    - R21-2  ->  U1-12
+  Net '/I2C_SCL' (2 unrouted connections):
+    - J3-4  ->  via
+    - via  ->  U8-9
+  Net '+5V_SYS' (1 unrouted connection):
+    - J1-A9  ->  D1-5
+  Net '/USB_MCU_D-' (1 unrouted connection):
+    - U1-26  ->  R8-2
+  Net '/MAIN_ON' (1 unrouted connection):
+    - R15-1  ->  U4-3
+2026-09-28 17:53:41.247 INFO   [39836E\0FE70C] Auto-routing stage completed: started with 97 unrouted nets, completed in 32.39 seconds, final score: 881.91 (8 unrouted and 71 violations), using 31.56 total CPU seconds, 470.74 GB total allocated, and 981.4 MB peak heap usage.
+2026-09-28 17:53:41.252 INFO   [39836E\0FE70C] Job '39836E\0FE70C' finished with state: COMPLETED (elapsed: 32.54 seconds, finished at UTC: 2026-09-28T12:23:41.251589Z).
+2026-09-28 17:53:41.676 INFO   Saving output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-b/scripts/../main/review/routing/AQI_Main.ses' (SES)...
+2026-09-28 17:53:41.683 INFO   Successfully saved output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-b/scripts/../main/review/routing/AQI_Main.ses' (37059 bytes).

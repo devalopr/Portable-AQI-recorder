@@ -1,0 +1,146 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-28T17:53:44",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.0",
+    "schematic_parity": [],
+    "source": "AQI_Main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone [GND] on B.Cu, priority 0",
+                    "pos": {
+                        "x": -1.1,
+                        "y": 0.4
+                    },
+                    "uuid": "b2359f98-54b6-452f-94d5-bc5208581080"
+                },
+                {
+                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": -1.1,
+                        "y": 0.4
+                    },
+                    "uuid": "94f50fd9-802d-4490-aa56-b5df292d5798"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone [GND] on B.Cu, priority 0",
+                    "pos": {
+                        "x": -1.1,
+                        "y": 0.4
+                    },
+                    "uuid": "b2359f98-54b6-452f-94d5-bc5208581080"
+                },
+                {
+                    "description": "Zone [GND] on B.Cu, priority 0",
+                    "pos": {
+                        "x": -1.1,
+                        "y": 0.4
+                    },
+                    "uuid": "b2359f98-54b6-452f-94d5-bc5208581080"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [/I2C_SDA] on B.Cu, length 3.5355 mm",
+                    "pos": {
+                        "x": 22.925,
+                        "y": 42.0
+                    },
+                    "uuid": "8731b8d1-381d-476f-8107-3a62158a207c"
+                },
+                {
+                    "description": "Track [/I2C_SDA] on B.Cu, length 4.2011 mm",
+                    "pos": {
+                        "x": 4.4775,
+                        "y": 58.6708
+                    },
+                    "uuid": "b0f2a59a-1d46-4593-b8e1-6a77f9580e3d"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [+5V_SYS] on B.Cu, length 2.6615 mm",
+                    "pos": {
+                        "x": 21.2248,
+                        "y": 70.792
+                    },
+                    "uuid": "37d7db19-9eb2-4511-bbbb-9113002b639a"
+                },
+                {
+                    "description": "Pad 5 [+5V_SYS] of D1 on B.Cu",
+                    "pos": {
+                        "x": 18.0625,
+                        "y": 73.05
+                    },
+                    "uuid": "775a4622-cbfb-406a-b8d9-99740745f7eb"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [/I2C_SDA] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 3.5011,
+                        "y": 53.5878
+                    },
+                    "uuid": "4277303e-72dd-4345-9046-9c84487c50db"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        }
+    ]
+}

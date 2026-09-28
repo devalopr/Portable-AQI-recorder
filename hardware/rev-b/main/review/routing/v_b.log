@@ -1,0 +1,64 @@
+2026-09-27 23:34:36.916 INFO   Freerouting v2.4.1 (build-date: 2026-09-03)
+WARNING: Final field userProfileSettings in class app.freerouting.settings.GlobalSettings has been mutated reflectively by class com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$2 in unnamed module @481a15ff (file:/Users/devalopr/Applications/freerouting/freerouting-2.4.1.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-09-27 23:34:38.355 INFO   [D701EE\DF7BD8] Loading board file 'v_b.dsn'...
+2026-09-27 23:34:38.548 INFO   [D701EE\DF7BD8] Job 'D701EE\DF7BD8' started at 2026-09-27T18:04:38.548236Z.
+2026-09-27 23:34:40.212 INFO   [D701EE\DF7BD8] Fanout stage started on board 'ea8b045ff26b677f043232a119ddbf73' with 58 of 316 SMD pins needing fanout (232 already connected, 26 netless).
+2026-09-27 23:34:44.067 INFO   [D701EE\DF7BD8] Fanout pass #1 on board 'bac32c4025e337fbd9f038a31704413b' completed in 3.12 seconds with 11 SMD pins fanouted, 1 not routed, 0 insert errors, +6 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-09-27 23:34:59.513 WARN   BasicBoard.normalizeTraces: reached 2000 iterations for net '/EPD_BUSY' — stopping to prevent hang. The board geometry for this net may be oscillating (split/combine cycle); traces are kept as-is and further normalization for this net is suppressed on this board candidate.
+2026-09-27 23:34:59.684 INFO   [D701EE\DF7BD8] Fanout pass #2 on board '57a43485b80e6b9a317d051aff2b0e02' completed in 15.59 seconds with 7 SMD pins fanouted, 1 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-09-27 23:35:00.322 INFO   [D701EE\DF7BD8] Fanout pass #3 on board '3799f063d927fdb9795bb6a8b9308343' completed in 0.62 seconds with 7 SMD pins fanouted, 1 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-09-27 23:35:00.917 INFO   [D701EE\DF7BD8] Fanout pass #4 on board '7847086b3ff116f93057bc26fb5b7b7c' completed in 0.58 seconds with 7 SMD pins fanouted, 1 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-09-27 23:35:01.499 INFO   [D701EE\DF7BD8] Fanout pass #5 on board '830f7098bb98b210277cb5a959f5b564' completed in 0.57 seconds with 7 SMD pins fanouted, 1 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=500).
+2026-09-27 23:35:01.500 INFO   Fanout stopped after 5 passes: no progress for 3 consecutive passes.
+2026-09-27 23:35:01.651 INFO   [D701EE\DF7BD8] Fanout stage completed: started with 290 total SMD pins, completed in 20.74 seconds, escaped pins: 263/290 (90.7%), using 13.57 total CPU seconds, 122.75 GB total allocated, and 1299.6 MB peak heap usage.
+2026-09-27 23:35:01.663 INFO   [D701EE\DF7BD8] Auto-routing stage started on board '830f7098bb98b210277cb5a959f5b564' for 14 unrouted items.
+2026-09-27 23:35:03.573 INFO   [D701EE\DF7BD8] Auto-routing pass #1 on board '830f7098bb98b210277cb5a959f5b564' was completed in 1.50 seconds with score 926.31 (14 unrouted and 14 violations), using 14.64 CPU seconds and the job allocated 136.53 GB of memory so far.
+2026-09-27 23:35:07.186 INFO   [D701EE\DF7BD8] Auto-routing pass #2 on board 'd2f6543d0f32e933a2de1d8cd6d69f9d' was completed in 3.27 seconds with score 926.31 (14 unrouted and 14 violations), using 17.97 CPU seconds and the job allocated 173.24 GB of memory so far.
+2026-09-27 23:35:12.370 INFO   [D701EE\DF7BD8] Auto-routing pass #3 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 4.21 seconds with score 926.31 (14 unrouted and 14 violations), using 21.76 CPU seconds and the job allocated 197.88 GB of memory so far.
+2026-09-27 23:35:14.851 INFO   [D701EE\DF7BD8] Auto-routing pass #4 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 2.18 seconds with score 926.31 (14 unrouted and 14 violations), using 24.63 CPU seconds and the job allocated 224.95 GB of memory so far.
+2026-09-27 23:35:16.367 INFO   [D701EE\DF7BD8] Auto-routing pass #5 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.36 seconds with score 926.31 (14 unrouted and 14 violations), using 25.61 CPU seconds and the job allocated 241.29 GB of memory so far.
+2026-09-27 23:35:17.903 INFO   [D701EE\DF7BD8] Auto-routing pass #6 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.38 seconds with score 926.31 (14 unrouted and 14 violations), using 27.58 CPU seconds and the job allocated 272.19 GB of memory so far.
+2026-09-27 23:35:19.763 INFO   [D701EE\DF7BD8] Auto-routing pass #7 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.70 seconds with score 926.31 (14 unrouted and 14 violations), using 29.50 CPU seconds and the job allocated 299.18 GB of memory so far.
+2026-09-27 23:35:21.270 INFO   [D701EE\DF7BD8] Auto-routing pass #8 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.36 seconds with score 926.31 (14 unrouted and 14 violations), using 30.48 CPU seconds and the job allocated 315.56 GB of memory so far.
+2026-09-27 23:35:22.822 INFO   [D701EE\DF7BD8] Auto-routing pass #9 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.40 seconds with score 926.31 (14 unrouted and 14 violations), using 32.45 CPU seconds and the job allocated 346.33 GB of memory so far.
+2026-09-27 23:35:24.793 INFO   [D701EE\DF7BD8] Auto-routing pass #10 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.82 seconds with score 926.31 (14 unrouted and 14 violations), using 34.28 CPU seconds and the job allocated 371.33 GB of memory so far.
+2026-09-27 23:35:27.275 INFO   [D701EE\DF7BD8] Auto-routing pass #11 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 2.16 seconds with score 926.31 (14 unrouted and 14 violations), using 35.96 CPU seconds and the job allocated 389.71 GB of memory so far.
+2026-09-27 23:35:29.738 INFO   [D701EE\DF7BD8] Auto-routing pass #12 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 2.14 seconds with score 926.31 (14 unrouted and 14 violations), using 37.84 CPU seconds and the job allocated 415.80 GB of memory so far.
+2026-09-27 23:35:32.049 INFO   [D701EE\DF7BD8] Auto-routing pass #13 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.97 seconds with score 926.31 (14 unrouted and 14 violations), using 40.22 CPU seconds and the job allocated 444.21 GB of memory so far.
+2026-09-27 23:35:33.725 INFO   [D701EE\DF7BD8] Auto-routing pass #14 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.52 seconds with score 926.31 (14 unrouted and 14 violations), using 41.18 CPU seconds and the job allocated 459.53 GB of memory so far.
+2026-09-27 23:35:35.449 INFO   [D701EE\DF7BD8] Auto-routing pass #15 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.51 seconds with score 926.31 (14 unrouted and 14 violations), using 43.10 CPU seconds and the job allocated 487.05 GB of memory so far.
+2026-09-27 23:35:37.078 INFO   [D701EE\DF7BD8] Auto-routing pass #16 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.48 seconds with score 926.31 (14 unrouted and 14 violations), using 45.02 CPU seconds and the job allocated 515.61 GB of memory so far.
+2026-09-27 23:35:38.634 INFO   [D701EE\DF7BD8] Auto-routing pass #17 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.40 seconds with score 926.31 (14 unrouted and 14 violations), using 46.00 CPU seconds and the job allocated 531.34 GB of memory so far.
+2026-09-27 23:35:40.121 INFO   [D701EE\DF7BD8] Auto-routing pass #18 on board '8fb33f2f7b8badce51abbd889a57130d' was completed in 1.33 seconds with score 926.31 (14 unrouted and 14 violations), using 47.96 CPU seconds and the job allocated 562.17 GB of memory so far.
+2026-09-27 23:35:40.140 INFO   [D701EE\DF7BD8] The router's best score (926.31) has not improved by more than 0.5 points since pass #8. Stopping the auto-router after 18 passes (14 items still unconnected).
+The following connections could not be routed -- please review your design (e.g. check pad clearances, trace width rules, and available routing space):
+  Net '/BOOT_GPIO8' (1 unrouted connection):
+    - SW1-1@1  ->  via
+  Net '+3V3_CO2' (5 unrouted connections):
+    - U8-7  ->  via
+    - U8-19  ->  via
+    - via  ->  U7-5
+    - via  ->  U8-7
+    - via  ->  C42-1
+  Net '/BAT_PWM_MCU' (1 unrouted connection):
+    - U1-31  ->  R34-2
+  Net '+3V2' (1 unrouted connection):
+    - L1-2  ->  C10-1
+  Net '/I2C_SCL' (1 unrouted connection):
+    - via  ->  via
+  Net '+3V3_PM' (1 unrouted connection):
+    - via  ->  C13-1
+  Net '/EPD_BUSY' (1 unrouted connection):
+    - U1-30  ->  TP5-1
+  Net '/DISP_CS' (1 unrouted connection):
+    - U1-16  ->  J5-3
+  Net '/USB_D+' (1 unrouted connection):
+    - J1-B6  ->  J1-A6
+  Net '/BL_PWM' (1 unrouted connection):
+    - via  ->  via
+2026-09-27 23:35:40.416 INFO   [D701EE\DF7BD8] Auto-routing stage completed: started with 14 unrouted nets, completed in 61.66 seconds, final score: 926.31 (14 unrouted and 14 violations), using 47.96 total CPU seconds, 562.17 GB total allocated, and 1299.6 MB peak heap usage.
+2026-09-27 23:35:40.426 INFO   [D701EE\DF7BD8] Job 'D701EE\DF7BD8' finished with state: COMPLETED (elapsed: 1 minute 1.88 seconds, finished at UTC: 2026-09-27T18:05:40.426172Z).
+2026-09-27 23:35:40.519 INFO   Saving output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-b/main/review/routing/v_b.ses' (SES)...
+2026-09-27 23:35:40.521 INFO   Successfully saved output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-b/main/review/routing/v_b.ses' (116476 bytes).

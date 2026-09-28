@@ -1,0 +1,132 @@
+{
+  "CL21A226MQQNNN": {
+    "source": "https://product.samsungsem.com/mlcc/CL21A226MQQNNN.do",
+    "status": "manufacturer typical curves, not guaranteed bounds",
+    "sampled_delta_percent": {
+      "3.3": [
+        3.3367999999999998,
+        -49.41223987711429
+      ],
+      "4.2": [
+        4.1856,
+        -59.00108319489926
+      ],
+      "5": [
+        5.0,
+        -65.98095711832104
+      ],
+      "5.25": [
+        5.2408,
+        -67.63518844225027
+      ],
+      "5.5": [
+        5.4984,
+        -69.24048040494661
+      ]
+    }
+  },
+  "CL21B225KAFNNN": {
+    "source": "https://product.samsungsem.com/mlcc/CL21B225KAFNNN.do",
+    "status": "manufacturer typical curves, not guaranteed bounds",
+    "sampled_delta_percent": {
+      "3.3": [
+        3.3,
+        -6.564734248873039
+      ],
+      "4.2": [
+        4.1952,
+        -10.847083901177623
+      ],
+      "5": [
+        5.0,
+        -14.83471363175734
+      ],
+      "5.25": [
+        5.2344,
+        -15.999965055736093
+      ],
+      "5.5": [
+        5.4792,
+        -17.221581577384068
+      ]
+    }
+  },
+  "CL21A106KAYNNN": {
+    "source": "https://product.samsungsem.com/mlcc/CL21A106KAYNNN.do",
+    "status": "manufacturer typical curves, not guaranteed bounds",
+    "sampled_delta_percent": {
+      "3.3": [
+        3.3367999999999998,
+        -30.950357673659123
+      ],
+      "4.2": [
+        4.1856,
+        -41.68256779475166
+      ],
+      "5": [
+        5.0,
+        -50.31482225958126
+      ],
+      "5.25": [
+        5.2344,
+        -52.46173281680174
+      ],
+      "5.5": [
+        5.4792,
+        -54.61281339083386
+      ]
+    }
+  },
+  "CL21A475KAQNNN": {
+    "source": "https://product.samsungsem.com/mlcc/CL21A475KAQNNN.do",
+    "status": "manufacturer typical curves, not guaranteed bounds",
+    "sampled_delta_percent": {
+      "3.3": [
+        3.3367999999999998,
+        -16.46168781553115
+      ],
+      "4.2": [
+        4.1856,
+        -24.496608865018654
+      ],
+      "5": [
+        5.0,
+        -31.83999288709091
+      ],
+      "5.25": [
+        5.2344,
+        -33.83198364030908
+      ],
+      "5.5": [
+        5.4792,
+        -35.89251227393593
+      ]
+    }
+  },
+  "CL31A226KAHNNN": {
+    "source": "https://product.samsungsem.com/mlcc/CL31A226KAHNNN.do",
+    "status": "manufacturer typical curves, not guaranteed bounds",
+    "sampled_delta_percent": {
+      "3.3": [
+        3.3,
+        -20.52255070748373
+      ],
+      "4.2": [
+        4.1952,
+        -30.093448826240568
+      ],
+      "5": [
+        5.0,
+        -37.96291314718172
+      ],
+      "5.25": [
+        5.2344,
+        -40.06370760926096
+      ],
+      "5.5": [
+        5.4792,
+        -42.21563817004717
+      ]
+    }
+  }
+}

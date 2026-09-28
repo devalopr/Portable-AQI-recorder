@@ -1,0 +1,71 @@
+{
+ "date": "2026-09-12",
+ "resistors": {
+  "100R": {
+   "mpn": "0603WAF1000T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C22775",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411221126_UNI-ROYAL-Uniroyal-Elec-0603WAF1000T5E_C22775.pdf"
+  },
+  "348kR": {
+   "mpn": "0603WAF3483T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C23006",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF3483T5E_C23006.pdf"
+  },
+  "51kR": {
+   "mpn": "0603WAF5102T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C23196",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF5102T5E_C23196.pdf"
+  },
+  "6.8kR": {
+   "mpn": "0603WAF6801T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C23212",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF6801T5E_C23212.pdf"
+  },
+  "13.7kR": {
+   "mpn": "0603WAF1372T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C22793",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010130_UNI-ROYAL-Uniroyal-Elec-0603WAF1372T5E_C22793.pdf"
+  },
+  "5.1kR": {
+   "mpn": "0603WAF5101T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C23186",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF5101T5E_C23186.pdf"
+  },
+  "47kR": {
+   "mpn": "0603WAF4702T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C25819",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010045_UNI-ROYAL-Uniroyal-Elec-0603WAF4702T5E_C25819.pdf"
+  },
+  "4.7kR": {
+   "mpn": "0603WAF4701T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C23162",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF4701T5E_C23162.pdf"
+  },
+  "226kR": {
+   "mpn": "0603WAF2263T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C33619",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010030_UNI-ROYAL-Uniroyal-Elec-0603WAF2263T5E_C33619.pdf"
+  },
+  "1MR": {
+   "mpn": "0603WAF1004T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C22935",
+   "datasheet": "https://www.lcsc.com/product-detail/C22935.html"
+  },
+  "470kR": {
+   "mpn": "0603WAF4703T5E",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "lcsc": "C23178",
+   "datasheet": "https://www.lcsc.com/product-detail/C23178.html"
+  }
+ }
+}

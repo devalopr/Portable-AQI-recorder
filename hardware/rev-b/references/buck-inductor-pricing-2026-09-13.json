@@ -1,0 +1,90 @@
+{
+  "parts": [
+    {
+      "lcsc": "C279948",
+      "data": {
+        "lcsc": "C279948",
+        "model": "SWPA4030S2R2NT",
+        "manufacturer": "Sunlord",
+        "package": "SMD,4x4mm",
+        "stock": 16456,
+        "price": 0.0637,
+        "price_10": 0.0533,
+        "library_type": "extended",
+        "preferred": false,
+        "category": "Inductors, Coils, Chokes",
+        "subcategory": "Power Inductors",
+        "subcategory_id": 3050,
+        "mounting_type": "smd",
+        "specs": {
+          "Current - Saturation(Isat)": "5.8A",
+          "Inductance": "2.2uH",
+          "Type": "-",
+          "Tolerance": "±30%",
+          "Current Rating": "2.95A",
+          "DC Resistance(DCR)": "30mΩ"
+        },
+        "description": "2.2uH 2.95A 30mΩ 5.8A ±30% SMD,4x4mm Power Inductors ROHS",
+        "min_order": 1,
+        "reel_qty": 2000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2310251551_Sunlord-SWPA4030S2R2NT_C279948.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/power-inductors_sunlord-swpa4030s2r2nt_C279948.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.0637
+          },
+          {
+            "qty": "100+",
+            "price": 0.0533
+          },
+          {
+            "qty": "300+",
+            "price": 0.0481
+          },
+          {
+            "qty": "2000+",
+            "price": 0.043
+          },
+          {
+            "qty": "4000+",
+            "price": 0.0398
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0383
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Current - Saturation(Isat)",
+            "value": "5.8A"
+          },
+          {
+            "name": "Inductance",
+            "value": "2.2uH"
+          },
+          {
+            "name": "Type",
+            "value": "-"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±30%"
+          },
+          {
+            "name": "Current Rating",
+            "value": "2.95A"
+          },
+          {
+            "name": "DC Resistance(DCR)",
+            "value": "30mΩ"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "5a83d571f37545499752df080ec1388b",
+        "easyeda_footprint_uuid": "a4d354a2f7b24c56ac4f3ee62e31a868"
+      }
+    }
+  ]
+}

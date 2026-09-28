@@ -1,0 +1,547 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-28T10:29:12",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.0",
+    "schematic_parity": [],
+    "source": "AQI_Main.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 28.5,
+                        "y": 61.5
+                    },
+                    "uuid": "3056af6b-9d06-4da3-a998-f12d7a07d4a7"
+                },
+                {
+                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "94f50fd9-802d-4490-aa56-b5df292d5798"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [/USB_D-] on F.Cu, length 3.3013 mm",
+                    "pos": {
+                        "x": 22.9783,
+                        "y": 67.3852
+                    },
+                    "uuid": "2ae433c3-d03b-4557-8511-a8b44ee88b2d"
+                },
+                {
+                    "description": "Track [/USB_D-] on B.Cu, length 0.2828 mm",
+                    "pos": {
+                        "x": 26.475,
+                        "y": 68.975
+                    },
+                    "uuid": "df756c54-b65f-4cc0-b0f9-3ae8763b09ec"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [/MAIN_CT] on B.Cu, length 0.1000 mm",
+                    "pos": {
+                        "x": 25.1779,
+                        "y": 61.4326
+                    },
+                    "uuid": "6aa5f9eb-6656-4c06-9d01-3e092988b421"
+                },
+                {
+                    "description": "Pad 4 [/MAIN_CT] of U4 on B.Cu",
+                    "pos": {
+                        "x": 19.8625,
+                        "y": 58.0375
+                    },
+                    "uuid": "aca4ba55-609c-4b72-b157-171f2a00be7e"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [/USB_CC2] on F.Cu, length 0.2828 mm",
+                    "pos": {
+                        "x": 24.775,
+                        "y": 67.274999
+                    },
+                    "uuid": "a09d1ed5-6d41-40c0-91bb-e917456c9a59"
+                },
+                {
+                    "description": "Pad 1 [/USB_CC2] of R6 on B.Cu",
+                    "pos": {
+                        "x": 24.425,
+                        "y": 67.6
+                    },
+                    "uuid": "21985f7b-685a-44b3-a8fd-d5c02824a861"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [/USB_CC2] on B.Cu, length 0.1000 mm",
+                    "pos": {
+                        "x": 26.075,
+                        "y": 68.075
+                    },
+                    "uuid": "c197ff11-ac95-40cf-a26c-76143fc8b5ba"
+                },
+                {
+                    "description": "Track [/USB_CC2] on F.Cu, length 0.4243 mm",
+                    "pos": {
+                        "x": 25.775,
+                        "y": 67.774999
+                    },
+                    "uuid": "7ff1ddad-3af2-4661-a073-c642606a077e"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [/MAIN_ON] on F.Cu, length 0.2828 mm",
+                    "pos": {
+                        "x": 25.075,
+                        "y": 60.475
+                    },
+                    "uuid": "54d76acd-72d0-486d-a10b-e06176635411"
+                },
+                {
+                    "description": "Track [/MAIN_ON] on F.Cu, length 0.9000 mm",
+                    "pos": {
+                        "x": 22.1375,
+                        "y": 58.2375
+                    },
+                    "uuid": "d41e0f8f-5117-4378-b9a5-61f11d4d2e51"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [/MAIN_QOD] on B.Cu, length 3.2527 mm",
+                    "pos": {
+                        "x": 26.175,
+                        "y": 66.974999
+                    },
+                    "uuid": "a5588190-afa4-4ea6-a2d5-f91242bd2a0b"
+                },
+                {
+                    "description": "Track [/MAIN_QOD] on B.Cu, length 0.1000 mm",
+                    "pos": {
+                        "x": 24.475,
+                        "y": 65.974999
+                    },
+                    "uuid": "366fe26a-1be0-4ae8-b0eb-48928acbd364"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 28.5,
+                        "y": 61.5
+                    },
+                    "uuid": "3056af6b-9d06-4da3-a998-f12d7a07d4a7"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [+5V_SYS] on F.Cu, length 4.0043 mm",
+                    "pos": {
+                        "x": 18.0484,
+                        "y": 58.1109
+                    },
+                    "uuid": "2485e8cf-d64c-4baf-9a8a-7b9ba8ba630a"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_D-] on F.Cu, length 0.4258 mm",
+                    "pos": {
+                        "x": 27.5733,
+                        "y": 67.6863
+                    },
+                    "uuid": "06770b2e-f3c1-4e4a-8f5e-df0b2a74367a"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_D-] on F.Cu, length 3.3013 mm",
+                    "pos": {
+                        "x": 22.9783,
+                        "y": 67.3852
+                    },
+                    "uuid": "2ae433c3-d03b-4557-8511-a8b44ee88b2d"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_MCU_D-] on F.Cu, length 0.4271 mm",
+                    "pos": {
+                        "x": 18.8024,
+                        "y": 67.494
+                    },
+                    "uuid": "f0ee925f-af05-4452-ac6b-8f733cdf4b39"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_MCU_D-] on B.Cu, length 0.8874 mm",
+                    "pos": {
+                        "x": 19.1044,
+                        "y": 67.192
+                    },
+                    "uuid": "9ecc858b-61a0-4741-8121-4070b2e967cb"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/MAIN_CT] on B.Cu, length 0.1000 mm",
+                    "pos": {
+                        "x": 25.1779,
+                        "y": 61.4326
+                    },
+                    "uuid": "6aa5f9eb-6656-4c06-9d01-3e092988b421"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_D+] on B.Cu, length 4.0954 mm",
+                    "pos": {
+                        "x": 21.6127,
+                        "y": 73.0155
+                    },
+                    "uuid": "4fc846bf-d761-4a26-8ea7-edc93afa092c"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_CC2] on F.Cu, length 0.1000 mm",
+                    "pos": {
+                        "x": 26.125,
+                        "y": 67.674999
+                    },
+                    "uuid": "285f77e9-65a0-499b-8484-a8001cb346ef"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_CC2] on F.Cu, length 0.4243 mm",
+                    "pos": {
+                        "x": 25.775,
+                        "y": 67.774999
+                    },
+                    "uuid": "7ff1ddad-3af2-4661-a073-c642606a077e"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_CC2] on F.Cu, length 0.2828 mm",
+                    "pos": {
+                        "x": 24.775,
+                        "y": 67.274999
+                    },
+                    "uuid": "a09d1ed5-6d41-40c0-91bb-e917456c9a59"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_CC2] on B.Cu, length 0.1000 mm",
+                    "pos": {
+                        "x": 26.125,
+                        "y": 67.574998
+                    },
+                    "uuid": "adcf9ee1-de29-41e0-b361-53f77a95fbac"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/USB_CC2] on B.Cu, length 0.1000 mm",
+                    "pos": {
+                        "x": 26.075,
+                        "y": 68.075
+                    },
+                    "uuid": "c197ff11-ac95-40cf-a26c-76143fc8b5ba"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/MAIN_ON] on F.Cu, length 0.9000 mm",
+                    "pos": {
+                        "x": 22.1375,
+                        "y": 58.2375
+                    },
+                    "uuid": "d41e0f8f-5117-4378-b9a5-61f11d4d2e51"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/MAIN_ON] on B.Cu, length 0.3231 mm",
+                    "pos": {
+                        "x": 27.7096,
+                        "y": 63.5215
+                    },
+                    "uuid": "5ba550d5-25b5-47d3-95c2-9c5a6f8deb2c"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/MAIN_QOD] on B.Cu, length 1.1314 mm",
+                    "pos": {
+                        "x": 24.475,
+                        "y": 66.075
+                    },
+                    "uuid": "7bc28a4a-5602-47ac-a163-cf18a658bbf3"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [/MAIN_QOD] on B.Cu, length 3.2527 mm",
+                    "pos": {
+                        "x": 26.175,
+                        "y": 66.974999
+                    },
+                    "uuid": "a5588190-afa4-4ea6-a2d5-f91242bd2a0b"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 42.5,
+                        "y": 76.0
+                    },
+                    "uuid": "36a28719-a53c-4d81-b485-b4c18c6ae677"
+                },
+                {
+                    "description": "Segment of J8 on B.Silkscreen",
+                    "pos": {
+                        "x": 41.22,
+                        "y": 73.49
+                    },
+                    "uuid": "bbd8cb32-4ba8-473d-afa3-0dfdeec90b70"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 42.5,
+                        "y": 76.0
+                    },
+                    "uuid": "36a28719-a53c-4d81-b485-b4c18c6ae677"
+                },
+                {
+                    "description": "Rectangle of J8 on B.Silkscreen",
+                    "pos": {
+                        "x": 38.57,
+                        "y": 73.49
+                    },
+                    "uuid": "851641e9-3051-44e1-8063-d986158a4260"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 42.5,
+                        "y": 76.0
+                    },
+                    "uuid": "36a28719-a53c-4d81-b485-b4c18c6ae677"
+                },
+                {
+                    "description": "Segment of J2 on B.Silkscreen",
+                    "pos": {
+                        "x": 35.12,
+                        "y": 73.49
+                    },
+                    "uuid": "87a4323c-7003-4b84-bae7-6103f9b1c94d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 42.5,
+                        "y": 76.0
+                    },
+                    "uuid": "36a28719-a53c-4d81-b485-b4c18c6ae677"
+                },
+                {
+                    "description": "Rectangle of J2 on B.Silkscreen",
+                    "pos": {
+                        "x": 32.47,
+                        "y": 73.49
+                    },
+                    "uuid": "3dc607fb-584b-44a9-9547-913e96ba6496"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        }
+    ]
+}

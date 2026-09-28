@@ -1,0 +1,67 @@
+{
+  "coordinates": "PCB front view; rear previews are mirrored",
+  "J3": {
+    "position_mm": [
+      40.275,
+      29.5
+    ],
+    "side": "rear",
+    "kicad_angle_deg": -90,
+    "mating_direction": "+X, right edge"
+  },
+  "J4": {
+    "position_mm": [
+      40.275,
+      40.6
+    ],
+    "side": "rear",
+    "kicad_angle_deg": -90,
+    "mating_direction": "+X, right edge"
+  },
+  "J6": {
+    "position_mm": [
+      5.3,
+      10
+    ],
+    "side": "rear",
+    "kicad_angle_deg": 90,
+    "mating_direction": "-X, left edge"
+  },
+  "validation": "Footprint courtyards pass DRC; angled native 3D inspection confirms outward openings. Final flex bend radius and enclosure wall clearance still require assembly fit check.",
+  "J1": {
+    "position_mm": [
+      38.3,
+      75.29
+    ],
+    "side": "front",
+    "kicad_angle_deg": 0,
+    "mating_direction": "+Y, bottom edge"
+  },
+  "J2": {
+    "position_mm": [
+      24.3,
+      76
+    ],
+    "side": "front",
+    "kicad_angle_deg": 0,
+    "mating_direction": "+Y, bottom edge"
+  },
+  "J5": {
+    "position_mm": [
+      22,
+      16.85
+    ],
+    "side": "rear",
+    "kicad_angle_deg": 0,
+    "mating_direction": "-Y, toward top edge"
+  },
+  "SW4": {
+    "position_mm": [
+      41.7,
+      65.2
+    ],
+    "side": "rear",
+    "kicad_angle_deg": -90,
+    "mating_direction": "+X, right edge"
+  }
+}

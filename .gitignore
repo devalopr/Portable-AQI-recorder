@@ -3,3 +3,13 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+
+# KiCad / hardware tooling
+**/.history/
+*-backups/
+*.lck
+fp-info-cache
+__pycache__/
+*.pyc
+*.step.glb
+hardware/**/*.zip

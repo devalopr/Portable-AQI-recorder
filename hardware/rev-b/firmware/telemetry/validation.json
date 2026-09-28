@@ -1,0 +1,13 @@
+{
+  "schematic_erc": {
+    "battery": 0,
+    "main": 0
+  },
+  "netlist": "all intended connected pins match in both revisions",
+  "protocol_tests": "passed",
+  "receiver_state_tests": "passed including timeout and timestamp rollover",
+  "esp32_receiver_example": "PlatformIO build passed, Arduino-ESP32 2.0.14",
+  "ch32_driver": "API/type syntax check against official SDK passed; RV32EC binary not built",
+  "pcb_routing": "pending; existing boards unchanged",
+  "hardware_tests": "not performed"
+}

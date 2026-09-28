@@ -1,0 +1,705 @@
+{
+  "date": "2026-09-20",
+  "source": "PCBParts JLC/LCSC catalogue snapshot; not live purchase quotations",
+  "planning_inr_per_usd": 96,
+  "parts": [
+    {
+      "lcsc": "C16581",
+      "model": "TP4056-42-ESOP8",
+      "manufacturer": "TOPPOWER(Nanjing Extension Microelectronics)",
+      "package": "ESOP-8",
+      "stock": 94393,
+      "price": 0.1846,
+      "price_10": 0.1462,
+      "library_type": "preferred",
+      "preferred": true,
+      "category": "Power Management (PMIC)",
+      "subcategory": "Battery Management",
+      "subcategory_id": 3098,
+      "mounting_type": "smd",
+      "specs": {
+        "Charging Saturation Voltage": "4.2V",
+        "Supply Current (Iq)": "2uA",
+        "Operating Temperature": "-40℃~+85℃",
+        "Type of Battery": "Lithium Battery",
+        "Charge Current - Max": "1A",
+        "Number of Cells": "1",
+        "Battery Temperature Detection": "Support",
+        "The Chip Type": "Charging IC",
+        "Balance Current": "-",
+        "Voltage - Supply": "4V~8V",
+        "End-Off Voltage": "-",
+        "Features": "Constant current charging、Constant voltage charging、Trickle charging、Automatic recharge、Charge termination、Programmable charging current、Soft-start、Under-voltage lockout",
+        "Interface": "-",
+        "0V Battery Charge": "-"
+      },
+      "description": "-40℃~+85℃ 1 1A 2uA 4.2V 4V~8V Charging IC Lithium Battery Support ESOP-8 Battery Management ROHS",
+      "min_order": 1,
+      "reel_qty": 4000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809261820_TOPPOWER-Nanjing-Extension-Microelectronics-TP4056-42-ESOP8_C16581.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/battery-management_toppower-nanjing-extension-microelectronics-tp4056-42-esop8_C16581.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.1846
+        },
+        {
+          "qty": "50+",
+          "price": 0.1462
+        },
+        {
+          "qty": "150+",
+          "price": 0.1275
+        },
+        {
+          "qty": "500+",
+          "price": 0.1107
+        },
+        {
+          "qty": "2500+",
+          "price": 0.0909
+        },
+        {
+          "qty": "4000+",
+          "price": 0.0881
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Charging Saturation Voltage",
+          "value": "4.2V"
+        },
+        {
+          "name": "Supply Current (Iq)",
+          "value": "2uA"
+        },
+        {
+          "name": "Operating Temperature",
+          "value": "-40℃~+85℃"
+        },
+        {
+          "name": "Type of Battery",
+          "value": "Lithium Battery"
+        },
+        {
+          "name": "Charge Current - Max",
+          "value": "1A"
+        },
+        {
+          "name": "Number of Cells",
+          "value": "1"
+        },
+        {
+          "name": "Battery Temperature Detection",
+          "value": "Support"
+        },
+        {
+          "name": "The Chip Type",
+          "value": "Charging IC"
+        },
+        {
+          "name": "Balance Current",
+          "value": "-"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "4V~8V"
+        },
+        {
+          "name": "End-Off Voltage",
+          "value": "-"
+        },
+        {
+          "name": "Features",
+          "value": "Constant current charging、Constant voltage charging、Trickle charging、Automatic recharge、Charge termination、Programmable charging current、Soft-start、Under-voltage lockout"
+        },
+        {
+          "name": "Interface",
+          "value": "-"
+        },
+        {
+          "name": "0V Battery Charge",
+          "value": "-"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "f5fb5a24e9edc515352eb800d4f925df",
+      "easyeda_footprint_uuid": "7568fee05bc44581b2c32625ae15b3f8"
+    },
+    {
+      "lcsc": "C51699",
+      "model": "TP5000-QFN16",
+      "manufacturer": "TOPPOWER(Nanjing Extension Microelectronics)",
+      "package": "QFN-16-EP(4x4)",
+      "stock": 7232,
+      "price": 0.3939,
+      "price_10": 0.3125,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Power Management (PMIC)",
+      "subcategory": "Battery Management",
+      "subcategory_id": 3098,
+      "mounting_type": "smd",
+      "specs": {
+        "Charging Saturation Voltage": "4.2V",
+        "Supply Current (Iq)": "180uA",
+        "Operating Temperature": "-20℃~+85℃",
+        "Type of Battery": "Lithium Battery、LiFePO4 Battery",
+        "Charge Current - Max": "2A",
+        "Number of Cells": "1",
+        "Battery Temperature Detection": "Support",
+        "The Chip Type": "Charging IC",
+        "Balance Current": "-",
+        "Voltage - Supply": "4V~9V",
+        "End-Off Voltage": "-",
+        "Features": "Constant current charging、Constant voltage charging、Trickle charging、Automatic recharge、Charge termination、Programmable charging current、Soft-start、Under-voltage lockout、Overcurrent Protection、Overvoltage protection",
+        "Interface": "-",
+        "0V Battery Charge": "-"
+      },
+      "description": "-20℃~+85℃ 1 180uA 2A 4.2V 4V~9V Charging IC Lithium Battery、LiFePO4 Battery Support QFN-16-EP(4x4) Battery Management ROHS",
+      "min_order": 1,
+      "reel_qty": 5000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410121619_TOPPOWER-Nanjing-Extension-Microelectronics-TP5000-QFN16_C51699.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/battery-management_toppower-nanjing-extension-microelectronics-tp5000-qfn16_C51699.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.3939
+        },
+        {
+          "qty": "50+",
+          "price": 0.3125
+        },
+        {
+          "qty": "150+",
+          "price": 0.2767
+        },
+        {
+          "qty": "500+",
+          "price": 0.2133
+        },
+        {
+          "qty": "2500+",
+          "price": 0.1937
+        },
+        {
+          "qty": "5000+",
+          "price": 0.1807
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Charging Saturation Voltage",
+          "value": "4.2V"
+        },
+        {
+          "name": "Supply Current (Iq)",
+          "value": "180uA"
+        },
+        {
+          "name": "Operating Temperature",
+          "value": "-20℃~+85℃"
+        },
+        {
+          "name": "Type of Battery",
+          "value": "Lithium Battery、LiFePO4 Battery"
+        },
+        {
+          "name": "Charge Current - Max",
+          "value": "2A"
+        },
+        {
+          "name": "Number of Cells",
+          "value": "1"
+        },
+        {
+          "name": "Battery Temperature Detection",
+          "value": "Support"
+        },
+        {
+          "name": "The Chip Type",
+          "value": "Charging IC"
+        },
+        {
+          "name": "Balance Current",
+          "value": "-"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "4V~9V"
+        },
+        {
+          "name": "End-Off Voltage",
+          "value": "-"
+        },
+        {
+          "name": "Features",
+          "value": "Constant current charging、Constant voltage charging、Trickle charging、Automatic recharge、Charge termination、Programmable charging current、Soft-start、Under-voltage lockout、Overcurrent Protection、Overvoltage protection"
+        },
+        {
+          "name": "Interface",
+          "value": "-"
+        },
+        {
+          "name": "0V Battery Charge",
+          "value": "-"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "c26c7c3e72734d799abac791fd6ef22f",
+      "easyeda_footprint_uuid": "42320502fbf2499fa3b537647dfd1ec6"
+    },
+    {
+      "lcsc": "C5447152",
+      "model": "TP5000X-4.2-ESOP8",
+      "manufacturer": "TOPPOWER(Nanjing Extension Microelectronics)",
+      "package": "ESOP8",
+      "stock": 11604,
+      "price": 0.3145,
+      "price_10": 0.2546,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Power Management (PMIC)",
+      "subcategory": "Battery Management",
+      "subcategory_id": 3098,
+      "mounting_type": "smd",
+      "specs": {
+        "Charging Saturation Voltage": "4.2V",
+        "Supply Current (Iq)": "250uA",
+        "Operating Temperature": "-20℃~+85℃",
+        "Type of Battery": "Lithium Battery",
+        "Charge Current - Max": "2A",
+        "Number of Cells": "1",
+        "Battery Temperature Detection": "Support",
+        "The Chip Type": "Charging IC",
+        "Balance Current": "-",
+        "Voltage - Supply": "4.5V~9V",
+        "End-Off Voltage": "-",
+        "Features": "-",
+        "Interface": "-",
+        "0V Battery Charge": "-"
+      },
+      "description": "-20℃~+85℃ 1 250uA 2A 4.2V 4.5V~9V Charging IC Support ESOP8 Battery Management ROHS",
+      "min_order": 1,
+      "reel_qty": 4000,
+      "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304251410_TOPPOWER-Nanjing-Extension-Microelectronics-TP5000X-4-2-ESOP8_C5447152.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/battery-management_toppower-nanjing-extension-microelectronics-tp5000x-4-2-esop8_C5447152.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.3145
+        },
+        {
+          "qty": "50+",
+          "price": 0.2546
+        },
+        {
+          "qty": "150+",
+          "price": 0.2291
+        },
+        {
+          "qty": "500+",
+          "price": 0.197
+        },
+        {
+          "qty": "2500+",
+          "price": 0.1625
+        },
+        {
+          "qty": "4000+",
+          "price": 0.154
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Charging Saturation Voltage",
+          "value": "4.2V"
+        },
+        {
+          "name": "Supply Current (Iq)",
+          "value": "250uA"
+        },
+        {
+          "name": "Operating Temperature",
+          "value": "-20℃~+85℃"
+        },
+        {
+          "name": "Type of Battery",
+          "value": "Lithium Battery"
+        },
+        {
+          "name": "Charge Current - Max",
+          "value": "2A"
+        },
+        {
+          "name": "Number of Cells",
+          "value": "1"
+        },
+        {
+          "name": "Battery Temperature Detection",
+          "value": "Support"
+        },
+        {
+          "name": "The Chip Type",
+          "value": "Charging IC"
+        },
+        {
+          "name": "Balance Current",
+          "value": "-"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "4.5V~9V"
+        },
+        {
+          "name": "End-Off Voltage",
+          "value": "-"
+        },
+        {
+          "name": "Features",
+          "value": "-"
+        },
+        {
+          "name": "Interface",
+          "value": "-"
+        },
+        {
+          "name": "0V Battery Charge",
+          "value": "-"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "a837f116aae944f386100665d45d674f",
+      "easyeda_footprint_uuid": "7568fee05bc44581b2c32625ae15b3f8"
+    },
+    {
+      "lcsc": "C88319",
+      "model": "FP6298XR-G1",
+      "manufacturer": "Advanced Analog Technology",
+      "package": "SOP-8-EP",
+      "stock": 6449,
+      "price": 0.4948,
+      "price_10": 0.3825,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Power Management (PMIC)",
+      "subcategory": "DC-DC Converters",
+      "subcategory_id": 3005,
+      "mounting_type": "smd",
+      "specs": {
+        "Operating Temperature": "-40℃~+85℃",
+        "Function": "Boost",
+        "Synchronous Rectifier": "Yes",
+        "Frequency - Switching": "500kHz",
+        "Output Type": "Adjustable",
+        "Voltage - Supply": "2.6V~5.5V",
+        "Output Current": "4.5A",
+        "Quiescent Current": "200uA",
+        "Features": "Overcurrent Protection、Adjustable current limiting",
+        "Switch tube (built-in/external)": "Built-in",
+        "Topology": "Boost",
+        "Output Voltage": "600mV~9V",
+        "Number of Outputs": "1"
+      },
+      "description": "-40℃~+85℃ 1 2.6V~5.5V 200uA 4.5A 500kHz Adjustable Boost Boost Built-in SOP-8-EP DC-DC Converters ROHS",
+      "min_order": 1,
+      "reel_qty": 2500,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811141821_Advanced-Analog-Technology-FP6298XR-G1_C88319.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/dc-dc-converters_advanced-analog-technology-fp6298xr-g1_C88319.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.4948
+        },
+        {
+          "qty": "10+",
+          "price": 0.3825
+        },
+        {
+          "qty": "30+",
+          "price": 0.3353
+        },
+        {
+          "qty": "100+",
+          "price": 0.2751
+        },
+        {
+          "qty": "500+",
+          "price": 0.2507
+        },
+        {
+          "qty": "1000+",
+          "price": 0.2344
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Operating Temperature",
+          "value": "-40℃~+85℃"
+        },
+        {
+          "name": "Function",
+          "value": "Boost"
+        },
+        {
+          "name": "Synchronous Rectifier",
+          "value": "Yes"
+        },
+        {
+          "name": "Frequency - Switching",
+          "value": "500kHz"
+        },
+        {
+          "name": "Output Type",
+          "value": "Adjustable"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "2.6V~5.5V"
+        },
+        {
+          "name": "Output Current",
+          "value": "4.5A"
+        },
+        {
+          "name": "Quiescent Current",
+          "value": "200uA"
+        },
+        {
+          "name": "Features",
+          "value": "Overcurrent Protection、Adjustable current limiting"
+        },
+        {
+          "name": "Switch tube (built-in/external)",
+          "value": "Built-in"
+        },
+        {
+          "name": "Topology",
+          "value": "Boost"
+        },
+        {
+          "name": "Output Voltage",
+          "value": "600mV~9V"
+        },
+        {
+          "name": "Number of Outputs",
+          "value": "1"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "b5afb13480314cebb3ef2e2a39ffed95",
+      "easyeda_footprint_uuid": "b0f29085d703403f86a22ffc3c6b4b4d"
+    },
+    {
+      "lcsc": "C84817",
+      "model": "MT3608",
+      "manufacturer": "XI'AN Aerosemi Tech",
+      "package": "SOT-23-6",
+      "stock": 180594,
+      "price": 0.0949,
+      "price_10": 0.0883,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Power Management (PMIC)",
+      "subcategory": "DC-DC Converters",
+      "subcategory_id": 3005,
+      "mounting_type": "smd",
+      "specs": {
+        "Operating Temperature": "-40℃~+85℃",
+        "Function": "Boost",
+        "Synchronous Rectifier": "No",
+        "Frequency - Switching": "1.2MHz",
+        "Output Type": "Adjustable",
+        "Voltage - Supply": "2V~24V",
+        "Output Current": "2A",
+        "Quiescent Current": "100uA、1.6mA",
+        "Features": "Overcurrent Protection、Light load efficient mode",
+        "Switch tube (built-in/external)": "Built-in",
+        "Topology": "Boost",
+        "Output Voltage": "600mV~28V",
+        "Number of Outputs": "1"
+      },
+      "description": "-40℃~+85℃ 1 1.2MHz 100uA、1.6mA 2A 2V~24V Adjustable Boost Boost Built-in No SOT-23-6 DC-DC Converters ROHS",
+      "min_order": 1,
+      "reel_qty": 3000,
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811151539_XI-AN-Aerosemi-Tech-MT3608_C84817.pdf",
+      "lcsc_url": "https://www.lcsc.com/product-detail/dc-dc-converters_xi-an-aerosemi-tech-mt3608_C84817.html",
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.0949
+        },
+        {
+          "qty": "10+",
+          "price": 0.0883
+        },
+        {
+          "qty": "30+",
+          "price": 0.0847
+        },
+        {
+          "qty": "100+",
+          "price": 0.0819
+        },
+        {
+          "qty": "500+",
+          "price": 0.0809
+        },
+        {
+          "qty": "1000+",
+          "price": 0.0801
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Operating Temperature",
+          "value": "-40℃~+85℃"
+        },
+        {
+          "name": "Function",
+          "value": "Boost"
+        },
+        {
+          "name": "Synchronous Rectifier",
+          "value": "No"
+        },
+        {
+          "name": "Frequency - Switching",
+          "value": "1.2MHz"
+        },
+        {
+          "name": "Output Type",
+          "value": "Adjustable"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "2V~24V"
+        },
+        {
+          "name": "Output Current",
+          "value": "2A"
+        },
+        {
+          "name": "Quiescent Current",
+          "value": "100uA、1.6mA"
+        },
+        {
+          "name": "Features",
+          "value": "Overcurrent Protection、Light load efficient mode"
+        },
+        {
+          "name": "Switch tube (built-in/external)",
+          "value": "Built-in"
+        },
+        {
+          "name": "Topology",
+          "value": "Boost"
+        },
+        {
+          "name": "Output Voltage",
+          "value": "600mV~28V"
+        },
+        {
+          "name": "Number of Outputs",
+          "value": "1"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "5129d2cb7f8e600e7152a0ee6ec60b1c",
+      "easyeda_footprint_uuid": "9a066f903e65476fa74739d5e9b0ceb9"
+    },
+    {
+      "lcsc": "C80366",
+      "model": "TP5602",
+      "manufacturer": "TOPPOWER(Nanjing Extension Microelectronics)",
+      "package": "QFN-24-EP(4x4)",
+      "stock": 0,
+      "price": 0.3435,
+      "price_10": 0.3353,
+      "library_type": "extended",
+      "preferred": false,
+      "category": "Power Management (PMIC)",
+      "subcategory": "Power Management - Specialized",
+      "subcategory_id": 3006,
+      "mounting_type": "smd",
+      "specs": {
+        "Charging Saturation Voltage": "4.2V",
+        "Operating Temperature": "-40℃~+85℃",
+        "The Chip Type": "-",
+        "Type of Battery": "Lithium-ion",
+        "Voltage - Supply": "4.2V~7V",
+        "Charge Current - Max": "3.5A",
+        "Number of Cells": "1",
+        "End-Off Voltage": "2.4V"
+      },
+      "description": "-40℃~+85℃ 1 2.4V 3.5A 4.2V 4.2V~7V Lithium-ion QFN-24-EP(4x4) Power Management - Specialized ROHS",
+      "min_order": 27,
+      "reel_qty": 120,
+      "datasheet": null,
+      "lcsc_url": null,
+      "prices": [
+        {
+          "qty": "1+",
+          "price": 0.3435
+        },
+        {
+          "qty": "10+",
+          "price": 0.3353
+        },
+        {
+          "qty": "30+",
+          "price": 0.3305
+        },
+        {
+          "qty": "100+",
+          "price": 0.3239
+        },
+        {
+          "qty": "500+",
+          "price": 0.3239
+        },
+        {
+          "qty": "1000+",
+          "price": 0.3239
+        }
+      ],
+      "attributes": [
+        {
+          "name": "Charging Saturation Voltage",
+          "value": "4.2V"
+        },
+        {
+          "name": "Operating Temperature",
+          "value": "-40℃~+85℃"
+        },
+        {
+          "name": "The Chip Type",
+          "value": "-"
+        },
+        {
+          "name": "Type of Battery",
+          "value": "Lithium-ion"
+        },
+        {
+          "name": "Voltage - Supply",
+          "value": "4.2V~7V"
+        },
+        {
+          "name": "Charge Current - Max",
+          "value": "3.5A"
+        },
+        {
+          "name": "Number of Cells",
+          "value": "1"
+        },
+        {
+          "name": "End-Off Voltage",
+          "value": "2.4V"
+        }
+      ],
+      "has_easyeda_footprint": true,
+      "easyeda_symbol_uuid": "a12461c84784433596cf6369e9a478d9",
+      "easyeda_footprint_uuid": "02855d248e434f3cb829027fb3896c67"
+    }
+  ]
+}

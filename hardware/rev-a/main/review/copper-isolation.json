@@ -1,0 +1,9 @@
+{
+  "checked_regions": [
+    "antenna",
+    "upper_support_tab",
+    "lower_support_tab"
+  ],
+  "issues": [],
+  "neck_ground_pour_area_mm2": 0
+}

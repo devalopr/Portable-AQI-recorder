@@ -1,0 +1,146 @@
+{
+ "date": "2026-09-27",
+ "source": "LCSC product pages fetched 2026-09-27; catalogue prices, not purchase quotations",
+ "parts": [
+  {
+   "lcsc": "C7528830",
+   "data": {
+    "lcsc": "C7528830",
+    "model": "RT9080-33GJ5-MS",
+    "manufacturer": "MSKSEMI",
+    "stock": 3635,
+    "price": 0.0847,
+    "prices": [
+     {
+      "qty": "5+",
+      "price": 0.0847
+     },
+     {
+      "qty": "50+",
+      "price": 0.0675
+     },
+     {
+      "qty": "150+",
+      "price": 0.0589
+     },
+     {
+      "qty": "500+",
+      "price": 0.0525
+     },
+     {
+      "qty": "3000+",
+      "price": 0.0472
+     },
+     {
+      "qty": "6000+",
+      "price": 0.0446
+     }
+    ],
+    "lcsc_url": "https://www.lcsc.com/product-detail/C7528830.html"
+   }
+  },
+  {
+   "lcsc": "C841192",
+   "data": {
+    "lcsc": "C841192",
+    "model": "RT9080-33GJ5",
+    "manufacturer": "RICHTEK",
+    "stock": 39920,
+    "price": 0.1207,
+    "prices": [
+     {
+      "qty": "5+",
+      "price": 0.1207
+     },
+     {
+      "qty": "50+",
+      "price": 0.0982
+     },
+     {
+      "qty": "150+",
+      "price": 0.087
+     },
+     {
+      "qty": "500+",
+      "price": 0.0786
+     },
+     {
+      "qty": "3000+",
+      "price": 0.0613
+     },
+     {
+      "qty": "6000+",
+      "price": 0.058
+     }
+    ],
+    "lcsc_url": "https://www.lcsc.com/product-detail/C841192.html"
+   }
+  },
+  {
+   "lcsc": "C22935",
+   "data": {
+    "lcsc": "C22935",
+    "model": "0603WAF1004T5E",
+    "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+    "stock": 4879800,
+    "price": 0.0019,
+    "prices": [
+     {
+      "qty": "100+",
+      "price": 0.0019
+     },
+     {
+      "qty": "1000+",
+      "price": 0.0014
+     },
+     {
+      "qty": "5000+",
+      "price": 0.0013
+     },
+     {
+      "qty": "10000+",
+      "price": 0.0011
+     },
+     {
+      "qty": "50000+",
+      "price": 0.001
+     }
+    ],
+    "lcsc_url": "https://www.lcsc.com/product-detail/C22935.html"
+   }
+  },
+  {
+   "lcsc": "C23178",
+   "data": {
+    "lcsc": "C23178",
+    "model": "0603WAF4703T5E",
+    "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+    "stock": 1170700,
+    "price": 0.0028,
+    "prices": [
+     {
+      "qty": "100+",
+      "price": 0.0028
+     },
+     {
+      "qty": "1000+",
+      "price": 0.0023
+     },
+     {
+      "qty": "5000+",
+      "price": 0.0019
+     },
+     {
+      "qty": "10000+",
+      "price": 0.0016
+     },
+     {
+      "qty": "50000+",
+      "price": 0.0013
+     }
+    ],
+    "lcsc_url": "https://www.lcsc.com/product-detail/C23178.html"
+   }
+  }
+ ]
+}

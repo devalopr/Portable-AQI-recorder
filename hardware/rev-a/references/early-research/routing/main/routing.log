@@ -1,0 +1,74 @@
+2026-09-08 10:27:35.503 INFO   Freerouting v2.4.1 (build-date: 2026-09-03)
+2026-09-08 10:27:35.543 WARN   Couldn't get screen resolution. If you are running in a headless environment, disable the GUI by setting gui.enabled to false.
+2026-09-08 10:27:36.855 INFO   [415FCE\EBD375] Loading board file 'AQI_Main.dsn'...
+2026-09-08 10:27:36.951 WARN   Power-plane validation failed:
+- Dedicated power layer 'In1.Cu' has no conduction areas defined.
+
+Proper Definition and Best Practices for Power Planes:
+1. What Belongs on a Power Plane:
+   - Solid Copper Pours: A single, uninterrupted sheet of copper assigned to one voltage (e.g., +3.3V).
+   - Split Planes: Multiple distinct voltage zones divided by thin isolation gaps (puzzle pieces).
+   - Vias and Anti-Pads: Plated holes passing through the board, surrounded by circular voids (anti-pads) to prevent shorting.
+   - Thermal Reliefs: Spoked connections for vias or pins that connect to the plane, facilitating soldering.
+2. Why Signal Wires/Traces are Banned:
+   - Destroyed Return Paths: High-speed signals on adjacent layers couple to the solid plane below/above as return paths. Crossing a trace gap detours return currents, causing severe EMI and signal integrity issues.
+   - Compromised Power Delivery: Power planes should provide the lowest impedance path. Routing traces chops up the copper, creating bottleneck restrictions and voltage drops.
+
+2026-09-08 10:27:36.955 INFO   [415FCE\EBD375] Job '415FCE\EBD375' started at 2026-09-08T04:57:36.954947Z.
+2026-09-08 10:27:37.228 INFO   [415FCE\EBD375] Fanout stage started on board '889e685820b0c1bbbd969b2ef89f34fd' with 193 of 408 SMD pins needing fanout (191 already connected, 24 netless).
+2026-09-08 10:27:38.012 INFO   [415FCE\EBD375] Fanout pass #1 on board '6bca7d31cf69a9f879745288a863048b' completed in 0.63 seconds with 11 SMD pins fanouted, 4 not routed, 0 insert errors, +1 extra via (0 SMD pins still to check in pass, ripup costs=100).
+2026-09-08 10:27:38.559 INFO   [415FCE\EBD375] Fanout pass #2 on board '0c574879861eeddc33004a55012619d3' completed in 0.53 seconds with 11 SMD pins fanouted, 4 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-09-08 10:27:39.077 INFO   [415FCE\EBD375] Fanout pass #3 on board '2cba748a2a7f835f0d0fbd59bd08f135' completed in 0.50 seconds with 11 SMD pins fanouted, 4 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-09-08 10:27:39.593 INFO   [415FCE\EBD375] Fanout pass #4 on board '21b146119e2b2171d6ef52c3f093c901' completed in 0.50 seconds with 11 SMD pins fanouted, 4 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-09-08 10:27:39.593 INFO   Fanout stopped after 4 passes: no progress for 3 consecutive passes.
+2026-09-08 10:27:39.703 INFO   [415FCE\EBD375] Fanout stage completed: started with 384 total SMD pins, completed in 2.34 seconds, escaped pins: 348/384 (90.6%), using 2.58 total CPU seconds, 76.48 GB total allocated, and 938.7 MB peak heap usage.
+2026-09-08 10:27:39.717 INFO   [415FCE\EBD375] Auto-routing stage started on board '21b146119e2b2171d6ef52c3f093c901' for 13 unrouted items.
+2026-09-08 10:27:41.752 INFO   [415FCE\EBD375] Auto-routing pass #1 on board '21b146119e2b2171d6ef52c3f093c901' was completed in 1.78 seconds with score 956.16 (12 unrouted and 4 violations), using 3.90 CPU seconds and the job allocated 107.39 GB of memory so far.
+2026-09-08 10:27:43.652 INFO   [415FCE\EBD375] Auto-routing pass #2 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.65 seconds with score 956.16 (12 unrouted and 4 violations), using 5.87 CPU seconds and the job allocated 156.96 GB of memory so far.
+2026-09-08 10:27:45.303 INFO   [415FCE\EBD375] Auto-routing pass #3 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.52 seconds with score 956.16 (12 unrouted and 4 violations), using 7.83 CPU seconds and the job allocated 208.27 GB of memory so far.
+2026-09-08 10:27:46.965 INFO   [415FCE\EBD375] Auto-routing pass #4 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.53 seconds with score 956.16 (12 unrouted and 4 violations), using 8.80 CPU seconds and the job allocated 240.92 GB of memory so far.
+2026-09-08 10:27:48.597 INFO   [415FCE\EBD375] Auto-routing pass #5 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.50 seconds with score 956.16 (12 unrouted and 4 violations), using 10.76 CPU seconds and the job allocated 290.28 GB of memory so far.
+2026-09-08 10:27:50.230 INFO   [415FCE\EBD375] Auto-routing pass #6 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.51 seconds with score 956.16 (12 unrouted and 4 violations), using 12.73 CPU seconds and the job allocated 344.18 GB of memory so far.
+2026-09-08 10:27:51.871 INFO   [415FCE\EBD375] Auto-routing pass #7 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.51 seconds with score 956.16 (12 unrouted and 4 violations), using 13.71 CPU seconds and the job allocated 375.06 GB of memory so far.
+2026-09-08 10:27:53.525 INFO   [415FCE\EBD375] Auto-routing pass #8 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.52 seconds with score 956.16 (12 unrouted and 4 violations), using 15.67 CPU seconds and the job allocated 424.57 GB of memory so far.
+2026-09-08 10:27:55.175 INFO   [415FCE\EBD375] Auto-routing pass #9 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.52 seconds with score 956.16 (12 unrouted and 4 violations), using 17.63 CPU seconds and the job allocated 479.95 GB of memory so far.
+2026-09-08 10:27:56.822 INFO   [415FCE\EBD375] Auto-routing pass #10 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.52 seconds with score 956.16 (12 unrouted and 4 violations), using 18.62 CPU seconds and the job allocated 508.95 GB of memory so far.
+2026-09-08 10:27:58.465 INFO   [415FCE\EBD375] Auto-routing pass #11 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.51 seconds with score 956.16 (12 unrouted and 4 violations), using 20.57 CPU seconds and the job allocated 558.73 GB of memory so far.
+2026-09-08 10:28:00.212 INFO   [415FCE\EBD375] Auto-routing pass #12 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.50 seconds with score 956.16 (12 unrouted and 4 violations), using 22.53 CPU seconds and the job allocated 616.37 GB of memory so far.
+2026-09-08 10:28:01.851 INFO   [415FCE\EBD375] Auto-routing pass #13 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.51 seconds with score 956.16 (12 unrouted and 4 violations), using 23.52 CPU seconds and the job allocated 645.74 GB of memory so far.
+2026-09-08 10:28:03.514 INFO   [415FCE\EBD375] Auto-routing pass #14 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.54 seconds with score 956.16 (12 unrouted and 4 violations), using 25.48 CPU seconds and the job allocated 695.25 GB of memory so far.
+2026-09-08 10:28:05.189 INFO   [415FCE\EBD375] Auto-routing pass #15 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.55 seconds with score 956.16 (12 unrouted and 4 violations), using 27.44 CPU seconds and the job allocated 750.74 GB of memory so far.
+2026-09-08 10:28:06.880 INFO   [415FCE\EBD375] Auto-routing pass #16 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.56 seconds with score 956.16 (12 unrouted and 4 violations), using 28.43 CPU seconds and the job allocated 778.75 GB of memory so far.
+2026-09-08 10:28:08.547 INFO   [415FCE\EBD375] Auto-routing pass #17 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.54 seconds with score 956.16 (12 unrouted and 4 violations), using 30.38 CPU seconds and the job allocated 827.90 GB of memory so far.
+2026-09-08 10:28:10.185 INFO   [415FCE\EBD375] Auto-routing pass #18 on board '1d81fd4b948b311046343f5e0c8dc91a' was completed in 1.51 seconds with score 956.16 (12 unrouted and 4 violations), using 32.35 CPU seconds and the job allocated 884.28 GB of memory so far.
+2026-09-08 10:28:10.206 INFO   [415FCE\EBD375] The router's best score (956.16) has not improved by more than 0.5 points since pass #8. Stopping the auto-router after 18 passes (12 items still unconnected).
+The following connections could not be routed -- please review your design (e.g. check pad clearances, trace width rules, and available routing space):
+  Net 'GND' (1 unrouted connection):
+    - J1-B12  ->  J1-SH
+  Net '+5V_USB' (1 unrouted connection):
+    - D1-5  ->  J1-B4
+  Net '+5V_SYS' (2 unrouted connections):
+    - U3-2  ->  via
+    - U4-1  ->  via
+  Net '+5V_SW' (1 unrouted connection):
+    - C12-1  ->  C9-1
+  Net '+3V3_CO2' (1 unrouted connection):
+    - via  ->  U8-19
+  Net '+3V2' (3 unrouted connections):
+    - C17-1  ->  U5-6
+    - U1-3  ->  C2-1
+    - J5-7  ->  via
+  Net '/MCU_EN' (1 unrouted connection):
+    - via  ->  via
+  Net '/EPD_BS' (1 unrouted connection):
+    - J7-1  ->  R32-1
+  Net '/PM_FB' (1 unrouted connection):
+    - R19-2  ->  R20-1
+2026-09-08 10:28:10.440 INFO   [415FCE\EBD375] Auto-routing stage completed: started with 13 unrouted nets, completed in 33.33 seconds, final score: 956.16 (12 unrouted and 4 violations), using 32.35 total CPU seconds, 884.28 GB total allocated, and 1171.9 MB peak heap usage.
+2026-09-08 10:28:10.557 INFO   [415FCE\EBD375] Optimization stage started on board '1d81fd4b948b311046343f5e0c8dc91a' with score 956.16 (12 unrouted and 4 violations).
+2026-09-08 10:28:11.184 INFO   [415FCE\EBD375] Optimizer pass #1 on board '07878a24a932762ade2e4d72c4e22b1e' was completed in 0.25 seconds with the score of 956.16 (12 unrouted and 4 violations).
+2026-09-08 10:28:11.298 INFO   [415FCE\EBD375] Stopping optimizer because the improvement in this pass (0.0000%) is below the threshold (1.00%).
+2026-09-08 10:28:11.414 INFO   [415FCE\EBD375] Optimization stage completed: started with score 956.16 (12 unrouted and 4 violations), completed in 0.74 seconds, final score: 956.16 (12 unrouted and 4 violations), using 0.73 total CPU seconds, 25.52 GB total allocated, and 933.2 MB peak heap usage.
+2026-09-08 10:28:11.427 INFO   [415FCE\EBD375] Job '415FCE\EBD375' finished with state: COMPLETED (elapsed: 34.47 seconds, finished at UTC: 2026-09-08T04:58:11.427440Z).
+2026-09-08 10:28:11.917 INFO   Saving output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-a/main/review/AQI_Main.ses' (SES)...
+2026-09-08 10:28:11.925 INFO   Successfully saved output file '/Users/devalopr/Documents/Projects/Portable-AQI-recorder/hardware/rev-a/main/review/AQI_Main.ses' (185341 bytes).

@@ -1,0 +1,849 @@
+{
+  "date": "2026-09-12",
+  "parts": [
+    {
+      "lcsc": "C5180249",
+      "data": {
+        "lcsc": "C5180249",
+        "model": "USBLC6-2SC6-ES",
+        "manufacturer": "ElecSuper",
+        "package": "SOT-23-6L",
+        "stock": 19140,
+        "price": 0.0311,
+        "price_10": 0.0256,
+        "library_type": "extended",
+        "preferred": false,
+        "category": "Circuit Protection",
+        "subcategory": "ESD and Surge Protection (TVS/ESD)",
+        "subcategory_id": 3035,
+        "mounting_type": "smd",
+        "specs": {
+          "Operating Temperature": "-40℃~+85℃",
+          "Type": "ESD",
+          "Junction Capacitance": "0.6pF",
+          "Peak Pulse Power Dissipation (Ppp)": "70W@8/20us",
+          "Number of Channels": "2",
+          "level of protection": "IEC 61000-4-2",
+          "Clamping Voltage": "15V",
+          "Polarity": "Unidirectional",
+          "Peak Pulse Current (Ipp)": "4.5A",
+          "Voltage - Breakdown": "6V",
+          "Reverse Stand-Off Voltage (Vrwm)": "5V",
+          "Reverse Leakage Current (Ir)": "1uA"
+        },
+        "description": "-40℃~+85℃ 0.6pF 15V 1uA 2 4.5A 5V 6V 70W@8/20us ESD IEC 61000-4-2 Unidirectional SOT-23-6L ESD and Surge Protection (TVS/ESD) ROHS",
+        "min_order": 1,
+        "reel_qty": 3000,
+        "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2209201730_ElecSuper-USBLC6-2SC6-ES_C5180249.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_elecsuper-usblc6-2sc6-es_C5180249.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.0311
+          },
+          {
+            "qty": "200+",
+            "price": 0.0256
+          },
+          {
+            "qty": "600+",
+            "price": 0.0225
+          },
+          {
+            "qty": "3000+",
+            "price": 0.0207
+          },
+          {
+            "qty": "9000+",
+            "price": 0.0191
+          },
+          {
+            "qty": "21000+",
+            "price": 0.0183
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Operating Temperature",
+            "value": "-40℃~+85℃"
+          },
+          {
+            "name": "Type",
+            "value": "ESD"
+          },
+          {
+            "name": "Junction Capacitance",
+            "value": "0.6pF"
+          },
+          {
+            "name": "Peak Pulse Power Dissipation (Ppp)",
+            "value": "70W@8/20us"
+          },
+          {
+            "name": "Number of Channels",
+            "value": "2"
+          },
+          {
+            "name": "level of protection",
+            "value": "IEC 61000-4-2"
+          },
+          {
+            "name": "Clamping Voltage",
+            "value": "15V"
+          },
+          {
+            "name": "Polarity",
+            "value": "Unidirectional"
+          },
+          {
+            "name": "Peak Pulse Current (Ipp)",
+            "value": "4.5A"
+          },
+          {
+            "name": "Voltage - Breakdown",
+            "value": "6V"
+          },
+          {
+            "name": "Reverse Stand-Off Voltage (Vrwm)",
+            "value": "5V"
+          },
+          {
+            "name": "Reverse Leakage Current (Ir)",
+            "value": "1uA"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "634c76ddb8294141ae8756a16a0b70ec",
+        "easyeda_footprint_uuid": "f3d2a2ecf658447dac746eb15158a989"
+      }
+    },
+    {
+      "lcsc": "C22775",
+      "data": {
+        "lcsc": "C22775",
+        "model": "0603WAF1000T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 13067992,
+        "price": 0.004,
+        "price_10": 0.0033,
+        "library_type": "basic",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "100Ω",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 100Ω 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411221126_UNI-ROYAL-Uniroyal-Elec-0603WAF1000T5E_C22775.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf1000t5e_C22775.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.004
+          },
+          {
+            "qty": "1000+",
+            "price": 0.0033
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0029
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0025
+          },
+          {
+            "qty": "50000+",
+            "price": 0.0023
+          },
+          {
+            "qty": "50200+",
+            "price": 0.0023
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "100Ω"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "2291b26429a0a53b9787e50172e9245c",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    },
+    {
+      "lcsc": "C23006",
+      "data": {
+        "lcsc": "C23006",
+        "model": "0603WAF3483T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 18222,
+        "price": 0.0035,
+        "price_10": 0.0028,
+        "library_type": "extended",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "348kΩ",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 348kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF3483T5E_C23006.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf3483t5e_C23006.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.0035
+          },
+          {
+            "qty": "1000+",
+            "price": 0.0028
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0024
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0022
+          },
+          {
+            "qty": "50000+",
+            "price": 0.002
+          },
+          {
+            "qty": "50200+",
+            "price": 0.002
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "348kΩ"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "b11f8d2d1730ca1c14c40e2b2877771d",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    },
+    {
+      "lcsc": "C23196",
+      "data": {
+        "lcsc": "C23196",
+        "model": "0603WAF5102T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 2566596,
+        "price": 0.002,
+        "price_10": 0.0016,
+        "library_type": "basic",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "51kΩ",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 51kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF5102T5E_C23196.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf5102t5e_C23196.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.002
+          },
+          {
+            "qty": "1000+",
+            "price": 0.0016
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0014
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0012
+          },
+          {
+            "qty": "50000+",
+            "price": 0.0011
+          },
+          {
+            "qty": "50200+",
+            "price": 0.0011
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "51kΩ"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "c39620caea91cc0b8bae7e3dc0dce058",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    },
+    {
+      "lcsc": "C23212",
+      "data": {
+        "lcsc": "C23212",
+        "model": "0603WAF6801T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 2113377,
+        "price": 0.0025,
+        "price_10": 0.002,
+        "library_type": "basic",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "6.8kΩ",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 6.8kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF6801T5E_C23212.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf6801t5e_C23212.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.0025
+          },
+          {
+            "qty": "1000+",
+            "price": 0.002
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0017
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0015
+          },
+          {
+            "qty": "50000+",
+            "price": 0.0013
+          },
+          {
+            "qty": "50200+",
+            "price": 0.0013
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "6.8kΩ"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "9c96bd528f29626b8360c5353b9f1778",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    },
+    {
+      "lcsc": "C22793",
+      "data": {
+        "lcsc": "C22793",
+        "model": "0603WAF1372T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 59420,
+        "price": 0.0017,
+        "price_10": 0.0014,
+        "library_type": "extended",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "13.7kΩ",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 13.7kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010130_UNI-ROYAL-Uniroyal-Elec-0603WAF1372T5E_C22793.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf1372t5e_C22793.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.0017
+          },
+          {
+            "qty": "1000+",
+            "price": 0.0014
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0012
+          },
+          {
+            "qty": "10000+",
+            "price": 0.001
+          },
+          {
+            "qty": "50000+",
+            "price": 0.0009
+          },
+          {
+            "qty": "50200+",
+            "price": 0.0009
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "13.7kΩ"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "ce01f24a8abbda8e7c6fc5be033e5602",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    },
+    {
+      "lcsc": "C23186",
+      "data": {
+        "lcsc": "C23186",
+        "model": "0603WAF5101T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 23511932,
+        "price": 0.0019,
+        "price_10": 0.0015,
+        "library_type": "basic",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "5.1kΩ",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 5.1kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF5101T5E_C23186.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf5101t5e_C23186.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.0019
+          },
+          {
+            "qty": "1000+",
+            "price": 0.0015
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0013
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0011
+          },
+          {
+            "qty": "50000+",
+            "price": 0.001
+          },
+          {
+            "qty": "50200+",
+            "price": 0.001
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "5.1kΩ"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "faac4ade3bc4e3dd5ad2239bdc7375c1",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    },
+    {
+      "lcsc": "C25819",
+      "data": {
+        "lcsc": "C25819",
+        "model": "0603WAF4702T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 2545328,
+        "price": 0.004,
+        "price_10": 0.0031,
+        "library_type": "basic",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "47kΩ",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 47kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010045_UNI-ROYAL-Uniroyal-Elec-0603WAF4702T5E_C25819.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf4702t5e_C25819.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.004
+          },
+          {
+            "qty": "1000+",
+            "price": 0.0031
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0027
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0023
+          },
+          {
+            "qty": "50000+",
+            "price": 0.0021
+          },
+          {
+            "qty": "50200+",
+            "price": 0.0021
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "47kΩ"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "11edeb1c5e2a4db53071549cb265b72b",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    },
+    {
+      "lcsc": "C23162",
+      "data": {
+        "lcsc": "C23162",
+        "model": "0603WAF4701T5E",
+        "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+        "package": "0603",
+        "stock": 26377375,
+        "price": 0.003,
+        "price_10": 0.0027,
+        "library_type": "basic",
+        "preferred": false,
+        "category": "Resistors",
+        "subcategory": "Chip Resistor - Surface Mount",
+        "subcategory_id": 2980,
+        "mounting_type": "smd",
+        "specs": {
+          "Resistance": "4.7kΩ",
+          "Operating Temperature": "-55℃~+155℃",
+          "Power(Watts)": "100mW",
+          "Type": "Thick Film Resistor",
+          "Voltage-Supply(Max)": "75V",
+          "Tolerance": "±1%",
+          "Temperature Coefficient": "±100ppm/℃"
+        },
+        "description": "-55℃~+155℃ 100mW 4.7kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+        "min_order": 1,
+        "reel_qty": 5000,
+        "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010116_UNI-ROYAL-Uniroyal-Elec-0603WAF4701T5E_C23162.pdf",
+        "lcsc_url": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0603waf4701t5e_C23162.html",
+        "prices": [
+          {
+            "qty": "1+",
+            "price": 0.003
+          },
+          {
+            "qty": "1000+",
+            "price": 0.0027
+          },
+          {
+            "qty": "5000+",
+            "price": 0.0025
+          },
+          {
+            "qty": "10000+",
+            "price": 0.0023
+          },
+          {
+            "qty": "50000+",
+            "price": 0.0022
+          },
+          {
+            "qty": "50200+",
+            "price": 0.0022
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Resistance",
+            "value": "4.7kΩ"
+          },
+          {
+            "name": "Operating Temperature",
+            "value": "-55℃~+155℃"
+          },
+          {
+            "name": "Power(Watts)",
+            "value": "100mW"
+          },
+          {
+            "name": "Type",
+            "value": "Thick Film Resistor"
+          },
+          {
+            "name": "Voltage-Supply(Max)",
+            "value": "75V"
+          },
+          {
+            "name": "Tolerance",
+            "value": "±1%"
+          },
+          {
+            "name": "Temperature Coefficient",
+            "value": "±100ppm/℃"
+          }
+        ],
+        "has_easyeda_footprint": true,
+        "easyeda_symbol_uuid": "0e9af40e10eb0954509ee99672d67d03",
+        "easyeda_footprint_uuid": "398691f1f785460098bbe5ee6590333c"
+      }
+    }
+  ]
+}
