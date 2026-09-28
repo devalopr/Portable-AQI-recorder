@@ -107,6 +107,8 @@ The TFT connector (TE 1-84953-0, $0.44) stays: no cheap top-contact 1.0 mm 10-pi
 
 ## Firmware pin map
 
+The firmware in [firmware/](../../../firmware/README.md) uses this map. The board is programmed and logs over J1 (native USB); see that README.
+
 | ESP32 GPIO | Function |
 |---|---|
 | 10 | Display DC |
@@ -119,7 +121,7 @@ The TFT connector (TE 1-84953-0, $0.44) stays: no cheap top-contact 1.0 mm 10-pi
 | 2 | RIGHT button, active low, R4 pull-up |
 | 21 | BAT_PWM input through R34. Use native USB for logs; do not enable UART TX on GPIO21. |
 | 3 | Backlight PWM, now driving a MOSFET gate (R27 pull-down) |
-| 0 | I²C SDA (SEN5x, SEN6x, SCD41) |
+| 0 | I²C SDA (SEN5x at 0x69, SEN6x at 0x6B, SCD4x at 0x62) |
 | 1 | I²C SCL |
 | 20 | E-paper BUSY (J6 pin 1), input; also the ROM UART RX |
 | 18, 19 | Native USB D−, D+ (to J1 through R7/R8 and D1) |
@@ -152,7 +154,7 @@ Two layers. Nearly every part is on the back, so the back carries most signals, 
 - **Fixed routes** (drawn before autorouting, in `main_revb_2layer.py`):
   - **Display SPI.** DC, CS, SCK, MOSI and RST run as a 5-lane front bus. It starts with vias above the module's top pins, runs up the left edge and along y = 21–23 mm, then drops through vias beside J5's pads.
   - **Backlight PWM.** It takes the outermost left-edge lane.
-  - **CO₂ island.** The island's copper enters through its 2.5 mm bottom-right tab (x = 41.5–44 mm, y = 34–35 mm); the left tab is mechanical only, with no copper. U8 (SCD41) is turned so its SDA, SCL, VDD and GND pins face the tab. SDA and GND cross on the back, SCL and +3V3_CO2 on the front, and they run down to U7 (the CO₂ LDO, beside J3) and the I²C bus. The widened strip beside the island (x = 44–45.5 mm) has no copper at all, so the island stays thermally isolated. Tracks keep 0.35 mm from all slot edges.
+  - **CO₂ island.** The island's copper enters through its 2.5 mm bottom-right tab (x = 41.5–44 mm, y = 34–35 mm); the left tab is mechanical only, with no copper. U8 (SCD41) is turned so its SDA, SCL, VDD and GND pins face the tab. SDA and GND cross on the back, SCL and +3V3_CO2 on the front, and they run down to U7 (the CO₂ LDO, beside J3) and the I²C bus. The widened strip beside the island (x = 44–45.5 mm) has no copper at all, so the island stays thermally isolated. Tracks keep 0.35 mm from all slot edges. The U8 footprint takes any SCD4x: the BOM lists the SCD41, but an SCD40 (cheaper, specified to 2000 ppm) or SCD43 (better accuracy) fits and works with the firmware unchanged.
   - **Buttons.**
     - GPIO8 (LEFT) runs straight down the front.
     - GPIO9 (OK) goes past the module corner on the back, then down the front.
@@ -218,11 +220,7 @@ Hand edits made in KiCad are not captured by the scripts. Once you edit the `.ki
    - the CO₂ island's tab feed;
    - the U4 corner by the slot;
    - the left-edge display bus.
-5. **Firmware.** Apply the pin map above:
-   - buttons on GPIO8/9/2 instead of the MCP23008;
-   - battery % from BAT_PWM;
-   - the display on DC = GPIO10, CS = GPIO4, SCK = GPIO5;
-   - for the e-paper build, BUSY on GPIO20 and a driver for the chosen panel.
+5. **Firmware.** [../../../firmware](../../../firmware/README.md) implements the pin map above (buttons on GPIO8/9/2, battery % from BAT_PWM, the display on DC = GPIO10, CS = GPIO4, SCK = GPIO5). On the first board, check the display orientation and colours, backlight steps and sensor detection. The e-paper build still needs BUSY on GPIO20 and a driver for the chosen panel.
 6. **USB-C supply and fit.** LCSC had only 2,553 of C49287211 in stock (2026-09-27). The battery board uses two per set, so 1000 sets need 3000. Reserve stock or approve the HRO TYPE-C-31-M-12 as the alternate, which needs a footprint and breakout change. SHOU HAN's drawing is for 0.8 mm boards, so check shell-leg soldering and retention on this 1.6 mm board. The battery board has the same open check. In JLC's placement preview, confirm J1's rotation: its footprint comes from the EasyEDA catalogue.
 7. **Pricing.** Get a real JLCPCB quote. The cost uses catalogue tiers and published assembly rates, not a quotation.
 8. **Carried over from Rev A:**
