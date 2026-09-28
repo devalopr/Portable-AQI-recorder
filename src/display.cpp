@@ -1,4 +1,5 @@
 #include "display.h"
+#include "display_format.h"
 #include "rubik_bold_fonts.h"
 #include <TFT_eSPI.h>
 #include <SPI.h>
@@ -35,15 +36,15 @@
 #define C_VERY_UNH    RGB565(151, 79, 201)
 #define C_HAZARDOUS   RGB565(126, 32, 58)
 
-static const uint16_t MAX_DISPLAY_AQI = 999;
-static const uint16_t MAX_DISPLAY_PM = 999;
+static const uint16_t MAX_DISPLAY_AQI = 65535;
+static const uint16_t MAX_DISPLAY_PM = 65535;
 static const uint16_t MAX_DISPLAY_CO2 = 4000;
 static const uint16_t MAX_DISPLAY_VOC = 500;
-static const uint8_t PLACEHOLDER_BATTERY_PERCENT = 75;
 static const uint16_t PLACEHOLDER_CO2_PPM = 1000;
-static const uint16_t PLACEHOLDER_NOX_INDEX = 100;
 
 static TFT_eSPI tft = TFT_eSPI();
+static TFT_eSprite chartFrame(&tft);
+static bool chartFrameReady = false;
 
 // ---- Field helpers ----
 
@@ -89,7 +90,7 @@ uint16_t fieldValue(const SensorSample &s, DataField f) {
     case DataField::HUMIDITY:    return s.humidity;
     case DataField::TEMPERATURE: return (uint16_t)s.temperature;
     case DataField::VOC_INDEX:   return s.vocIndex;
-    case DataField::NOX_INDEX:   return PLACEHOLDER_NOX_INDEX;
+    case DataField::NOX_INDEX:   return s.noxIndex;
     case DataField::CO2:         return PLACEHOLDER_CO2_PPM;
     case DataField::AQI:         return s.aqi;
     default:                     return 0;
@@ -105,7 +106,7 @@ float fieldValueFloat(const SensorSample &s, DataField f) {
     case DataField::HUMIDITY:    return s.humidity / 100.0f;
     case DataField::TEMPERATURE: return s.temperature / 100.0f;
     case DataField::VOC_INDEX:   return (float)s.vocIndex;
-    case DataField::NOX_INDEX:   return (float)PLACEHOLDER_NOX_INDEX;
+    case DataField::NOX_INDEX:   return (float)s.noxIndex;
     case DataField::CO2:         return (float)PLACEHOLDER_CO2_PPM;
     case DataField::AQI:         return (float)s.aqi;
     default:                     return 0.0f;
@@ -123,17 +124,17 @@ static uint16_t aqiColor(uint16_t aqi) {
   return C_HAZARDOUS;
 }
 
-static uint16_t aqiTextColor(uint16_t aqi) {
-  (void)aqi;
-  return C_TEXT_WHITE;
+static uint16_t textOnColor(uint16_t bg) {
+  return (bg == C_GOOD || bg == C_MODERATE || bg == C_USG ||
+          bg == C_UNHEALTHY || bg == C_HUM_CYAN) ? C_TEXT_DARK : C_TEXT_WHITE;
 }
 
 static uint16_t pmColor(float pm25) {
-  if (pm25 <= 12.0f) return C_GOOD;
+  if (pm25 <= 9.0f) return C_GOOD;
   if (pm25 <= 35.4f) return C_MODERATE;
   if (pm25 <= 55.4f) return C_USG;
-  if (pm25 <= 150.4f) return C_UNHEALTHY;
-  if (pm25 <= 250.4f) return C_VERY_UNH;
+  if (pm25 <= 125.4f) return C_UNHEALTHY;
+  if (pm25 <= 225.4f) return C_VERY_UNH;
   return C_HAZARDOUS;
 }
 
@@ -194,6 +195,10 @@ void display_begin() {
   tft.invertDisplay(false);
   tft.setRotation(2);
   tft.fillScreen(C_BG);
+  // Reuse one half-screen RGB565 tile: 76.8KB, native SPI pixel format.
+  chartFrame.setColorDepth(16);
+  chartFrameReady = chartFrame.createSprite(240, 160) != nullptr;
+  if (!chartFrameReady) Serial.println("ERROR: Chart framebuffer allocation failed.");
 }
 
 // ---- Drawing functions ----
@@ -211,9 +216,9 @@ static void drawStatusChip(int x, int y, const char *label, bool active,
   tft.setTextDatum(TL_DATUM);
 }
 
-static void drawBatteryChip(int x, int y, uint8_t percent) {
+static void drawBatteryChip(int x, int y) {
   char buf[8];
-  snprintf(buf, sizeof(buf), "%u%%", percent);
+  snprintf(buf, sizeof(buf), "--"); // No battery measurement in this hardware.
 
   tft.fillRoundRect(x, y, 42, 22, 4, C_CARD);
   tft.drawRoundRect(x, y, 42, 22, 4, C_BORDER);
@@ -281,13 +286,28 @@ static void drawFittedLabel(const char *text, int x, int y, int maxW,
 static void drawFittedValue(const char *text, int x, int y, int w, int h,
                             uint16_t color, uint16_t bg,
                             const uint8_t *sizes, int count,
-                            int yNudge = 0) {
-  uint8_t size = pickLargestRubik(text, w, h, sizes, count);
-
-  tft.setFreeFont(rubikBySize(size));
-  tft.setTextColor(color, bg);
-  tft.setTextDatum(BC_DATUM);
-  tft.drawString(text, x + w / 2, y + h + yNudge);
+                            int yNudge = 0, bool rightAligned = false) {
+  int top = 0, bottom = 0;
+  // Fit and centre visible glyphs, not unused ascender/descender space.
+  for (int i = 0; i < count; ++i) {
+    const GFXfont *font = rubikBySize(sizes[i]);
+    tft.setFreeFont(font);
+    top = 127; bottom = -127;
+    for (const char *p = text; *p; ++p) {
+      const GFXglyph &g = font->glyph[(uint8_t)*p - font->first];
+      if (!g.height) continue;
+      if (g.yOffset < top) top = g.yOffset;
+      if (g.yOffset + g.height > bottom) bottom = g.yOffset + g.height;
+    }
+    if (tft.textWidth(text) <= w && bottom - top <= h) break;
+  }
+  // The card is already filled. Equal foreground/background disables GFX's
+  // full-font background rectangle, which can extend below the number box.
+  (void)bg;
+  tft.setTextColor(color, color);
+  tft.setTextDatum(rightAligned ? R_BASELINE : C_BASELINE);
+  tft.drawString(text, rightAligned ? x + w : x + w / 2,
+                 y + (h - (bottom - top)) / 2 - top + yNudge);
   tft.setTextDatum(TL_DATUM);
 }
 
@@ -297,7 +317,7 @@ static uint16_t clampU16(float value, uint16_t maxValue) {
   return (uint16_t)round(value);
 }
 
-static uint16_t displayIntValue(const SensorSample &sample, DataField field) {
+static int32_t displayIntValue(const SensorSample &sample, DataField field) {
   float value = fieldValueFloat(sample, field);
 
   switch (field) {
@@ -315,9 +335,7 @@ static uint16_t displayIntValue(const SensorSample &sample, DataField field) {
     case DataField::HUMIDITY:
       return clampU16(value, 100);
     case DataField::TEMPERATURE:
-      if (value < 0.0f) return 0;
-      if (value > 99.0f) return 99;
-      return (uint16_t)round(value);
+      return (int32_t)round(value);
     case DataField::NOX_INDEX:
       return clampU16(value, MAX_DISPLAY_VOC);
     default:
@@ -344,16 +362,7 @@ static void fillCard(int x, int y, int w, int h, int radius, uint16_t color,
 }
 
 static uint16_t pmPanelColor(const SensorSample &sample) {
-  float pm1 = fieldValueFloat(sample, DataField::PM1_0);
-  float pm25 = fieldValueFloat(sample, DataField::PM2_5);
-  float pm4 = fieldValueFloat(sample, DataField::PM4_0);
-  float pm10 = fieldValueFloat(sample, DataField::PM10_0);
-  float worst = pm1;
-
-  if (pm25 > worst) worst = pm25;
-  if (pm4 > worst) worst = pm4;
-  if (pm10 > worst) worst = pm10;
-  return pmColor(worst);
+  return aqiColor(sample.aqi);
 }
 
 static const char *aqiCategoryShort(uint16_t aqi) {
@@ -370,101 +379,103 @@ static void drawHeader(const SensorSample &sample, DataField cursor,
   uint16_t aqiVal = displayIntValue(sample, DataField::AQI);
   uint16_t bg = aqiColor(aqiVal);
   char buf[8];
-  snprintf(buf, sizeof(buf), "%u", aqiVal);
-  static const uint8_t aqiSizes[] = {62, 42, 32, 24};
+  formatCompactValue(buf, sizeof(buf), aqiVal);
+  static const uint8_t aqiSizes[] = {62, 42, 32};
 
   fillCard(4, 4, 232, 88, 4, bg, cursor == DataField::AQI);
 
-  drawRubik("AQI", 12, 12, 24, C_TEXT_WHITE, bg);
+  drawRubik("AQI", 10, 28, 24, textOnColor(bg), bg, L_BASELINE);
 
-  drawFittedValue(buf, 0, 4, 232, 62, aqiTextColor(aqiVal), bg,
-                  aqiSizes, 4, 0);
+  // README reference: large three-digit AQI, centred between label/status.
+  drawFittedValue(buf, 56, 12, 128, 54, textOnColor(bg), bg,
+                  aqiVal > 999 ? aqiSizes + 1 : aqiSizes,
+                  aqiVal > 999 ? 2 : 3);
 
-  drawRubik(aqiCategoryShort(aqiVal), 116, 86, 20, C_TEXT_WHITE, bg, BC_DATUM);
+  drawRubik(aqiCategoryShort(aqiVal), 120, 82, 15, textOnColor(bg), bg, C_BASELINE);
 
   drawStatusChip(184, 10, "REC", recording, C_REC_RED);
   drawStatusChip(184, 35, "BLE", bleConnected, C_BLE_BLUE);
-  drawBatteryChip(184, 60, PLACEHOLDER_BATTERY_PERCENT);
+  drawBatteryChip(184, 60);
 }
 
 static void drawPmRow(int y, const char *label, uint16_t value,
                       uint16_t bg) {
   char buf[8];
-  snprintf(buf, sizeof(buf), "%u", value);
+  formatCompactValue(buf, sizeof(buf), value);
   static const uint8_t valueSizes[] = {32, 24, 20};
 
-  drawRubik(label, 12, y, 15, C_TEXT_WHITE, bg, ML_DATUM);
+  static const uint8_t labelSizes[] = {15};
+  drawFittedValue(label, 10, y - 16, 30, 32, textOnColor(bg), bg, labelSizes, 1);
 
-  drawFittedValue(buf, 44, y - 16, 66, 32, C_TEXT_WHITE, bg,
-                  valueSizes, 3, 0);
+  drawFittedValue(buf, 44, y - 16, 66, 32, textOnColor(bg), bg,
+                  valueSizes, 3, 0, true);
 }
 
 static void drawPmPanel(const SensorSample &sample, DataField cursor) {
   uint16_t bg = pmPanelColor(sample);
   fillCard(4, 96, 114, 164, 4, bg, isPmField(cursor));
 
-  drawRubik("PM", 10, 104, 20, C_TEXT_WHITE, bg);
+  drawRubik("PM", 12, 113, 15, textOnColor(bg), bg, L_BASELINE);
   
   tft.setFreeFont(rubikBySize(12));
   int unitW = tft.textWidth("ug/m3");
-  drawRubik("ug/m3", 118 - 8 - unitW, 108, 12, C_TEXT_WHITE, bg, TL_DATUM);
+  drawRubik("ug/m3", 110 - unitW, 113, 12, textOnColor(bg), bg, L_BASELINE);
 
   drawPmRow(142, "1.0", displayIntValue(sample, DataField::PM1_0), bg);
   drawPmRow(175, "2.5", displayIntValue(sample, DataField::PM2_5), bg);
   drawPmRow(208, "4.0", displayIntValue(sample, DataField::PM4_0), bg);
-  drawPmRow(241, "10.", displayIntValue(sample, DataField::PM10_0), bg);
+  drawPmRow(241, "10", displayIntValue(sample, DataField::PM10_0), bg);
 }
 
 static void drawSmallMetricCard(int x, int y, int w, int h, DataField field,
                                 const SensorSample &sample,
                                 DataField cursor, bool enabled) {
-  uint16_t value = displayIntValue(sample, field);
+  int32_t value = displayIntValue(sample, field);
   uint16_t bg = enabled ? getHealthColor(field, value) : C_GEAR_BG;
   char buf[8];
   if (enabled) {
-    snprintf(buf, sizeof(buf), "%u", value);
+    formatCompactValue(buf, sizeof(buf), value);
   } else {
     snprintf(buf, sizeof(buf), "--");
   }
-  static const uint8_t valueSizes[] = {42, 32, 24, 20};
+  static const uint8_t valueSizes[] = {32, 24, 20};
 
   fillCard(x, y, w, h, 4, bg, cursor == field);
 
-  static const uint8_t labelSizes[] = {15, 12, 10, 8};
-  drawFittedLabel(fieldLabel(field), x + 6, y + 4, w - 30, C_TEXT_WHITE, bg, labelSizes, 4);
-  
-  tft.setFreeFont(rubikBySize(10));
+  tft.setFreeFont(rubikBySize(12));
   int unitW = tft.textWidth(fieldUnit(field));
-  drawRubik(fieldUnit(field), x + w - 6 - unitW, y + 6, 10, C_TEXT_WHITE, bg);
+  drawRubik(fieldLabel(field), x + 8, y + 16, 15, textOnColor(bg), bg, L_BASELINE);
+  drawRubik(fieldUnit(field), x + w - 6 - unitW, y + 16, 12, textOnColor(bg), bg, L_BASELINE);
 
-  drawFittedValue(buf, x + 4, y + 20, w - 8, h - 22, C_TEXT_WHITE, bg,
-                  valueSizes, 4, 0);
+  drawFittedValue(buf, x + 6, y + 22, w - 12, h - 26, textOnColor(bg), bg,
+                  valueSizes, 3, 0, true);
 }
 
 static void drawBottomMetricCard(int x, int y, int w, int h, DataField field,
                                  const SensorSample &sample,
-                                 DataField cursor) {
-  uint16_t value = displayIntValue(sample, field);
-  uint16_t bg = getHealthColor(field, value);
+                                 DataField cursor, bool enabled) {
+  int32_t value = displayIntValue(sample, field);
+  uint16_t bg = enabled ? getHealthColor(field, value) : C_GEAR_BG;
   char buf[10];
 
-  if (field == DataField::TEMPERATURE) {
-    snprintf(buf, sizeof(buf), "%uC", value);
+  if (!enabled) {
+    snprintf(buf, sizeof(buf), "--");
+  } else if (field == DataField::TEMPERATURE) {
+    snprintf(buf, sizeof(buf), "%ldC", (long)value);
   } else if (field == DataField::HUMIDITY) {
-    snprintf(buf, sizeof(buf), "%u%%", value);
+    snprintf(buf, sizeof(buf), "%ld%%", (long)value);
   } else {
-    snprintf(buf, sizeof(buf), "%u", value);
+    formatCompactValue(buf, sizeof(buf), value);
   }
 
   fillCard(x, y, w, h, 4, bg, cursor == field);
 
   const char *label = fieldLabel(field);
-  static const uint8_t valueSizes[] = {42, 32, 24};
-  static const uint8_t labelSizes[] = {15, 12, 10, 8};
+  static const uint8_t valueSizes[] = {32, 24, 20};
 
-  drawFittedLabel(label, x + 6, y + 4, w - 12, C_TEXT_WHITE, bg, labelSizes, 4);
+  drawRubik(label, x + w / 2, y + 16, 12, textOnColor(bg), bg, C_BASELINE);
 
-  drawFittedValue(buf, x + 4, y + 20, w - 8, h - 22, C_TEXT_WHITE, bg,
+  drawFittedValue(buf, x + 6, y + 22, w - 12, h - 26, textOnColor(bg), bg,
                   valueSizes, 3, 0);
 }
 
@@ -476,7 +487,10 @@ static bool lastRecording = false;
 static bool lastBleConnected = false;
 
 void display_home(const SensorSample &current, DataField cursor,
-                  bool recording, bool bleConnected, bool hasCo2, bool hasNox) {
+                  bool recording, bool bleConnected, bool hasCo2, bool hasNox,
+                  bool hasEnvironment) {
+  static SensorSample previous{};
+  DataField oldCursor = lastCursorField;
   bool modeChanged = (lastScreenMode != ScreenMode::HOME);
   if (lastScreenMode != ScreenMode::HOME) {
     lastScreenMode = ScreenMode::HOME;
@@ -498,42 +512,72 @@ void display_home(const SensorSample &current, DataField cursor,
   lastRecording = recording;
   lastBleConnected = bleConnected;
 
-  drawHeader(current, cursor, recording, bleConnected);
-  drawPmPanel(current, cursor);
-  drawSmallMetricCard(122, 96, 114, 52, DataField::CO2, current, cursor, hasCo2);
-  drawSmallMetricCard(122, 152, 114, 52, DataField::VOC_INDEX, current, cursor, true);
-  drawSmallMetricCard(122, 208, 114, 52, DataField::NOX_INDEX, current, cursor, hasNox);
-  drawBottomMetricCard(4, 264, 89, 52, DataField::TEMPERATURE, current, cursor);
-  drawBottomMetricCard(97, 264, 90, 52, DataField::HUMIDITY, current, cursor);
+  auto selectionChanged = [&](DataField field) {
+    return cursorChanged && (cursor == field || oldCursor == field);
+  };
+  if (modeChanged || aqiChanged || statusChanged || selectionChanged(DataField::AQI))
+    drawHeader(current, cursor, recording, bleConnected);
+  if (modeChanged || aqiChanged || current.pm1p0 != previous.pm1p0 ||
+      current.pm2p5 != previous.pm2p5 || current.pm4p0 != previous.pm4p0 ||
+      current.pm10p0 != previous.pm10p0 ||
+      (cursorChanged && (isPmField(cursor) || isPmField(oldCursor))))
+    drawPmPanel(current, cursor);
+  if (modeChanged || selectionChanged(DataField::CO2))
+    drawSmallMetricCard(122, 96, 114, 52, DataField::CO2, current, cursor, hasCo2);
+  if (modeChanged || current.vocIndex != previous.vocIndex || selectionChanged(DataField::VOC_INDEX))
+    drawSmallMetricCard(122, 152, 114, 52, DataField::VOC_INDEX, current, cursor, hasEnvironment);
+  if (modeChanged || current.noxIndex != previous.noxIndex || selectionChanged(DataField::NOX_INDEX))
+    drawSmallMetricCard(122, 208, 114, 52, DataField::NOX_INDEX, current, cursor, hasNox);
+  if (modeChanged || current.temperature != previous.temperature || selectionChanged(DataField::TEMPERATURE))
+    drawBottomMetricCard(4, 264, 89, 52, DataField::TEMPERATURE, current, cursor, hasEnvironment);
+  if (modeChanged || current.humidity != previous.humidity || selectionChanged(DataField::HUMIDITY))
+    drawBottomMetricCard(97, 264, 90, 52, DataField::HUMIDITY, current, cursor, hasEnvironment);
+  previous = current;
+  if (!modeChanged && !selectionChanged(DataField::SETTINGS)) return;
 
   bool settingsSelected = (cursor == DataField::SETTINGS);
   fillCard(191, 264, 45, 52, 4, C_GEAR_BG, settingsSelected);
   
   int cx = 213;
   int cy = 290;
-  // 8 smooth circular cogs for a modern gear look
-  tft.fillCircle(cx, cy - 10, 3, C_TEXT_WHITE);
-  tft.fillCircle(cx, cy + 10, 3, C_TEXT_WHITE);
-  tft.fillCircle(cx - 10, cy, 3, C_TEXT_WHITE);
-  tft.fillCircle(cx + 10, cy, 3, C_TEXT_WHITE);
-  tft.fillCircle(cx - 7, cy - 7, 3, C_TEXT_WHITE);
-  tft.fillCircle(cx + 7, cy - 7, 3, C_TEXT_WHITE);
-  tft.fillCircle(cx - 7, cy + 7, 3, C_TEXT_WHITE);
-  tft.fillCircle(cx + 7, cy + 7, 3, C_TEXT_WHITE);
-  
-  // central body
-  tft.fillCircle(cx, cy, 8, C_TEXT_WHITE);
-  // inner hole
-  tft.fillCircle(cx, cy, 3, C_GEAR_BG);
+  // Square-ended teeth on a solid gear body, with a clear circular bore.
+  tft.fillCircle(cx, cy, 10, C_TEXT_WHITE);
+  for (int tooth = 0; tooth < 8; ++tooth) {
+    float angle = tooth * 3.14159265f / 4.0f;
+    float ux = cosf(angle), uy = sinf(angle);
+    int x[4], y[4];
+    const float radius[] = {8, 14, 14, 8};
+    const float tangent[] = {-3, -3, 3, 3};
+    for (int i = 0; i < 4; ++i) {
+      x[i] = cx + (int)roundf(radius[i] * ux - tangent[i] * uy);
+      y[i] = cy + (int)roundf(radius[i] * uy + tangent[i] * ux);
+    }
+    tft.fillTriangle(x[0], y[0], x[1], y[1], x[2], y[2], C_TEXT_WHITE);
+    tft.fillTriangle(x[0], y[0], x[2], y[2], x[3], y[3], C_TEXT_WHITE);
+  }
+  tft.fillCircle(cx, cy, 5, C_GEAR_BG);
 }
 
 // ---- Chart Screen ----
 // Light theme chart, simple and effective
 
-void display_chart(const DataBuffer &buf, DataField field) {
+void display_chart(const DataBuffer &buf, DataField field, const SensorSample &current) {
   static DataField lastChartField = (DataField)-1;
   static size_t lastChartCount = (size_t)-1;
+  static uint32_t lastChartTimestamp = 0;
+  if (!chartFrameReady) {
+    if (lastScreenMode != ScreenMode::CHART) {
+      tft.fillScreen(C_BG);
+      tft.setTextFont(2);
+      tft.setTextColor(C_TEXT_DARK, C_BG);
+      tft.drawString("Chart memory unavailable", 12, 140);
+      lastScreenMode = ScreenMode::CHART;
+    }
+    return;
+  }
   size_t count = buf.getCount();
+  SensorSample newest{};
+  if (count) buf.getSample(count - 1, newest);
   bool pmGroupChart = isPmField(field);
   static const DataField pmFields[] = {
     DataField::PM1_0, DataField::PM2_5, DataField::PM4_0, DataField::PM10_0
@@ -543,70 +587,102 @@ void display_chart(const DataBuffer &buf, DataField field) {
   };
 
   bool fullRedraw = (lastScreenMode != ScreenMode::CHART || field != lastChartField);
-  if (!fullRedraw && count == lastChartCount) {
+  bool historyChanged = count != lastChartCount || newest.timestamp != lastChartTimestamp;
+  static uint16_t lastPm25 = 0;
+  bool valueChanged = pmGroupChart && current.pm2p5 != lastPm25;
+  if (!fullRedraw && !historyChanged && !valueChanged) {
     return;
   }
 
   lastChartField = field;
   lastChartCount = count;
+  lastChartTimestamp = newest.timestamp;
+  lastPm25 = current.pm2p5;
 
-  if (fullRedraw) {
-    tft.fillScreen(C_BG);
-    lastScreenMode = ScreenMode::CHART;
-  } else {
-    tft.fillRoundRect(6, 45, 228, 265, 9, C_CARD);
-  }
+  lastScreenMode = ScreenMode::CHART;
+  for (int tileY = 0; tileY < 320; tileY += 160) {
+  if (tileY == 160 && !fullRedraw && !historyChanged) continue;
+  chartFrame.resetViewport();
+  chartFrame.fillSprite(C_BG);
+  chartFrame.setViewport(0, -tileY, 240, 320, true);
 
-  tft.fillRoundRect(7, 9, 228, 304, 9, C_SHADOW);
-  tft.fillRoundRect(6, 6, 228, 304, 9, C_CARD);
-  tft.drawRoundRect(6, 6, 228, 304, 9, C_BORDER);
+  chartFrame.fillRoundRect(7, 9, 228, 304, 9, C_SHADOW);
+  chartFrame.fillRoundRect(6, 6, 228, 304, 9, C_CARD);
+  chartFrame.drawRoundRect(6, 6, 228, 304, 9, C_BORDER);
 
-  tft.setTextFont(2);
-  tft.setTextColor(C_TEXT_DARK, C_CARD);
+  chartFrame.setTextFont(2);
+  chartFrame.setTextColor(C_TEXT_DARK, C_CARD);
   char title[32];
   if (pmGroupChart) {
-    snprintf(title, sizeof(title), "PM %s", fieldUnit(DataField::PM2_5));
+    snprintf(title, sizeof(title), "PM2.5 %s", fieldUnit(DataField::PM2_5));
   } else {
     snprintf(title, sizeof(title), "%s %s", fieldLabel(field), fieldUnit(field));
   }
-  tft.drawString(title, 16, 14);
+  if (!pmGroupChart) chartFrame.drawString(title, 16, 14);
 
-  tft.setTextFont(1);
-  tft.setTextColor(C_TEXT_LIGHT, C_CARD);
+  if (pmGroupChart) {
+    uint16_t bg = pmColor(fieldValueFloat(current, DataField::PM2_5));
+    chartFrame.fillRoundRect(10, 10, 220, 86, 4, bg);
+    chartFrame.drawRoundRect(10, 10, 220, 86, 4, C_BORDER);
+    chartFrame.setFreeFont(rubikBySize(15));
+    chartFrame.setTextColor(textOnColor(bg), bg);
+    chartFrame.setTextDatum(L_BASELINE);
+    chartFrame.drawString("PM2.5", 18, 30);
+    chartFrame.setFreeFont(rubikBySize(12));
+    chartFrame.drawString("ug/m3", 222 - chartFrame.textWidth("ug/m3"), 30);
+    char value[12];
+    // Keep PM2.5 in ug/m3, with a decimal at ordinary concentrations.
+    float pm25 = fieldValueFloat(current, DataField::PM2_5);
+    if (pm25 < 1000) snprintf(value, sizeof(value), "%.1f", pm25);
+    else formatCompactValue(value, sizeof(value), (int32_t)round(pm25));
+    const uint8_t sizes[] = {42, 32, 24};
+    for (uint8_t size : sizes) {
+      chartFrame.setFreeFont(rubikBySize(size));
+      if (chartFrame.textWidth(value) <= 208) break;
+    }
+    chartFrame.setTextColor(textOnColor(bg), bg);
+    chartFrame.setTextDatum(C_BASELINE);
+    chartFrame.drawString(value, 120, 78);
+    chartFrame.setTextDatum(TL_DATUM);
+  }
+  chartFrame.setTextFont(1);
+  chartFrame.setTextColor(C_TEXT_LIGHT, C_CARD);
   if (pmGroupChart) {
     int legendX = 16;
     const char *labels[] = {"1.0", "2.5", "4.0", "10"};
     for (int i = 0; i < 4; i++) {
-      tft.fillRect(legendX, 35, 7, 4, pmColors[i]);
-      tft.drawString(labels[i], legendX + 10, 32);
+      chartFrame.fillRect(legendX, 103, 7, 4, pmColors[i]);
+      chartFrame.drawString(labels[i], legendX + 10, 100);
       legendX += 38;
     }
   } else {
-    tft.drawString("history", 16, 32);
+    chartFrame.drawString("history", 16, 32);
   }
 
   if (count < 2) {
-    tft.setTextFont(2);
-    tft.setTextColor(C_TEXT_MID, C_CARD);
-    tft.drawString("Waiting for data...", 54, 156);
-    return;
+    chartFrame.setTextFont(2);
+    chartFrame.setTextColor(C_TEXT_MID, C_CARD);
+    chartFrame.drawString("Waiting for data...", 54, 156);
+    chartFrame.resetViewport();
+    chartFrame.pushSprite(0, tileY);
+    continue;
   }
 
   // Chart area
-  const int CHART_X = 44;
-  const int CHART_Y = 54;
-  const int CHART_W = 174;
-  const int CHART_H = 218;
+  const int CHART_X = 52;
+  const int CHART_Y = pmGroupChart ? 122 : 54;
+  const int CHART_W = 166;
+  const int CHART_H = 272 - CHART_Y;
   const int CHART_BOTTOM = CHART_Y + CHART_H;
 
-  tft.fillRoundRect(CHART_X, CHART_Y, CHART_W, CHART_H, 6, 0xF7FF);
-  tft.drawRoundRect(CHART_X, CHART_Y, CHART_W, CHART_H, 6, C_BORDER);
+  chartFrame.fillRoundRect(CHART_X, CHART_Y, CHART_W, CHART_H, 6, 0xF7FF);
+  chartFrame.drawRoundRect(CHART_X, CHART_Y, CHART_W, CHART_H, 6, C_BORDER);
 
   size_t numPoints = count;
   size_t startIdx = 0;
-  if (numPoints > (size_t)CHART_W) {
-    startIdx = numPoints - CHART_W;
-    numPoints = CHART_W;
+  if (numPoints > (size_t)(CHART_W - 2)) {
+    startIdx = numPoints - (CHART_W - 2);
+    numPoints = CHART_W - 2;
   }
 
   float minVal = 1e9f, maxVal = -1e9f;
@@ -634,23 +710,23 @@ void display_chart(const DataBuffer &buf, DataField field) {
   range = maxVal - minVal;
 
   char lbl[12];
-  tft.setTextFont(2);
-  tft.setTextColor(C_TEXT_MID, C_CARD);
+  chartFrame.setTextFont(1);
+  chartFrame.setTextColor(C_TEXT_MID, C_CARD);
 
-  snprintf(lbl, sizeof(lbl), "%.0f", maxVal);
-  tft.drawString(lbl, 14, CHART_Y);
+  formatCompactValue(lbl, sizeof(lbl), (int32_t)round(maxVal));
+  chartFrame.drawString(lbl, 14, CHART_Y);
 
   float midVal = (minVal + maxVal) / 2.0f;
-  snprintf(lbl, sizeof(lbl), "%.0f", midVal);
-  tft.drawString(lbl, 14, CHART_Y + CHART_H / 2 - 8);
+  formatCompactValue(lbl, sizeof(lbl), (int32_t)round(midVal));
+  chartFrame.drawString(lbl, 14, CHART_Y + CHART_H / 2 - 8);
 
-  snprintf(lbl, sizeof(lbl), "%.0f", minVal);
-  tft.drawString(lbl, 14, CHART_BOTTOM - 16);
+  formatCompactValue(lbl, sizeof(lbl), (int32_t)round(minVal));
+  chartFrame.drawString(lbl, 14, CHART_BOTTOM - 16);
 
   for (int g = 0; g <= 4; g++) {
     int gy = CHART_Y + (CHART_H * g) / 4;
     for (int gx = CHART_X + 5; gx < CHART_X + CHART_W - 5; gx += 6) {
-      tft.drawPixel(gx, gy, C_BORDER);
+      chartFrame.drawPixel(gx, gy, C_BORDER);
     }
   }
 
@@ -665,15 +741,15 @@ void display_chart(const DataBuffer &buf, DataField field) {
       if (!buf.getSample(startIdx + i, s)) continue;
 
       float v = fieldValueFloat(s, lineField);
-      int px = CHART_X + 1 + (int)i;
+      int px = CHART_X + 1 + (int)(i * (CHART_W - 3) / (numPoints - 1));
       int py = CHART_BOTTOM - 1 - (int)(((v - minVal) / range) * (CHART_H - 2));
 
       if (py < CHART_Y + 1) py = CHART_Y + 1;
       if (py > CHART_BOTTOM - 1) py = CHART_BOTTOM - 1;
 
       if (prevPx >= 0) {
-        tft.drawLine(prevPx, prevPy, px, py, lineColor);
-        tft.drawLine(prevPx, prevPy + 1, px, py + 1, lineColor);
+        chartFrame.drawLine(prevPx, prevPy, px, py, lineColor);
+        chartFrame.drawLine(prevPx, prevPy + 1, px, py + 1, lineColor);
       }
 
       prevPx = px;
@@ -681,11 +757,16 @@ void display_chart(const DataBuffer &buf, DataField field) {
     }
   }
 
-  tft.setTextFont(2);
-  tft.setTextColor(C_TEXT_LIGHT, C_CARD);
-  snprintf(lbl, sizeof(lbl), "%ds ago", (int)(numPoints));
-  tft.drawString(lbl, CHART_X, CHART_BOTTOM + 10);
+  chartFrame.setTextFont(2);
+  chartFrame.setTextColor(C_TEXT_LIGHT, C_CARD);
+  SensorSample oldest{};
+  buf.getSample(startIdx, oldest);
+  snprintf(lbl, sizeof(lbl), "%lus ago", (unsigned long)((newest.timestamp - oldest.timestamp) / 1000));
+  chartFrame.drawString(lbl, CHART_X, CHART_BOTTOM + 10);
   
-  int nowW = tft.textWidth("now");
-  tft.drawString("now", CHART_X + CHART_W - nowW, CHART_BOTTOM + 10);
+  int nowW = chartFrame.textWidth("now");
+  chartFrame.drawString("now", CHART_X + CHART_W - nowW, CHART_BOTTOM + 10);
+  chartFrame.resetViewport();
+  chartFrame.pushSprite(0, tileY);
+  }
 }

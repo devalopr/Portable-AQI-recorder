@@ -1,13 +1,13 @@
 /**
  * Portable AQI Monitor — V2
- * ESP32-C3 Super Mini + Sensirion SEN5x + ILI9225 TFT Display
+ * ESP32-C3 Super Mini + Sensirion SEN5x + ST7789 TFT Display
  *
  * Auto-detects the connected sensor variant at boot:
  *   - SEN50: PM1.0, PM2.5, PM4.0, PM10.0
  *   - SEN54: PM + Humidity, Temperature, VOC Index
  *   - SEN55: PM + Humidity, Temperature, VOC Index, NOx Index
  *
- * Displays data on a 176×220 ILI9225 TFT with 4-button navigation.
+ * Displays data on a 240×320 ST7789 TFT with 4-button navigation.
  * Streams data over BLE to the companion web app.
  * Records data into RAM ring buffer for on-device charting.
  * Calculates and displays US EPA AQI.
@@ -60,7 +60,7 @@ DataBuffer dataBuffer;
 
 // Display refresh timing
 static unsigned long lastDisplayUpdateMs = 0;
-static const unsigned long DISPLAY_UPDATE_INTERVAL_MS = 500;
+static const unsigned long DISPLAY_UPDATE_INTERVAL_MS = 33;
 
 // Browser-friendly BLE service for the companion web app.
 // Samples are sent as a compact little-endian binary packet:
@@ -79,35 +79,32 @@ static bool bleConnected = false;
 // ---------------------------------------------------------------------------
 
 static int calcAQILinear(float Ih, float Il, float Ch, float Cl, float C) {
-  return (int)round(((Ih - Il) / (Ch - Cl)) * (C - Cl) + Il);
-}
-
-static int clampAQI(int aqi) {
-  if (aqi < 0) return 0;
-  if (aqi > 999) return 999;
-  return aqi;
+  float value = ((Ih - Il) / (Ch - Cl)) * (C - Cl) + Il;
+  // Preserve the uint16_t sample/BLE format without wrapping extreme values.
+  return value >= 65535.0f ? 65535 : (int)round(value);
 }
 
 int aqiFromPM25(float pm25) {
-  if (pm25 < 0.0f)    return -1;
+  if (!isfinite(pm25) || pm25 < 0.0f) return -1;
+  pm25 = floorf(pm25 * 10.0f) / 10.0f;
   if (pm25 <= 9.0f)   return calcAQILinear(50, 0, 9.0f, 0.0f, pm25);
   if (pm25 <= 35.4f)  return calcAQILinear(100, 51, 35.4f, 9.1f, pm25);
   if (pm25 <= 55.4f)  return calcAQILinear(150, 101, 55.4f, 35.5f, pm25);
   if (pm25 <= 125.4f) return calcAQILinear(200, 151, 125.4f, 55.5f, pm25);
   if (pm25 <= 225.4f) return calcAQILinear(300, 201, 225.4f, 125.5f, pm25);
-  if (pm25 <= 325.4f) return calcAQILinear(500, 301, 325.4f, 225.5f, pm25);
-  return clampAQI(calcAQILinear(999, 501, 1000.0f, 325.5f, pm25));
+  // EPA: above 500, continue the 301–500 band's slope.
+  return calcAQILinear(500, 301, 325.4f, 225.5f, pm25);
 }
 
 int aqiFromPM10(float pm10) {
-  if (pm10 < 0.0f)    return -1;
+  if (!isfinite(pm10) || pm10 < 0.0f) return -1;
+  pm10 = floorf(pm10);
   if (pm10 <= 54.0f)  return calcAQILinear(50, 0, 54.0f, 0.0f, pm10);
   if (pm10 <= 154.0f) return calcAQILinear(100, 51, 154.0f, 55.0f, pm10);
   if (pm10 <= 254.0f) return calcAQILinear(150, 101, 254.0f, 155.0f, pm10);
   if (pm10 <= 354.0f) return calcAQILinear(200, 151, 354.0f, 255.0f, pm10);
   if (pm10 <= 424.0f) return calcAQILinear(300, 201, 424.0f, 355.0f, pm10);
-  if (pm10 <= 604.0f) return calcAQILinear(500, 301, 604.0f, 425.0f, pm10);
-  return clampAQI(calcAQILinear(999, 501, 1000.0f, 604.1f, pm10));
+  return calcAQILinear(500, 301, 604.0f, 425.0f, pm10);
 }
 
 const char *aqiCategory(int aqi) {
@@ -410,6 +407,7 @@ void measure_and_report() {
 void handleButtons() {
   Button btn = buttons_poll();
   if (btn == Button::NONE) return;
+  lastDisplayUpdateMs = 0;
 
   switch (btn) {
   case Button::UP:
@@ -430,7 +428,12 @@ void handleButtons() {
 
   case Button::SELECT:
     if (screenMode == ScreenMode::HOME) {
-      if (cursorField != DataField::SETTINGS) {
+      bool environment = sensorVariant == VARIANT_SEN54 || sensorVariant == VARIANT_SEN55;
+      bool available = cursorField != DataField::CO2 &&
+          (cursorField != DataField::NOX_INDEX || sensorVariant == VARIANT_SEN55) &&
+          ((cursorField != DataField::TEMPERATURE && cursorField != DataField::HUMIDITY &&
+            cursorField != DataField::VOC_INDEX) || environment);
+      if (cursorField != DataField::SETTINGS && available) {
         screenMode = ScreenMode::CHART;
       }
     } else {
@@ -467,14 +470,25 @@ void updateDisplay() {
   unsigned long now = millis();
   if (now - lastDisplayUpdateMs < DISPLAY_UPDATE_INTERVAL_MS) return;
   lastDisplayUpdateMs = now;
+  uint32_t renderStartedUs = micros();
 
   if (screenMode == ScreenMode::HOME) {
     bool hasNox = (sensorVariant == VARIANT_SEN55);
     bool hasCo2 = false; // Add logic here if SCD4x is ever added
     display_home(latestSample, cursorField,
-                 dataBuffer.isRecording(), bleConnected, hasCo2, hasNox);
+                 dataBuffer.isRecording(), bleConnected, hasCo2, hasNox,
+                 sensorVariant == VARIANT_SEN54 || sensorVariant == VARIANT_SEN55);
   } else {
-    display_chart(dataBuffer, cursorField);
+    display_chart(dataBuffer, cursorField, latestSample);
+  }
+  // Occasional serial timing makes display latency verifiable on the board.
+  uint32_t renderUs = micros() - renderStartedUs;
+  static uint32_t lastTimingMs = 0;
+  if (renderUs >= 1000 && now - lastTimingMs >= 5000) {
+    Serial.printf("[UI] %s render: %lu us, free heap: %lu bytes\n",
+                  screenMode == ScreenMode::HOME ? "home" : "chart",
+                  (unsigned long)renderUs, (unsigned long)ESP.getFreeHeap());
+    lastTimingMs = now;
   }
 }
 
@@ -553,6 +567,7 @@ void setup() {
 void loop() {
   // Read sensor at 1 Hz
   if (millis() - lastMeasurementTimeMs >= measurementIntervalMs) {
+    lastMeasurementTimeMs = millis(); // Also rate-limit retries after sensor errors.
     measure_and_report();
   }
 

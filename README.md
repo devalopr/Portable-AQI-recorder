@@ -44,24 +44,28 @@ All three SEN5x variants use the **same pinout and connector** — just swap the
 
 | ESP32-C3 Super Mini | SEN5x (JST connector) |
 |---|---|
-| GPIO 8 (SDA) | Pin 4 — SDA |
-| GPIO 9 (SCL) | Pin 3 — SCL |
+| GPIO 8 (SDA) | Pin 3 — SDA |
+| GPIO 9 (SCL) | Pin 4 — SCL |
 | GND | Pin 2 — GND |
 | 5V | Pin 1 — VDD |
 
 > [!IMPORTANT]
 > The SEN5x sensors **require 5V** for the internal fan. Power from a 5V source (e.g. USB VBUS), not the ESP32's 3.3V output. The I2C lines are 3.3V tolerant — no level shifter needed.
 
-#### SEN5x JST Pinout (left to right, notch facing up)
+#### SEN5x Connector Pinout
+
+Pin numbers below follow Sensirion's connector drawing; do not infer numbering from a cable's viewing direction or wire colors. See the [SEN5x datasheet, Table 11](https://sensirion.com/resource/datasheet/sen5x).
 
 ```text
 Pin 1 — VDD  (5V)
 Pin 2 — GND
-Pin 3 — SCL
-Pin 4 — SDA
-Pin 5 — SEL (leave unconnected or tie to GND for I2C)
+Pin 3 — SDA
+Pin 4 — SCL
+Pin 5 — SEL (tie to GND before or at power-up for I2C)
 Pin 6 — NC
 ```
+
+These are SEN5x connections. SEN6x requires a 3.3V supply and has different functions on pins 5 and 6; it must not be plugged into this 5V connection.
 
 #### ST7789 2.4" SPI TFT Display (10-Pin Version)
 
@@ -180,6 +184,10 @@ The firmware exposes this Web Bluetooth service:
 ## AQI Reference
 
 The firmware calculates the **US EPA Air Quality Index** from PM2.5 and PM10. The overall AQI is the higher of the two sub-indices.
+
+PM2.5 is truncated to one decimal place and PM10 to whole µg/m³ before conversion. Above AQI 500, both pollutants continue the slope of their 301–500 band, following [EPA guidance](https://document.airnow.gov/technical-assistance-document-for-the-reporting-of-daily-air-quailty.pdf). For example, PM2.5 575.9 µg/m³ produces AQI 999, and 1000 µg/m³ produces AQI 1844. The display shows values above 999 in thousands (`1.0K`, `1.1K`, `1.5K`); BLE and recordings retain the full integer (up to 65535). This is an instantaneous concentration-derived index, not a daily average or NowCast.
+
+Run `python3 scripts/test_aqi.py` for host regression checks and `pio run` to build the firmware.
 
 | AQI Range | Category | Color |
 |---|---|---|

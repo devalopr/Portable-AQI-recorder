@@ -30,10 +30,11 @@ void display_begin();
 /// Draw the home screen with current sensor values.
 /// cursor = which DataField row is highlighted.
 void display_home(const SensorSample &current, DataField cursor,
-                  bool recording, bool bleConnected, bool hasCo2, bool hasNox);
+                  bool recording, bool bleConnected, bool hasCo2, bool hasNox,
+                  bool hasEnvironment);
 
 /// Draw a full-screen chart of `field` using data from `buf`.
-void display_chart(const DataBuffer &buf, DataField field);
+void display_chart(const DataBuffer &buf, DataField field, const SensorSample &current);
 
 /// Returns short label for a data field (e.g. "PM2.5")
 const char *fieldLabel(DataField f);
